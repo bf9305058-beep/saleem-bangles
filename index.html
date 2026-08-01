@@ -1,76 +1,151 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Saleem Bangles</title>
-    <style>
-        body {font-family: Arial; background: #f9f9f9; padding: 20px;}
-        h1 {text-align: center; color: #d63384;}
-        .grid {display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 900px; margin: auto;}
-        .box {background: white; border: 1px solid #ddd; border-radius: 10px; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1);}
-       .box img {width: 100%; height: 200px; object-fit: contain; background: white; border-radius: 8px;}
-        .price {font-weight: bold; color: green; font-size: 18px;}
-        button {background: #d63384; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: 10px;}
-    </style>
+  <title>Saleem Bangles Collection</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {font-family: Arial; text-align:center; background:#fff0f5; margin:0; padding-bottom:100px;}
+    h1 {color:#d63384; padding-top:20px;}
+    .grid {display:flex; flex-wrap:wrap; justify-content:center; gap:20px; padding:20px;}
+    .box {background:white; padding:15px; border-radius:10px; width:220px; box-shadow:0 2px 8px rgba(0,0,0,0.1);}
+    .box img {width:100%; height:200px; object-fit:cover; border-radius:8px;}
+    .box h3 {margin:10px 0 5px; color:#333;}
+    .box p {margin:5px 0; color:#666; font-size:14px;}
+    .price {color:green; font-weight:bold; font-size:18px;}
+    .qty {display:flex; justify-content:center; align-items:center; gap:8px; margin:10px 0;}
+    .qty button {width:32px; height:32px; border:none; background:#ddd; border-radius:5px; cursor:pointer; font-size:18px; font-weight:bold;}
+    .qty span {font-size:16px; font-weight:bold; min-width:25px;}
+    .addbtn {background:#ff4da6; color:white; border:none; padding:12px; border-radius:8px; width:100%; cursor:pointer; font-weight:bold; font-size:15px;}
+    .addbtn:hover {background:#e63a94;}
+    .cartbtn {position:fixed; bottom:20px; right:20px; background:#25D366; color:white; padding:15px 25px; border:none; border-radius:50px; font-weight:bold; font-size:16px; z-index:999; cursor:pointer; box-shadow:0 4px 10px rgba(0,0,0,0.2);}
+    .cartbtn:hover {background:#1ebf5a;}
+  </style>
 </head>
 <body>
-    <h1>Saleem Bangles Collection</h1>
-    <div class="grid">
-        
-<div class="box">
-        <img src="swan-special.jpg">
-        <h2>Sawan Special Set</h2>
-        <p>Size: 2.2, 2.4, 2.6, 2.8</p>
-      
-        <p class="price">MRP: Rs. 400.00</p>
-     <button onclick="window.open('https://wa.me/917703067297?text=Namaste, mujhe Sawan Special Set chahiye. MRP: Rs 400')">Order Now</button>
+
+<h1>Saleem Bangles Collection</h1>
+
+<div class="grid">
+  <!-- 1. GREEN - SAWAN SPECIAL -->
+  <div class="box">
+    <img src="swan-special.jpg">
+    <h3>Sawan Special Set</h3>
+    <p>Size: 2.2, 2.4, 2.6, 2.8</p>
+    <p class="price">MRP: Rs. 400.00</p>
+    <div class="qty">
+      <button onclick="changeQty('green', -1)">-</button>
+      <span id="qty-green">1</span>
+      <button onclick="changeQty('green', 1)">+</button>
     </div>
+    <button class="addbtn" onclick="addToCart('Sawan Special Set Green', 400, 'green')">🛒 Add to Cart</button>
+  </div>
 
-    <div class="box">
-        <img src="kashmiri-set.jpg">
-        <h2>Kashmiri Set One Hand</h2>
-        <p>Size: 2.2, 2.4, 2.6, 2.8</p>
-      
-        <p class="price">MRP: Rs. 300.00</p>
-    <button onclick="window.open('https://wa.me/917703067297?text=Namaste, mujhe Kashmiri Set One Hand chahiye. MRP: Rs 300')">Order Now</button> 
-    </div>   
-        <div class="box">
-  <img src="rapunzelbox.jpg" alt="Rapunzel Box">
-  <h2>Rapunzel Box</h2>
-  <p>24 Dozen Bangles</p>
-  <p>All Size: 2.2, 2.4, 2.6, 2.8</p>
-  <p>Multi Color Premium Set</p>
-  <p class="price">MRP: Rs. 4500.00</p>
-  <button onclick="window.open('https://wa.me/917703067297?text=Namaste, Saleem Bangles & Cosmetics se. Mujhe Rapunzel Box 24 Dozen chahiye. MRP: Rs 4500. Photo: https://saleem-bangles.vercel.app/rapunzelbox.jpg')">Order Now</button>
+  <!-- 2. KASHMIRI -->
+  <div class="box">
+    <img src="kashmiri-set.jpg">
+    <h3>Kashmiri Set One Hand</h3>
+    <p>Size: 2.2, 2.4, 2.6, 2.8</p>
+    <p class="price">MRP: Rs. 300.00</p>
+    <div class="qty">
+      <button onclick="changeQty('kashmiri', -1)">-</button>
+      <span id="qty-kashmiri">1</span>
+      <button onclick="changeQty('kashmiri', 1)">+</button>
+    </div>
+    <button class="addbtn" onclick="addToCart('Kashmiri Set One Hand', 300, 'kashmiri')">🛒 Add to Cart</button>
+  </div>
+
+  <!-- 3. MULTI -->
+  <div class="box">
+    <img src="multimoti.jpg">
+    <h3>Multi Color Bangle Set</h3>
+    <p>Size: 2.2, 2.4, 2.6, 2.8</p>
+    <p class="price">MRP: Rs. 350.00</p>
+    <div class="qty">
+      <button onclick="changeQty('multi', -1)">-</button>
+      <span id="qty-multi">1</span>
+      <button onclick="changeQty('multi', 1)">+</button>
+    </div>
+    <button class="addbtn" onclick="addToCart('Multi Color Bangle Set', 350, 'multi')">🛒 Add to Cart</button>
+  </div>
+
+  <!-- 4. ORANGE -->
+  <div class="box">
+    <img src="orangemoti.jpg">
+    <h3>Orange Moti Bangle</h3>
+    <p>Size: 2.2, 2.4, 2.6, 2.8</p>
+    <p class="price">MRP: Rs. 299.00</p>
+    <div class="qty">
+      <button onclick="changeQty('orange', -1)">-</button>
+      <span id="qty-orange">1</span>
+      <button onclick="changeQty('orange', 1)">+</button>
+    </div>
+    <button class="addbtn" onclick="addToCart('Orange Moti Bangle', 299, 'orange')">🛒 Add to Cart</button>
+  </div>
+
+  <!-- 5. PINK -->
+  <div class="box">
+    <img src="pinkmoti.jpg">
+    <h3>Pink Moti Bangle</h3>
+    <p>Size: 2.2, 2.4, 2.6, 2.8</p>
+    <p class="price">MRP: Rs. 299.00</p>
+    <div class="qty">
+      <button onclick="changeQty('pink', -1)">-</button>
+      <span id="qty-pink">1</span>
+      <button onclick="changeQty('pink', 1)">+</button>
+    </div>
+    <button class="addbtn" onclick="addToCart('Pink Moti Bangle', 299, 'pink')">🛒 Add to Cart</button>
+  </div>
+
+  <!-- 6. BLUE -->
+  <div class="box">
+    <img src="bluemoti.jpg">
+    <h3>Blue Moti Bangle</h3>
+    <p>Size: 2.2, 2.4, 2.6, 2.8</p>
+    <p class="price">MRP: Rs. 299.00</p>
+    <div class="qty">
+      <button onclick="changeQty('blue', -1)">-</button>
+      <span id="qty-blue">1</span>
+      <button onclick="changeQty('blue', 1)">+</button>
+    </div>
+    <button class="addbtn" onclick="addToCart('Blue Moti Bangle', 299, 'blue')">🛒 Add to Cart</button>
+  </div>
+
 </div>
-  ...
-    <button onclick="window.open('https://wa.me/917703067297?text=Namaste, Saleem Bangles & Cosmetics se. Mujhe Rapunzel Box 24 Dozen chahiye. MRP: Rs 4500. Photo: https://saleem-bangles.vercel.app/rapunzelbox.jpg')">Order Now</button>
-  </div>
 
-  <!-- YAHAN SE NAYA CODE SHURU -->
+<button class="cartbtn" onclick="sendWhatsAppOrder()">📦 Cart (0) Order Karein</button>
 
-   <div class="box">
-  <img id="motiImg" src="orangemoti.jpg" alt="Moti Bangle">
-  <h2>Moti Bangle Set</h2>
-  <p>Premium Glass Bangles with Golden Beads</p>
-  <p><b>Color:</b> 
-    <button onclick="document.getElementById('motiImg').src='orangemoti.jpg'">Orange</button>
-    <button onclick="document.getElementById('motiImg').src='pinkmoti.jpg'">Pink</button>
-    <button onclick="document.getElementById('motiImg').src='bluemoti.jpg'">Green</button>
-    <button onclick="document.getElementById('motiImg').src='multimoti.jpg'">Multi</button>
-  </p>
-  <p class="price">MRP: Rs. 299.00/-</p>
-   <a href="https://wa.me/917703067297?text=Namaste, Mujhe Moti Bangle Set chahiye" 
-   target="_blank" 
-   style="display:block; text-align:center; background:#25D366; color:white; padding:10px; border-radius:8px; text-decoration:none; margin-top:8px; font-weight:bold;">
-   📲 WhatsApp pe Order Karein
-</a>    
-  <button onclick="window.open('https://wa.me/917703067297?text=Namaste, Mujhe Moti Bangle Set chahiye. Color: Orange. MRP: Rs 299')">Order Now</button>
+<script>
+let cart = [];
+let cartCount = 0;
 
+function changeQty(id, num) {
+  let el = document.getElementById('qty-'+id);
+  let val = parseInt(el.innerText) + num;
+  if(val < 1) val = 1;
+  if(val > 50) val = 50; // max 50 piece
+  el.innerText = val;
+}
 
-  </div>
-  <!-- YAHAN PE KHATAM -->
-  
+function addToCart(name, price, id) {
+  let qty = parseInt(document.getElementById('qty-'+id).innerText);
+  cart.push({name, price, qty});
+  cartCount += qty;
+  document.querySelector('.cartbtn').innerText = `📦 Cart (${cartCount}) Order Karein`;
+  alert(qty + " x " + name + " Cart me add ho gaya!");
+}
+
+function sendWhatsAppOrder() {
+  if(cart.length === 0) { alert("Pehle Cart me kuch add karo"); return; }
+  let message = "Namaste Saleem Bangles, Mujhe ye Bulk Order chahiye:%0A%0A";
+  let total = 0;
+  cart.forEach(item => {
+    message += item.qty + " x " + item.name + " - Rs." + item.price + "%0A";
+    total += item.price * item.qty;
+  });
+  message += "%0A*Total Amount: Rs." + total + "*%0A%0AName: %0AAddress: %0APhone:";
+  window.open("https://wa.me/917703067297?text=" + message, "_blank");
+}
+</script>
+
 </body>
-
-    
 </html>
