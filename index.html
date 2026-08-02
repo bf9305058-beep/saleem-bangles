@@ -80,15 +80,36 @@ function addToCart(name,price,id){
   alert(qty+" x "+name+" Size: "+size+" Cart me add ho gaya!");
 }
 function sendWhatsAppOrder(){
-  if(cart.length==0){alert("Pehle Cart me kuch add karo");return;}
-  let msg="Namaste Saleem Bangles, Mujhe ye Bulk Order chahiye:%0A%0A";
-  let total=0;
-  cart.forEach(i=>{
-    msg+=i.qty+" x "+i.name+" - Size: "+i.size+" - Rs."+i.price+"%0A";
-    total+=i.price*i.qty
-  });
-  msg+="%0A*Total: Rs."+total+"*%0A%0AName:%0AAddress:%0APhone:";
-  window.open("https://wa.me/917703067297?text="+msg,"_blank");
+    if(cart.length==0){alert("Pehle Cart me kuch add karo");return;}
+    let msg = "Namaste Saleem Bangles, Mujhe ye Bulk Order chahiye:%0A%0A";
+    let total = 0;
+    let photoLinks = "";
+    
+    cart.forEach(item => {
+        msg += `${item.qty} x ${item.name} - Size: ${item.size} - Rs.${item.price*item.qty}%0A`;
+        total += item.price*item.qty;
+        
+        // Har product ki photo ka link
+        let photoName = item.name.toLowerCase().replace(/ /g, '');
+        if(photoName == "multi moti") photoName = "multimoti";
+        if(photoName == "fairy box") photoName = "fairybox";
+        if(photoName == "orange moti") photoName = "orangemot";
+        if(photoName == "jelly") photoName = "jellybox";
+        if(photoName == "pink moti") photoName = "pinkmoti";
+        if(photoName == "blue moti") photoName = "bluemoti";
+        if(photoName == "moti picock") photoName = "motipicoc";
+        
+        photoLinks += `Photo: https://saleem-bangles.vercel.app/${photoName}.jpg%0A`;
+    });
+    
+    msg += `%0A*Total: Rs.${total}*%0A%0A`;
+    msg += `Name: [Apna Naam]%0A`;
+    msg += `Address: [Apna Address]%0A`;
+    msg += `Phone: [Apna Number]%0A%0A`;
+    msg += `̶ ̶ ̶ ̶ ̶ ̶%0A`;
+    msg += photoLinks;
+
+    window.open(`https://wa.me/917703067297?text=${msg}`,"_blank");
 }
 
 <!-- Zoom ke liye naya JS -->
