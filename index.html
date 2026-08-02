@@ -40,7 +40,32 @@
 <div class="box"><img src="bluemoti.jpg" onclick="zoom(this)"><h2>Blue Moti</h2><p class="price">MRP: Rs.399</p><select class="size"><option value="">Size Select karein</option><option value="2.4">2.4</option><option value="2.6">2.6</option><option value="2.8">2.8</option><option value="2.10">2.10</option></select><div class="qty"><button>-</button> <span>1</span> <button>+</button></div><button class="add-to-cart">Add to Cart</button></div>
 
 <div class="box"><img src="motipicc.jpg" onclick="zoom(this)"><h2>Moti Piccock</h2><p class="price">MRP: Rs.399</p><select class="size"><option value="">Size Select karein</option><option value="2.4">2.4</option><option value="2.6">2.6</option><option value="2.8">2.8</option><option value="2.10">2.10</option></select><div class="qty"><button>-</button> <span>1</span> <button>+</button></div><button class="add-to-cart">Add to Cart</button></div>
+<div class="box">
+<img src="multi1.jpg">
+<h3>Multi Moti</h3>
+<p>MRP: Rs.299</p>
+<select><option>Size Select karein</option><option>2.2</option><option>2.4</option><option>2.6</option><option>2.8</option></select>
+<div class="qty"><button onclick="changeQty(this,-1)">-</button><span>1</span><button onclick="changeQty(this,1)">+</button></div>
+<button class="btn" onclick="addToCart('Multi Moti',299,this)">Add to Cart</button>
+</div>
 
+<div class="box">
+<img src="jellybox.jpg">
+<h3>SRC Jelly Box</h3>
+<p>MRP: Rs.1299</p>
+<select><option>Size Select karein</option><option>2.2</option><option>2.4</option><option>2.6</option><option>2.8</option></select>
+<div class="qty"><button onclick="changeQty(this,-1)">-</button><span>1</span><button onclick="changeQty(this,1)">+</button></div>
+<button class="btn" onclick="addToCart('SRC Jelly Box',1299,this)">Add to Cart</button>
+</div>
+
+<div class="box">
+<img src="srctransparentjelly.jpg">
+<h3>Transparent Jelly</h3>
+<p>MRP: Rs.399</p>
+<select><option>Size Select karein</option><option>2.2</option><option>2.4</option><option>2.6</option><option>2.8</option></select>
+<div class="qty"><button onclick="changeQty(this,-1)">-</button><span>1</span><button onclick="changeQty(this,1)">+</button></div>
+<button class="btn" onclick="addToCart('Transparent Jelly',399,this)">Add to Cart</button>
+</div>
 </div>
 
 <button class="cartbtn" onclick="sendWhatsAppOrder()">🛒 Cart (0) Order Karein</button>
@@ -49,7 +74,7 @@
 
 <script>
 function zoom(img){document.getElementById('zoomImg').src=img.src;document.getElementById('zoomModal').style.display='flex';}
-function sendWhatsAppOrder(){window.open('https://wa.me/91XXXXXXXXXX?text=Order%20Karna%20Hai')}
+function sendWhatsAppOrder(){window.open('https://wa.me/917703067297?text=Order%20Karna%20Hai')}
 </script>
 </body>
 </html>
