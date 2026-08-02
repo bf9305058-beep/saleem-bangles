@@ -81,15 +81,37 @@ function addToCart(name,price,id){
 }
 function sendWhatsAppOrder(){
     if(cart.length==0){alert("Pehle Cart me kuch add karo");return;}
-    let msg = "Namaste Saleem Bangles, Mujhe ye Bulk Order chahiye:%0A%0A";
-    let total = 0;
-    let photoLinks = "";
     
     cart.forEach(item => {
-        msg += `${item.qty} x ${item.name} - Size: ${item.size} - Rs.${item.price*item.qty}%0A`;
-        total += item.price*item.qty;
+        // Har item ki photo pehle bhejo
+        let photoName = item.name.toLowerCase().replace(/ /g, '');
+        if(photoName == "multi moti") photoName = "multimoti";
+        if(photoName == "fairy box") photoName = "fairybox";
+        if(photoName == "orange moti") photoName = "orangemot";
+        if(photoName == "jelly") photoName = "jellybox";
+        if(photoName == "pink moti") photoName = "pinkmoti";
+        if(photoName == "blue moti") photoName = "bluemoti";
+        if(photoName == "moti picock") photoName = "motipicoc";
         
-        // Har product ki photo ka link
+        let photoUrl = `https://saleem-bangles.vercel.app/${photoName}.jpg`;
+        window.open(`https://wa.me/917703067297?text=${photoUrl}`,"_blank");
+    });
+
+    // 2 second baad order details bhejo
+    setTimeout(() => {
+        let msg = "Namaste Saleem Bangles, Mujhe ye Bulk Order chahiye:%0A%0A";
+        let total = 0;
+        cart.forEach(item => {
+            msg += `${item.qty} x ${item.name} - Size: ${item.size} - Rs.${item.price*item.qty}%0A`;
+            total += item.price*item.qty;
+        });
+        msg += `%0A*Total: Rs.${total}*%0A%0A`;
+        msg += `Name: [Apna Naam]%0A`;
+        msg += `Address: [Apna Address]%0A`;
+        msg += `Phone: [Apna Number]`;
+        window.open(`https://wa.me/917703067297?text=${msg}`,"_blank");
+    }, 2000);
+}
         let photoName = item.name.toLowerCase().replace(/ /g, '');
         if(photoName == "multi moti") photoName = "multimoti";
         if(photoName == "fairy box") photoName = "fairybox";
