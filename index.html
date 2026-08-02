@@ -1,63 +1,38 @@
-<!DOCTYPE html>
+0<!DOCTYPE html>
 <html>
 <head>
-<title>Saleem Bangles Collection</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saleem Bangles</title>
 <style>
-body{font-family:Arial;text-align:center;background:#fff0f5;margin:0;padding-bottom:120px;}
-h1{color:#d63384;padding:20px;}
-.grid{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;padding:20px;}
-.box{background:white;padding:15px;border-radius:10px;width:250px;box-shadow:0 3px 8px rgba(0,0,0,0.1);text-align:left;}
-.box img{width:100%;height:220px;object-fit:cover;border-radius:8px;cursor:pointer;transition:0.3s;}
-.box img:hover{opacity:0.9;transform:scale(1.02);}
-.box h2{color:#d63384;font-size:18px;margin:10px 0 5px;}
-.box p{margin:5px 0;font-size:14px;color:#555;}
-.price{color:green;font-weight:bold;font-size:18px;}
-.size{width:100%;padding:8px;margin:8px 0;border:1px solid #ddd;border-radius:5px;font-size:14px;}
-.qty{display:flex;justify-content:center;align-items:center;gap:8px;margin:10px 0;}
-.qty button{width:32px;height:32px;border:none;background:#ddd;border-radius:5px;cursor:pointer;font-size:18px;font-weight:bold;}
-.qty span{font-size:16px;font-weight:bold;min-width:25px;}
-.addbtn{background:#ff66a6;color:white;border:none;padding:12px;border-radius:8px;width:100%;cursor:pointer;font-weight:bold;font-size:15px;}
-.addbtn:hover{background:#e63a94;}
-.cartbtn{position:fixed;bottom:20px;right:20px;background:#250366;color:white;padding:15px 25px;border:none;border-radius:50px;font-weight:bold;font-size:16px;box-shadow:0 4px 10px rgba(0,0,0,0.3);cursor:pointer;z-index:999;}
-#zoomModal{display:none;position:fixed;z-index:1000;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);justify-content:center;align-items:center;}
-#zoomModal img{max-width:90%;max-height:90%;border-radius:10px;box-shadow:0 20px white;}
-#zoomModal span{position:absolute;top:20px;right:40px;color:white;font-size:40px;cursor:pointer;font-weight:bold;}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:10px}
+.box{border:1px solid #ccc;padding:10px;text-align:center;border-radius:10px}
+.box img{width:100%;height:200px;object-fit:cover;border-radius:10px;cursor:pointer}
+.price{font-weight:bold;color:green}
+.size{width:100%;margin:5px 0;padding:5px}
+.qty{margin:5px 0}
+.qty button{padding:5px 10px}
+.add-to-cart{background:green;color:white;border:none;padding:8px 15px;border-radius:5px;margin-top:5px}
+.cartbtn{position:fixed;bottom:10px;right:10px;background:red;color:white;padding:10px 20px;border:none;border-radius:50px}
+#zoomModal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);justify-content:center;align-items:center}
+#zoomModal img{max-width:90%;max-height:90%}
 </style>
 </head>
 <body>
-
 <h1>Saleem Bangles Collection</h1>
-
 <div class="grid">
-<div class="grid">
-<div class="box"><img src="sawan-spec.jpg" onclick="zoom(this)"><h2>Sawan Special</h2><p class="price">MRP: Rs. 399</p><select id="size-sawan" class="size" onchange="selectSize('sawan', this.value)"><option value="">Size Select karein</option><option value="2.4">2.4</option><option value="2.6">2.6</option><option value="2.8">2.8</option></select><div class="qty"><button onclick="changeQty('sawan',-1)">-</button><span id="qty-sawan">1</span><button onclick="changeQty('sawan',1)">+</button></div><button class="addbtn" onclick="addToCart('sawan')">Add to Cart</button></div>
-<div class="box"><img src="kashmirise.jpg" onclick="zoom(this)"><h2>Kashmiri Set</h2><p class="price">MRP: Rs.299</p><select id="size-kashmiri" class="size" onchange="selectSize('kashmiri', this.value)"><option value="">Size Select karein</option><option value="2.4">2.4</option><option value="2.6">2.6</option><option value="2.8">2.8</option></select><div class="qty"><button onclick="changeQty('kashmiri',-1)">-</button><span id="qty-kashmiri">1</span><button onclick="changeQty('kashmiri',1)">+</button></div><button class="addbtn" onclick="addToCart('kashmiri')">Add to Cart</button></div>
-<div class="box"><img src="multibox.jpg" onclick="zoom(this)"><h2>Multi Box</h2><p class="price">MRP: Rs.279</p><select id="size-multi" class="size" onchange="selectSize('multi', this.value)"><option value="">Size Select karein</option><option value="2.4">2.4</option><option value="2.6">2.6</option><option value="2.8">2.8</option></select><div class="qty"><button onclick="changeQty('multi',-1)">-</button><span id="qty-multi">1</span><button onclick="changeQty('multi',1)">+</button></div><button class="addbtn" onclick="addToCart('multi')">Add to Cart</button></div>
-<div class="box"><img src="multimoti.jpg.jpeg" onclick="zoom(this)"><h2>Multi Moti</h2><p class="price">MRP: Rs. 390</p><select id="size-multimoti" class="size" onchange="selectSize('multimoti', this.value)"><option value="">Size Select karein</option><option value="2.4">2.4</option><option value="2.6">2.6</option><option value="2.8">2.8</option></select><div class="qty"><button onclick="changeQty('multimoti',-1)">-</button><span id="qty-multimoti">1</span><button onclick="changeQty('multimoti',1)">+</button></div><button class="addbtn" onclick="addToCart('multimoti')">Add to Cart</button></div>
-<div class="box"><img src="motibox.jpg" onclick="zoom(this)"><h2>Moti Box</h2><p class="price">MRP: Rs. 1799</p><select id="size-moti" class="size" onchange="selectSize('moti', this.value)"><option value="">Size Select karein</option><option value="2.4">2.4</option><option value="2.6">2.6</option><option value="2.8">2.8</option></select><div class="qty"><button onclick="changeQty('moti',-1)">-</button><span id="qty-moti">1</span><button onclick="changeQty('moti',1)">+</button></div><button class="addbtn" onclick="addToCart('moti')">Add to Cart</button></div>
-<div class="box"><img src="fairybox.jpg" onclick="zoom(this)"><h2>Fairy Box</h2><p class="price">MRP: Rs. 4499</p><select id="size-fairy" class="size" onchange="selectSize('fairy', this.value)"><option value="">Size Select karein</option><option value="2.4">2.4</option><option value="2.6">2.6</option><option value="2.8">2.8</option></select><div class="qty"><button onclick="changeQty('fairy',-1)">-</button><span id="qty-fairy">1</span><button onclick="changeQty('fairy',1)">+</button></div><button class="addbtn" onclick="addToCart('fairy')">Add to Cart</button></div>
-<div class="box"><img src="greenbox.jpg" onclick="zoom(this)"><h2>Green Box</h2><p class="price">MRP: Rs. 1699</p><select id="size-green" class="size" onchange="selectSize('green', this.value)"><option value="">Size Select karein</option><option value="2.4">2.4</option><option value="2.6">2.6</option><option value="2.8">2.8</option></select><div class="qty"><button onclick="changeQty('green',-1)">-</button><span id="qty-green">1</span><button onclick="changeQty('green',1)">+</button></div><button class="addbtn" onclick="addToCart('green')">Add to Cart</button></div>
-<div class="box"><img src="orangemoti.jpg" onclick="zoom(this)"><h2>Orange Moti</h2><p class="price">MRP: Rs. 399</p><select id="size-orange" class="size" onchange="selectSize('orange', this.value)"><option value="">Size Select karein</option><option value="2.4">2.4</option><option value="2.6">2.6</option><option value="2.8">2.8</option></select><div class="qty"><button onclick="changeQty('orange',-1)">-</button><span id="qty-orange">1</span><button onclick="changeQty('orange',1)">+</button></div><button class="addbtn" onclick="addToCart('orange')">Add to Cart</button></div>
-<div class="box"><img src="pinkmoti.jpg" onclick="zoom(this)"><h2>Pink Moti</h2><p class="price">MRP: Rs. 399</p><select id="size-pink" class="size" onchange="selectSize('pink', this.value)"><option value="">Size Select karein</option><option value="2.4">2.4</option><option value="2.6">2.6</option><option value="2.8">2.8</option></select><div class="qty"><button onclick="changeQty('pink',-1)">-</button><span id="qty-pink">1</span><button onclick="changeQty('pink',1)">+</button></div><button class="addbtn" onclick="addToCart('pink')">Add to Cart</button></div>
-<div class="box"><img src="bluemoti.jpg" onclick="zoom(this)"><h2>Blue Moti</h2><p class="price">MRP: Rs.399</p><select id="size-blue" class="size" onchange="selectSize('blue', this.value)"><option value="">Size Select karein</option><option value="2.4">2.4</option><option value="2.6">2.6</option><option value="2.8">2.8</option></select><div class="qty"><button onclick="changeQty('blue',-1)">-</button><span id="qty-blue">1</span><button onclick="changeQty('blue',1)">+</button></div><button class="addbtn" onclick="addToCart('blue')">Add to Cart</button></div>
-<div class="box"><img src="motipicc.jpg" onclick="zoom(this)"><h2>Moti Piccock</h2><p class="price">MRP: Rs.399</p><select id="size-picock" class="size" onchange="selectSize('picock', this.value)"><option value="">Size Select karein</option><option value="2.4">2.4</option><option value="2.6">2.6</option><option value="2.8">2.8</option></select><div class="qty"><button onclick="changeQty('picock',-1)">-</button><span id="qty-picock">1</span><button onclick="changeQty('picock',1)">+</button></div><button class="addbtn" onclick="addToCart('picock')">Add to Cart</button></div>
-<div class="box"><img src="jelly.jpg" onclick="zoom(this)"><h2>Jelly</h2><p class="price">MRP: Rs1299</p><select id="size-jelly" class="size" onchange="selectSize('jelly', this.value)"><option value="">Size Select karein</option><option value="2.4">2.4</option><option value="2.6">2.6</option><option value="2.8">2.8</option></select><div class="qty"><button onclick="changeQty('jelly',-1)">-</button><span id="qty-jelly">1</span><button onclick="changeQty('jelly',1)">+</button></div><button class="addbtn" onclick="addToCart('jelly')">Add to Cart</button></div>
-<div class="box"><img src="transparent-jelly.jpg" onclick="zoom(this)"><h2>Transparent Jelly</h2><p class="price">MRP: Rs.399</p><select id="size-tjelly
-</div>
+<div class="box"><img src="sawan-spec.jpg" onclick="zoom(this)"><h2>Sawan Special</h2><p class="price">MRP: Rs. 399</p><select id="size-sawan" class="size" onchange="selectSize('sawan', this.value)"><option value="">Size Select karein</option><option value="2.4">2.4</option><option value="2.6">2.6</option><option value="2.8">2.8</option><option value="2.10">2.10</option></select><div class="qty"><button onclick="changeQty('sawan',-1)">-</button> <span id="qty-sawan">1</span> <button onclick="changeQty('sawan',1)">+</button></div><button class="add-to-cart" onclick="addToCart('sawan')">Add to Cart</button></div>
 
-<button class="cartbtn" onclick="sendWhatsAppOrder()">🛒 Cart (0) Order Karein</button>
+<div class="box"><img src="kashmirise.jpg" onclick="zoom(this)"><h2>Kashmiri Set</h2><p class="price">MRP: Rs.299</p><select id="size-kashmiri" class="size" onchange="selectSize('kashmiri', this.value)"><option value="">Size Select karein</option><option value="2.4">2.4</option><option value="2.6">2.6</option><option value="2.8">2.8</option><option value="2.10">2.10</option></select><div class="qty"><button onclick="changeQty('kashmiri',-1)">-</button> <span id="qty-kashmiri">1</span> <button onclick="changeQty('kashmiri',1)">+</button></div><button class="add-to-cart" onclick="addToCart('kashmiri')">Add to Cart</button></div>
 
-<div id="zoomModal" onclick="this.style.display='none'"><span>×</span><img id="zoomImg"></div>
+<div class="box"><img src="multibox.jpg" onclick="zoom(this)"><h2>Multi Box</h2><p class="price">MRP: Rs.279</p><select id="size-multi" class="size" onchange="selectSize('multi', this.value)"><option value="">Size Select karein</option><option value="2.4">2.4</option><option value="2.6">2.6</option><option value="2.8">2.8</option><option value="2.10">2.10</option></select><div class="qty"><button onclick="changeQty('multi',-1)">-</button> <span id="qty-multi">1</span> <button onclick="changeQty('multi',1)">+</button></div><button class="add-to-cart" onclick="addToCart('multi')">Add to Cart</button></div>
 
-<script>
-let cart=[];let cartCount=0;
-let selectedSizes = {};
-function selectSize(id, size){ selectedSizes[id] = size; }
-function changeQty(id,num){let el=document.getElementById('qty-'+id);let val=parseInt(el.innerText)+num;if(val<1)val=1;el.innerText=val;}
-function zoom(img){document.getElementById('zoomImg').src=img.src;document.getElementById('zoomModal').style.display='flex';}
+<div class="box"><img src="multimoti.jpg.jpeg" onclick="zoom(this)"><h2>Multi Moti</h2><p class="price">MRP: Rs. 390</p><select id="size-multimoti" class="size" onchange="selectSize('multimoti', this.value)"><option value="">Size Select karein</option><option value="2.4">2.4</option><option value="2.6">2.6</option><option value="2.8">2.8</option><option value="2.10">2.10</option></select><div class="qty"><button onclick="changeQty('multimoti',-1)">-</button> <span id="qty-multimoti">1</span> <button onclick="changeQty('multimoti',1)">+</button></div><button class="add-to-cart" onclick="addToCart('multimoti')">Add to Cart</button></div>
 
-function addToCart(id){
-    let size = selectedSizes[id];
-    if(!size){alert("Pehle Size select karein");return;}
-    let qty=parseInt(document.getElementById('qty-'+id).inner
+<div class="box"><img src="motibox.jpg" onclick="zoom(this)"><h2>Moti Box</h2><p class="price">MRP: Rs. 1799</p><select id="size-moti" class="size" onchange="selectSize('moti', this.value)"><option value="">Size Select karein</option><option value="2.4">2.4</option><option value="2.6">2.6</option><option value="2.8">2.8</option><option value="2.10">2.10</option></select><div class="qty"><button onclick="changeQty('moti',-1)">-</button> <span id="qty-moti">1</span> <button onclick="changeQty('moti',1)">+</button></div><button class="add-to-cart" onclick="addToCart('moti')">Add to Cart</button></div>
+
+<div class="box"><img src="fairybox.jpg" onclick="zoom(this)"><h2>Fairy Box</h2><p class="price">MRP: Rs. 4499</p><select id="size-fairy" class="size" onchange="selectSize('fairy', this.value)"><option value="">Size Select karein</option><option value="2.4">2.4</option><option value="2.6">2.6</option><option value="2.8">2.8</option><option value="2.10">2.10</option></select><div class="qty"><button onclick="changeQty('fairy',-1)">-</button> <span id="qty-fairy">1</span> <button onclick="changeQty('fairy',1)">+</button></div><button class="add-to-cart" onclick="addToCart('fairy')">Add to Cart</button></div>
+
+<div class="box"><img src="greenbox.jpg" onclick="zoom(this)"><h2>Green Box</h2><p class="price">MRP: Rs. 1699</p><select id="size-green" class="size" onchange="selectSize('green', this.value)"><option value="">Size Select karein</option><option value="2.4">2.4</option><option value="2.6">2.6</option><option value="2.8">2.8</option><option value="2.10">2.10</option></select><div class="qty"><button onclick="changeQty('green',-1)">-</button> <span id="qty-green">1</span> <button onclick="changeQty('green',1)">+</button></div><button class="add-to-cart" onclick="addToCart('green')">Add to Cart</button></div>
+
+<div class="box"><img src="orangemoti.jpg" onclick="zoom(this)"><h2>Orange Moti</h2><p class="price">MRP: Rs. 399</p><select id="size-orange" class="size" onchange="selectSize('orange', this.value)"><option value="">Size Select karein</option><option value="2.4">2.4</option><option value="2.6">2.6</option><option value="2.8">2.8</option><option value="2.10">2.10</option></select><div class="qty"><button onclick="changeQty('orange',-1)">-</button> <span id="qty-orange">1</span> <button onclick="changeQty('orange',1)">+</button></div><button class="add-to-cart" onclick="addToCart('orange')">Add to Cart</button></div>
+
+<div class="box"><img src="pinkmoti.jpg" onclick="zoom(this)"><h2>Pink Moti</h2><p class="price">MRP: Rs.399</p><select id="size-pink" class="size" onchange="selectSize('pink', this.value)"><option value="">Size Select
