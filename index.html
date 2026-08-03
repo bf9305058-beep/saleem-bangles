@@ -23,6 +23,16 @@
  .btn { flex:1; padding:12px; border:none; border-radius:6px; font-weight:bold; cursor:pointer; font-size:14px; }
  .btn-cart { background:#ff9f00; color:white; }
  .btn-buy { background:#fb641b; color:white; }
+.header img { height:45px; }
+.product { position:relative; }
+.product::after {
+  content:"Saleem Bangle Store";
+  position:absolute; bottom:8px; right:8px;
+  background:rgba(77, 163, 255, 0.7);
+  color:white; padding:3px 7px;
+  font-size:9px; border-radius:4px; font-weight:bold;
+}
+.footer { text-align:center; padding:20px; background:white; margin-top:20px; color:#555; font-size:13px; line-height:1.6; }
 </style>
 </head>
 <body>
@@ -30,7 +40,14 @@
 <div class="header">Saleem Bangles 💙</div>
 <h1>🌿 Sawan Special Collection 🌿</h1>
 <div class="products" id="products"></div>
-
+<div class="footer">
+  <b>Saleem Bangle Store</b><br>
+  A Complete Bangle Hub<br>
+  Prop: Mohd Saeed<br>
+  Amin Complex Shop No. 8 & 48, Basement<br>
+  Akbari Gate, Nakhas, Lucknow<br>
+  📞 7703067297 | 
+</div>
 <script>
 const products = [
   {name:"Pari Rang Sandook", price:2600, img:"pari-sandook.jpg", tag:""},
