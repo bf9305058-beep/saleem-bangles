@@ -1,52 +1,54 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Saleem Bangles</title>
+<title>Saleem Bangles - Sawan Special</title>
 <style>
-  body{font-family:sans-serif;background:#f8f8f8;margin:0;padding:0}
-  .product{background:#fff;margin:10px;border-radius:12px;padding:15px;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
-  .main-img{width:100%;border-radius:10px}
-  .badges{display:flex;gap:8px;margin:10px 0;flex-wrap:wrap}
-  .badge{border:1px solid #ddd;border-radius:20px;padding:5px 10px;font-size:12px;background:#fff}
-  .thumbs{display:flex;gap:8px;overflow-x:auto;margin:10px 0}
-  .thumbs img{width:70px;height:70px;border-radius:8px;border:2px solid #ddd;object-fit:cover}
-  .thumbs img.active{border-color:green}
-  .sizes{display:flex;gap:10px;margin:10px 0}
-  .size-btn{padding:10px 15px;border:1px solid #ddd;border-radius:8px;background:#fff}
-  .size-btn.active{background:#000;color:#fff;border-color:#000}
-  .btns{display:flex;gap:10px;margin-top:15px}
-  .btn{flex:1;padding:12px;border:none;border-radius:8px;font-weight:bold}
-  .btn-cart{background:#fff;border:1px solid #000}
-  .btn-buy{background:#FFD700}
-  select{width:100%;padding:8px;margin:5px 0;border-radius:8px;border:1px solid #ddd}
+  body { font-family: Arial, sans-serif; background: #fff5f5; margin:0; padding:20px; }
+  h1 { text-align:center; color:#d6336c; margin-bottom:30px; }
+  .products { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; max-width:1200px; margin:auto; }
+  .product { background:white; border-radius:12px; padding:15px; box-shadow:0 2px 8px rgba(0,0,0,0.1); }
+  .main-img { width:100%; height:250px; object-fit:cover; border-radius:8px; }
+  .badges { margin:8px 0; }
+  .badge { display:inline-block; background:#ffe3e3; color:#c92a2a; padding:4px 8px; border-radius:6px; font-size:12px; margin-right:5px; }
+  .thumbs { display:flex; gap:8px; margin:8px 0; flex-wrap:wrap; }
+  .thumbs img { width:50px; height:50px; border:2px solid #ddd; border-radius:6px; cursor:pointer; object-fit:cover; }
+  .thumbs img.active { border-color:#d6336c; }
+  select { width:100%; padding:8px; margin:8px 0; border-radius:6px; border:1px solid #ddd; }
+  .sizes { margin:8px 0; }
+  .size-btn { padding:6px 12px; border:1px solid #ddd; background:white; border-radius:6px; }
+  .size-btn.active { background:#d6336c; color:white; border-color:#d6336c; }
+  h3 { margin:10px 0 5px; color:#333; }
+  p { margin:0 0 10px; color:#666; font-size:14px; }
+  .btns { display:flex; gap:10px; margin-top:10px; }
+  .btn { flex:1; padding:10px; border:none; border-radius:8px; font-weight:bold; cursor:pointer; font-size:14px; }
+  .btn-cart { background:#ffe3e3; color:#c92a2a; }
+  .btn-buy { background:#d6336c; color:white; }
 </style>
 </head>
 <body>
 
-<h2 style="text-align:center;padding:15px">Saleem Bangles</h2>
-
-<div id="products"></div>
+<h1>🌿 Saleem Bangles - Sawan Special 🌿</h1>
+<div class="products" id="products"></div>
 
 <script>
-
-  const products = [
+const products = [
   {name:"Sawan Special", price:399, img:"sawan-special.jpg", colors:["sawan-special.jpg","green-box.jpg"]},
   {name:"Kashmiri Ghughru Set", price:299, img:"kashmiri-set.jpg", colors:["kashmiri-set.jpg","multi-box.jpg"]},
-  {name:"SRC Jelly Box", price:1299, img:"src-jelly-box.jpg", colors:["src-jelly-box.jpg"]},
-  {name:"Green Box", price:1699, img:"green-box.jpg", colors:["green-box.jpg"]},
+  {name:"SRC Jelly Box", price:299, img:"src-jelly-box.jpg", colors:["src-jelly-box.jpg"]},
+  {name:"Green Box", price:1999, img:"green-box.jpg", colors:["green-box.jpg"]},
   {name:"Fairy Box", price:4499, img:"fairy-box.jpg", colors:["fairy-box.jpg"]},
-  {name:"Moti Box", price:1799, img:"moti-box.jpg", colors:["moti-box.jpg"]},
+  {name:"Moti Box", price:1899, img:"moti-box.jpg", colors:["moti-box.jpg"]},
   {name:"Multi Box", price:2399, img:"multi-box.jpg", colors:["multi-box.jpg","multi-moti1.jpg","multi-moti2.jpg"]},
-  {name:"Orange Moti", price:209, img:"orange-moti.jpg", colors:["orange-moti.jpg"]},
+  {name:"Orange Moti", price:299, img:"orange-moti.jpg", colors:["orange-moti.jpg"]},
   {name:"Blue Moti", price:299, img:"blue-moti.jpg", colors:["blue-moti.jpg"]},
   {name:"Pink Moti", price:299, img:"pink-moti.jpg", colors:["pink-moti.jpg"]},
   {name:"Moti Piccock", price:299, img:"moti-piccock.jpg", colors:["moti-piccock.jpg"]},
   {name:"Insight Kajal", price:130, img:"insight-kajal.jpg", colors:["insight-kajal.jpg"]},
   {name:"Multi Moti 1", price:299, img:"multi-moti1.jpg", colors:["multi-moti1.jpg"]},
   {name:"Multi Moti 2", price:299, img:"multi-moti2.jpg", colors:["multi-moti2.jpg"]},
-  {name:"Transparent Jelly", price:399, img:"transparent-jelly.jpg", colors:["transparent-jelly.jpg"]}
+  {name:"Transparent Jelly", price:299, img:"transparent-jelly.jpg", colors:["transparent-jelly.jpg"]}
 ];
 
 function render(){
