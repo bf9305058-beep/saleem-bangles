@@ -1,91 +1,205 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Saleem Bangles</title>
-<style>
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;padding:15px}
-.box{border:1px solid #ccc;padding:10px;text-align:center;border-radius:10px}
-.box img{width:100%;height:220px;object-fit:cover;object-position:center;border-radius:10px;cursor:pointer;background:#fff}
-.price{font-weight:bold;color:green}
-.size{width:100%;margin:5px 0;padding:5px}
-.qty{margin:5px 0}
-.qty button{padding:5px 10px}
-.add-to-cart{background:green;color:white;border:none;padding:8px 15px;border-radius:5px;margin-top:5px}
-.cartbtn{position:fixed;bottom:10px;right:10px;background:red;color:white;padding:10px 20px;border:none;border-radius:50px}
-#zoomModal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);justify-content:center;align-items:center}
-#zoomModal img{max-width:90%;max-height:90%}
-</style>
+  <title>Saleem Bangles Collection</title>
+  <style>
+    body { font-family: Arial; background: #f5f5f5; padding: 15px; }
+    h1 { text-align: center; color: #d63384; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 15px; max-width: 1300px; margin: auto; }
+    .card { background: white; border-radius: 12px; padding: 12px; box-shadow: 0 2px 8px #ccc; text-align: center; }
+    .card img { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; }
+    .card h3 { margin: 8px 0 4px; font-size: 16px; }
+    .price { color: #d63384; font-weight: bold; font-size: 16px; margin-bottom: 8px; }
+    select { width: 100%; padding: 6px; margin: 5px 0; border-radius: 5px; border: 1px solid #ccc; font-size: 14px; }
+    .qty { display: flex; justify-content: center; align-items: center; gap: 10px; margin: 8px 0; }
+    .qty button { padding: 4px 10px; border: 1px solid #ccc; background: white; border-radius: 4px; cursor: pointer; }
+    .btn { width: 100%; padding: 10px; background: #25D366; color: white; border: none; border-radius: 8px; font-size: 15px; cursor: pointer; font-weight: bold; }
+    .btn:hover { background: #1ebe5d; }
+  </style>
 </head>
 <body>
+
 <h1>Saleem Bangles Collection</h1>
 <div class="grid">
-<div class="box"><img src="sawan-spec.jpg" onclick="zoom(this)"><h2>Sawan Special</h2><p class="price">MRP: Rs. 399</p><select class="size"><option value="">Size Select karein</option><option value="2.4">2.4</option><option value="2.6">2.6</option><option value="2.8">2.8</option><option value="2.10">2.10</option></select><div class="qty"><button>-</button> <span>1</span> <button>+</button></div><button class="add-to-cart">Add to Cart</button></div>
 
-<div class="box"><img src="kashmirise.jpg" onclick="zoom(this)"><h2>Kashmiri Set</h2><p class="price">MRP: Rs.299</p><select class="size"><option value="">Size Select karein</option><option value="2.4">2.4</option><option value="2.6">2.6</option><option value="2.8">2.8</option><option value="2.10">2.10</option></select><div class="qty"><button>-</button> <span>1</span> <button>+</button></div><button class="add-to-cart">Add to Cart</button></div>
+  <!-- 1 -->
+  <div class="card">
+    <img src="sawan-special.jpg">
+    <h3>Sawan Special</h3>
+    <p class="price">MRP: Rs. 399</p>
+    <select id="size1"><option>Size Select karein</option><option>2.4</option><option>2.6</option><option>2.8</option></select>
+    <div class="qty"><button onclick="qty('qty1',-1)">-</button><span id="qty1">1</span><button onclick="qty('qty1',1)">+</button></div>
+    <button class="btn" onclick="order('Sawan Special','399','sawan-special.jpg','size1','qty1')">Add to Cart</button>
+  </div>
 
-<div class="box"><img src="multibox.jpg" onclick="zoom(this)"><h2>Multi Box</h2><p class="price">MRP: Rs.279</p><select class="size"><option value="">Size Select karein</option><option value="2.4">2.4</option><option value="2.6">2.6</option><option value="2.8">2.8</option><option value="2.10">2.10</option></select><div class="qty"><button>-</button> <span>1</span> <button>+</button></div><button class="add-to-cart">Add to Cart</button></div>
+  <!-- 2 -->
+  <div class="card">
+    <img src="kashmiri-set.jpg">
+    <h3>Kashmiri Set</h3>
+    <p class="price">MRP: Rs. 299</p>
+    <select id="size2"><option>Size Select karein</option><option>2.4</option><option>2.6</option><option>2.8</option></select>
+    <div class="qty"><button onclick="qty('qty2',-1)">-</button><span id="qty2">1</span><button onclick="qty('qty2',1)">+</button></div>
+    <button class="btn" onclick="order('Kashmiri Set','299','kashmiri-set.jpg','size2','qty2')">Add to Cart</button>
+  </div>
 
-<div class="box"><img src="multimoti.jpg.jpeg" onclick="zoom(this)"><h2>Multi Moti</h2><p class="price">MRP: Rs. 390</p><select class="size"><option value="">Size Select karein</option><option value="2.4">2.4</option><option value="2.6">2.6</option><option value="2.8">2.8</option><option value="2.10">2.10</option></select><div class="qty"><button>-</button> <span>1</span> <button>+</button></div><button class="add-to-cart">Add to Cart</button></div>
+  <!-- 3 -->
+  <div class="card">
+    <img src="multi-box.jpg">
+    <h3>Multi Box</h3>
+    <p class="price">MRP: Rs. 279</p>
+    <select id="size3"><option>Size Select karein</option><option>2.4</option><option>2.6</option><option>2.8</option></select>
+    <div class="qty"><button onclick="qty('qty3',-1)">-</button><span id="qty3">1</span><button onclick="qty('qty3',1)">+</button></div>
+    <button class="btn" onclick="order('Multi Box','279','multi-box.jpg','size3','qty3')">Add to Cart</button>
+  </div>
 
-<div class="box"><img src="motibox.jpg" onclick="zoom(this)"><h2>Moti Box</h2><p class="price">MRP: Rs. 1799</p><select class="size"><option value="">Size Select karein</option><option value="2.4">2.4</option><option value="2.6">2.6</option><option value="2.8">2.8</option><option value="2.10">2.10</option></select><div class="qty"><button>-</button> <span>1</span> <button>+</button></div><button class="add-to-cart">Add to Cart</button></div>
+  <!-- 4 -->
+  <div class="card">
+    <img src="multi-moti1.jpg">
+    <h3>Multi Moti</h3>
+    <p class="price">MRP: Rs. 390</p>
+    <select id="size4"><option>Size Select karein</option><option>2.4</option><option>2.6</option><option>2.8</option></select>
+    <div class="qty"><button onclick="qty('qty4',-1)">-</button><span id="qty4">1</span><button onclick="qty('qty4',1)">+</button></div>
+    <button class="btn" onclick="order('Multi Moti','390','multi-moti1.jpg','size4','qty4')">Add to Cart</button>
+  </div>
 
-<div class="box"><img src="fairybox.jpg" onclick="zoom(this)"><h2>Fairy Box</h2><p class="price">MRP: Rs. 4499</p><select class="size"><option value="">Size Select karein</option><option value="2.4">2.4</option><option value="2.6">2.6</option><option value="2.8">2.8</option><option value="2.10">2.10</option></select><div class="qty"><button>-</button> <span>1</span> <button>+</button></div><button class="add-to-cart">Add to Cart</button></div>
+  <!-- 5 -->
+  <div class="card">
+    <img src="moti-box.jpg">
+    <h3>Moti Box</h3>
+    <p class="price">MRP: Rs. 1799</p>
+    <select id="size5"><option>Size Select karein</option><option>2.4</option><option>2.6</option><option>2.8</option></select>
+    <div class="qty"><button onclick="qty('qty5',-1)">-</button><span id="qty5">1</span><button onclick="qty('qty5',1)">+</button></div>
+    <button class="btn" onclick="order('Moti Box','1799','moti-box.jpg','size5','qty5')">Add to Cart</button>
+  </div>
 
-<div class="box"><img src="greenbox.jpg" onclick="zoom(this)"><h2>Green Box</h2><p class="price">MRP: Rs. 1699</p><select class="size"><option value="">Size Select karein</option><option value="2.4">2.4</option><option value="2.6">2.6</option><option value="2.8">2.8</option><option value="2.10">2.10</option></select><div class="qty"><button>-</button> <span>1</span> <button>+</button></div><button class="add-to-cart">Add to Cart</button></div>
+  <!-- 6 -->
+  <div class="card">
+    <img src="fairy-box.jpg">
+    <h3>Fairy Box</h3>
+    <p class="price">MRP: Rs. 4499</p>
+    <select id="size6"><option>Size Select karein</option><option>2.4</option><option>2.6</option><option>2.8</option></select>
+    <div class="qty"><button onclick="qty('qty6',-1)">-</button><span id="qty6">1</span><button onclick="qty('qty6',1)">+</button></div>
+    <button class="btn" onclick="order('Fairy Box','4499','fairy-box.jpg','size6','qty6')">Add to Cart</button>
+  </div>
 
-<div class="box"><img src="orangemoti.jpg" onclick="zoom(this)"><h2>Orange Moti</h2><p class="price">MRP: Rs. 399</p><select class="size"><option value="">Size Select karein</option><option value="2.4">2.4</option><option value="2.6">2.6</option><option value="2.8">2.8</option><option value="2.10">2.10</option></select><div class="qty"><button>-</button> <span>1</span> <button>+</button></div><button class="add-to-cart">Add to Cart</button></div>
+  <!-- 7 -->
+  <div class="card">
+    <img src="green-box.jpg">
+    <h3>Green Box</h3>
+    <p class="price">MRP: Rs. 1699</p>
+    <select id="size7"><option>Size Select karein</option><option>2.4</option><option>2.6</option><option>2.8</option></select>
+    <div class="qty"><button onclick="qty('qty7',-1)">-</button><span id="qty7">1</span><button onclick="qty('qty7',1)">+</button></div>
+    <button class="btn" onclick="order('Green Box','1699','green-box.jpg','size7','qty7')">Add to Cart</button>
+  </div>
 
-<div class="box"><img src="pinkmoti.jpg" onclick="zoom(this)"><h2>Pink Moti</h2><p class="price">MRP: Rs.399</p><select class="size"><option value="">Size Select karein</option><option value="2.4">2.4</option><option value="2.6">2.6</option><option value="2.8">2.8</option><option value="2.10">2.10</option></select><div class="qty"><button>-</button> <span>1</span> <button>+</button></div><button class="add-to-cart">Add to Cart</button></div>
+  <!-- 8 -->
+  <div class="card">
+    <img src="orange-moti.jpg">
+    <h3>Orange Moti</h3>
+    <p class="price">MRP: Rs. 399</p>
+    <select id="size8"><option>Size Select karein</option><option>2.4</option><option>2.6</option><option>2.8</option></select>
+    <div class="qty"><button onclick="qty('qty8',-1)">-</button><span id="qty8">1</span><button onclick="qty('qty8',1)">+</button></div>
+    <button class="btn" onclick="order('Orange Moti','399','orange-moti.jpg','size8','qty8')">Add to Cart</button>
+  </div>
 
-<div class="box"><img src="bluemoti.jpg" onclick="zoom(this)"><h2>Blue Moti</h2><p class="price">MRP: Rs.399</p><select class="size"><option value="">Size Select karein</option><option value="2.4">2.4</option><option value="2.6">2.6</option><option value="2.8">2.8</option><option value="2.10">2.10</option></select><div class="qty"><button>-</button> <span>1</span> <button>+</button></div><button class="add-to-cart">Add to Cart</button></div>
+  <!-- 9 -->
+  <div class="card">
+    <img src="pink-moti.jpg">
+    <h3>Pink Moti</h3>
+    <p class="price">MRP: Rs. 399</p>
+    <select id="size9"><option>Size Select karein</option><option>2.4</option><option>2.6</option><option>2.8</option></select>
+    <div class="qty"><button onclick="qty('qty9',-1)">-</button><span id="qty9">1</span><button onclick="qty('qty9',1)">+</button></div>
+    <button class="btn" onclick="order('Pink Moti','399','pink-moti.jpg','size9','qty9')">Add to Cart</button>
+  </div>
 
-<div class="box"><img src="motipicc.jpg" onclick="zoom(this)"><h2>Moti Piccock</h2><p class="price">MRP: Rs.399</p><select class="size"><option value="">Size Select karein</option><option value="2.4">2.4</option><option value="2.6">2.6</option><option value="2.8">2.8</option><option value="2.10">2.10</option></select><div class="qty"><button>-</button> <span>1</span> <button>+</button></div><button class="add-to-cart">Add to Cart</button></div>
-<div class="box">
-<img src="multi1.jpg">
-<h3>Multi Moti</h3>
-<p>MRP: Rs.299</p>
-  
-<select><option>Size Select karein</option><option>2.2</option><option>2.4</option><option>2.6</option><option>2.8</option></select>
-<div class="qty"><button onclick="changeQty(this,-1)">-</button><span>1</span><button onclick="changeQty(this,1)">+</button></div>
-<button class="btn" onclick="addToCart('Multi Moti',299,this)">Add to Cart</button>
+  <!-- 10 -->
+  <div class="card">
+    <img src="blue-moti.jpg">
+    <h3>Blue Moti</h3>
+    <p class="price">MRP: Rs. 399</p>
+    <select id="size10"><option>Size Select karein</option><option>2.4</option><option>2.6</option><option>2.8</option></select>
+    <div class="qty"><button onclick="qty('qty10',-1)">-</button><span id="qty10">1</span><button onclick="qty('qty10',1)">+</button></div>
+    <button class="btn" onclick="order('Blue Moti','399','blue-moti.jpg','size10','qty10')">Add to Cart</button>
+  </div>
+
+  <!-- 11 -->
+  <div class="card">
+    <img src="moti-piccock.jpg">
+    <h3>Moti Piccock</h3>
+    <p class="price">MRP: Rs. 399</p>
+    <select id="size11"><option>Size Select karein</option><option>2.4</option><option>2.6</option><option>2.8</option></select>
+    <div class="qty"><button onclick="qty('qty11',-1)">-</button><span id="qty11">1</span><button onclick="qty('qty11',1)">+</button></div>
+    <button class="btn" onclick="order('Moti Piccock','399','moti-piccock.jpg','size11','qty11')">Add to Cart</button>
+  </div>
+
+  <!-- 12 -->
+  <div class="card">
+    <img src="multi-moti2.jpg">
+    <h3>Multi Moti</h3>
+    <p class="price">MRP: Rs. 299</p>
+    <select id="size12"><option>Size Select karein</option><option>2.4</option><option>2.6</option><option>2.8</option></select>
+    <div class="qty"><button onclick="qty('qty12',-1)">-</button><span id="qty12">1</span><button onclick="qty('qty12',1)">+</button></div>
+    <button class="btn" onclick="order('Multi Moti','299','multi-moti2.jpg','size12','qty12')">Add to Cart</button>
+  </div>
+
+  <!-- 13 -->
+  <div class="card">
+    <img src="src-jelly-box.jpg">
+    <h3>SRC Jelly Box</h3>
+    <p class="price">MRP: Rs. 1299</p>
+    <select id="size13"><option>Size Select karein</option><option>2.4</option><option>2.6</option><option>2.8</option></select>
+    <div class="qty"><button onclick="qty('qty13',-1)">-</button><span id="qty13">1</span><button onclick="qty('qty13',1)">+</button></div>
+    <button class="btn" onclick="order('SRC Jelly Box','1299','src-jelly-box.jpg','size13','qty13')">Add to Cart</button>
+  </div>
+
+  <!-- 14 -->
+  <div class="card">
+    <img src="transparent-jelly.jpg">
+    <h3>Transparent Jelly</h3>
+    <p class="price">MRP: Rs. 399</p>
+    <select id="size14"><option>Size Select karein</option><option>2.4</option><option>2.6</option><option>2.8</option></select>
+    <div class="qty"><button onclick="qty('qty14',-1)">-</button><span id="qty14">1</span><button onclick="qty('qty14',1)">+</button></div>
+    <button class="btn" onclick="order('Transparent Jelly','399','transparent-jelly.jpg','size14','qty14')">Add to Cart</button>
+  </div>
+
+  <!-- 15 -->
+  <div class="card">
+    <img src="insight-kajal.jpg">
+    <h3>Insight Kajal</h3>
+    <p class="price">MRP: Rs. 130</p>
+    <select id="size15"><option>Size Select karein</option><option>2.4</option><option>2.6</option><option>2.8</option></select>
+    <div class="qty"><button onclick="qty('qty15',-1)">-</button><span id="qty15">1</span><button onclick="qty('qty15',1)">+</button></div>
+    <button class="btn" onclick="order('Insight Kajal','130','insight-kajal.jpg','size15','qty15')">Add to Cart</button>
+  </div>
+
 </div>
-
-<div class="box">
-<img src="jellybox.jpg">
-<h3>SRC Jelly Box</h3>
-<p>MRP: Rs.1299</p>
-<select><option>Size Select karein</option><option>2.2</option><option>2.4</option><option>2.6</option><option>2.8</option></select>
-<div class="qty"><button onclick="changeQty(this,-1)">-</button><span>1</span><button onclick="changeQty(this,1)">+</button></div>
-<button class="btn" onclick="addToCart('SRC Jelly Box',1299,this)">Add to Cart</button>
-</div>
-
-
-<div class="box">
-  <img src="transparentjelly.jpg" style="width:100%; height:200px; object-fit: contain;">
-  <h3>Transparent Jelly</h3>
-  <p>MRP: Rs.399</p>
-  <select><option>Size Select karein</option><option>2.2</option><option>2.4</option><option>2.6</option><option>2.8</option></select>
-  <div class="qty"><button onclick="changeQty(this,-1)">-</button><span>1</span><button onclick="changeQty(this,1)">+</button></div>
-  <button class="btn" onclick="addToCart('Transparent Jelly',399,this)">Add to Cart</button>
-</div>
-
-<div class="box">
-  <img src="insightkajal.jpg" style="width:100%; height:200px; object-fit: contain;">
-  <h3>Insight Kajal</h3>
-  <p>MRP: Rs.130</p>
-  <select><option>Size Select karein</option><option>Free Size</option></select>
-  <div class="qty"><button onclick="changeQty(this,-1)">-</button><span>1</span><button onclick="changeQty(this,1)">+</button></div>
-  <button class="btn" onclick="addToCart('Insight Kajal',130,this)">Add to Cart</button>
-</div>
-</div>
-
-<button class="cartbtn" onclick="sendWhatsAppOrder()">🛒 Cart (0) Order Karein</button>
-
-<div id="zoomModal" onclick="this.style.display='none'"><span>X</span><img id="zoomImg"></div>
 
 <script>
-function zoom(img){document.getElementById('zoomImg').src=img.src;document.getElementById('zoomModal').style.display='flex';}
-function sendWhatsAppOrder(){window.open('https://wa.me/917703067297?text=Order%20Karna%20Hai')}
+function qty(id, change) {
+  let el = document.getElementById(id);
+  let val = parseInt(el.innerText) + change;
+  if(val < 1) val = 1;
+  el.innerText = val;
+}
+
+function order(name, price, img, sizeId, qtyId) {
+  let size = document.getElementById(sizeId).value;
+  let quantity = document.getElementById(qtyId).innerText;
+  if(size == "Size Select karein") { alert("Pehle size select karein"); return; }
+  
+  let myNumber = "917703067297";
+  let total = price * quantity;
+  let message = `*New Order From Saleem Bangles*%0A%0A` +
+                `*Product:* ${name}%0A` +
+                `*Size:* ${size}%0A` +
+                `*Quantity:* ${quantity}%0A` +
+                `*Price:* ₹${price} x ${quantity} = ₹${total}%0A%0A` +
+                `*Product Photo:*%0A${window.location.origin}/${img}%0A%0A` +
+                `Address bhej dijiye 🙏`;
+  
+  window.open(`https://wa.me/${myNumber}?text=${message}`, '_blank');
+}
 </script>
+
 </body>
 </html>
