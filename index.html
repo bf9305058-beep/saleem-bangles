@@ -5,41 +5,45 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Saleem Bangles - Sawan Special</title>
 <style>
-  body { font-family: Arial, sans-serif; background: #fff5f5; margin:0; padding:20px; }
-  h1 { text-align:center; color:#d6336c; margin-bottom:30px; }
-  .products { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; max-width:1200px; margin:auto; }
-  .product { background:white; border-radius:12px; padding:15px; box-shadow:0 2px 8px rgba(0,0,0,0.1); }
-  .main-img { width:100%; height:250px; object-fit:cover; border-radius:8px; }
+  body { font-family: Arial, sans-serif; background: #f1f3f6; margin:0; padding:0; }
+  .header { background:#2874f0; padding:12px; color:white; text-align:center; font-size:20px; font-weight:bold; }
+  h1 { text-align:center; color:#d6336c; padding:20px 0 10px; }
+  .products { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:15px; padding:20px; max-width:1200px; margin:auto; }
+  .product { background:white; border-radius:4px; padding:15px; box-shadow:0 1px 4px rgba(0,0,0,0.1); }
+  .product:hover { box-shadow:0 3px 8px rgba(0,0,0,0.2); }
+  .main-img { width:100%; height:220px; object-fit:cover; border-radius:4px; }
   .badges { margin:8px 0; }
-  .badge { display:inline-block; background:#ffe3e3; color:#c92a2a; padding:4px 8px; border-radius:6px; font-size:12px; margin-right:5px; }
-  .thumbs { display:flex; gap:8px; margin:8px 0; flex-wrap:wrap; }
-  .thumbs img { width:50px; height:50px; border:2px solid #ddd; border-radius:6px; cursor:pointer; object-fit:cover; }
-  .thumbs img.active { border-color:#d6336c; }
-  select { width:100%; padding:8px; margin:8px 0; border-radius:6px; border:1px solid #ddd; }
+  .badge { display:inline-block; background:#e6f3ff; color:#2874f0; padding:3px 6px; border-radius:3px; font-size:11px; margin-right:4px; }
+  .thumbs { display:flex; gap:6px; margin:8px 0; flex-wrap:wrap; }
+  .thumbs img { width:45px; height:45px; border:1px solid #ddd; border-radius:4px; cursor:pointer; object-fit:cover; }
+  .thumbs img.active { border:2px solid #2874f0; }
+  select { width:100%; padding:8px; margin:8px 0; border-radius:4px; border:1px solid #ccc; }
   .sizes { margin:8px 0; }
-  .size-btn { padding:6px 12px; border:1px solid #ddd; background:white; border-radius:6px; }
-  .size-btn.active { background:#d6336c; color:white; border-color:#d6336c; }
-  h3 { margin:10px 0 5px; color:#333; }
-  p { margin:0 0 10px; color:#666; font-size:14px; }
-  .btns { display:flex; gap:10px; margin-top:10px; }
-  .btn { flex:1; padding:10px; border:none; border-radius:8px; font-weight:bold; cursor:pointer; font-size:14px; }
-  .btn-cart { background:#ffe3e3; color:#c92a2a; }
-  .btn-buy { background:#d6336c; color:white; }
+  .size-btn { padding:5px 10px; border:1px solid #ddd; background:white; border-radius:4px; font-size:12px; }
+  .size-btn.active { background:#2874f0; color:white; border-color:#2874f0; }
+  h3 { margin:8px 0 4px; color:#212121; font-size:16px; }
+  p { margin:0 0 8px; color:#878787; font-size:13px; }
+  .price { font-size:18px; font-weight:bold; color:#212121; margin:8px 0; }
+  .btns { display:flex; gap:8px; margin-top:10px; }
+  .btn { flex:1; padding:10px; border:none; border-radius:4px; font-weight:bold; cursor:pointer; font-size:14px; }
+  .btn-cart { background:#ff9f00; color:white; }
+  .btn-buy { background:#fb641b; color:white; }
 </style>
 </head>
 <body>
 
-<h1>🌿 Saleem Bangles - Sawan Special 🌿</h1>
+<div class="header">Saleem Bangles</div>
+<h1>🌿 Sawan Special Collection 🌿</h1>
 <div class="products" id="products"></div>
 
 <script>
 const products = [
   {name:"Sawan Special", price:399, img:"sawan-special.jpg", colors:["sawan-special.jpg","green-box.jpg"]},
   {name:"Kashmiri Ghughru Set", price:299, img:"kashmiri-set.jpg", colors:["kashmiri-set.jpg","multi-box.jpg"]},
-  {name:"SRC Jelly Box", price:299, img:"src-jelly-box.jpg", colors:["src-jelly-box.jpg"]},
-  {name:"Green Box", price:1999, img:"green-box.jpg", colors:["green-box.jpg"]},
+  {name:"SRC Jelly Box", price:1399, img:"src-jelly-box.jpg", colors:["src-jelly-box.jpg"]},
+  {name:"Green Box", price:1799, img:"green-box.jpg", colors:["green-box.jpg"]},
   {name:"Fairy Box", price:4499, img:"fairy-box.jpg", colors:["fairy-box.jpg"]},
-  {name:"Moti Box", price:1899, img:"moti-box.jpg", colors:["moti-box.jpg"]},
+  {name:"Moti Box", price:1999, img:"moti-box.jpg", colors:["moti-box.jpg"]},
   {name:"Multi Box", price:2399, img:"multi-box.jpg", colors:["multi-box.jpg","multi-moti1.jpg","multi-moti2.jpg"]},
   {name:"Orange Moti", price:299, img:"orange-moti.jpg", colors:["orange-moti.jpg"]},
   {name:"Blue Moti", price:299, img:"blue-moti.jpg", colors:["blue-moti.jpg"]},
@@ -48,7 +52,7 @@ const products = [
   {name:"Insight Kajal", price:130, img:"insight-kajal.jpg", colors:["insight-kajal.jpg"]},
   {name:"Multi Moti 1", price:299, img:"multi-moti1.jpg", colors:["multi-moti1.jpg"]},
   {name:"Multi Moti 2", price:299, img:"multi-moti2.jpg", colors:["multi-moti2.jpg"]},
-  {name:"Transparent Jelly", price:299, img:"transparent-jelly.jpg", colors:["transparent-jelly.jpg"]}
+  {name:"Transparent Jelly", price:399, img:"transparent-jelly.jpg", colors:["transparent-jelly.jpg"]}
 ];
 
 function render(){
@@ -58,28 +62,30 @@ function render(){
     <div class="product">
       <img src="${p.img}" class="main-img" id="main${i}">
       <div class="badges">
-        <div class="badge">🌿 Traditional Elegance</div>
-        <div class="badge">✨ Perfect for Sawan</div>
+        <div class="badge">🌿 Traditional</div>
+        <div class="badge">✨ Sawan Special</div>
       </div>
       
-      <b>Selected Color:</b>
+      <b style="font-size:13px;">Selected Color:</b>
       <div class="thumbs">
         ${p.colors.map((c,j)=>`<img src="${c}" onclick="changeImg(${i},'${c}',this)" class="${j==0?'active':''}">`).join("")}
       </div>
 
-      <b>Selected Size:</b>
+      <b style="font-size:13px;">Selected Size:</b>
       <select id="size${i}">
         <option>Size Select karein</option>
         <option>2.2</option><option>2.4</option><option>2.6</option><option>2.8</option>
       </select>
 
-      <b>Selected Pack Of:</b>
+      <b style="font-size:13px;">Pack Of:</b>
       <div class="sizes">
         <button class="size-btn active">18</button>
       </div>
 
       <h3>${p.name}</h3>
       <p>Glass Bangle Set</p>
+      
+      <div class="price">₹${p.price}</div>
       
       <div class="btns">
         <button class="btn btn-cart" onclick="addCart('${p.name}')">Add to cart</button>
