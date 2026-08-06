@@ -16,6 +16,9 @@ h1{text-align:center; color:#0066cc; font-size:24px; margin:20px 0}
 .size-btn{margin:3px; padding:5px 10px; border:1px solid #ccc; border-radius:5px; background:#f0f0f0; cursor:pointer; font-size:14px}
 .size-btn.active{background:#0099ff; color:white; border-color:#0099ff}
 .btn-cart{background:#ff6b81; color:white; border:none; padding:10px; border-radius:8px; margin-top:8px; cursor:pointer; width:100%; font-size:15px}
+  .btn-add{margin-top:8px; cursor:pointer; width:100%; padding:10px; background:#ff69b4; color:white; border:none; border-radius:8px; font-weight:bold;}
+#cart{margin:20px; padding:20px; border:2px solid #ff69b4; border-radius:10px;}
+#cart ul{list-style:none; padding:0;}
 .btn-wa{background:#25D366; color:white; border:none; padding:10px; border-radius:8px; margin-top:5px; cursor:pointer; width:100%; font-size:15px}
 .footer{text-align:center; margin-top:20px; padding:20px; background:#ccefff; font-size:14px; line-height:1.6}
 </style>
@@ -24,7 +27,12 @@ h1{text-align:center; color:#0066cc; font-size:24px; margin:20px 0}
 <div class="header">Saleem Bangles 💙</div>
 <h1>🌿 Sawan Special Collection 🌿</h1>
 <div class="products" id="products"></div>
-
+<div id="cart">
+  <h2>🛒 Your Cart</h2>
+  <ul id="cart-items"></ul>
+  <p id="total" style="font-weight:bold; font-size:18px;"></p>
+  <button id="whatsapp-btn" onclick="orderOnWhatsApp()" style="background:#25D366; color:white; padding:12px; border:none; width:100%; border-radius:8px; font-size:16px;">Order on WhatsApp</button>
+</div>
 <div class="footer">
 <b>Saleem Bangle Store</b><br>
 A Complete Bangle Hub<br>
@@ -34,69 +42,95 @@ Akbari Gate, Nakhas, Lucknow<br>
 📞 7703067297
 </div>
 
+
 <script>
 const products = [
-{name:"Pari Rang Sandook", price:2600, img:"pari-sandook.jpg", sizes:["2.2","2.4","2.6","2.8"]},
-{name:"24 Dozen Fairy Box", price:4500, img:"24-fairy-box.jpg", sizes:["2.2","2.4","2.6","2.8"]},
-{name:"Viral Fairy Box", price:3400, img:"viral-fairy-box.jpg", sizes:["2.2","2.4","2.6","2.8"]},
-{name:"Sawan Special", price:399, img:"sawan-special.jpg", sizes:["2.2","2.4","2.6","2.8"]},
-{name:"Kashmiri Ghughru Set", price:299, img:"kashmiri-set.jpg", sizes:["2.2","2.4","2.6","2.8"]},
-{name:"SRC Jelly Box", price:1399, img:"src-jelly-box.jpg", sizes:["2.2","2.4","2.6","2.8"]},
-{name:"Green Box", price:1799, img:"green-box.jpg", sizes:["2.2","2.4","2.6","2.8"]},
-{name:"Moti Box", price:1799, img:"moti-box.jpg", sizes:["2.2","2.4","2.6","2.8"]},
-{name:"Multi Box", price:2399, img:"multi-box.jpg", sizes:["2.2","2.4","2.6","2.8"]},
-{name:"Orange Moti", price:299, img:"orange-moti.jpg", sizes:["2.2","2.4","2.6","2.8"]},
-{name:"Blue Moti", price:299, img:"blue-moti.jpg", sizes:["2.2","2.4","2.6","2.8"]},
-{name:"Pink Moti", price:299, img:"pink-moti.jpg", sizes:["2.2","2.4","2.6","2.8"]},
-{name:"Moti Piccock", price:399, img:"moti-piccock.jpg", sizes:["2.2","2.4","2.6","2.8"]},
-{name:"Insight Kajal", price:130, img:"insight-kajal.jpg"},
-{name:"Multi Moti 1", price:299, img:"multi-moti1.jpg", sizes:["2.2","2.4","2.6","2.8"]},
-{name:"Multi Moti 2", price:299, img:"multi-moti2.jpg", sizes:["2.2","2.4","2.6","2.8"]},
-{name:"Wine with Irani Kada", price:299, img:"wine-irani-kada.jpg", sizes:["2.2","2.4","2.6","2.8"]},
-{name:"Rangila Set", price:349, img:"rangila-bangle.jpg", sizes:["2.2","2.4","2.6","2.8"]}
+  {name:"Pari Rang Sandook", price:2600, img:"pari-sandook.jpg", sizes:["2.2","2.4","2.6","2.8"]},
+  {name:"24 Dozen Fairy Box", price:4500, img:"24-fairy-box.jpg", sizes:["2.2","2.4","2.6","2.8"]},
+  {name:"Viral Fairy Box", price:3400, img:"viral-fairy-box.jpg", sizes:["2.2","2.4","2.6","2.8"]},
+  {name:"Sawan Special", price:399, img:"sawan-special.jpg", sizes:["2.2","2.4","2.6","2.8"]},
+  {name:"Kashmiri Ghughru Set", price:299, img:"kashmiri-set.jpg", sizes:["2.2","2.4","2.6","2.8"]},
+  {name:"SRC Jelly Box", price:1399, img:"src-jelly-box.jpg", sizes:["2.2","2.4","2.6","2.8"]},
+  {name:"Green Box", price:1799, img:"green-box.jpg", sizes:["2.2","2.4","2.6","2.8"]},
+  {name:"Moti Box", price:1799, img:"moti-box.jpg", sizes:["2.2","2.4","2.6","2.8"]},
+  {name:"Multi Box", price:2399, img:"multi-box.jpg", sizes:["2.2","2.4","2.6","2.8"]},
+  {name:"Orange Moti", price:299, img:"orange-moti.jpg", sizes:["2.2","2.4","2.6","2.8"]},
+  {name:"Blue Moti", price:299, img:"blue-moti.jpg", sizes:["2.2","2.4","2.6","2.8"]},
+  {name:"Pink Moti", price:299, img:"pink-moti.jpg", sizes:["2.2","2.4","2.6","2.8"]},
+  {name:"Moti Piccock", price:399, img:"moti-piccock.jpg", sizes:["2.2","2.4","2.6","2.8"]},
+  {name:"Insight Kajal", price:130, img:"insight-kajal.jpg"},
+  {name:"Multi Moti 1", price:299, img:"multi-moti1.jpg", sizes:["2.2","2.4","2.6","2.8"]},
+  {name:"Multi Moti 2", price:299, img:"multi-moti2.jpg", sizes:["2.2","2.4","2.6","2.8"]},
+  {name:"Wine with Irani Kada", price:299, img:"wine-irani-kada.jpg", sizes:["2.2","2.4","2.6","2.8"]},
+  {name:"Rangila Set", price:349, img:"rangila-bangle.jpg", sizes:["2.2","2.4","2.6","2.8"]}
 ];
 
+let cart = [];
+let selectedSizes = {};
+
+function showProducts() {
+  const container = document.getElementById("products");
+  container.innerHTML = "";
+  products.forEach((p,i) => {
+    let sizeBtns = "";
+    if(p.sizes){
+      sizeBtns = `<div style="margin:5px 0;">Size: `;
+      p.sizes.forEach(s => {
+        sizeBtns += `<button onclick="selectSize(${i},'${s}',this)" style="margin:2px; padding:4px 8px; border:1px solid #ccc; border-radius:4px;">${s}</button>`;
+      });
+      sizeBtns += `</div>`;
+    }
+    container.innerHTML += `
+      <div class="card">
+        <img src="${p.img}">
+        <h3>${p.name}</h3>
+        <p>₹${p.price}</p>
+        ${sizeBtns}
+        <button class="btn-add" onclick="addToCart(${i})">Add to Cart</button>
+      </div>
+    `;
+  });
+}
+
 function selectSize(i, size, el){
-  selectedSize[i] = size;
-  el.parentElement.querySelectorAll('.size-btn').forEach(b=>b.classList.remove('active'));
-  el.classList.add('active');
+  selectedSizes[i] = size;
+  el.parentElement.querySelectorAll("button").forEach(b=>{b.style.background="#fff"; b.style.color="#000"});
+  el.style.background="#ff69b4";
+  el.style.color="white";
 }
 
-function addToCart(name, price, img, i){
-  let size = selectedSize[i];
-  if(!size){
-    alert("Pehle size select karo! 🙏");
-    return;
-  }
-  alert(name + " - Size " + size + " cart me add ho gaya! 🛒");
+function addToCart(i) {
+  let p = products[i];
+  let size = selectedSizes[i] || (p.sizes? "Size nahi chuna" : "");
+  cart.push({name:p.name, price:p.price, size:size});
+  alert(p.name + " cart me add ho gaya!");
+  showCart();
 }
 
-function order(name, price, img, i) {
-  let size = selectedSize[i];
-  if(!size){
-    alert("Pehle size select karo! 🙏");
-    return;
-  }
-  let myNumber = "917703067297";
-  let photoLink = `${window.location.origin}/${img}`;
-  let message = `*New Order From Saleem Bangles*%0A%0A*Product:* ${name}%0A*Size:* ${size}%0A*Price:* Rs.${price}%0A%0A*Photo:*%0A${photoLink}%0A%0Abhej dijiye 🙏`;
-  window.open(`https://wa.me/${myNumber}?text=${message}`, '_blank');
+function showCart() {
+  let cartList = document.getElementById("cart-items");
+  let total = 0;
+  cartList.innerHTML = "";
+  cart.forEach(item => {
+    cartList.innerHTML += `<li>${item.name} ${item.size} - ₹${item.price}</li>`;
+    total += item.price;
+  });
+  document.getElementById("total").innerText = "Total: ₹" + total;
 }
 
-const container = document.getElementById('products');
-products.forEach((p,i) => {
-  let sizeBtns = p.sizes.map(s=>`<button class="size-btn" onclick="selectSize(${i},'${s}',this)">${s}</button>`).join('');
-  container.innerHTML += `
-    <div class="card">
-      <img src="${p.img}" alt="${p.name}">
-      <h3>${p.name}</h3>
-      <p>₹${p.price}</p>
-      <div><b>Size:</b> ${sizeBtns}</div>
-      <button class="btn-cart" onclick="addToCart('${p.name}',${p.price},'${p.img}',${i})">Add to Cart</button>
-      <button class="btn-wa" onclick="order('${p.name}',${p.price},'${p.img}',${i})">Order on WhatsApp</button>
-    </div>
-  `;
-});
+function orderOnWhatsApp() {
+  if(cart.length == 0){ alert("Pehle cart me product add karo!"); return; }
+  let number = "917703067297";
+  let message = "Salam Saleem Bangles! Mujhe ye order karna hai:%0A%0A";
+  cart.forEach(item => { 
+    message += `• ${item.name} ${item.size} - ₹${item.price}%0A`; 
+  });
+  let total = cart.reduce((sum, item) => sum + item.price, 0);
+  message += `%0ATotal: ₹${total}`;
+  window.open(`https://wa.me/${number}?text=${message}`, '_blank');
+}
+
+showProducts();
 </script>
 </body>
 </html>
