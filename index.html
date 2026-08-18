@@ -83,7 +83,7 @@ function showProducts() {
     }
     container.innerHTML += `
       <div class="card">
-       <img src="${p.img}">
+      <img src="${p.img}" onclick="openPopup(${index})" style="cursor:pointer;">
         <h3>${p.name}</h3>
         <p>₹${p.price}</p>
         ${sizeBtns}
@@ -132,6 +132,21 @@ function orderOnWhatsApp() {
 }
 
 showProducts();
+ function openPopup(index){
+  let p = products[index];
+  document.getElementById("popupImg").src = p.img;
+  document.getElementById("popupName").innerText = p.name;
+  document.getElementById("popupPrice").innerText = "₹" + p.price;
+  document.getElementById("popupSizes").innerText = p.sizes.join(", ");
+  document.getElementById("popupWhatsapp").onclick = () => {
+    let msg = `Hello! Mujhe ${p.name} order karna hai. \nPrice: ₹${p.price} \nSize: ${p.sizes[0]}`;
+   window.open(`https://wa.me/917703067297?text=${encodeURIComponent(msg)}`, '_blank');
+  
+  document.getElementById("productPopup").style.display = "block";
+}
+function closePopup(){
+  document.getElementById("productPopup").style.display = "none";
+} 
 </script>
 </body>
 </html>
