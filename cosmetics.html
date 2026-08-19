@@ -1,1 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cosmetics - Saleem Bangles</title>
+  <style>
+    body{font-family:Arial; background:#fff0f5; margin:0;}
+    .navbar{background:#ff3399; padding:12px; text-align:center;}
+    .navbar a{color:white; margin:0 15px; text-decoration:none; font-weight:bold; font-size:16px;}
+    h1{text-align:center; color:#d63384; margin-top:20px;}
+    .grid{display:flex; flex-wrap:wrap; gap:15px; padding:20px; justify-content:center;}
+    .card{background:white; border-radius:10px; padding:10px; width:200px; box-shadow:0 2px 5px #ccc; text-align:center;}
+    .card img{width:100%; border-radius:8px; height:200px; object-fit:cover;}
+    .card h3{margin:10px 0 5px; font-size:16px;}
+    .card p{color:#009900; font-weight:bold;}
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <a href="index.html">Home</a>
+    <a href="bangles.html">Bangles</a>
+    <a href="cosmetics.html">Cosmetics</a>
+  </div>
 
+  <h1>💄 Cosmetics Collection 💄</h1>
+  <div class="grid" id="product-grid"></div>
+
+  <script>
+    const products = [
+      {name:"Insight Kajal", price:130, img:"insight-kajal.jpg"},
+      {name:"Insight Kajal 2", price:130, img:"insight kajal (1).jpg"},
+      {name:"Insight Kajal 3", price:130, img:"insightKajal.jpg"},
+      // yahan aur product add kar sakte ho
+    ];
+    
+    let html = "";
+    products.forEach(p => {
+      html += `<div class="card">
+        <img src="${p.img}">
+        <h3>${p.name}</h3>
+        <p>₹${p.price}</p>
+      </div>`;
+    });
+    document.getElementById("product-grid").innerHTML = html;
+  </script>
+</body>
+</html>
