@@ -138,7 +138,7 @@ function showCart() {
     return;
   }
   cart.forEach((item, idx) => {
-    cartList.innerHTML += `<li style="display:flex; justify-content:space-between; margin:6px 0; border-bottom:1px dashed #ccc; padding-bottom:4px;"><span>${item.name} Size ${item.size}</span><span>₹${item.price} <button onclick="removeItem(${idx})" style="margin-left:5px;">X</button></span></li>`;
+    cartList.innerHTML += `<li>${item.name} Size ${item.size} - ₹${item.price} <button onclick="removeItem(${idx})" style="background:red;color:white;border:none;padding:3px 8px;border-radius:4px;margin-left:10px;">X</button></li>`;
     total += item.price;
   });
   document.getElementById("total").innerText = "Total: ₹" + total;
