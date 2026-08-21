@@ -16,7 +16,9 @@ body{font-family:'Segoe UI',Arial; background:#f8f8f8; margin:0; padding:0;}
 .old-price{text-decoration:line-through; color:gray; font-size:14px; margin-left:5px;}
 .offer{color:#06a759; font-size:13px; font-weight:bold; margin:5px 0;}
 .btn{background:#fc2779; color:white; padding:10px; border:none; width:100%; border-radius:8px; font-size:15px; font-weight:bold; cursor:pointer; margin-top:8px;}
+.btn:hover{background:#e01e6a;}
 .back-btn{display:block; text-align:center; margin:20px; color:#fc2779; text-decoration:none; font-weight:bold;}
+.shade-select{width:100%; padding:10px; margin:8px 0; border-radius:8px; border:1.5px solid #fc2779; font-size:14px; background:#fff0f5;}
 </style>
 </head>
 <body>
@@ -36,12 +38,43 @@ body{font-family:'Segoe UI',Arial; background:#f8f8f8; margin:0; padding:0;}
     </div>
 
     <div class="card">
-     <img src="insight-lipstick.jpg">
+     <img src="insight-lipstick.jpg" style="object-fit:contain; background:#ffe4ec;">
       <div class="card-body">
         <h3>Insight 24 Hrs Non Transfer Matte Lipstick</h3>
         <p class="price">₹310 <span class="old-price">MRP ₹310</span></p>
-        <p class="offer">🔥 BUY 2 GET 1 FREE 🔥</p>
-        <button class="btn" onclick="window.location.href='https://wa.me/917703067297?text=Hi, I want Insight 24 Hrs Lipstick'">Add to Bag</button>
+        <p class="offer">🔥 BUY 2 GET 1 FREE 🔥 - 24 Shades Available</p>
+        
+        <!-- YEH NAYA SHADE SELECTOR -->
+        <label style="font-weight:bold; font-size:13px;">Apna Shade Select Karo:</label>
+        <select id="lipstickShade" class="shade-select">
+          <option value="">-- Shade Chuniye --</option>
+          <option value="01 - WAKE-UP ME UP">01 - WAKE-UP ME UP</option>
+          <option value="02 - BITCH">02 - BITCH</option>
+          <option value="03 - OH SHIT">03 - OH SHIT</option>
+          <option value="04 - FORGET ME (BEST SELLER)">04 - FORGET ME ⭐ BEST SELLER</option>
+          <option value="05 - HOW YOU DOING">05 - HOW YOU DOING</option>
+          <option value="06 - SEND NUDES">06 - SEND NUDES</option>
+          <option value="07 - STAY BASIC">07 - STAY BASIC</option>
+          <option value="08 - STAY BASIC">08 - STAY BASIC</option>
+          <option value="09 - BLOOD HOUND">09 - BLOOD HOUND</option>
+          <option value="10 - PINKITY POOH">10 - PINKITY POOH</option>
+          <option value="11 - RED SEEKER">11 - RED SEEKER</option>
+          <option value="12 - STAY TAN">12 - STAY TAN</option>
+          <option value="13 - SUMMER PEACH">13 - SUMMER PEACH</option>
+          <option value="14 - SPIRALING">14 - SPIRALING</option>
+          <option value="15 - BLOOD LUST">15 - BLOOD LUST</option>
+          <option value="16 - YES PLEASE!">16 - YES PLEASE!</option>
+          <option value="17 - HOTTIE">17 - HOTTIE</option>
+          <option value="18 - LOOKING GOOD">18 - LOOKING GOOD</option>
+          <option value="19 - HOW ARE YOU">19 - HOW ARE YOU</option>
+          <option value="20 - YOU ARE SO SESSY">20 - YOU ARE SO SESSY</option>
+          <option value="21 - TOO CHIC!">21 - TOO CHIC!</option>
+          <option value="22 - ALWAYS CLASSY">22 - ALWAYS CLASSY</option>
+          <option value="23 - DIVA">23 - DIVA</option>
+          <option value="24 - INSTAGRAM">24 - INSTAGRAM</option>
+        </select>
+
+        <button class="btn" onclick="orderWithShade()">Add to Bag with Shade</button>
       </div>
     </div>
 
@@ -49,6 +82,18 @@ body{font-family:'Segoe UI',Arial; background:#f8f8f8; margin:0; padding:0;}
 </div>
 
 <a href="cosmetics.html" class="back-btn">← Back to All Brands</a>
+
+<script>
+function orderWithShade(){
+  var shade = document.getElementById('lipstickShade').value;
+  if(shade == ""){
+    alert("Ben pehle shade select karo! 💄");
+    return;
+  }
+  var message = "Hi, I want Insight 24 Hrs Lipstick - Shade: " + shade + " - Price ₹310";
+  window.location.href = "https://wa.me/917703067297?text=" + encodeURIComponent(message);
+}
+</script>
 
 </body>
 </html>
