@@ -1,35 +1,84 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lakme Face Powder - Saleem Bangles</title>
 <style>
-body{font-family:Arial; text-align:center; padding:10px; margin:0; background:#fff;}
-.img-box{position:relative; display:inline-block; max-width:500px; width:100%;}
-.img-box img{width:100%; border-radius:15px;}
-.badge{position:absolute; top:10px; right:10px; background:red; color:white; padding:12px 15px; border-radius:50%; font-weight:bold; font-size:18px; width:60px; height:60px; display:flex; align-items:center; justify-content:center; box-shadow:0 3px 8px rgba(0,0,0,0.3);}
-.price{font-size:16px;}
-.offer{color:red; font-weight:bold; font-size:22px;}
-.shade-btn{padding:10px 20px; margin:8px; border-radius:25px; border:1px solid #ff6b9d; background:white; color:#ff6b9d; font-weight:bold;}
-.shade-btn.active{background:#ff6b9d; color:white;}
+body{font-family:Arial,sans-serif; margin:0; padding:15px; background:#fff; text-align:center;}
+.img-wrap{position:relative; display:inline-block; width:100%; max-width:450px;}
+.img-wrap img{width:100%; border-radius:15px; border:1px solid #ffd6e7;}
+.badge{position:absolute; top:10px; right:10px; background:red; color:white; width:70px; height:70px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; line-height:1.1; font-size:17px;}
+.shade-btn{padding:10px 20px; margin:6px; border-radius:25px; border:2px solid #ff6b9d; background:white; color:#ff6b9d; font-weight:bold; cursor:pointer;}
+.shade-btn.active{background:#ff6b9d; color:white; border-color:#ff6b9d;}
+.qty-box{margin:15px 0; display:flex; justify-content:center; align-items:center; gap:10px;}
+.qty-btn{width:35px; height:35px; border-radius:50%; border:1px solid #ccc; background:white; font-size:20px; cursor:pointer;}
+.cart-btn{width:90%; max-width:400px; padding:14px; background:#ff6b9d; color:white; border:none; border-radius:10px; font-size:18px; font-weight:bold; margin-top:10px; cursor:pointer;}
+.buy-btn{width:90%; max-width:400px; padding:14px; background:#25D366; color:white; border:none; border-radius:10px; font-size:18px; font-weight:bold; margin-top:10px; cursor:pointer;}
+.price{font-size:17px;}
+.offer{color:red; font-size:22px; font-weight:bold;}
 </style>
 </head>
 <body>
 
-<h2>LAKME Face Powder</h2>
+<h2>LAKME Face Powder With Sunscreen</h2>
 
-<div class="img-box">
-<img src="lakme-powder.jpg">
-<div class="badge">20%<br>OFF</div>
+<div class="img-wrap">
+  <img src="lakme-powder.jpg">
+  <div class="badge">20%<br>OFF</div>
 </div>
 
-<p><b>Shade:</b> 01 Soft Pink / 02 Warm Pink</p>
+<p><b>Select Shade:</b></p>
+<button id="btn01" class="shade-btn active" onclick="selectShade('01 Soft Pink')">01 Soft Pink</button>
+<button id="btn02" class="shade-btn" onclick="selectShade('02 Warm Pink')">02 Warm Pink</button>
+
+<p id="selectedShade" style="font-weight:bold; color:#333;">Selected: 01 Soft Pink</p>
+
+<div class="qty-box">
+  <button class="qty-btn" onclick="changeQty(-1)">-</button>
+  <span id="qty" style="font-size:20px; font-weight:bold;">1</span>
+  <button class="qty-btn" onclick="changeQty(1)">+</button>
+</div>
 
 <div class="price">
-MRP: <del>₹250/-</del><br>
-<span class="offer">Offer Price: ₹200/- (20% OFF)</span>
+  MRP: <del>₹250/-</del><br>
+  <span class="offer">Offer Price: ₹200/-</span> (20% OFF)<br>
+  Net Wt. 40g | With Sunscreen
 </div>
 
-<p>Net Wt. 40g | With Sunscreen</p>
+<button class="cart-btn" onclick="addToCart()">🛒 Add to Cart</button>
+<button class="buy-btn" onclick="buyNow()">Buy on WhatsApp</button>
+
+<script>
+let currentShade = '01 Soft Pink';
+let quantity = 1;
+
+function selectShade(shade){
+  currentShade = shade;
+  document.getElementById('selectedShade').innerText = 'Selected: ' + shade;
+  document.getElementById('btn01').classList.toggle('active', shade.includes('01'));
+  document.getElementById('btn02').classList.toggle('active', shade.includes('02'));
+}
+
+function changeQty(n){
+  quantity += n;
+  if(quantity < 1) quantity = 1;
+  document.getElementById('qty').innerText = quantity;
+}
+
+function addToCart(){
+  alert(currentShade + ' (Qty: ' + quantity + ') Cart me add ho gaya! ✅');
+  // Yahan aapka cart code ayega - localStorage me save
+  let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+  cart.push({name:'Lakme Face Powder', shade:currentShade, qty:quantity, price:200});
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+function buyNow(){
+  let msg = `Hello Saleem Bangles, mujhe *LAKME Face Powder* chahiye:%0A Shade: ${currentShade}%0A Qty: ${quantity}%0A Price: Rs 200/- each (20% OFF)`;
+  window.open(`https://wa.me/91XXXXXXXXXX?text=${msg}`, '_blank');
+}
+</script>
 
 </body>
 </html>
