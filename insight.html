@@ -72,12 +72,31 @@ body{font-family:'Segoe UI',Arial; background:#f8f8f8; margin:0; padding:0;}
           <option value="22 - ALWAYS CLASSY">22 - ALWAYS CLASSY</option>
           <option value="23 - DIVA">23 - DIVA</option>
           <option value="24 - INSTAGRAM">24 - INSTAGRAM</option>
-        </select>
+        </select> 
 
         <button class="btn" onclick="orderWithShade()">Add to Bag with Shade</button>
       </div>
     </div>
+    <div class="card">
+     <img src="insight-highlighter.jpg" style="object-fit:contain; background:#fff8f0;">
+      <div class="card-body">
+        <h3>Insight Highlighter - Glow That Defines You</h3>
+        <p class="price">₹135</p>
+        <p class="offer">✨ 5 Shades Available ✨</p>
+        
+        <label style="font-weight:bold; font-size:13px;">Apna Shade Select Karo:</label>
+        <select id="highlighterShade" class="shade-select">
+          <option value="">-- Shade Chuniye --</option>
+          <option value="01 - MERMAID SCALE">01 - MERMAID SCALE - Icy champagne</option>
+          <option value="03 - ANGELIC BEAUTY">03 - ANGELIC BEAUTY - Warm golden</option>
+          <option value="04 - FROSTED HEART">04 - FROSTED HEART - Rose gold ⭐</option>
+          <option value="05 - SAVAGE BARBIE">05 - SAVAGE BARBIE - Peachy pink</option>
+          <option value="06 - COSMIC POWER">06 - COSMIC POWER - Deep golden</option>
+        </select>
 
+        <button class="btn" onclick="orderHighlighter()">Add to Bag with Shade</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -91,6 +110,16 @@ function orderWithShade(){
     return;
   }
   var message = "Hi, I want Insight 24 Hrs Lipstick - Shade: " + shade + " - Price ₹310";
+  window.location.href = "https://wa.me/917703067297?text=" + encodeURIComponent(message);
+}
+
+function orderHighlighter(){
+  var shade = document.getElementById('highlighterShade').value;
+  if(shade == ""){
+    alert("Ben pehle highlighter ka shade select karo! ✨");
+    return;
+  }
+  var message = "Hi, I want Insight Highlighter - Shade: " + shade + " - Price ₹135";
   window.location.href = "https://wa.me/917703067297?text=" + encodeURIComponent(message);
 }
 </script>
