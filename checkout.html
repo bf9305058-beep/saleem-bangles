@@ -1,61 +1,119 @@
 <!DOCTYPE html>
-<html>
+<html lang="hi">
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Checkout - Saleem Bangles</title>
 <style>
-body{background:#f1f3f6; font-family:Roboto, sans-serif; margin:0}
-.card{background:#fff; padding:15px; border-radius:8px; margin:10px; box-shadow:0 1px 2px #ccc}
-.price-green{color:green; font-weight:bold}
+body{background:#f1f3f6; font-family:Roboto, Arial; margin:0; padding:0}
+.card{background:#fff; padding:15px; border-radius:8px; margin:10px; box-shadow:0 1px 3px rgba(0,0,0,0.1)}
+.btn{border:none; padding:14px; width:100%; border-radius:6px; font-size:16px; font-weight:bold; cursor:pointer; margin-top:10px}
+.pay{background:#fb641b; color:#fff}
+.wa{background:#25D366; color:#fff}
+.item{display:flex; justify-content:space-between; line-height:2}
+.green{color:green; font-weight:bold}
 .red{color:red; font-weight:bold}
-.btn{background:#fb641b; color:#fff; padding:14px; width:100%; border:none; border-radius:4px; font-size:16px; font-weight:bold}
+input{width:100%; padding:12px; margin:6px 0; border:1px solid #ccc; border-radius:5px; box-sizing:border-box}
 </style>
 </head>
 <body>
 
 <div class="card">
-  <h3>📍 Delivery Address</h3>
-  <p>Akbarigate, Lucknow - 226003</p>
-  <p>🚚 Delivery by <b id="delivery-date"></b></p>
+<h3>📍 Delivery Address</h3>
+<input id="name" placeholder="Full Name *">
+<input id="mobile" placeholder="Mobile Number *">
+<input id="address" placeholder="Full Address, Pincode, City *">
+<p>🚚 Delivery by <b id="delivery-date"></b></p>
 </div>
 
 <div class="card">
-  <h3>Order Summary</h3>
-  <p>Saleem Bangles Set x 1</p>
-  <p>Price: ₹<span id="product-price">799</span></p>
+<h3>Order Summary</h3>
+<div id="order-items"></div>
 </div>
 
 <div class="card">
-  <h3>Price Details</h3>
-  <div style="display:flex; justify-content:space-between; line-height:2;">
-    <span>Price (1 item)</span><span>₹799</span>
-  </div>
-  <div style="display:flex; justify-content:space-between; line-height:2;">
-    <span>Delivery Charges</span><span id="delivery-charge" class="price-green">FREE</span>
-  </div>
-  <hr>
-  <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:18px;">
-    <span>Total Amount</span><span>₹799</span>
-  </div>
-  <div style="background:#f7fff7; border:1px solid #d4edda; padding:10px; border-radius:8px; font-size:13px; margin-top:12px; text-align:center; line-height:1.8;">
-    <b>All India:</b> ₹999 tak <b style="color:green;">FREE Delivery 🎉</b><br>
-    International Delivery Available 🌍<br>
-    <span class="red">Pakistan 🇵🇰 ❌ Not Available</span>
-  </div>
+<h3>Price Details</h3>
+<div class="item"><span>Price (<span id="count">0</span> items)</span><span>₹<span id="p1">0</span></span></div>
+<div class="item"><span>Delivery Charges</span><span id="delivery-charge" class="green">FREE</span></div>
+<hr>
+<div class="item" style="font-weight:bold; font-size:18px;"><span>Total Amount</span><span>₹<span id="total">0</span></span></div>
+
+<div style="background:#f7fff7; border:1px solid #d4edda; padding:10px; border-radius:8px; font-size:13px; margin-top:12px; text-align:center; line-height:1.8;">
+<b>All India:</b> ₹999 tak <b style="color:green;">FREE Delivery 🎉</b><br>
+International Delivery Available 🌍<br>
+<span class="red">Pakistan 🇵🇰 ❌ Not Available</span><br>
+<span style="color:red; font-size:12px;">❌ Cash on Delivery Available Nahi Hai - Only Prepaid</span>
+</div>
 </div>
 
 <div class="card">
-  <h3>💳 Payment Method</h3>
-  <p>✅ Razorpay (UPI, Card, Netbanking)</p>
-  
-  <button class="btn">CONTINUE TO PAY</button>
+<h3>💳 Payment</h3>
+<p>✅ <b>Razorpay Secure - UPI / Card / Netbanking</b></p>
+<button class="btn pay" onclick="payWithRazorpay()">CONTINUE TO PAY - Razorpay</button>
+<button class="btn wa" onclick="orderOnWa()">Order on WhatsApp</button>
+<p style="text-align:center;"><a href="bangles.html">← Back to Shop</a></p>
 </div>
 
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
-let d = new Date();
-d.setDate(d.getDate() + 7);
-document.getElementById('delivery-date').innerText = d.toLocaleDateString('en-IN', {weekday:'short', day:'numeric', month:'short'});
-</script>
+let cart=JSON.parse(localStorage.getItem("saleem_cart")||"[]");
+let total=0;
+let itemsDiv=document.getElementById("order-items");
+let count=cart.length;
 
+if(count==0){ itemsDiv.innerHTML="<p>Cart khali hai</p>"; }
+else{
+  cart.forEach(i=>{
+    total+=i.price;
+    itemsDiv.innerHTML+=`<div class="item"><span>${i.name} ${i.size}</span><span>₹${i.price}</span></div>`;
+  });
+}
+
+document.getElementById("count").innerText=count;
+document.getElementById("p1").innerText=total;
+
+let delivery=0;
+if(total>=999){ delivery=0; document.getElementById("delivery-charge").innerHTML='<span class="green">FREE</span>'; }
+else{ delivery=0; document.getElementById("delivery-charge").innerHTML='<span class="green">FREE</span>'; }
+
+document.getElementById("total").innerText=total+delivery;
+
+let d=new Date(); d.setDate(d.getDate()+7);
+document.getElementById("delivery-date").innerText=d.toLocaleDateString('en-IN',{weekday:'short', day:'numeric', month:'short'});
+
+function getDetails(){
+ let n=document.getElementById("name").value;
+ let m=document.getElementById("mobile").value;
+ let a=document.getElementById("address").value;
+ if(!n||!m||!a){ alert("Naam, Mobile, Address bharo"); return null; }
+ return {n,m,a};
+}
+
+function orderOnWa(){
+ let det=getDetails(); if(!det) return;
+ let msg=`Salam Saleem Bangles!%0AName: ${det.n}%0AMobile: ${det.m}%0AAddress: ${det.a}%0A%0AOrder:%0A`;
+ cart.forEach(i=>{ msg+=`• ${i.name} ${i.size} - ₹${i.price}%0A`; });
+ msg+=`%0ATotal: ₹${total+delivery}`;
+ window.open(`https://wa.me/917703067297?text=${msg}`,'_blank');
+}
+
+function payWithRazorpay(){
+ let det=getDetails(); if(!det) return;
+ var options={
+  "key": "rzp_test_XXXXXX", // KAL YAHI CHANGE KARNA HAI
+  "amount": (total+delivery)*100,
+  "currency": "INR",
+  "name": "Saleem Bangles",
+  "description": "Bangles Order",
+  "handler": function(res){
+   alert("Payment Success! "+res.razorpay_payment_id);
+   orderOnWa();
+  },
+  "prefill": {"name": det.n, "contact": det.m},
+  "theme": {"color": "#fb641b"}
+ };
+ var rzp=new Razorpay(options); rzp.open();
+}
+</script>
 </body>
 </html>
