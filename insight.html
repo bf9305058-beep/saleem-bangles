@@ -100,7 +100,20 @@ body{font-family:'Segoe UI',Arial; background:#f8f8f8; margin:0; padding:0;}
   </div>
 </div>
 
-<a href="cosmetics.html" class="back-btn">← Back to All Brands</a>
+    </div>
+
+  <!-- YAHAN ADD KARO BEN - YOUR CART -->
+  <div id="cartSection" style="background:white; border:2px solid #ffb6d9; border-radius:12px; padding:15px; max-width:700px; margin:30px auto;">
+    <h3>🛒 Your Cart</h3>
+    <div id="cartItems">Cart Khali hai</div>
+    <p id="cartTotal"><b>Total: ₹0</b></p>
+    <button onclick="orderAllWA()" style="width:100%;padding:10px;background:#00c851;color:white;border:none;border-radius:6px;font-weight:bold;margin-top:8px;cursor:pointer;">Order on WhatsApp</button>
+    <button onclick="payAll()" style="width:100%;padding:10px;background:#ff6a00;color:white;border:none;border-radius:6px;font-weight:bold;margin-top:8px;cursor:pointer;">Proceed to Checkout - Payment 💳</button>
+    <button onclick="clearCart()" style="width:100%;padding:6px;background:white;border:1px solid #ddd;border-radius:6px;margin-top:8px;">Clear Cart</button>
+  </div>
+
+  <a href="cosmetics.html" class="back-btn">← Back to All Brands</a>
+
 
 <script>
 function orderWithShade(){
