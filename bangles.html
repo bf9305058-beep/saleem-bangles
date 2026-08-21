@@ -1,112 +1,190 @@
 <!DOCTYPE html>
-<html>
+<html lang="hi">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Saleem Bangles</title>
 <style>
-body{font-family:Roboto; background:#f0f8ff; margin:0; padding:10px}
-.grid{display:grid; grid-template-columns:1fr 1fr; gap:10px}
-.card{background:#fff; border-radius:10px; padding:10px; text-align:center; box-shadow:0 2px 5px #ccc}
-.card img{width:100%; height:150px; object-fit:cover; border-radius:8px}
-.price{color:#008cff; font-weight:bold; font-size:18px}
-.size span{border:1px solid #ccc; padding:4px 8px; margin:2px; border-radius:5px; cursor:pointer; display:inline-block}
-.size span.active{background:#ff4081; color:#fff; border-color:#ff4081}
-.btn{background:#ff4081; color:#fff; border:none; width:100%; padding:10px; border-radius:8px; font-weight:bold; margin-top:8px; cursor:pointer}
-.cart-box{background:#fff; margin-top:15px; padding:15px; border-radius:10px; box-shadow:0 2px 5px #ccc}
-.checkout{background:#fb641b; color:#fff; padding:12px; width:100%; border:none; border-radius:6px; font-weight:bold; font-size:16px; margin-top:10px}
+body{font-family:Arial; background:#e6f7ff; margin:0; padding:0}
+.header{background:#0099ff; color:white; text-align:center; padding:15px; font-size:22px; font-weight:bold}
+h1{text-align:center; color:#0066cc; font-size:24px; margin:20px 0}
+.products{display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:20px; padding:20px}
+.card{border:1px solid #99ddff; padding:15px; border-radius:12px; background:white; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+.card img{width:100%; height:220px; object-fit:cover; border-radius:8px}
+.card h3{margin:10px 0; color:#333; font-size:16px}
+.card p{font-size:18px; color:#0099ff; font-weight:bold; margin:5px 0}
+.btn-add{margin-top:8px; cursor:pointer; width:100%; padding:10px; background:#ff69b4; color:white; border:none; border-radius:8px; font-weight:bold;}
+#cart{margin:20px; padding:20px; border:2px solid #ff69b4; border-radius:10px; background:white;}
+#cart ul{list-style:none; padding:0;}
+.footer{text-align:center; margin-top:20px; padding:20px; background:#ccefff; font-size:14px; line-height:1.6}
+#productPopup{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:9999;justify-content:center;align-items:center;}
+#productPopup.popup-box{background:white;padding:20px;border-radius:10px;max-width:400px;text-align:center;}
+#productPopup img{width:100%;border-radius:8px;}
 </style>
 </head>
 <body>
+<div class="header">Saleem Bangles 💙</div>
+<h1>👑💍 Bridal Collection 💍👑</h1>
+<div class="products" id="products"></div>
 
-<h2 style="text-align:center;">Saleem Bangles Collection</h2>
+<div id="cart">
+  <h2>🛒 Your Cart</h2>
+  <ul id="cart-items"></ul>
+  <p id="total" style="font-weight:bold; font-size:18px;"></p>
+  <button id="whatsapp-btn" onclick="orderOnWhatsApp()" style="background:#25D366; color:white; padding:12px; border:none; width:100%; border-radius:8px; font-size:16px; margin-top:8px;">Order on WhatsApp</button>
+  <a href="checkout.html"><button style="background:#fb641b; color:white; padding:12px; border:none; width:100%; border-radius:8px; font-size:16px; margin-top:8px; font-weight:bold;">Proceed to Checkout - Payment 💳</button></a>
+  <button onclick="clearCart()" style="background:#fff; border:1px solid #ccc; padding:8px; width:100%; border-radius:8px; margin-top:8px;">Clear Cart</button>
+</div>
 
-<div class="grid">
-  <div class="card">
-    <img src="https://i.ibb.co/XYZ/moti.jpg">
-    <p><b>Moti Piccock</b><br><span class="price">₹399</span></p>
-    <div class="size" id="size-Moti Piccock">
-      <span onclick="selectSize('Moti Piccock','2.2',this)">2.2</span>
-      <span onclick="selectSize('Moti Piccock','2.4',this)">2.4</span>
-      <span onclick="selectSize('Moti Piccock','2.6',this)">2.6</span>
-      <span onclick="selectSize('Moti Piccock','2.8',this)">2.8</span>
-    </div>
-    <button class="btn" onclick="addToCart('Moti Piccock',399)">Add to Cart</button>
-  </div>
-
-  <div class="card">
-    <img src="https://i.ibb.co/XYZ/multi1.jpg">
-    <p><b>Multi Moti 1</b><br><span class="price">₹299</span></p>
-    <div class="size" id="size-Multi Moti 1">
-      <span onclick="selectSize('Multi Moti 1','2.2',this)">2.2</span>
-      <span onclick="selectSize('Multi Moti 1','2.4',this)">2.4</span>
-      <span onclick="selectSize('Multi Moti 1','2.6',this)">2.6</span>
-      <span onclick="selectSize('Multi Moti 1','2.8',this)">2.8</span>
-    </div>
-    <button class="btn" onclick="addToCart('Multi Moti 1',299)">Add to Cart</button>
-  </div>
-
-  <div class="card">
-    <img src="https://i.ibb.co/XYZ/kada.jpg">
-    <p><b>Mirror Stone Kada</b><br><span class="price">₹399</span></p>
-    <div class="size" id="size-Mirror Stone Kada">
-      <span onclick="selectSize('Mirror Stone Kada','2.4',this)">2.4</span>
-      <span onclick="selectSize('Mirror Stone Kada','2.6',this)">2.6</span>
-      <span onclick="selectSize('Mirror Stone Kada','2.8',this)">2.8</span>
-    </div>
-    <button class="btn" onclick="addToCart('Mirror Stone Kada',399)">Add to Cart</button>
-  </div>
-
-  <div class="card">
-    <img src="https://i.ibb.co/XYZ/stone.jpg">
-    <p><b>Stone Kada</b><br><span class="price">₹399</span></p>
-    <div class="size" id="size-Stone Kada">
-      <span onclick="selectSize('Stone Kada','2.4',this)">2.4</span>
-      <span onclick="selectSize('Stone Kada','2.6',this)">2.8</span>
-      <span onclick="selectSize('Stone Kada','2.8',this)">2.8</span>
-    </div>
-    <button class="btn" onclick="addToCart('Stone Kada',399)">Add to Cart</button>
+<div id="productPopup">
+  <div class="popup-box">
+    <img id="popupImg">
+    <h3 id="popupName"></h3>
+    <p id="popupPrice"></p>
+    <p id="popupSizes"></p>
+    <button id="popupWhatsapp" style="background:#25D366;color:white;padding:10px 20px;border:none;border-radius:5px;cursor:pointer;">WhatsApp pe Order Karein</button>
+    <button onclick="closePopup()" style="margin-left:10px;padding:10px 20px;border:none;border-radius:5px;cursor:pointer;">Band Karein</button>
   </div>
 </div>
 
-<div class="cart-box">
-<h3>🛒 Your Cart</h3>
-<div id="cart-items">Cart khali hai</div>
+<div class="footer">
+<b>Saleem Bangle Store</b><br>
+A Complete Bangle Hub<br>
+Prop: Mohd Saeed<br>
+Amin Complex Shop No. 8 & 48, Basement<br>
+Akbari Gate, Nakhas, Lucknow<br>
+📞 7703067297
 </div>
 
 <script>
-let selected = {};
-function selectSize(name,size,el){
-  selected[name]=size;
-  let p=el.parentElement;
-  p.querySelectorAll('span').forEach(s=>s.classList.remove('active'));
-  el.classList.add('active');
+const products = [
+  {name:"Pari Rang Sandook", price:2600, img:"pari-sandook.jpg", sizes:["2.2","2.4","2.6","2.8"]},
+  {name:"24 Dozen Fairy Box", price:4500, img:"24-fairy-box.jpg", sizes:["2.2","2.4","2.6","2.8"]},
+  {name:"Viral Fairy Box", price:3400, img:"viral-fairy-box.jpg", sizes:["2.2","2.4","2.6","2.8"]},
+  {name:"Sawan Special", price:399, img:"sawan-special.jpg", sizes:["2.2","2.4","2.6","2.8"]},
+  {name:"Kashmiri Ghughru Set", price:299, img:"kashmiri-set.jpg", sizes:["2.2","2.4","2.6","2.8"]},
+  {name:"SRC Jelly Box", price:1399, img:"src-jelly-box.jpg", sizes:["2.2","2.4","2.6","2.8"]},
+  {name:"Green Box", price:1799, img:"green-box.jpg", sizes:["2.2","2.4","2.6","2.8"]},
+  {name:"Moti Box", price:1799, img:"moti-box.jpg", sizes:["2.2","2.4","2.6","2.8"]},
+  {name:"Multi Box", price:2399, img:"multi-box.jpg", sizes:["2.2","2.4","2.6","2.8"]},
+  {name:"Orange Moti", price:299, img:"orange-moti.jpg", sizes:["2.2","2.4","2.6","2.8"]},
+  {name:"Blue Moti", price:299, img:"blue-moti.jpg", sizes:["2.2","2.4","2.6","2.8"]},
+  {name:"Pink Moti", price:299, img:"pink-moti.jpg", sizes:["2.2","2.4","2.6","2.8"]},
+  {name:"Moti Piccock", price:399, img:"moti-piccock.jpg", sizes:["2.2","2.4","2.6","2.8"]},
+  {name:"Multi Moti 1", price:299, img:"multi-moti1.jpg", sizes:["2.2","2.4","2.6","2.8"]},
+  {name:"Multi Moti 2", price:299, img:"multi-moti2.jpg", sizes:["2.2","2.4","2.6","2.8"]},
+  {name:"Wine with Irani Kada", price:299, img:"wine-irani-kada.jpg", sizes:["2.2","2.4","2.6","2.8"]},
+  {name:"Rangila Set", price:349, img:"rangila-bangle.jpg", sizes:["2.2","2.4","2.6","2.8"]},
+  {name:"Bridal Pearl Kaleera", price:3999, img:"bridal kalira kada.jpg", sizes:["2.4","2.6","2.8"]},
+  {name:"Mirror Stone Kada", price:399, img:"mirror stone kada.jpg", sizes:["2.4","2.6","2.8"]},
+  {name:"Stone Kada", price:399, img:"stone kada.jpg", sizes:["2.4","2.6","2.8"]},
+];
+
+let cart = JSON.parse(localStorage.getItem("saleem_cart")||"[]");
+let selectedSizes = {};
+
+function showProducts() {
+  const container = document.getElementById("products");
+  container.innerHTML = "";
+  products.forEach((p,i) => {
+    let sizeBtns = "";
+    if(p.sizes){
+      sizeBtns = `<div style="margin:5px 0;">Size: `;
+      p.sizes.forEach(s => {
+        sizeBtns += `<button onclick="selectSize(${i},'${s}',this)" style="margin:2px; padding:4px 8px; border:1px solid #ccc; border-radius:4px; background:#fff;">${s}</button>`;
+      });
+      sizeBtns += `</div>`;
+    }
+    container.innerHTML += `
+      <div class="card">
+      <img src="${p.img}" onclick="openPopup(${i})" style="cursor:pointer;">
+        <h3>${p.name}</h3>
+        <p>₹${p.price}</p>
+        ${sizeBtns}
+        <button class="btn-add" onclick="addToCart(${i})">Add to Cart</button>
+      </div>
+    `;
+  });
 }
-function addToCart(name,price){
-  let sz=selected[name];
-  if(!sz){ alert(name+" ke liye Size chuno!"); return; }
-  let cart=JSON.parse(localStorage.getItem("saleem_cart")||"[]");
-  cart.push({name:name,size:sz,price:price});
-  localStorage.setItem("saleem_cart",JSON.stringify(cart));
+
+function selectSize(i, size, el){
+  selectedSizes[i] = size;
+  el.parentElement.querySelectorAll("button").forEach(b=>{b.style.background="#fff"; b.style.color="#000"});
+  el.style.background="#ff69b4";
+  el.style.color="white";
+}
+
+function addToCart(i) {
+  let p = products[i];
+  // YEHI FIX HAI - bina size ke add nahi hoga
+  if(p.sizes &&!selectedSizes[i]){
+    alert("Pehle Size select karo ben! 👉 "+p.name);
+    return;
+  }
+  let size = selectedSizes[i] || "";
+  cart.push({name:p.name, price:p.price, size:size});
+  localStorage.setItem("saleem_cart", JSON.stringify(cart));
+  alert(p.name + " Size " + size + " cart me add ho gaya ✅");
   showCart();
 }
-function showCart(){
-  let cart=JSON.parse(localStorage.getItem("saleem_cart")||"[]");
-  let div=document.getElementById("cart-items");
-  if(cart.length==0){ div.innerHTML="Cart khali hai"; return; }
-  let total=0; div.innerHTML="";
-  cart.forEach((it,i)=>{
-    total+=it.price;
-    div.innerHTML+=`<div style="display:flex;justify-content:space-between;margin:5px 0;"><span>${it.name} - Size ${it.size}</span><span>₹${it.price} <button onclick="removeItem(${i})">X</button></span></div>`;
+
+function showCart() {
+  let cartList = document.getElementById("cart-items");
+  let total = 0;
+  cartList.innerHTML = "";
+  if(cart.length==0){
+    cartList.innerHTML = "Cart khali hai";
+    document.getElementById("total").innerText = "";
+    return;
+  }
+  cart.forEach((item, idx) => {
+    cartList.innerHTML += `<li style="display:flex; justify-content:space-between; margin:6px 0; border-bottom:1px dashed #ccc; padding-bottom:4px;"><span>${item.name} Size ${item.size}</span><span>₹${item.price} <button onclick="removeItem(${idx})" style="margin-left:5px;">X</button></span></li>`;
+    total += item.price;
   });
-  div.innerHTML+=`<hr><b>Total: ₹${total}</b><br>
-  <a href="checkout.html"><button class="checkout">Proceed to Checkout - Payment 💳</button></a>
-  <button onclick="clearCart()" style="width:100%;margin-top:8px;padding:8px;border:1px solid #ccc;background:#fff;border-radius:5px;">Clear Cart</button>`;
+  document.getElementById("total").innerText = "Total: ₹" + total;
 }
+
 function removeItem(i){
-  let cart=JSON.parse(localStorage.getItem("saleem_cart")||"[]");
-  cart.splice(i,1); localStorage.setItem("saleem_cart",JSON.stringify(cart)); showCart();
+  cart.splice(i,1);
+  localStorage.setItem("saleem_cart", JSON.stringify(cart));
+  showCart();
 }
-function clearCart(){ localStorage.removeItem("saleem_cart"); showCart(); }
+function clearCart(){
+  cart = [];
+  localStorage.removeItem("saleem_cart");
+  showCart();
+}
+
+function orderOnWhatsApp() {
+  if(cart.length == 0){ alert("Pehle cart me product add karo!"); return; }
+  let number = "917703067297";
+  let message = "Salam Saleem Bangles! Mujhe ye order karna hai:%0A%0A";
+  cart.forEach(item => {
+    message += `• ${item.name} Size ${item.size} - ₹${item.price}%0A`;
+  });
+  let total = cart.reduce((sum, item) => sum + item.price, 0);
+  message += `%0ATotal: ₹${total}`;
+  window.open(`https://wa.me/${number}?text=${message}`, '_blank');
+}
+
+function openPopup(index){
+  let p = products[index];
+  document.getElementById("popupImg").src = p.img;
+  document.getElementById("popupName").innerText = p.name;
+  document.getElementById("popupPrice").innerText = "₹" + p.price;
+  document.getElementById("popupSizes").innerText = p.sizes? "Size: " + p.sizes.join(", ") : "";
+  document.getElementById("popupWhatsapp").onclick = () => {
+    let selSize = selectedSizes[index] || p.sizes[0];
+    let msg = `Hello! Mujhe ${p.name} order karna hai. \nPrice: ₹${p.price} \nSize: ${selSize}`;
+    window.open(`https://wa.me/917703067297?text=${encodeURIComponent(msg)}`, '_blank');
+  }
+  document.getElementById("productPopup").style.display = "flex";
+}
+function closePopup(){
+  document.getElementById("productPopup").style.display = "none";
+}
+
+showProducts();
 showCart();
 </script>
 </body>
