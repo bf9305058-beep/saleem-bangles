@@ -4,18 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lakme Face Powder - Saleem Bangles</title>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <style>
-body{font-family:Arial,sans-serif; margin:0; padding:15px; background:#fff; text-align:center;}
-.img-wrap{position:relative; display:inline-block; width:100%; max-width:450px;}
+body{font-family:Arial; text-align:center; padding:15px; margin:0;}
+.img-wrap{position:relative; display:inline-block; max-width:450px; width:100%;}
 .img-wrap img{width:100%; border-radius:15px; border:1px solid #ffd6e7;}
-.badge{position:absolute; top:10px; right:10px; background:red; color:white; width:70px; height:70px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; line-height:1.1; font-size:17px;}
+.badge{position:absolute; top:10px; right:10px; background:red; color:white; width:70px; height:70px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold;}
 .shade-btn{padding:10px 20px; margin:6px; border-radius:25px; border:2px solid #ff6b9d; background:white; color:#ff6b9d; font-weight:bold; cursor:pointer;}
-.shade-btn.active{background:#ff6b9d; color:white; border-color:#ff6b9d;}
-.qty-box{margin:15px 0; display:flex; justify-content:center; align-items:center; gap:10px;}
-.qty-btn{width:35px; height:35px; border-radius:50%; border:1px solid #ccc; background:white; font-size:20px; cursor:pointer;}
-.cart-btn{width:90%; max-width:400px; padding:14px; background:#ff6b9d; color:white; border:none; border-radius:10px; font-size:18px; font-weight:bold; margin-top:10px; cursor:pointer;}
-.buy-btn{width:90%; max-width:400px; padding:14px; background:#25D366; color:white; border:none; border-radius:10px; font-size:18px; font-weight:bold; margin-top:10px; cursor:pointer;}
-.price{font-size:17px;}
+.shade-btn.active{background:#ff6b9d; color:white;}
+.qty-box{margin:15px 0; display:flex; justify-content:center; align-items:center; gap:12px;}
+.qty-btn{width:36px; height:36px; border-radius:50%; border:1px solid #ccc; background:white; font-size:20px; cursor:pointer;}
+.pay-btn{width:90%; max-width:400px; padding:14px; border:none; border-radius:10px; font-size:18px; font-weight:bold; margin:8px 0; cursor:pointer;}
+.razor{background:#0a6cff; color:white;}
+.wa{background:#25D366; color:white;}
 .offer{color:red; font-size:22px; font-weight:bold;}
 </style>
 </head>
@@ -29,53 +30,60 @@ body{font-family:Arial,sans-serif; margin:0; padding:15px; background:#fff; text
 </div>
 
 <p><b>Select Shade:</b></p>
-<button id="btn01" class="shade-btn active" onclick="selectShade('01 Soft Pink')">01 Soft Pink</button>
-<button id="btn02" class="shade-btn" onclick="selectShade('02 Warm Pink')">02 Warm Pink</button>
-
-<p id="selectedShade" style="font-weight:bold; color:#333;">Selected: 01 Soft Pink</p>
+<button id="b01" class="shade-btn active" onclick="sel('01 Soft Pink')">01 Soft Pink</button>
+<button id="b02" class="shade-btn" onclick="sel('02 Warm Pink')">02 Warm Pink</button>
+<p id="shadeText"><b>Selected:</b> 01 Soft Pink</p>
 
 <div class="qty-box">
-  <button class="qty-btn" onclick="changeQty(-1)">-</button>
-  <span id="qty" style="font-size:20px; font-weight:bold;">1</span>
-  <button class="qty-btn" onclick="changeQty(1)">+</button>
+  <button class="qty-btn" onclick="qtyC(-1)">-</button>
+  <span id="q" style="font-size:20px; font-weight:bold;">1</span>
+  <button class="qty-btn" onclick="qtyC(1)">+</button>
 </div>
 
-<div class="price">
-  MRP: <del>₹250/-</del><br>
-  <span class="offer">Offer Price: ₹200/-</span> (20% OFF)<br>
-  Net Wt. 40g | With Sunscreen
-</div>
+<p>MRP: <del>₹250/-</del><br><span class="offer">₹200/- (20% OFF)</span></p>
 
-<button class="cart-btn" onclick="addToCart()">🛒 Add to Cart</button>
-<button class="buy-btn" onclick="buyNow()">Buy on WhatsApp</button>
+<button class="pay-btn razor" onclick="payRazor()">💳 Pay with Razorpay - ₹<span id="total">200</span></button>
+<button class="pay-btn wa" onclick="payWA()">Order on WhatsApp</button>
 
 <script>
-let currentShade = '01 Soft Pink';
-let quantity = 1;
-
-function selectShade(shade){
-  currentShade = shade;
-  document.getElementById('selectedShade').innerText = 'Selected: ' + shade;
-  document.getElementById('btn01').classList.toggle('active', shade.includes('01'));
-  document.getElementById('btn02').classList.toggle('active', shade.includes('02'));
+let shade='01 Soft Pink';
+let qty=1;
+function sel(s){
+  shade=s;
+  document.getElementById('shadeText').innerHTML='<b>Selected:</b> '+s;
+  document.getElementById('b01').classList.toggle('active', s.includes('01'));
+  document.getElementById('b02').classList.toggle('active', s.includes('02'));
+}
+function qtyC(n){
+  qty+=n; if(qty<1) qty=1;
+  document.getElementById('q').innerText=qty;
+  document.getElementById('total').innerText=qty*200;
 }
 
-function changeQty(n){
-  quantity += n;
-  if(quantity < 1) quantity = 1;
-  document.getElementById('qty').innerText = quantity;
+function payRazor(){
+  let amount = qty*200*100; // paise me
+  var options = {
+    "key": "rzp_test_XXXXXXX", // <-- Yahan apna Razorpay Key daalo ben
+    "amount": amount,
+    "currency": "INR",
+    "name": "Saleem Bangles",
+    "description": "Lakme Face Powder - "+shade+" x "+qty,
+    "image": "lakme-powder.jpg",
+    "handler": function (response){
+        alert("Payment Success! ID: "+response.razorpay_payment_id+" ✅\nShade: "+shade);
+        // Payment ke baad WhatsApp pe bhejo
+        let msg = `Payment Done!%0AProduct: Lakme Face Powder%0AShade: ${shade}%0AQty: ${qty}%0APayment ID: ${response.razorpay_payment_id}`;
+        window.open(`https://wa.me/91XXXXXXXXXX?text=${msg}`, '_blank');
+    },
+    "prefill": { "name": "", "email": "", "contact": "" },
+    "theme": { "color": "#ff6b9d" }
+  };
+  var rzp = new Razorpay(options);
+  rzp.open();
 }
 
-function addToCart(){
-  alert(currentShade + ' (Qty: ' + quantity + ') Cart me add ho gaya! ✅');
-  // Yahan aapka cart code ayega - localStorage me save
-  let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-  cart.push({name:'Lakme Face Powder', shade:currentShade, qty:quantity, price:200});
-  localStorage.setItem('cart', JSON.stringify(cart));
-}
-
-function buyNow(){
-  let msg = `Hello Saleem Bangles, mujhe *LAKME Face Powder* chahiye:%0A Shade: ${currentShade}%0A Qty: ${quantity}%0A Price: Rs 200/- each (20% OFF)`;
+function payWA(){
+  let msg = `Hello, mujhe *Lakme Face Powder* chahiye:%0AShade: ${shade}%0AQty: ${qty}%0APrice: Rs ${qty*200}/-`;
   window.open(`https://wa.me/91XXXXXXXXXX?text=${msg}`, '_blank');
 }
 </script>
