@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cosmetics Collection - Saleem Bangles</title>
 <style>
-body{font-family:Arial,sans-serif;background:#ffeef5;margin:0;padding:20px}
+body{font-family:Arial,sans-serif;background:#ffeef7;margin:0;padding:20px}
 .header{background:#e91e63;color:white;text-align:center;padding:15px;border-radius:10px;font-size:24px;font-weight:bold}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px;margin-top:20px}
-.brand-box{background:white;padding:20px;border-radius:10px;text-align:center;box-shadow:0 2px 5px rgba(0,0,0,0.1);text-decoration:none;color:black}
-.brand-box:hover{background:#ffe0eb}
+.brand-box{background:white;padding:20px;border-radius:10px;text-align:center;box-shadow:0 2px 5px rgba(0,0,0,0.1);text-decoration:none;color:black;display:block;transition:0.2s}
+.brand-box:hover{background:#ffe0eb;transform:scale(1.02)}
 .brand-name{color:#e91e63;font-weight:bold;font-size:18px}
 </style>
 </head>
@@ -20,56 +20,19 @@ body{font-family:Arial,sans-serif;background:#ffeef5;margin:0;padding:20px}
 <div class="grid">
   <a href="insight.html" class="brand-box">
     <div class="brand-name">INSIGHT</div>
-    <div>Click Here 👇</div>
+    <div style="margin-top:5px;">Click Here 👆</div>
   </a>
+  
   <a href="swiss.html" class="brand-box">
     <div class="brand-name">SWISS BEAUTY</div>
-    <div>Click Here 👇</div>
+    <div style="margin-top:5px;">Click Here 👆</div>
   </a>
+  
   <a href="lakme.html" class="brand-box">
     <div class="brand-name">LAKME</div>
-    <div>Click Here 👇</div>
+    <div style="margin-top:5px;">Click Here 👆</div>
   </a>
-
-</div>
-<!-- YOUR CART - 1 BAAR LAGAO, SAB BRAND AUTOMATIC -->
-<div id="cartSection" style="background:white; border:2px solid #ffb6d9; border-radius:12px; padding:15px; max-width:900px; margin:30px auto; text-align:left;">
-  <h3 style="margin:0 0 10px;">🛒 Your Cart</h3>
-  <div id="cartItems">Cart Khali hai</div>
-  <p id="cartTotal" style="font-weight:bold; margin-top:10px;">Total: ₹0</p>
-  <button onclick="orderWA()" style="width:100%; padding:12px; background:#00c851; color:white; border:none; border-radius:8px; font-weight:bold; margin-top:8px; cursor:pointer;">Order on WhatsApp</button>
-  <button onclick="checkoutPay()" style="width:100%; padding:12px; background:#ff6a00; color:white; border:none; border-radius:8px; font-weight:bold; margin-top:8px; cursor:pointer;">Proceed to Checkout - Payment 💳</button>
-  <button onclick="clearCart()" style="width:100%; padding:8px; background:white; border:1px solid #ddd; border-radius:8px; margin-top:8px; cursor:pointer;">Clear Cart</button>
 </div>
 
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<script>
-function renderCart(){
-  let cart=JSON.parse(localStorage.getItem('cart')||'[]');
-  let html=''; let total=0;
-  cart.forEach((it,i)=>{
-    total+=it.price*it.qty;
-    html+=`${it.name} x ${it.qty} - ₹${it.price*it.qty} <span onclick="removeItem(${i})" style="background:red;color:white;padding:1px 6px;border-radius:3px;cursor:pointer;margin-left:5px;">X</span><br>`;
-  });
-  document.getElementById('cartItems').innerHTML = html || 'Cart Khali hai';
-  document.getElementById('cartTotal').innerText = 'Total: ₹'+total;
-}
-function removeItem(i){ let c=JSON.parse(localStorage.getItem('cart')||'[]'); c.splice(i,1); localStorage.setItem('cart', JSON.stringify(c)); renderCart(); }
-function clearCart(){ localStorage.removeItem('cart'); renderCart(); }
-function orderWA(){
-  let c=JSON.parse(localStorage.getItem('cart')||'[]'); if(!c.length){alert('Cart khali hai ben!');return;}
-  let msg='Hello Saleem Bangles Order:%0A'; let total=0;
-  c.forEach(it=>{ msg+=`${it.name} x ${it.qty}=₹${it.price*it.qty}%0A`; total+=it.price*it.qty; });
-  msg+=`%0ATotal: ₹${total}`;
-  window.open(`https://wa.me/917703067297?text=${msg}`,'_blank');
-}
-function checkoutPay(){
-  let c=JSON.parse(localStorage.getItem('cart')||'[]'); if(!c.length){alert('Cart khali hai ben!');return;}
-  let total=0; c.forEach(it=>total+=it.price*it.qty);
-  var options={key:"rzp_test_XXXXXXX",amount:total*100,currency:"INR",name:"Saleem Bangle Store",handler:function(r){ alert('Payment Done: '+r.razorpay_payment_id); orderWA(); },theme:{color:"#e91e63"}};
-  new Razorpay(options).open();
-}
-renderCart();
-</script>
 </body>
 </html>
