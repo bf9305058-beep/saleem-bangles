@@ -79,13 +79,13 @@ body{
 }
 .footer{
   text-align:center; 
-  margin-top:30px; 
+  margin-top:20px; 
   padding:20px; 
   font-size:14px;
   color:white;
   text-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
-  .logo .and{
+.logo .and{
   font-size:28px;
   color:#ffd700;
 }
@@ -96,25 +96,63 @@ body{
 
 <div class="welcome-box">
   <h2>✨ A Complete Bangle Hub ✨</h2>
-
   <p>Traditional & Modern Bangles + Cosmetics</p>
 
   <div class="btn-container">
- <button class="btn btn-bangles" onclick="window.location.href='bangles.html'">
-  💎 BANGLES COLLECTION<br><small>Click Here 👇</small>
-</button>
-<button class="btn btn-cosmetics" onclick="window.location.href='cosmetics.html'">
-  💄 COSMETICS COLLECTION<br><small>Click Here 👇</small>
-</button>
+    <button class="btn btn-bangles" onclick="window.location.href='bangles.html'">
+      💎 BANGLES COLLECTION<br><small>Click Here 👇</small>
+    </button>
+    <button class="btn btn-cosmetics" onclick="window.location.href='cosmetics.html'">
+      💄 COSMETICS COLLECTION<br><small>Click Here 👇</small>
     </button>
   </div>
+
+  <!-- Delivery Box Start - Aapka wala -->
+  <div style="border:1px solid #e0e0e0; border-radius:12px; padding:16px; margin-top:30px; font-family: Poppins, Arial; background:white; text-align:left;">
+    <h3 style="margin:0 0 12px 0; font-size:17px; color:#333; text-align:center;">📦 Delivery details</h3>
+    
+    <div style="display:flex; align-items:center; margin-bottom:10px; font-size:14px;">
+      <span style="margin-right:8px;">📍</span>
+      <span><b>Akbarigate Lucknow, 226003</b></span>
+    </div>
+    
+    <div style="display:flex; align-items:center; margin-bottom:14px; font-size:14px;">
+      <span style="margin-right:8px;">🚚</span>
+      <div>
+        <b>Delivery by <span id="delivery-date"></span></b>
+      </div>
+    </div>
+    
+    <div style="background:#f7fff7; border:1px solid #d4edda; padding:10px; border-radius:8px; font-size:13px; line-height:1.7;">
+      <b>All India Shipping:</b><br>
+      ₹999 tak order = <b style="color:green;">FREE Delivery</b><br>
+      ₹999 se upar = <b>₹80 Delivery Charge</b><br>
+      International = <b>₹350</b>
+    </div>
+  </div>
+  <!-- Delivery Box End -->
+
 </div>
  
-
 <div class="footer">
 <b>📍 Amin Complex Shop No. 8 & 48, Basement, Akbari Gate, Nakhas, Lucknow</b><br>
 📞 7703067297 | Prop: Mohd Saeed
 </div>
+
+<script>
+function getDeliveryDate(days) {
+    let date = new Date();
+    date.setDate(date.getDate() + days);
+    let options = { day: 'numeric', month: 'short', weekday: 'short' };
+    return date.toLocaleDateString('en-IN', options);
+}
+document.getElementById('delivery-date').innerText = getDeliveryDate(7);
+
+function getShipping(price, isIndia){
+    if(!isIndia) return 350;
+    return price <= 999 ? 0 : 80;
+}
+</script>
 
 </body>
 </html>
