@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkout - Saleem Bangles</title>
+<style>
+body{background:#f1f3f6; font-family:Roboto, sans-serif; margin:0}
+.card{background:#fff; padding:15px; border-radius:8px; margin:10px; box-shadow:0 1px 2px #ccc}
+.price-green{color:green; font-weight:bold}
+.red{color:red; font-weight:bold}
+.btn{background:#fb641b; color:#fff; padding:14px; width:100%; border:none; border-radius:4px; font-size:16px; font-weight:bold}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <h3>📍 Delivery Address</h3>
+  <p>Akbarigate, Lucknow - 226003</p>
+  <p>🚚 Delivery by <b id="delivery-date"></b></p>
+</div>
+
+<div class="card">
+  <h3>Order Summary</h3>
+  <p>Saleem Bangles Set x 1</p>
+  <p>Price: ₹<span id="product-price">799</span></p>
+</div>
+
+<div class="card">
+  <h3>Price Details</h3>
+  <div style="display:flex; justify-content:space-between; line-height:2;">
+    <span>Price (1 item)</span><span>₹799</span>
+  </div>
+  <div style="display:flex; justify-content:space-between; line-height:2;">
+    <span>Delivery Charges</span><span id="delivery-charge" class="price-green">FREE</span>
+  </div>
+  <hr>
+  <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:18px;">
+    <span>Total Amount</span><span>₹799</span>
+  </div>
+  <div style="background:#f7fff7; border:1px solid #d4edda; padding:10px; border-radius:8px; font-size:13px; margin-top:12px; text-align:center; line-height:1.8;">
+    <b>All India:</b> ₹999 tak <b style="color:green;">FREE Delivery 🎉</b><br>
+    International Delivery Available 🌍<br>
+    <span class="red">Pakistan 🇵🇰 ❌ Not Available</span>
+  </div>
+</div>
+
+<div class="card">
+  <h3>💳 Payment Method</h3>
+  <p>✅ Razorpay (UPI, Card, Netbanking)</p>
+  
+  <button class="btn">CONTINUE TO PAY</button>
+</div>
+
+<script>
+let d = new Date();
+d.setDate(d.getDate() + 7);
+document.getElementById('delivery-date').innerText = d.toLocaleDateString('en-IN', {weekday:'short', day:'numeric', month:'short'});
+</script>
+
+</body>
+</html>
