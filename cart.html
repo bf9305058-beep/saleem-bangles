@@ -1,65 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cart - Saleem Bangles</title>
-<style>
-body{font-family:Arial; background:#fff6f7; margin:0; padding:15px}
-.item{background:white; padding:12px; margin-bottom:10px; border-radius:10px; display:flex; justify-content:space-between}
-.total{font-size:20px; font-weight:bold; text-align:right; margin:15px 0}
-input, textarea{width:100%; padding:12px; margin:8px 0; border-radius:8px; border:1px solid #ccc; box-sizing:border-box}
-.payBtn{width:100%; padding:15px; background:#25D366; color:white; border:none; border-radius:30px; font-size:18px; font-weight:bold}
-.back{display:block; text-align:center; margin-top:15px; color:black; text-decoration:none}
-</style>
+<style>body{font-family:Arial;background:#fff6f7;padding:15px} .item{background:white;padding:12px;margin-bottom:10px;border-radius:10px;display:flex;justify-content:space-between} .total{font-weight:bold;font-size:20px;text-align:right;margin:15px 0} input,textarea{width:100%;padding:12px;margin:8px 0;border-radius:8px;border:1px solid #ccc;box-sizing:border-box} .payBtn{width:100%;padding:15px;background:#25D366;color:white;border:none;border-radius:30px;font-size:18px;font-weight:bold}</style>
 </head>
 <body>
-
-<h2>🛒 Your Cart</h2>
-<p style="text-align:center;">Bangles + Cosmetics ek saath</p>
-
+<h2>🛒 Aapka Cart (Bangle + Cosmetics)</h2>
 <div id="cartList"></div>
-<div class="total" id="totalDiv">Total: Rs 0</div>
-
-<input id="cName" placeholder="Aapka Naam">
-<input id="cPhone" placeholder="Mobile Number">
-<textarea id="cAddress" placeholder="Address likho"></textarea>
-
-<button class="payBtn" onclick="orderOnWhatsApp()">WhatsApp pe Order Bhejo</button>
-
-<a href="index.html" class="back">← Bangles Dekho</a>
-<a href="cosmetics.html" class="back">← Cosmetics Dekho</a>
-
+<div class="total" id="totalDiv"></div>
+<input id="cName" placeholder="Naam"><input id="cPhone" placeholder="Mobile"><textarea id="cAddress" placeholder="Address"></textarea>
+<button class="payBtn" onclick="orderOnWhatsApp()">WhatsApp Pe Ek Saath Order Bhejo</button>
 <script>
-let cart = JSON.parse(localStorage.getItem("saleemCart")) || [];
-let list = document.getElementById("cartList");
-let total = 0;
-if(cart.length==0){
-  list.innerHTML = "<p style='text-align:center'>Cart khali hai!</p>";
-}
-cart.forEach((p,i)=>{
-  total += parseInt(p.price);
-  list.innerHTML += `<div class="item"><span>${p.name}</span><span>Rs ${p.price} <b onclick="removeItem(${i})" style="color:red;margin-left:8px;cursor:pointer;">X</b></span></div>`;
-});
-document.getElementById("totalDiv").innerText = "Total: Rs " + total;
-
-function removeItem(i){
-  cart.splice(i,1);
-  localStorage.setItem("saleemCart", JSON.stringify(cart));
-  location.reload();
-}
-
+let cart = JSON.parse(localStorage.getItem("saleem_cart")) || [];
+let list = document.getElementById("cartList"); let total=0;
+if(cart.length==0) list.innerHTML="<p>Cart khali hai, pehle Bangle ya Lipstick add karo</p>";
+cart.forEach((p,i)=>{ total+=parseInt(p.price); list.innerHTML+=`<div class="item"><span>${p.name} ${p.size?'(Size:'+p.size+')':''}</span><span>Rs ${p.price} <b onclick="removeItem(${i})" style="color:red;margin-left:10px;cursor:pointer">X</b></span></div>`; });
+document.getElementById("totalDiv").innerText="Total: Rs "+total;
+function removeItem(i){ cart.splice(i,1); localStorage.setItem("saleem_cart", JSON.stringify(cart)); location.reload(); }
 function orderOnWhatsApp(){
-  if(total==0){ alert("Cart khali hai"); return; }
-  let name = document.getElementById("cName").value;
-  let phone = document.getElementById("cPhone").value;
-  let addr = document.getElementById("cAddress").value;
-  if(!name){ alert("Naam likho"); return; }
-  let msg = `*New Order - Saleem Bangles*%0A%0A*Customer:* ${name}%0A*Phone:* ${phone}%0A*Address:* ${addr}%0A%0A*Items:*%0A`;
-  cart.forEach((p, idx)=>{ msg += `${idx+1}. ${p.name} - Rs ${p.price}%0A`; });
-  msg += `%0A*Total: Rs ${total}*`;
-  let yourNumber = "917703067297";
-  window.open(`https://wa.me/${yourNumber}?text=${msg}`, "_blank");
+ let name=document.getElementById("cName").value; if(!name){alert("Naam likho");return;}
+ let msg=`*New Order - Saleem Bangles*%0A*Customer:* ${name}%0A%0A*Items (Bangle+Cosmetics):*%0A`;
+ cart.forEach((p,idx)=>{ msg+=`${idx+1}. ${p.name} ${p.size?'Size '+p.size:''} - Rs ${p.price}%0A`; });
+ msg+=`%0A*Total: Rs ${total}*`;
+ window.open(`https://wa.me/917703067297?text=${msg}`,"_blank");
 }
 </script>
 </body>
