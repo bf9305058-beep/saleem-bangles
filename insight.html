@@ -140,7 +140,7 @@ function addToCart(name, shade, price){
   alert(name + " " + shade + " Cart me add ✅");
 }
 function renderCart(){
-  let c = JSON.parse(localStorage.getItem('cart')||'[]');
+ let c = JSON.parse(localStorage.getItem('saleem_cart')||'[]');
   let html=''; let total=0;
   c.forEach((it,i)=>{ total+=it.price; html+=`${it.name} - ₹${it.price} <span onclick="removeItem(${i})" style="background:red;color:white;padding:0 6px;border-radius:3px;cursor:pointer;margin-left:5px">X</span><br>`; });
   document.getElementById('cartItems').innerHTML = html || 'Cart Khali hai';
