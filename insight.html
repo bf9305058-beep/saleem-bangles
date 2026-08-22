@@ -143,7 +143,15 @@ function renderCart(){
   c.forEach((it,i)=>{ total+=it.price; html+=`${it.name} - ₹${it.price} <span onclick="removeItem(${i})" style="background:red;color:white;padding:0 6px;border-radius:3px;cursor:pointer;margin-left:5px">X</span><br>`; });
   document.getElementById('cartItems').innerHTML = html || 'Cart Khali hai';
   document.getElementById('cartTotal').innerHTML = '<b>Total: ₹'+total+'</b>';
+} 
+ function openZoom(src){
+  document.getElementById('zoomImg').src = src;
+  document.getElementById('zoomModal').style.display = 'flex';
 }
+function closeZoom(){
+  document.getElementById('zoomModal').style.display = 'none';
+}
+ 
 function removeItem(i){ let c=JSON.parse(localStorage.getItem('cart')||'[]'); c.splice(i,1); localStorage.setItem('cart', JSON.stringify(c)); renderCart(); }
 function clearCart(){ localStorage.removeItem('cart'); renderCart(); }
 function orderAllWA(){
@@ -160,7 +168,10 @@ function payAll(){
   new Razorpay(opt).open();
 }
 renderCart();
-</script>
+</script> 
+  <div id="zoomModal" onclick="closeZoom()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:99999; justify-content:center; align-items:center;">
+  <img id="zoomImg" src="" style="max-width:95%; max-height:95%; border-radius:12px;">
+</div>
 
 </body>
 </html>
