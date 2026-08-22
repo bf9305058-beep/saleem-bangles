@@ -55,7 +55,7 @@ function addToCart(){
   var shade = document.getElementById('shade').value;
   if(shade==""){ alert("Ben pehle shade select karo! 👆"); return; }
   let c = JSON.parse(localStorage.getItem('cart')||'[]');
-  for(let i=0;i<qty;i++){ c.push({name: "Lakme Face Powder - " + shade, price: 200}); }
+c.push({name: "Lakme Face Powder - Shade " + shade, price: 200})
   localStorage.setItem('cart', JSON.stringify(c));
   renderCart();
   alert("Lakme "+shade+" Cart me add ✅");
