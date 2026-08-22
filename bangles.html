@@ -10,7 +10,7 @@ body{font-family:Arial; background:#e6f7ff; margin:0; padding:0}
 h1{text-align:center; color:#0066cc; font-size:24px; margin:20px 0}
 .products{display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:20px; padding:20px}
 .card{border:1px solid #99ddff; padding:15px; border-radius:12px; background:white; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.1)}
-.card img{width:100%; height:220px; object-fit:cover; border-radius:8px}
+.card img{width:100%; height:220px; object-fit:cover; border-radius:8px; cursor:pointer}
 .card h3{margin:10px 0; color:#333; font-size:16px}
 .card p{font-size:18px; color:#0099ff; font-weight:bold; margin:5px 0}
 .btn-add{margin-top:8px; cursor:pointer; width:100%; padding:10px; background:#ff69b4; color:white; border:none; border-radius:8px; font-weight:bold;}
@@ -18,7 +18,7 @@ h1{text-align:center; color:#0066cc; font-size:24px; margin:20px 0}
 #cart ul{list-style:none; padding:0;}
 .footer{text-align:center; margin-top:20px; padding:20px; background:#ccefff; font-size:14px; line-height:1.6}
 #productPopup{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:9999;justify-content:center;align-items:center;}
-#productPopup.popup-box{background:white;padding:20px;border-radius:10px;max-width:400px;text-align:center;}
+#productPopup .popup-box{background:white;padding:20px;border-radius:10px;max-width:400px;text-align:center;}
 #productPopup img{width:100%;border-radius:8px;}
 </style>
 </head>
@@ -77,7 +77,7 @@ const products = [
   {name:"Rangila Set", price:349, img:"rangila-bangle.jpg", sizes:["2.2","2.4","2.6","2.8"]},
   {name:"Bridal Pearl Kaleera", price:3999, img:"bridal kalira kada.jpg", sizes:["2.4","2.6","2.8"]},
   {name:"Mirror Stone Kada", price:399, img:"mirror stone kada.jpg", sizes:["2.4","2.6","2.8"]},
-  {name:"Stone Kada", price:399, img:"stone kada.jpg", sizes:["2.4","2.6","2.8"]},
+  {name:"Stone Kada", price:399, img:"stone kada.jpg", sizes:["2.4","2.6","2.8"]}
 ];
 
 let cart = JSON.parse(localStorage.getItem("saleem_cart")||"[]");
@@ -87,40 +87,33 @@ function showProducts() {
   const container = document.getElementById("products");
   container.innerHTML = "";
   products.forEach((p,i) => {
-    let sizeBtns = "";
+    let sizeBtns = `<div style="margin:5px 0;">`;
     if(p.sizes){
-      sizeBtns = `<div style="margin:5px 0;">Size: `;
       p.sizes.forEach(s => {
         sizeBtns += `<button onclick="selectSize(${i},'${s}',this)" style="margin:2px; padding:4px 8px; border:1px solid #ccc; border-radius:4px; background:#fff;">${s}</button>`;
       });
-      sizeBtns += `</div>`;
     }
+    sizeBtns += `</div>`;
     container.innerHTML += `
       <div class="card">
-      <img src="${p.img}" onclick="openPopup(${i})" style="cursor:pointer;">
+      <img src="${p.img}" onclick="openPopup(${i})">
         <h3>${p.name}</h3>
         <p>₹${p.price}</p>
-        <p>Rs ${p.price}</p>
-<button onclick="addToCart(${i})" style="width:100%;padding:8px;background:white;color:black;border:1px solid black;border-radius:20px;margin-top:8px;">🛒 Add to Cart</button>
-<button onclick="orderSingle(${i})" style="width:100%;padding:8px;background:#25D366;color:white;border:none;border-radius:20px;margin-top:6px;">WhatsApp Order</button>
         ${sizeBtns}
-        <button class="btn-add" onclick="addToCart(${i})">Add to Cart</button>
+        <button class="btn-add" onclick="addToCart(${i})">🛒 Add to Cart</button>
       </div>
     `;
   });
 }
-
 function selectSize(i, size, el){
   selectedSizes[i] = size;
   el.parentElement.querySelectorAll("button").forEach(b=>{b.style.background="#fff"; b.style.color="#000"});
   el.style.background="#ff69b4";
   el.style.color="white";
 }
-
 function addToCart(i) {
   let p = products[i];
-  // YEHI FIX HAI - bina size ke add nahi hoga
-  if(p.sizes &&!selectedSizes[i]){
+  if(p.sizes && !selectedSizes[i]){
     alert("Pehle Size select karo ben! 👉 "+p.name);
     return;
   }
@@ -130,7 +123,6 @@ function addToCart(i) {
   alert(p.name + " Size " + size + " cart me add ho gaya ✅");
   showCart();
 }
-
 function showCart() {
   let cartList = document.getElementById("cart-items");
   let total = 0;
@@ -146,30 +138,17 @@ function showCart() {
   });
   document.getElementById("total").innerText = "Total: ₹" + total;
 }
-
-function removeItem(i){
-  cart.splice(i,1);
-  localStorage.setItem("saleem_cart", JSON.stringify(cart));
-  showCart();
-}
-function clearCart(){
-  cart = [];
-  localStorage.removeItem("saleem_cart");
-  showCart();
-}
-
+function removeItem(i){ cart.splice(i,1); localStorage.setItem("saleem_cart", JSON.stringify(cart)); showCart(); }
+function clearCart(){ cart = []; localStorage.removeItem("saleem_cart"); showCart(); }
 function orderOnWhatsApp() {
   if(cart.length == 0){ alert("Pehle cart me product add karo!"); return; }
   let number = "917703067297";
   let message = "Salam Saleem Bangles! Mujhe ye order karna hai:%0A%0A";
-  cart.forEach(item => {
-    message += `• ${item.name} Size ${item.size} - ₹${item.price}%0A`;
-  });
+  cart.forEach(item => { message += `• ${item.name} Size ${item.size} - ₹${item.price}%0A`; });
   let total = cart.reduce((sum, item) => sum + item.price, 0);
   message += `%0ATotal: ₹${total}`;
   window.open(`https://wa.me/${number}?text=${message}`, '_blank');
 }
-
 function openPopup(index){
   let p = products[index];
   document.getElementById("popupImg").src = p.img;
@@ -177,19 +156,15 @@ function openPopup(index){
   document.getElementById("popupPrice").innerText = "₹" + p.price;
   document.getElementById("popupSizes").innerText = p.sizes? "Size: " + p.sizes.join(", ") : "";
   document.getElementById("popupWhatsapp").onclick = () => {
-    let selSize = selectedSizes[index] || p.sizes[0];
+    let selSize = selectedSizes[index] || (p.sizes? p.sizes[0] : "");
     let msg = `Hello! Mujhe ${p.name} order karna hai. \nPrice: ₹${p.price} \nSize: ${selSize}`;
     window.open(`https://wa.me/917703067297?text=${encodeURIComponent(msg)}`, '_blank');
   }
   document.getElementById("productPopup").style.display = "flex";
 }
-function closePopup(){
-  document.getElementById("productPopup").style.display = "none";
-}
-
+function closePopup(){ document.getElementById("productPopup").style.display = "none"; }
 showProducts();
 showCart();
 </script>
-  <script src="cart-common.js"></script>
 </body>
 </html>
