@@ -54,6 +54,7 @@ function clearCart(){localStorage.removeItem('cart'); renderCart();}
 function orderAllWA(){let c=JSON.parse(localStorage.getItem('cart')||'[]'); if(!c.length){alert('Cart khali');return;} let m='Swiss Order:%0A'; let t=0; c.forEach(it=>{m+=it.name+"=₹"+it.price+"%0A"; t+=it.price;}); m+="Total: ₹"+t; window.open('https://wa.me/917703067297?text='+encodeURIComponent(m),'_blank');}
 function payAll(){let c=JSON.parse(localStorage.getItem('cart')||'[]'); if(!c.length){alert('Cart khali');return;} let t=0; c.forEach(it=>t+=it.price); var o={key:"rzp_test_XXXXXXX",amount:t*100,currency:"INR",name:"Saleem Bangles",handler:function(r){alert('Pay ID: '+r.razorpay_payment_id); orderAllWA();},theme:{color:"#e91e63"}}; new Razorpay(o).open();}
 renderCart();
-</script>
+</script> 
+ <script src="cart-common.js"></script>
 </body>
 </html>
