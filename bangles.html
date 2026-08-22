@@ -100,6 +100,9 @@ function showProducts() {
       <img src="${p.img}" onclick="openPopup(${i})" style="cursor:pointer;">
         <h3>${p.name}</h3>
         <p>₹${p.price}</p>
+        <p>Rs ${p.price}</p>
+<button onclick="addToCart(${i})" style="width:100%;padding:8px;background:white;color:black;border:1px solid black;border-radius:20px;margin-top:8px;">🛒 Add to Cart</button>
+<button onclick="orderSingle(${i})" style="width:100%;padding:8px;background:#25D366;color:white;border:none;border-radius:20px;margin-top:6px;">WhatsApp Order</button>
         ${sizeBtns}
         <button class="btn-add" onclick="addToCart(${i})">Add to Cart</button>
       </div>
