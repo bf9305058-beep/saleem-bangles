@@ -1,12 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>LAKME COLLECTION - SALEEM BANGLES</title>
+<style>
+body{font-family:'Segoe UI',Arial; background:#f8f8f8; margin:0; padding:0;}
+.header{background:#fc2779; color:white; padding:15px; text-align:center; position:sticky; top:0;}
+.container{max-width:1200px; margin:20px auto; padding:0 15px;}
+.grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:20px;}
+.card{background:white; border-radius:12px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.08);}
+.card img{width:100%; height:300px; object-fit:cover;}
+.card-body{padding:15px;}
+.price{font-size:18px; font-weight:bold; color:#000;}
+.btn{background:#fc2779; color:white; padding:10px; border:none; width:100%; border-radius:8px; font-size:15px; font-weight:bold; cursor:pointer; margin-top:8px;}
+.shade-select{width:100%; padding:10px; margin:8px 0; border-radius:8px; border:1.5px solid #fc2779; background:#fff0f5;}
+.qty-select{width:100%; padding:10px; margin:8px 0; border-radius:8px; border:1.5px solid #ddd;}
+.back-btn{display:block; text-align:center; margin:20px; color:#fc2779; text-decoration:none; font-weight:bold;}
+</style>
+</head>
+<body>
+<div class="header"><h1>LAKME COLLECTION</h1></div>
+<div class="container">
+  <div class="grid">
+    <div class="card">
+      <img src="lakme-powder.jpg" style="object-fit:contain; background:#ffe4ec;">
+      <div class="card-body">
+        <h3>Lakme Face Powder</h3>
+        <p class="price" id="total">Total: ₹200</p>
+        <label style="font-weight:bold; font-size:13px;">Apna Shade Select Karo:</label>
+   <label style="font-weight:bold; font-size:13px;">Apna Shade Select Karo:</label>
+        <select id="shade" class="shade-select">
+          <option value="">-- Shade Chuniye --</option>
+          <option value="01 - Soft Pink">01 - Soft Pink</option>
+          <option value="02 - Warm Pink">02 - Warm Pink</option>
+        </select>
+        <label style="font-weight:bold; font-size:13px;">Quantity:</label>
+        <select id="qty" class="qty-select" onchange="upd()">
+          <option value="1">1 Pc - ₹200</option>
+          <option value="2">2 Pc - ₹400</option>
+          <option value="3">3 Pc - ₹600</option>
+        </select>
+        </select>
+        <button class="btn" onclick="addToCart()">🛒 Add to Cart with Shade</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="cartSection" style="background:white; border:2px solid #ffb6d9; border-radius:12px; padding:15px; max-width:700px; margin:30px auto;">
+  <h3>🛒 Your Cart</h3>
+  <div id="cartItems">Cart Khali hai</div>
+  <p id="cartTotal"><b>Total: ₹0</b></p>
+  <button onclick="orderAllWA()" style="width:100%;padding:10px;background:#00c851;color:white;border:none;border-radius:6px;font-weight:bold;margin-top:8px;cursor:pointer;">Order on WhatsApp</button>
+  <button onclick="payAll()" style="width:100%;padding:10px;background:#ff6a00;color:white;border:none;border-radius:6px;font-weight:bold;margin-top:8px;cursor:pointer;">Proceed to Checkout 💳</button>
+  <button onclick="clearCart()" style="width:100%;padding:6px;background:white;border:1px solid #ddd;border-radius:6px;margin-top:8px;">Clear Cart</button>
+</div>
+
+<a href="cosmetics.html" class="back-btn">← Back to All Brands</a>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
 let qty=1;
 function upd(){ qty = parseInt(document.getElementById('qty').value) || 1; document.getElementById('total').innerText = "Total: ₹"+ (qty*200); }
-
 function addToCart(){
   var shade = document.getElementById('shade').value;
   if(shade==""){ alert("Ben pehle shade select karo! 👆"); return; }
   let c = JSON.parse(localStorage.getItem('saleem_cart')||'[]');
-  c.push({name: "Lakme Face Powder - Shade " + shade, price: 200*qty, size: shade});
+  c.push({name: "Lakme Face Powder - " + shade, price: 200*qty, size: shade});
   localStorage.setItem('saleem_cart', JSON.stringify(c));
   renderCart();
   alert("Lakme "+shade+" Cart me add ✅");
@@ -14,7 +73,7 @@ function addToCart(){
 function renderCart(){
   let c = JSON.parse(localStorage.getItem('saleem_cart')||'[]');
   let html=''; let total=0;
-  c.forEach((it,i)=>{ total+=it.price; html+= it.name + " - ₹" + it.price + " <span onclick='removeItem("+i+")' style='background:red;color:white;padding:0 6px;border-radius:3px;cursor:pointer;margin-left:5px'>X</span><br>"; });
+  c.forEach((it,i)=>{ total+=it.price; html+= it.name + " - ₹" + it.price + " <span onclick='removeItem("+i+")' style='background:#ffe0e6;color:#fc2779;padding:4px 8px;border-radius:6px;cursor:pointer;margin-left:8px;border:1px solid #ffb6d9' title='Remove karo'>🗑️</span><br><br>"; });
   document.getElementById('cartItems').innerHTML = html || 'Cart Khali hai';
   document.getElementById('cartTotal').innerHTML = '<b>Total: ₹'+total+'</b>';
 }
@@ -22,16 +81,18 @@ function removeItem(i){ let c=JSON.parse(localStorage.getItem('saleem_cart')||'[
 function clearCart(){ localStorage.removeItem('saleem_cart'); renderCart(); }
 function orderAllWA(){
   let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]'); if(!c.length){alert('Cart khali hai');return;}
-  let m='Order:%0A'; let t=0;
-  c.forEach(it=>{ m+= it.name + "=₹" + it.price + "%0A"; t+=it.price; });
-  m+= "Total: ₹" + t;
-  window.open('https://wa.me/917703067297?text='+encodeURIComponent(m),'_blank');
+  let m='Salam Saleem Bangles!%0AMujhe ye order karna hai:%0A'; let t=0;
+  c.forEach(it=>{ m+= "• "+it.name + " = ₹" + it.price + "%0A"; t+=it.price; });
+  m+= "%0ATotal: ₹" + t;
+  window.open('https://wa.me/917703067297?text='+m,'_blank');
 }
 function payAll(){
   let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]'); if(!c.length){alert('Cart khali hai');return;}
   let t=0; c.forEach(it=>t+=it.price);
-  var opt={key:"rzp_test_XXXXXXX", amount:t*100, currency:"INR", name:"Saleem Bangle Store", description:"Order", handler:function(r){ alert('Payment ID: '+r.razorpay_payment_id); orderAllWA(); }, theme:{color:"#e91e63"}};
+  var opt={key:"rzp_test_XXXXXXX", amount:t*100, currency:"INR", name:"Saleem Bangle Store", description:"Lakme Order", handler:function(r){ alert('Payment ID: '+r.razorpay_payment_id); orderAllWA(); }, theme:{color:"#e91e63"}};
   new Razorpay(opt).open();
 }
 renderCart();
 </script>
+</body>
+</html>
