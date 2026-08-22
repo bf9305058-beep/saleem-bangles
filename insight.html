@@ -22,30 +22,24 @@ body{font-family:'Segoe UI',Arial; background:#f8f8f8; margin:0; padding:0;}
 </style>
 </head>
 <body>
-
 <div class="header"><h1>INSIGHT COLLECTION</h1></div>
-
 <div class="container">
   <div class="grid">
-
     <div class="card">
      <img src="insight-kajal.jpg">
       <div class="card-body">
         <h3>Insight Intense Color Kajal</h3>
         <p class="price">₹130</p>
-       <button class="btn" onclick="addToCartAll('Insight Intense Color Kajal')" style="margin-bottom:6px;">🛒 Add to Cart</button>
-<button class="btn" onclick="window.location.href='https://wa.me/917703067297?text=Hi, I want Insight Intense Kajal'" style="background:white; color:#fc2779; border:1.5px solid #fc2779;">Order on WhatsApp</button>
+       <button class="btn" onclick="addToCartAll('Insight Intense Color Kajal',130)" style="margin-bottom:6px;">🛒 Add to Cart</button>
+<button class="btn" onclick="window.location.href='https://wa.me/917703067297?text=Hi, I want Insight Intense Kajal - Rs130'" style="background:white; color:#fc2779; border:1.5px solid #fc2779;">Order on WhatsApp</button>
       </div>
     </div>
-
     <div class="card">
      <img src="insight-lipstick.jpg" style="object-fit:contain; background:#ffe4ec;">
       <div class="card-body">
         <h3>Insight 24 Hrs Non Transfer Matte Lipstick</h3>
         <p class="price">₹310 <span class="old-price">MRP ₹310</span></p>
         <p class="offer">🔥 BUY 2 GET 1 FREE 🔥 - 24 Shades Available</p>
-        
-        <!-- YEH NAYA SHADE SELECTOR -->
         <label style="font-weight:bold; font-size:13px;">Apna Shade Select Karo:</label>
         <select id="lipstickShade" class="shade-select">
           <option value="">-- Shade Chuniye --</option>
@@ -74,8 +68,7 @@ body{font-family:'Segoe UI',Arial; background:#f8f8f8; margin:0; padding:0;}
           <option value="23 - DIVA">23 - DIVA</option>
           <option value="24 - INSTAGRAM">24 - INSTAGRAM</option>
         </select> 
-
-       <button class="btn" onclick="addToCartShade('Insight Lipstick', 'lipstickShade')" style="margin-bottom:6px;">🛒 Add to Cart with Shade</button>
+       <button class="btn" onclick="addToCartShade('Insight Lipstick',310,'lipstickShade')" style="margin-bottom:6px;">🛒 Add to Cart with Shade</button>
 <button class="btn" onclick="orderWithShade()" style="background:white; color:#fc2779; border:1.5px solid #fc2779;">Order on WhatsApp with Shade</button>
       </div>
     </div>
@@ -85,7 +78,6 @@ body{font-family:'Segoe UI',Arial; background:#f8f8f8; margin:0; padding:0;}
         <h3>Insight Highlighter - Glow That Defines You</h3>
         <p class="price">₹135</p>
         <p class="offer">✨ 5 Shades Available ✨</p>
-        
         <label style="font-weight:bold; font-size:13px;">Apna Shade Select Karo:</label>
         <select id="highlighterShade" class="shade-select">
           <option value="">-- Shade Chuniye --</option>
@@ -95,16 +87,11 @@ body{font-family:'Segoe UI',Arial; background:#f8f8f8; margin:0; padding:0;}
           <option value="05 - SAVAGE BARBIE">05 - SAVAGE BARBIE - Peachy pink</option>
           <option value="06 - COSMIC POWER">06 - COSMIC POWER - Deep golden</option>
         </select>
-
-        <button class="btn" onclick="orderHighlighter()">Add to Bag with Shade</button>
+        <button class="btn" onclick="addToCartShade('Insight Highlighter',135,'highlighterShade')">Add to Bag with Shade</button>
       </div>
     </div>
   </div>
 </div>
-
-    </div>
-
-  <!-- YAHAN ADD KARO BEN - YOUR CART -->
   <div id="cartSection" style="background:white; border:2px solid #ffb6d9; border-radius:12px; padding:15px; max-width:700px; margin:30px auto;">
     <h3>🛒 Your Cart</h3>
     <div id="cartItems">Cart Khali hai</div>
@@ -113,31 +100,30 @@ body{font-family:'Segoe UI',Arial; background:#f8f8f8; margin:0; padding:0;}
     <button onclick="payAll()" style="width:100%;padding:10px;background:#ff6a00;color:white;border:none;border-radius:6px;font-weight:bold;margin-top:8px;cursor:pointer;">Proceed to Checkout - Payment 💳</button>
     <button onclick="clearCart()" style="width:100%;padding:6px;background:white;border:1px solid #ddd;border-radius:6px;margin-top:8px;">Clear Cart</button>
   </div>
-
   <a href="cosmetics.html" class="back-btn">← Back to All Brands</a>
-
-
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
-let cart = JSON.parse(localStorage.getItem('cart')||'[]');
-
+// BANGLE JAISA HI SYSTEM - AB 100% CHALEGA BEN
+function addToCartAll(name, price){
+  let c = JSON.parse(localStorage.getItem('saleem_cart')||'[]');
+  c.push({name: name, price: price});
+  localStorage.setItem('saleem_cart', JSON.stringify(c));
+  renderCart();
+  alert(name + " cart me add ho gaya ✅");
+}
+function addToCartShade(name, price, shadeId){
+  var shade = document.getElementById(shadeId).value;
+  if(shade == ""){ alert("Ben pehle shade select karo! 👆"); return; }
+  let c = JSON.parse(localStorage.getItem('saleem_cart')||'[]');
+  c.push({name: name + " - " + shade, price: price});
+  localStorage.setItem('saleem_cart', JSON.stringify(c));
+  renderCart();
+  alert(name + " " + shade + " cart me add ho gaya ✅");
+}
 function orderWithShade(){
   var shade = document.getElementById('lipstickShade').value;
   if(shade == ""){ alert("Ben pehle shade select karo! 👆"); return; }
-  addToCart("Insight 24 Hrs Lipstick", shade, 110);
-}
-function orderHighlighter(){
-  var shade = document.getElementById('highlighterShade').value;
-  if(shade == ""){ alert("Ben pehle highlighter ka shade select karo! 👆"); return; }
-  addToCart("Insight Highlighter", shade, 135);
-}
-
-function addToCart(name, shade, price){
-  let c = JSON.parse(localStorage.getItem('cart')||'[]');
-  c.push({name: name + " - " + shade, price: price, qty: 1});
-  localStorage.setItem('cart', JSON.stringify(c));
-  renderCart();
-  alert(name + " " + shade + " Cart me add ✅");
+  window.open('https://wa.me/917703067297?text=Hi, I want Insight Lipstick '+encodeURIComponent(shade)+' - Rs310','_blank');
 }
 function renderCart(){
  let c = JSON.parse(localStorage.getItem('saleem_cart')||'[]');
@@ -146,34 +132,22 @@ function renderCart(){
   document.getElementById('cartItems').innerHTML = html || 'Cart Khali hai';
   document.getElementById('cartTotal').innerHTML = '<b>Total: ₹'+total+'</b>';
 } 
- function openZoom(src){
-  document.getElementById('zoomImg').src = src;
-  document.getElementById('zoomModal').style.display = 'flex';
-}
-function closeZoom(){
-  document.getElementById('zoomModal').style.display = 'none';
-}
- 
-function removeItem(i){ let c=JSON.parse(localStorage.getItem('saleem_cart'))||'[]'); c.splice(i,1); localStorage.setItem('saleem_cart', JSON.stringify(c)); renderCart(); }
+function removeItem(i){ let c = JSON.parse(localStorage.getItem('saleem_cart')||'[]'); c.splice(i,1); localStorage.setItem('saleem_cart', JSON.stringify(c)); renderCart(); }
 function clearCart(){ localStorage.removeItem('saleem_cart'); renderCart(); }
 function orderAllWA(){
- let c=JSON.parse(localStorage.getItem('saleem_cart'))||'[]'); if(!c.length){alert('Cart khali hai');return;}
- let m='Insight Order:%0A'; let t=0;
- c.forEach(it=>{ m+=`${it.name} - Rs${it.price}%0A`; t+=it.price; });
- m+=`Total: Rs${t}`;
- window.open('https://wa.me/917703067297?text='+encodeURIComponent(m),'_blank');
+ let c = JSON.parse(localStorage.getItem('saleem_cart')||'[]'); if(!c.length){alert('Cart khali hai');return;}
+ let m='Salam Saleem Bangles!%0AMujhe ye order karna hai:%0A'; let t=0;
+ c.forEach(it=>{ m+= "• "+it.name + " = ₹" + it.price + "%0A"; t+=it.price; });
+ m+= "%0ATotal: ₹" + t;
+ window.open('https://wa.me/917703067297?text='+m,'_blank');
 }
 function payAll(){
- let c=JSON.parse(localStorage.getItem('saleem_cart'))||'[]'); if(!c.length){alert('Cart khali hai');return;}
+ let c = JSON.parse(localStorage.getItem('saleem_cart')||'[]'); if(!c.length){alert('Cart khali hai');return;}
  let t=0; c.forEach(it=>t+=it.price);
- var opt={key:"rzp_test_XXXXXXX", amount:t*100, currency:"INR", name:"Saleem Bangle Store", description:"Insight Order", handler:function(r){ alert('Payment ID: '+r.razorpay_payment_id); orderAllWA(); }};
+ var opt={key:"rzp_test_XXXXXXX", amount:t*100, currency:"INR", name:"Saleem Bangle Store", description:"Insight Order", handler:function(r){ alert('Payment ID: '+r.razorpay_payment_id); orderAllWA(); }, theme:{color:"#fc2779"}};
  new Razorpay(opt).open();
 }
 renderCart();
 </script> 
-  <div id="zoomModal" onclick="closeZoom()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:99999; justify-content:center; align-items:center;">
-  <img id="zoomImg" src="" style="max-width:95%; max-height:95%; border-radius:12px;">
-</div>
-<script src="cart-common.js"></script>
 </body>
 </html>
