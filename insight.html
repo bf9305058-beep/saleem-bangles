@@ -33,7 +33,8 @@ body{font-family:'Segoe UI',Arial; background:#f8f8f8; margin:0; padding:0;}
       <div class="card-body">
         <h3>Insight Intense Color Kajal</h3>
         <p class="price">₹130</p>
-        <button class="btn" onclick="window.location.href='https://wa.me/917703067297?text=Hi, I want Insight Intense Kajal'">Add to Bag</button>
+       <button class="btn" onclick="addToCartAll('Insight Intense Color Kajal')" style="margin-bottom:6px;">🛒 Add to Cart</button>
+<button class="btn" onclick="window.location.href='https://wa.me/917703067297?text=Hi, I want Insight Intense Kajal'" style="background:white; color:#fc2779; border:1.5px solid #fc2779;">Order on WhatsApp</button>
       </div>
     </div>
 
@@ -74,7 +75,8 @@ body{font-family:'Segoe UI',Arial; background:#f8f8f8; margin:0; padding:0;}
           <option value="24 - INSTAGRAM">24 - INSTAGRAM</option>
         </select> 
 
-        <button class="btn" onclick="orderWithShade()">Add to Bag with Shade</button>
+       <button class="btn" onclick="addToCartShade('Insight Lipstick', 'lipstickShade')" style="margin-bottom:6px;">🛒 Add to Cart with Shade</button>
+<button class="btn" onclick="orderWithShade()" style="background:white; color:#fc2779; border:1.5px solid #fc2779;">Order on WhatsApp with Shade</button>
       </div>
     </div>
     <div class="card">
@@ -152,20 +154,20 @@ function closeZoom(){
   document.getElementById('zoomModal').style.display = 'none';
 }
  
-function removeItem(i){ let c=JSON.parse(localStorage.getItem('cart')||'[]'); c.splice(i,1); localStorage.setItem('cart', JSON.stringify(c)); renderCart(); }
-function clearCart(){ localStorage.removeItem('cart'); renderCart(); }
+function removeItem(i){ let c=JSON.parse(localStorage.getItem('saleem_cart'))||'[]'); c.splice(i,1); localStorage.setItem('saleem_cart', JSON.stringify(c)); renderCart(); }
+function clearCart(){ localStorage.removeItem('saleem_cart'); renderCart(); }
 function orderAllWA(){
-  let c=JSON.parse(localStorage.getItem('cart')||'[]'); if(!c.length){alert('Cart khali hai');return;}
-  let m='Insight Order:%0A'; let t=0;
-  c.forEach(it=>{ m+=`${it.name}=₹${it.price}%0A`; t+=it.price; });
-  m+=`Total: ₹${t}`;
-  window.open('https://wa.me/917703067297?text='+encodeURIComponent(m),'_blank');
+ let c=JSON.parse(localStorage.getItem('saleem_cart'))||'[]'); if(!c.length){alert('Cart khali hai');return;}
+ let m='Insight Order:%0A'; let t=0;
+ c.forEach(it=>{ m+=`${it.name} - Rs${it.price}%0A`; t+=it.price; });
+ m+=`Total: Rs${t}`;
+ window.open('https://wa.me/917703067297?text='+encodeURIComponent(m),'_blank');
 }
 function payAll(){
-  let c=JSON.parse(localStorage.getItem('cart')||'[]'); if(!c.length){alert('Cart khali hai');return;}
-  let t=0; c.forEach(it=>t+=it.price);
-  var opt={key:"rzp_test_XXXXXXX", amount:t*100, currency:"INR", name:"Saleem Bangle Store", description:"Insight Order", handler:function(r){ alert('Payment ID: '+r.razorpay_payment_id); orderAllWA(); }, theme:{color:"#e91e63"}};
-  new Razorpay(opt).open();
+ let c=JSON.parse(localStorage.getItem('saleem_cart'))||'[]'); if(!c.length){alert('Cart khali hai');return;}
+ let t=0; c.forEach(it=>t+=it.price);
+ var opt={key:"rzp_test_XXXXXXX", amount:t*100, currency:"INR", name:"Saleem Bangle Store", description:"Insight Order", handler:function(r){ alert('Payment ID: '+r.razorpay_payment_id); orderAllWA(); }};
+ new Razorpay(opt).open();
 }
 renderCart();
 </script> 
