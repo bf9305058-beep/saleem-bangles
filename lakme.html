@@ -33,7 +33,6 @@ select, input{padding:8px;width:80%;margin:5px;border-radius:6px;border:1px soli
   <button class="btn" style="background:#e91e63;color:white;width:90%" onclick="addToCart()">Add to Bag 🛒</button>
 </div>
 
-<!-- YOUR CART - INSIGHT JAISA -->
 <div id="cartSection" style="background:white; border:2px solid #ffb6d9; border-radius:12px; padding:15px; max-width:700px; margin:30px auto;">
   <h3>🛒 Your Cart</h3>
   <div id="cartItems">Cart Khali hai</div>
@@ -55,7 +54,7 @@ function addToCart(){
   var shade = document.getElementById('shade').value;
   if(shade==""){ alert("Ben pehle shade select karo! 👆"); return; }
   let c = JSON.parse(localStorage.getItem('cart')||'[]');
-c.push({name: "Lakme Face Powder - Shade " + shade, price: 200})
+  c.push({name: "Lakme Face Powder - Shade " + shade, price: 200})
   localStorage.setItem('cart', JSON.stringify(c));
   renderCart();
   alert("Lakme "+shade+" Cart me add ✅");
@@ -84,6 +83,6 @@ function payAll(){
 }
 renderCart();
 </script>
-<script src="cart-common.js"></script>
+
 </body>
 </html>
