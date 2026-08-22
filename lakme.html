@@ -1,51 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lakme - Saleem Bangles</title>
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<style>
-body{font-family:Arial,sans-serif;background:#fff0f5;margin:0;padding:20px}
-.header{background:#e91e63;color:white;text-align:center;padding:12px;border-radius:10px;font-weight:bold;font-size:20px}
-.box{background:white;border-radius:12px;padding:15px;max-width:500px;margin:20px auto;box-shadow:0 2px 10px rgba(0,0,0,0.1);text-align:center}
-.box img{width:100%;max-height:250px;object-fit:cover;border-radius:10px}
-select, input{padding:8px;width:80%;margin:5px;border-radius:6px;border:1px solid #ccc}
-.btn{padding:10px 15px;border:none;border-radius:6px;font-weight:bold;cursor:pointer;margin:5px}
-</style>
-</head>
-<body>
-
-<div class="header">LAKME COLLECTION</div>
-
-<div class="box">
-  <img src="lakme-powder.jpg" alt="Lakme">
-  <h3>Lakme Face Powder</h3>
-  <p>Price: ₹200</p>
-  
-  <label>Select Shade:</label><br>
-  <select id="shade"><option value="">-- Shade Select Karo --</option><option value="01 Pink">01 Pink</option><option value="02 Natural">02 Natural</option><option value="03 Beige">03 Beige</option></select><br>
-  
-  <label>Qty:</label><br>
-  <input type="number" id="qty" value="1" min="1" max="5" onchange="upd()"><br>
-  <p id="total"><b>Total: ₹200</b></p>
-
-  <button class="btn" style="background:#e91e63;color:white;width:90%" onclick="addToCart()">Add to Bag 🛒</button>
-</div>
-
-<div id="cartSection" style="background:white; border:2px solid #ffb6d9; border-radius:12px; padding:15px; max-width:700px; margin:30px auto;">
-  <h3>🛒 Your Cart</h3>
-  <div id="cartItems">Cart Khali hai</div>
-  <p id="cartTotal"><b>Total: ₹0</b></p>
-  <button onclick="orderAllWA()" style="width:100%;padding:10px;background:#00c851;color:white;border:none;border-radius:6px;font-weight:bold;margin-top:8px;">Order on WhatsApp</button>
-  <button onclick="payAll()" style="width:100%;padding:10px;background:#ff6a00;color:white;border:none;border-radius:6px;font-weight:bold;margin-top:8px;">Proceed to Checkout - Payment 💳</button>
-  <button onclick="clearCart()" style="width:100%;padding:6px;background:white;border:1px solid #ddd;border-radius:6px;margin-top:8px;">Clear Cart</button>
-</div>
-
-<div style="text-align:center; margin:30px 0;">
-  <a href="cosmetics.html" style="color:#ff2d7b; text-decoration:none; font-weight:bold;">← Back to All Brands</a>
-</div>
-
 <script>
 let qty=1;
 function upd(){ qty = parseInt(document.getElementById('qty').value) || 1; document.getElementById('total').innerText = "Total: ₹"+ (qty*200); }
@@ -53,36 +5,33 @@ function upd(){ qty = parseInt(document.getElementById('qty').value) || 1; docum
 function addToCart(){
   var shade = document.getElementById('shade').value;
   if(shade==""){ alert("Ben pehle shade select karo! 👆"); return; }
-  let c = JSON.parse(localStorage.getItem('cart')||'[]');
-  c.push({name: "Lakme Face Powder - Shade " + shade, price: 200})
-  localStorage.setItem('cart', JSON.stringify(c));
+  let c = JSON.parse(localStorage.getItem('saleem_cart')||'[]');
+  c.push({name: "Lakme Face Powder - Shade " + shade, price: 200*qty, size: shade});
+  localStorage.setItem('saleem_cart', JSON.stringify(c));
   renderCart();
   alert("Lakme "+shade+" Cart me add ✅");
 }
 function renderCart(){
-  let c = JSON.parse(localStorage.getItem('cart')||'[]');
+  let c = JSON.parse(localStorage.getItem('saleem_cart')||'[]');
   let html=''; let total=0;
   c.forEach((it,i)=>{ total+=it.price; html+= it.name + " - ₹" + it.price + " <span onclick='removeItem("+i+")' style='background:red;color:white;padding:0 6px;border-radius:3px;cursor:pointer;margin-left:5px'>X</span><br>"; });
   document.getElementById('cartItems').innerHTML = html || 'Cart Khali hai';
   document.getElementById('cartTotal').innerHTML = '<b>Total: ₹'+total+'</b>';
 }
-function removeItem(i){ let c=JSON.parse(localStorage.getItem('cart')||'[]'); c.splice(i,1); localStorage.setItem('cart', JSON.stringify(c)); renderCart(); }
-function clearCart(){ localStorage.removeItem('cart'); renderCart(); }
+function removeItem(i){ let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]'); c.splice(i,1); localStorage.setItem('saleem_cart', JSON.stringify(c)); renderCart(); }
+function clearCart(){ localStorage.removeItem('saleem_cart'); renderCart(); }
 function orderAllWA(){
-  let c=JSON.parse(localStorage.getItem('cart')||'[]'); if(!c.length){alert('Cart khali hai');return;}
-  let m='Lakme Order:%0A'; let t=0;
+  let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]'); if(!c.length){alert('Cart khali hai');return;}
+  let m='Order:%0A'; let t=0;
   c.forEach(it=>{ m+= it.name + "=₹" + it.price + "%0A"; t+=it.price; });
   m+= "Total: ₹" + t;
   window.open('https://wa.me/917703067297?text='+encodeURIComponent(m),'_blank');
 }
 function payAll(){
-  let c=JSON.parse(localStorage.getItem('cart')||'[]'); if(!c.length){alert('Cart khali hai');return;}
+  let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]'); if(!c.length){alert('Cart khali hai');return;}
   let t=0; c.forEach(it=>t+=it.price);
-  var opt={key:"rzp_test_XXXXXXX", amount:t*100, currency:"INR", name:"Saleem Bangle Store", description:"Lakme Order", handler:function(r){ alert('Payment ID: '+r.razorpay_payment_id); orderAllWA(); }, theme:{color:"#e91e63"}};
+  var opt={key:"rzp_test_XXXXXXX", amount:t*100, currency:"INR", name:"Saleem Bangle Store", description:"Order", handler:function(r){ alert('Payment ID: '+r.razorpay_payment_id); orderAllWA(); }, theme:{color:"#e91e63"}};
   new Razorpay(opt).open();
 }
 renderCart();
 </script>
-
-</body>
-</html>
