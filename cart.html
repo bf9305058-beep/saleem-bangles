@@ -1,1 +1,81 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cart - Saleem Bangles</title>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<style>
+body{font-family:Arial,sans-serif; background:#fff6f7; margin:0; padding:15px}
+h2{text-align:center}
+.item{background:white; padding:12px; margin-bottom:10px; border-radius:10px; display:flex; justify-content:space-between; box-shadow:0 2px 5px rgba(0,0,0,0.1)}
+.total{font-size:22px; font-weight:bold; text-align:right; margin:15px 0}
+input{width:100%; padding:12px; margin:8px 0; border-radius:8px; border:1px solid #ccc; box-sizing:border-box}
+.payBtn{width:100%; padding:15px; background:black; color:white; border:none; border-radius:30px; font-size:18px; margin-top:10px}
+.back{display:block; text-align:center; margin-top:15px; color:black; text-decoration:none}
+</style>
+</head>
+<body>
+
+<h2>🛒 Your Cart</h2>
+<p style="text-align:center; font-size:13px;">Bangles + Cosmetics ek saath</p>
+
+<div id="cartList"></div>
+<div class="total" id="totalDiv">Total: Rs 0</div>
+
+<input id="cName" placeholder="Aapka Naam">
+<input id="cPhone" placeholder="Mobile Number">
+<input id="cAddress" placeholder="Address (Lucknow)">
+
+<button class="payBtn" onclick="payNow()">Razorpay se Payment Karo</button>
+
+<a href="index.html" class="back">← Bangles dekhne jao</a>
+<a href="cosmetics.html" class="back">← Cosmetics dekhne jao</a>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("saleemCart")) || [];
+let list = document.getElementById("cartList");
+let total = 0;
+
+if(cart.length==0){
+  list.innerHTML = "<p style='text-align:center'>Cart khali hai, kuch add karo ben!</p>";
+}
+
+cart.forEach((p,i)=>{
+  total += parseInt(p.price);
+  list.innerHTML += `<div class="item"><span>${p.name}</span><span>Rs ${p.price} <span onclick="removeItem(${i})" style="color:red;margin-left:10px;cursor:pointer;">X</span></span></div>`;
+});
+document.getElementById("totalDiv").innerText = "Total: Rs " + total;
+
+function removeItem(i){
+  cart.splice(i,1);
+  localStorage.setItem("saleemCart", JSON.stringify(cart));
+  location.reload();
+}
+
+function payNow(){
+  if(total==0){ alert("Pehle kuch add karo"); return; }
+  let name = document.getElementById("cName").value;
+  if(!name){ alert("Naam likho"); return; }
+
+  var options = {
+    "key": "rzp_test_YAHAN_APNI_KEY_DALO", // <-- YAHAN APNI RAZORPAY KEY DALNA
+    "amount": total*100,
+    "currency": "INR",
+    "name": "Saleem Bangles & Cosmetics",
+    "description": "Bangles + Cosmetics Order",
+    "handler": function (res){
+      alert("Payment Success! ID: " + res.razorpay_payment_id + "\nShukriya ben!");
+      localStorage.removeItem("saleemCart");
+      window.location.href = "index.html";
+    },
+    "prefill": { "name": name, "contact": document.getElementById("cPhone").value },
+    "theme": { "color": "#e91e63" }
+  };
+  var rzp = new Razorpay(options);
+  rzp.open();
+}
+</script>
+</body>
+</html>
