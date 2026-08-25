@@ -38,22 +38,19 @@ input{width:100%; padding:12px; margin:6px 0; border:1px solid #ccc; border-radi
 <hr>
 <div class="item" style="font-weight:bold; font-size:18px;"><span>Total Amount</span><span>₹<span id="total">0</span></span></div>
 
-<div style="background:#f7fff7; border:1px solid #d4edda; padding:10px; border-radius:8px; font-size:13px; margin-top:12px; text-align:center; line-height:1.8;">
-<b>All India:</b> ₹999 tak <b style="color:green;">FREE Delivery 🎉</b><br>
-International Delivery Available 🌍<br>
-<span class="red">Pakistan 🇵🇰 ❌ Not Available</span><br>
-<span style="color:red; font-size:12px;">❌ Cash on Delivery Available Nahi Hai - Only Prepaid</span>
-</div>
+<div style="background:#f7ffef; border:1px solid #4edda; padding:10px; border-radius:8px; font-size:13px; margin-top:12px; text-align:center; line-height:1.8;">
+<b>All India Delivery Available</b><br>
+World Wide Shipping Available
 </div>
 
 <div class="card">
 <h3>💳 Payment</h3>
-<p>✅ <b>Razorpay Secure - UPI / Card / Netbanking</b></p>
-<button class="btn pay" onclick="payWithRazorpay()">CONTINUE TO PAY - Razorpay</button>
+<p style="text-align:center; font-weight:bold;">Scan & Pay - GPay / PhonePe / Paytm</p>
+<img src="qr.png" style="width:280px; max-width:95%; display:block; margin:15px auto; border:2px solid #ddd; border-radius:12px; padding:8px; background:white;">
+<p style="text-align:center; font-size:13px;">Payment ke baad screenshot WhatsApp pe bhej dijiye</p>
 <button class="btn wa" onclick="orderOnWa()">Order on WhatsApp</button>
 <p style="text-align:center;"><a href="bangles.html">← Back to Shop</a></p>
 </div>
-
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
 let cart=JSON.parse(localStorage.getItem("saleem_cart")||"[]");
