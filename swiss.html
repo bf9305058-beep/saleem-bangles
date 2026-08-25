@@ -4,10 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Swiss Beauty - Saleem Bangles</title>
-function payAll(){ 
-  if(cart.length==0){ alert('Cart Khali hai!'); return; } 
-  window.location.href='checkout.html'; 
-}
 <style>
 body{font-family:Arial;background:#fff0f5;margin:0;padding:20px}
 .header{background:#e91e63;color:white;text-align:center;padding:12px;border-radius:10px;font-weight:bold}
@@ -55,7 +51,10 @@ function renderCart(){
 function rem(i){let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]'); c.splice(i,1); localStorage.setItem('saleem_cart',JSON.stringify(c)); renderCart();}
 function clearCart(){localStorage.removeItem('saleem_cart'); renderCart();}
 function orderAllWA(){let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]'); if(!c.length){alert('Cart khali');return;} let m='Salam! Swiss Order:%0A'; let t=0; c.forEach(it=>{m+="• "+it.name+"=₹"+it.price+"%0A"; t+=it.price;}); m+="%0ATotal: ₹"+t; window.open('https://wa.me/917703067297?text='+m,'_blank');}
-function payAll(){let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]'); if(!c.length){alert('Cart khali');return;} let t=0; c.forEach(it=>t+=it.price); var o={key:"rzp_test_XXXXXXX",amount:t*100,currency:"INR",name:"Saleem Bangles",handler:function(r){alert('Pay ID: '+r.razorpay_payment_id); orderAllWA();},theme:{color:"#e91e63"}}; new Razorpay(o).open();}
+function payAll(){ 
+  if(JSON.parse(localStorage.getItem('saleem_cart')||'[]').length==0){ alert('Cart Khali hai!'); return; } 
+  window.location.href='checkout.html'; 
+}
 renderCart();
 </script> 
 </body>
