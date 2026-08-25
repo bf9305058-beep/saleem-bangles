@@ -57,7 +57,10 @@ body{font-family:'Segoe UI',Arial; background:#f8f8f8; margin:0; padding:0;}
 
 <a href="cosmetics.html" class="back-btn">← Back to All Brands</a>
 
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+function payAll(){ 
+  if(JSON.parse(localStorage.getItem('saleem_cart')||'[]').length==0){ alert('Cart Khali hai!'); return; } 
+  window.location.href='checkout.html'; 
+}
 <script>
 let qty=1;
 function upd(){ qty = parseInt(document.getElementById('qty').value) || 1; document.getElementById('total').innerText = "Total: ₹"+ (qty*200); }
