@@ -27,7 +27,6 @@ body{font-family:'Segoe UI',Arial; background:#f8f8f8; margin:0; padding:0;}
         <h3>Lakme Face Powder</h3>
         <p class="price" id="total">Total: ₹200</p>
         <label style="font-weight:bold; font-size:13px;">Apna Shade Select Karo:</label>
-   <label style="font-weight:bold; font-size:13px;">Apna Shade Select Karo:</label>
         <select id="shade" class="shade-select">
           <option value="">-- Shade Chuniye --</option>
           <option value="01 - Soft Pink">01 - Soft Pink</option>
@@ -38,7 +37,6 @@ body{font-family:'Segoe UI',Arial; background:#f8f8f8; margin:0; padding:0;}
           <option value="1">1 Pc - ₹200</option>
           <option value="2">2 Pc - ₹400</option>
           <option value="3">3 Pc - ₹600</option>
-        </select>
         </select>
         <button class="btn" onclick="addToCart()">🛒 Add to Cart with Shade</button>
       </div>
@@ -57,10 +55,6 @@ body{font-family:'Segoe UI',Arial; background:#f8f8f8; margin:0; padding:0;}
 
 <a href="cosmetics.html" class="back-btn">← Back to All Brands</a>
 
-function payAll(){ 
-  if(JSON.parse(localStorage.getItem('saleem_cart')||'[]').length==0){ alert('Cart Khali hai!'); return; } 
-  window.location.href='checkout.html'; 
-}
 <script>
 let qty=1;
 function upd(){ qty = parseInt(document.getElementById('qty').value) || 1; document.getElementById('total').innerText = "Total: ₹"+ (qty*200); }
@@ -76,7 +70,7 @@ function addToCart(){
 function renderCart(){
   let c = JSON.parse(localStorage.getItem('saleem_cart')||'[]');
   let html=''; let total=0;
-  c.forEach((it,i)=>{ total+=it.price; html+= it.name + " - ₹" + it.price + " <span onclick='removeItem("+i+")' style='background:#ffe0e6;color:#fc2779;padding:4px 8px;border-radius:6px;cursor:pointer;margin-left:8px;border:1px solid #ffb6d9' title='Remove karo'>🗑️</span><br><br>"; });
+  c.forEach((it,i)=>{ total+=it.price; html+= it.name + " - ₹" + it.price + " <span onclick='removeItem("+i+")' style='background:#ffe0e6;color:#fc2779;padding:4px 8px;border-radius:6px;cursor:pointer;margin-left:8px;border:1px solid #ffb6d9'>🗑️</span><br><br>"; });
   document.getElementById('cartItems').innerHTML = html || 'Cart Khali hai';
   document.getElementById('cartTotal').innerHTML = '<b>Total: ₹'+total+'</b>';
 }
@@ -89,11 +83,9 @@ function orderAllWA(){
   m+= "%0ATotal: ₹" + t;
   window.open('https://wa.me/917703067297?text='+m,'_blank');
 }
-function payAll(){
-  let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]'); if(!c.length){alert('Cart khali hai');return;}
-  let t=0; c.forEach(it=>t+=it.price);
-  var opt={key:"rzp_test_XXXXXXX", amount:t*100, currency:"INR", name:"Saleem Bangle Store", description:"Lakme Order", handler:function(r){ alert('Payment ID: '+r.razorpay_payment_id); orderAllWA(); }, theme:{color:"#e91e63"}};
-  new Razorpay(opt).open();
+function payAll(){ 
+  if(JSON.parse(localStorage.getItem('saleem_cart')||'[]').length==0){ alert('Cart Khali hai!'); return; } 
+  window.location.href='checkout.html'; 
 }
 renderCart();
 </script>
