@@ -2,128 +2,46 @@
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Checkout - Saleem Bangles</title>
 <style>
-body{background:#f1f3f6; font-family:Roboto, Arial; margin:0; padding:0}
-.card{background:#fff; padding:15px; border-radius:8px; margin:10px; box-shadow:0 1px 3px rgba(0,0,0,0.1)}
-.btn{border:none; padding:14px; width:100%; border-radius:6px; font-size:16px; font-weight:bold; cursor:pointer; margin-top:10px}
-.pay{background:#fb641b; color:#fff}
-.wa{background:#25D366; color:#fff}
-.item{display:flex; justify-content:space-between; line-height:2}
-.green{color:green; font-weight:bold}
-.red{color:red; font-weight:bold}
-input{width:100%; padding:12px; margin:6px 0; border:1px solid #ccc; border-radius:5px; box-sizing:border-box}
+body{font-family:Poppins,sans-serif;background:#f8f9fa;margin:0;padding:15px}
+.box{background:white;border-radius:15px;padding:20px;max-width:500px;margin:auto;box-shadow:0 5px 20px rgba(0,0,0,0.1)}
+h2{text-align:center;color:#d63384}
+.qr-box{text-align:center;background:#fff8dc;padding:15px;border-radius:12px;border:1px solid #ffc107;margin:15px 0}
+.btn{width:100%;padding:14px;background:#25D366;color:white;border:none;border-radius:10px;font-size:18px;font-weight:bold;cursor:pointer;margin-top:10px}
+input{width:100%;padding:12px;margin:8px 0;border-radius:8px;border:1px solid #ddd;box-sizing:border-box}
 </style>
 </head>
 <body>
+<div class="box">
+<h2>💳 Prepaid Checkout</h2>
+<p style="text-align:center;font-size:14px;color:gray">International Delivery Available - Prepaid Only</p>
 
-<div class="card">
-<h3>📍 Delivery Address</h3>
-<input id="name" placeholder="Full Name *">
-<input id="mobile" placeholder="Mobile Number *">
-<input id="address" placeholder="Full Address, Pincode, City *">
-<p>🚚 Delivery by <b id="delivery-date"></b></p>
+<div class="qr-box">
+<p><b>Scan & Pay via UPI</b></p>
+<img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=gpay-12205946398@okbizaxis%26pn=Saleem%20Bangles" style="width:200px;border-radius:10px">
+<p style="font-size:13px;margin-top:10px"><b>UPI ID:</b> gpay-12205946398@okbizaxis</p>
+<p style="font-size:12px;color:green">✅ Payment Owner ko Direct Jayega</p>
 </div>
 
-<div class="card">
-<h3>Order Summary</h3>
-<div id="order-items"></div>
-</div>
+<input type="text" id="name" placeholder="Aapka Naam">
+<input type="text" id="address" placeholder="Full Address + Country">
+<input type="text" id="utr" placeholder="UPI UTR / Transaction ID (12 digit)">
 
-<div class="card">
-<h3>Price Details</h3>
-<div class="item"><span>Price (<span id="count">0</span> items)</span><span>₹<span id="p1">0</span></span></div>
-<div class="item"><span>Delivery Charges</span><span id="delivery-charge" class="green">FREE</span></div>
-<hr>
-<div class="item" style="font-weight:bold; font-size:18px;"><span>Total Amount</span><span>₹<span id="total">0</span></span></div>
-
-<div style="background:#f7ffef; border:1px solid #4edda; padding:10px; border-radius:8px; font-size:13px; margin-top:12px; text-align:center; line-height:1.8;">
-<b>All India Delivery Available</b><br>
-World Wide Shipping Available
-</div>
-
-<div class="card">
-<h3>💳 Payment</h3>
-<p style="text-align:center; font-weight:bold;">Scan & Pay - GPay / PhonePe / Paytm</p>
-<img src="qr.png" style="width:280px; max-width:95%; display:block; margin:15px auto; border:2px solid #ddd; border-radius:12px; padding:8px; background:white;">
-<p style="text-align:center; font-size:13px;">Payment ke baad screenshot WhatsApp pe bhej dijiye</p>
-<button class="btn wa" onclick="orderOnWa()">Order on WhatsApp</button>
-<p style="text-align:center;"><a href="bangles.html">← Back to Shop</a></p>
+<button class="btn" onclick="sendOrder()">📲 Order WhatsApp Par Bhejo</button>
+<p style="font-size:11px;text-align:center;color:gray;margin-top:10px">COD Available Nahi Hai - Sirf Prepaid</p>
 </div>
 
 <script>
-let cart=JSON.parse(localStorage.getItem("saleem_cart")||"[]");
-let total=0;
-let itemsDiv=document.getElementById("order-items");
-let count=cart.length;
-
-if(count==0){ itemsDiv.innerHTML="<p>Cart khali hai</p>"; }
-else{
-  cart.forEach(i=>{
-    total+=i.price;
-    itemsDiv.innerHTML+=`<div class="item"><span>${i.name} ${i.size}</span><span>₹${i.price}</span></div>`;
-  });
-}
-
-document.getElementById("count").innerText=count;
-document.getElementById("p1").innerText=total;
-
-let delivery=0;
-if(total>=999){ delivery=0; document.getElementById("delivery-charge").innerHTML='<span class="green">FREE</span>'; }
-else{ delivery=0; document.getElementById("delivery-charge").innerHTML='<span class="green">FREE</span>'; }
-
-document.getElementById("total").innerText=total+delivery;
-
-let d=new Date(); d.setDate(d.getDate()+7);
-document.getElementById("delivery-date").innerText=d.toLocaleDateString('en-IN',{weekday:'short', day:'numeric', month:'short'});
-
-function getDetails(){
- let n=document.getElementById("name").value;
- let m=document.getElementById("mobile").value;
- let a=document.getElementById("address").value;
- if(!n||!m||!a){ alert("Naam, Mobile, Address bharo"); return null; }
- return {n,m,a};
-}
-
-function orderOnWa(){
- let det=getDetails(); if(!det) return;
- let msg=`Salam Saleem Bangles!%0AName: ${det.n}%0AMobile: ${det.m}%0AAddress: ${det.a}%0A%0AOrder:%0A`;
- cart.forEach(i=>{ msg+=`• ${i.name} ${i.size} - ₹${i.price}%0A`; });
- msg+=`%0ATotal: ₹${total+delivery}`;
+function sendOrder(){
+ let name=document.getElementById('name').value;
+ let addr=document.getElementById('address').value;
+ let utr=document.getElementById('utr').value;
+ if(!name||!addr||!utr){alert('Saare box bharo ben!');return;}
+ let msg=`*NEW PREPAID ORDER - Saleem Bangles*%0AName: ${name}%0AAddress: ${addr}%0AUTR: ${utr}%0APayment: gpay-12205946398@okbizaxis`;
  window.open(`https://wa.me/917703067297?text=${msg}`,'_blank');
 }
-function payWithQR(){
-  let det=getDetails(); if(!det) return;
-  
-  // QR dikhao
-  document.getElementById("qrBox").style.display="block";
-  document.getElementById("qrAmount").innerText = "Total: ₹" + (total+delivery);
-  
-  // Scroll to QR
-  document.getElementById("qrBox").scrollIntoView({behavior: "smooth"});
-}
-
-function orderAfterPayment(){
-  let det=getDetails(); if(!det) return;
-  let msg=`Hello Saleem Bangles! Mujhe ye order karna hai:%0AName: ${det.n}%0AMobile: ${det.m}%0AAddress: ${det.a}%0A%0APayment Done via GPay QR%0A%0AOrder:%0A`;
-  cart.forEach(i=>{ msg+=`• ${i.name} ${i.size||''} - ₹${i.price}%0A`; });
-  msg+=`%0ATotal: ₹${total+delivery}`;
-  window.open(`https://wa.me/917703067297?text=${msg}`,'_blank');
-}
-}
-
-</script> 
-  <div id="qrBox" style="display:none; text-align:center; margin:20px; padding:20px; background:white; border-radius:16px; border:2px solid #6a11cb;">
-  <h3 style="color:#6a11cb; margin:0;">Scan & Pay</h3>
-  <p id="qrAmount" style="font-weight:bold; margin-top:8px;"></p>
-  
-  <img src="qr.png" style="width:230px; height:230px; border-radius:12px; border:3px solid #eee; margin:10px 0;">
-  
-  <p><b>UPI:</b> gpay-12205946398@okbizaxis</p>
-  <a href="upi://pay?pa=gpay-12205946398@okbizaxis&pn=SALEEM BANGLE STORE&cu=INR" style="display:block; background:#00baf2; color:white; padding:12px; border-radius:25px; text-decoration:none; font-weight:bold;">📱 GPay / PhonePe se Pay Kare</a>
-  
-  <button onclick="orderAfterPayment()" style="width:100%; background:#25D366; color:white; padding:12px; border-radius:25px; border:none; font-weight:bold; margin-top:12px; cursor:pointer;">✅ Payment Kar Diya, Order WhatsApp Kare</button>
-</div>
+</script>
 </body>
 </html>
