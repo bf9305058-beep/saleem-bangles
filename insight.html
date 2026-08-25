@@ -103,7 +103,6 @@ body{font-family:'Segoe UI',Arial; background:#f8f8f8; margin:0; padding:0;}
   <a href="cosmetics.html" class="back-btn">← Back to All Brands</a>
 
 <script>
-// BANGLE JAISA HI SYSTEM - AB 100% CHALEGA BEN
 function addToCartAll(name, price){
   let c = JSON.parse(localStorage.getItem('saleem_cart')||'[]');
   c.push({name: name, price: price});
@@ -141,11 +140,9 @@ function orderAllWA(){
  m+= "%0ATotal: ₹" + t;
  window.open('https://wa.me/917703067297?text='+m,'_blank');
 }
-function payAll(){
- let c = JSON.parse(localStorage.getItem('saleem_cart')||'[]'); if(!c.length){alert('Cart khali hai');return;}
- let t=0; c.forEach(it=>t+=it.price);
- var opt={key:"rzp_test_XXXXXXX", amount:t*100, currency:"INR", name:"Saleem Bangle Store", description:"Insight Order", handler:function(r){ alert('Payment ID: '+r.razorpay_payment_id); orderAllWA(); }, theme:{color:"#fc2779"}};
- new Razorpay(opt).open();
+function payAll(){ 
+  if(JSON.parse(localStorage.getItem('saleem_cart')||'[]').length==0){ alert('Cart Khali hai!'); return; } 
+  window.location.href='checkout.html'; 
 }
 renderCart();
 </script> 
