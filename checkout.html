@@ -106,10 +106,11 @@ function payWithQR(){
 
 function orderAfterPayment(){
   let det=getDetails(); if(!det) return;
-  let msg=`Salam Saleem Bangles!%0AName: ${det.n}%0AMobile: ${det.m}%0A%0A*Payment Done via GPay QR*%0A`;
-  cart.forEach(i=>{ msg+=`• ${i.name} ${i.size} - ₹${i.price}%0A`; });
+  let msg=`Hello Saleem Bangles! Mujhe ye order karna hai:%0AName: ${det.n}%0AMobile: ${det.m}%0AAddress: ${det.a}%0A%0APayment Done via GPay QR%0A%0AOrder:%0A`;
+  cart.forEach(i=>{ msg+=`• ${i.name} ${i.size||''} - ₹${i.price}%0A`; });
   msg+=`%0ATotal: ₹${total+delivery}`;
   window.open(`https://wa.me/917703067297?text=${msg}`,'_blank');
+}
 }
 
 </script> 
