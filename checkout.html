@@ -1,49 +1,49 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Checkout - Saleem Bangles</title>
 <style>
-body{font-family:Arial; background:#f5f5f5; margin:0; padding:15px}
-.box{background:white; padding:20px; border-radius:12px; max-width:500px; margin:auto; box-shadow:0 2px 10px rgba(0,0,0,0.1)}
-h2{text-align:center; color:#d63384}
-input, textarea{width:100%; padding:12px; margin:8px 0; border:1px solid #ccc; border-radius:8px; box-sizing:border-box}
-.pay-box{background:#fff3cd; border:1px solid #ffc107; padding:15px; border-radius:10px; text-align:center; margin:15px 0}
-.qr{width:200px; height:200px; background:white; margin:10px auto; border:1px solid #ddd}
-.btn{width:100%; padding:14px; border:none; border-radius:8px; font-size:16px; font-weight:bold; cursor:pointer; margin-top:10px}
-.btn-pay{background:#0099ff; color:white}
+body{font-family:'Poppins',Arial; background:#f8f9fa; margin:0; padding:15px}
+.box{background:white; padding:25px; border-radius:16px; max-width:520px; margin:auto; box-shadow:0 4px 20px rgba(0,0,0,0.08); border:1px solid #eee}
+h2{text-align:center; color:#111; font-weight:700; letter-spacing:0.5px}
+h3{font-size:15px; color:#333; margin-top:20px; margin-bottom:5px}
+input, textarea{width:100%; padding:13px; margin:8px 0; border:1px solid #ddd; border-radius:10px; box-sizing:border-box; font-size:14px}
+input:focus, textarea:focus{border-color:#111; outline:none}
+.order-summary{background:#f8f9fa; padding:15px; border-radius:10px; font-size:13px; line-height:1.6; border:1px solid #eee}
+.pay-box{background:#fafafa; border:1.5px solid #111; padding:20px; border-radius:14px; text-align:center; margin:20px 0}
+.btn{width:100%; padding:14px; border:none; border-radius:10px; font-size:15px; font-weight:600; cursor:pointer; margin-top:12px; transition:0.2s}
+.btn-pay{background:#111; color:white}
 .btn-whatsapp{background:#25D366; color:white}
+.label{font-size:12px; color:#888; text-transform:uppercase; letter-spacing:1px; font-weight:600}
 </style>
 </head>
 <body>
 <div class="box">
-<h2>💳 Checkout & Payment</h2>
+<h2>CHECKOUT</h2>
 
-<div id="order-summary" style="background:#e6f7ff; padding:10px; border-radius:8px;"></div>
+<div id="order-summary" class="order-summary"></div>
 
-<h3>👤 Customer Details</h3>
-<input id="c_name" placeholder="Aapka Naam *">
+<h3>Customer Details</h3>
+<input id="c_name" placeholder="Full Name *">
 <input id="c_mobile" placeholder="Mobile Number *">
-<textarea id="c_address" placeholder="Full Address - Akbarigate Lucknow 226003 *"></textarea>
-<input id="c_utr" placeholder="UTR / Transaction ID * (Payment ke baad milega)">
+<textarea id="c_address" placeholder="Full Shipping Address *"></textarea>
 
 <div class="pay-box">
-<b>UPI Payment Karein</b><br>
-UPI ID: <b>gpay-12205946398@okbizaxis</b><br>
-<div style="margin:10px 0">
-<img id="qrImg" src="" style="width:220px; border:5px solid white; border-radius:10px;">
-</div>
-Amount: <b id="payAmount">₹0</b><br>
-<small>Google Pay / PhonePe / Paytm se payment karein</small><br>
-<a id="upiLink" href=""><button class="btn btn-pay">UPI App Se Pay Karein</button></a>
+<div class="label">UPI Payment</div>
+<div style="margin:8px 0; font-size:14px">UPI ID: <b>gpay-12205946398@okbizaxis</b><br>Account Name: <b>Mohd Saeed</b></div>
+<img id="qrImg" src="" style="width:200px; border-radius:12px; margin:10px 0;">
+<div style="font-size:16px; font-weight:700" id="payAmount">₹0</div>
+<div style="font-size:12px; color:#666; margin-top:4px">Scan with Google Pay, PhonePe, Paytm</div>
+<a id="upiLink" href=""><button class="btn btn-pay">Pay via UPI App</button></a>
 </div>
 
-<h3>📸 Payment Screenshot Upload</h3>
+<h3>Payment Proof</h3>
 <input type="file" id="screenshot" accept="image/*">
-<p style="font-size:12px; color:red">* Payment karke screenshot yaha select karo, fir WhatsApp pe bhejte time attach kar dena</p>
 
-<button class="btn btn-whatsapp" onclick="sendOrder()">✅ I Have Paid - Order Bhejo WhatsApp Pe</button>
+<button class="btn btn-whatsapp" onclick="sendOrder()">Confirm Payment & Place Order via WhatsApp</button>
+<p style="font-size:11px; color:#999; text-align:center; margin-top:10px">After payment, please attach screenshot in WhatsApp chat</p>
 </div>
 
 <script>
@@ -52,26 +52,22 @@ let total = cart.reduce((s,i)=>s+i.price,0);
 let shipping = total <= 999 ? 0 : 80;
 let finalTotal = total + shipping;
 
-document.getElementById("order-summary").innerHTML = cart.map(i=>`• ${i.name} Size ${i.size||''} - ₹${i.price}`).join("<br>") + `<hr><b>Total: ₹${total} + Shipping ₹${shipping} = ₹${finalTotal}</b>`;
-document.getElementById("payAmount").innerText = "₹"+finalTotal;
+document.getElementById("order-summary").innerHTML = cart.map(i=>`${i.name} ${i.size ? 'Size '+i.size : ''} - ₹${i.price}`).join("<br>") + `<hr><b>Total: ₹${total} + Shipping ₹${shipping} = ₹${finalTotal}</b>`;
+document.getElementById("payAmount").innerText = "Amount Payable: ₹"+finalTotal;
 
 let upiID = "gpay-12205946398@okbizaxis";
-let upiLink = `upi://pay?pa=${upiID}&pn=Saleem%20Bangles&am=${finalTotal}&cu=INR`;
+let upiLink = `upi://pay?pa=${upiID}&pn=Mohd%20Saeed&am=${finalTotal}&cu=INR`;
 document.getElementById("upiLink").href = upiLink;
-// QR Code generate
 document.getElementById("qrImg").src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(upiLink)}`;
 
 function sendOrder(){
   let name = document.getElementById("c_name").value;
   let mobile = document.getElementById("c_mobile").value;
   let address = document.getElementById("c_address").value;
-  let utr = document.getElementById("c_utr").value;
-  if(!name || !mobile || !address || !utr){ alert("Ben sab details bharo - Naam, Mobile, Address, UTR *"); return; }
-  
-  let msg = `*NEW ORDER*%0AName:${name}%0AMobile:${mobile}%0AAddress:${address}%0AUTR:${utr}%0A%0AOrder:%0A`;
-  cart.forEach(i=>{ msg += `• ${i.name} Size ${i.size||''} - ₹${i.price}%0A`; });
-  msg += `%0ATotal: ₹${finalTotal} (Shipping ₹${shipping})%0A%0APayment Screenshot WhatsApp pe attach kar rahi hu`;
-
+  if(!name || !mobile || !address){ alert("Please fill all customer details"); return; }
+  let msg = `*NEW ORDER - SALEEM BANGLES*%0AName: ${name}%0AMobile: ${mobile}%0AAddress: ${address}%0A%0A*Order Details:*%0A`;
+  cart.forEach(i=>{ msg += `• ${i.name} ${i.size ? 'Size '+i.size : ''} - ₹${i.price}%0A`; });
+  msg += `%0A*Total Amount Paid: ₹${finalTotal}* (Shipping ₹${shipping})%0A%0APayment Screenshot will be attached`;
   window.open(`https://wa.me/917703067297?text=${msg}`, '_blank');
 }
 </script>
