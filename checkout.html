@@ -1,24 +1,79 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Checkout - Saleem Bangles</title>
-<style>body{font-family:Poppins,sans-serif;background:#f8f9fa;margin:0;padding:15px}.box{background:white;border-radius:15px;padding:20px;max-width:500px;margin:auto;box-shadow:0 5px 20px rgba(0,0,0,0.1)}h2{text-align:center;color:#d63384}.qr{text-align:center;background:#fff8dc;padding:15px;border-radius:12px;border:1px solid #ffc107;margin:15px 0}.btn{width:100%;padding:14px;background:#25D366;color:white;border:none;border-radius:10px;font-size:18px;font-weight:bold}input{width:100%;padding:12px;margin:8px 0;border-radius:8px;border:1px solid #ddd}</style>
+<style>
+body{font-family:Arial; background:#f5f5f5; margin:0; padding:15px}
+.box{background:white; padding:20px; border-radius:12px; max-width:500px; margin:auto; box-shadow:0 2px 10px rgba(0,0,0,0.1)}
+h2{text-align:center; color:#d63384}
+input, textarea{width:100%; padding:12px; margin:8px 0; border:1px solid #ccc; border-radius:8px; box-sizing:border-box}
+.pay-box{background:#fff3cd; border:1px solid #ffc107; padding:15px; border-radius:10px; text-align:center; margin:15px 0}
+.qr{width:200px; height:200px; background:white; margin:10px auto; border:1px solid #ddd}
+.btn{width:100%; padding:14px; border:none; border-radius:8px; font-size:16px; font-weight:bold; cursor:pointer; margin-top:10px}
+.btn-pay{background:#0099ff; color:white}
+.btn-whatsapp{background:#25D366; color:white}
+</style>
 </head>
 <body>
 <div class="box">
-<h2>💳 Prepaid Checkout</h2>
-<p style="text-align:center;font-size:13px">✅ All India + 🌍 International Delivery</p>
-<div class="qr">
-<b>Scan & Pay</b><br><br>
-<img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=upi://pay?pa=gpay-12205946398@okbizaxis&pn=Saleem%20Bangles%20Lucknow" style="width:200px">
-<p><b>UPI:</b> gpay-12205946398@okbizaxis</p>
+<h2>💳 Checkout & Payment</h2>
+
+<div id="order-summary" style="background:#e6f7ff; padding:10px; border-radius:8px;"></div>
+
+<h3>👤 Customer Details</h3>
+<input id="c_name" placeholder="Aapka Naam *">
+<input id="c_mobile" placeholder="Mobile Number *">
+<textarea id="c_address" placeholder="Full Address - Akbarigate Lucknow 226003 *"></textarea>
+<input id="c_utr" placeholder="UTR / Transaction ID * (Payment ke baad milega)">
+
+<div class="pay-box">
+<b>UPI Payment Karein</b><br>
+UPI ID: <b>gpay-12205946398@okbizaxis</b><br>
+<div style="margin:10px 0">
+<img id="qrImg" src="" style="width:220px; border:5px solid white; border-radius:10px;">
 </div>
-<input id="n" placeholder="Aapka Naam">
-<input id="a" placeholder="Full Address">
-<input id="u" placeholder="UTR / Transaction ID">
-<button class="btn" onclick="let N=document.getElementById('n').value,A=document.getElementById('a').value,U=document.getElementById('u').value;if(!N||!A||!U){alert('Saare box bharo!');return}let m=`*NEW ORDER*%0AName:${N}%0AAddress:${A}%0AUTR:${U}`;window.open('https://wa.me/917703067297?text='+m)">📲 WhatsApp Pe Order Bhejo</button>
-<p style="text-align:center;font-size:11px;color:gray;margin-top:10px">COD nahi hai - Sirf Prepaid</p>
+Amount: <b id="payAmount">₹0</b><br>
+<small>Google Pay / PhonePe / Paytm se payment karein</small><br>
+<a id="upiLink" href=""><button class="btn btn-pay">UPI App Se Pay Karein</button></a>
 </div>
+
+<h3>📸 Payment Screenshot Upload</h3>
+<input type="file" id="screenshot" accept="image/*">
+<p style="font-size:12px; color:red">* Payment karke screenshot yaha select karo, fir WhatsApp pe bhejte time attach kar dena</p>
+
+<button class="btn btn-whatsapp" onclick="sendOrder()">✅ I Have Paid - Order Bhejo WhatsApp Pe</button>
+</div>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("saleem_cart")||"[]");
+let total = cart.reduce((s,i)=>s+i.price,0);
+let shipping = total <= 999 ? 0 : 80;
+let finalTotal = total + shipping;
+
+document.getElementById("order-summary").innerHTML = cart.map(i=>`• ${i.name} Size ${i.size||''} - ₹${i.price}`).join("<br>") + `<hr><b>Total: ₹${total} + Shipping ₹${shipping} = ₹${finalTotal}</b>`;
+document.getElementById("payAmount").innerText = "₹"+finalTotal;
+
+let upiID = "gpay-12205946398@okbizaxis";
+let upiLink = `upi://pay?pa=${upiID}&pn=Saleem%20Bangles&am=${finalTotal}&cu=INR`;
+document.getElementById("upiLink").href = upiLink;
+// QR Code generate
+document.getElementById("qrImg").src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(upiLink)}`;
+
+function sendOrder(){
+  let name = document.getElementById("c_name").value;
+  let mobile = document.getElementById("c_mobile").value;
+  let address = document.getElementById("c_address").value;
+  let utr = document.getElementById("c_utr").value;
+  if(!name || !mobile || !address || !utr){ alert("Ben sab details bharo - Naam, Mobile, Address, UTR *"); return; }
+  
+  let msg = `*NEW ORDER*%0AName:${name}%0AMobile:${mobile}%0AAddress:${address}%0AUTR:${utr}%0A%0AOrder:%0A`;
+  cart.forEach(i=>{ msg += `• ${i.name} Size ${i.size||''} - ₹${i.price}%0A`; });
+  msg += `%0ATotal: ₹${finalTotal} (Shipping ₹${shipping})%0A%0APayment Screenshot WhatsApp pe attach kar rahi hu`;
+
+  window.open(`https://wa.me/917703067297?text=${msg}`, '_blank');
+}
+</script>
 </body>
 </html>
