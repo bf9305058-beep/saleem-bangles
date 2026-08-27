@@ -162,6 +162,20 @@ function updateConcealerPrice(){
   }
 }
 }
+ function getBlushPrice(){
+  let shade = document.getElementById('blushShade').value;
+  if(shade=="01" || shade=="02") return 95;
+  if(shade=="04" || shade=="05") return 105;
+  return 95;
+}
+function updateBlushPrice(){
+  let shade = document.getElementById('blushShade').value;
+  let price = getBlushPrice();
+  if(shade){
+    document.getElementById('blushPriceDisplay').innerText = 'MRP: ₹' + price + '/-';
+  }
+}
+ 
 function addToCartShade(name, price, shadeId){
   var shade = document.getElementById(shadeId).value;
   if(shade == ""){ alert("Ben pehle shade select karo! 👆"); return; }
