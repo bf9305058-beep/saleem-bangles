@@ -112,6 +112,24 @@ body{font-family:'Segoe UI',Arial; background:#f8f8f8; margin:0; padding:0;}
  </div>
 </div>
   </div>
+  <div class="card">
+<img src="insight-blush.jpg" style="object-fit:contain; background:#fff8f0;">
+<div class="card-body">
+<h3>Insight Blush</h3>
+<p class="price">₹95 - ₹105</p>
+<p class="offer">✨ 4 Shades Available ✨</p>
+<label style="font-weight:bold; font-size:13px;">Apna Shade Select Karo:</label>
+<select id="blushShade" class="shade-select" onchange="updateBlushPrice()">
+<option value="">-- Shade Chuniye --</option>
+<option value="01">01 - ₹95</option>
+<option value="02">02 - ₹95</option>
+<option value="04">04 - ₹105</option>
+<option value="05">05 - ₹105</option>
+</select>
+<p id="blushPriceDisplay" style="font-weight:bold; color:#fc2779; margin-top:8px;"></p>
+<button class="btn" onclick="addToCartShade('Insight Blush', getBlushPrice(), 'blushShade')">Add to Cart</button>
+</div>
+</div>
 </div>
   <div id="cartSection" style="background:white; border:2px solid #ffb6d9; border-radius:12px; padding:15px; max-width:700px; margin:30px auto;">
     <h3>🛒 Your Cart</h3>
