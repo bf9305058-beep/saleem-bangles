@@ -49,12 +49,12 @@ input:focus, textarea:focus{border-color:#111; outline:none}
 <script>
 let cart = JSON.parse(localStorage.getItem("saleem_cart")||"[]");
 let total = cart.reduce((s,i)=>s+i.price,0);
-let shipping = total <= 999 ? 0 : 80;
+let shipping =80;
 let finalTotal = total + shipping;
 
-document.getElementById("order-summary").innerHTML = cart.map(i=>`${i.name} ${i.size ? 'Size '+i.size : ''} - ₹${i.price}`).join("<br>") + `<hr><b>Total: ₹${total} + Shipping ₹${shipping} = ₹${finalTotal}</b>`;
-document.getElementById("payAmount").innerText = "Amount Payable: ₹"+finalTotal;
+document.getElementById("order-summary").innerHTML = cart.map(i=>`${i.name} - ₹${i.price}`).join("<br>") + `<br><br><b>Subtotal: ₹${total}</b><br>Shipping (All India): ₹${shipping}<br><b style="color:#b91c1c;">Total: ₹${finalTotal}</b>`;
 
+document.getElementById("payAmount").innerText = "Amount Payable: ₹" + finalTotal;
 let upiID = "gpay-12205946398@okbizaxis";
 let upiLink = `upi://pay?pa=${upiID}&pn=Mohd%20Saeed&am=${finalTotal}&cu=INR`;
 document.getElementById("upiLink").href = upiLink;
