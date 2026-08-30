@@ -32,7 +32,7 @@ body{
 }
 .welcome-box{
   background:rgba(255,255,255,0.95);
-  padding:50px 40px;
+  padding:30px 40px 50px 40px;
   border-radius:25px;
   box-shadow:0 15px 40px rgba(0,0,0,0.3);
   max-width:550px;
@@ -95,6 +95,11 @@ body{
 <div class="logo">💎 SALEEM BANGLES <span class="and">&</span> COSMETICS 💄</div>
 
 <div class="welcome-box">
+  <!-- 15 Min Fast Delivery Banner -->
+  <div style="background:linear-gradient(90deg, #ff0000, #ff6a00); color:white; padding:9px 14px; border-radius:25px; text-align:center; font-weight:bold; font-size:14px; margin-bottom:15px; box-shadow:0 3px 10px rgba(255,0,0,0.4);">
+    🛵⚡ 15 Min Fast Delivery All Over Lucknow ⚡
+  </div>
+
   <h2>✨ A Complete Bangle Hub ✨</h2>
   <p>Traditional & Modern Bangles + Cosmetics</p>
 
@@ -107,7 +112,6 @@ body{
     </button>
   </div>
 
-  <!-- Delivery Box Start - Aapka wala -->
   <div style="border:1px solid #e0e0e0; border-radius:12px; padding:16px; margin-top:30px; font-family: Poppins, Arial; background:white; text-align:left;">
     <h3 style="margin:0 0 12px 0; font-size:17px; color:#333; text-align:center;">📦 Delivery details</h3>
     
@@ -126,13 +130,9 @@ body{
 <div style="background:#fff3cd; border:1px solid #ffc107; padding:10px; border-radius:10px; margin-top:10px; text-align:center; font-size:14px;">
 ✅ <b>All India Delivery Available</b><br>
 🌐 <b>International Delivery Available</b><br>  
-
 <span style="font-size:12px; color:#666;">💳 Prepaid Orders Only - UPI: gpay-12205946398@okbizaxis</span>
 </div>
 </div>
-   
-  <!-- Delivery Box End -->
-
 </div>
  
 <div class="footer">
@@ -148,11 +148,6 @@ function getDeliveryDate(days) {
     return date.toLocaleDateString('en-IN', options);
 }
 document.getElementById('delivery-date').innerText = getDeliveryDate(7);
-
-function getShipping(price, isIndia){
-    if(!isIndia) return 350;
-    return price <= 999 ? 0 : 80;
-}
 </script>
 <script src="cart-common.js"></script>
 </body>
