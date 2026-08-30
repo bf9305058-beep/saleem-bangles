@@ -27,7 +27,6 @@ h1{text-align:center; color:#0066cc; font-size:24px; margin:20px 0}
 <div class="header">Saleem Bangles 💙</div>
 <h1>👑💍 Bridal Collection 💍👑</h1>
 <div class="products" id="products"></div>
-
 <div id="cart">
   <h2>🛒 Your Cart</h2>
   <ul id="cart-items"></ul>
@@ -36,7 +35,6 @@ h1{text-align:center; color:#0066cc; font-size:24px; margin:20px 0}
   <a href="checkout.html"><button style="background:#fb641b; color:white; padding:12px; border:none; width:100%; border-radius:8px; font-size:16px; margin-top:8px; font-weight:bold;">Proceed to Checkout - Payment 💳</button></a>
   <button onclick="clearCart()" style="background:#fff; border:1px solid #ccc; padding:8px; width:100%; border-radius:8px; margin-top:8px;">Clear Cart</button>
 </div>
-
 <div id="productPopup">
   <div class="popup-box">
     <img id="popupImg">
@@ -47,7 +45,6 @@ h1{text-align:center; color:#0066cc; font-size:24px; margin:20px 0}
     <button onclick="closePopup()" style="margin-left:10px;padding:10px 20px;border:none;border-radius:5px;cursor:pointer;">Band Karein</button>
   </div>
 </div>
-
 <div class="footer">
 <b>Saleem Bangle Store</b><br>
 A Complete Bangle Hub<br>
@@ -56,12 +53,11 @@ Amin Complex Shop No. 8 & 48, Basement<br>
 Akbari Gate, Nakhas, Lucknow<br>
 📞 7703067297
 </div>
-
 <script>
 const products = [
   {name:"Pari Rang Sandook", price:3499, img:"pari-sandook.jpg", sizes:["2.2","2.4","2.6","2.8"]},
-{name:"Rainbow Stone Bangles Box", price:4499, img:"rainbow-stone-bangles.jpg", sizes:["2.2","2.4","2.6","2.8"]},
-{name:"18 Dozen Rainbow Stone Box", price:3499, img:"18-dozen-rainbow-box.jpg", sizes:["2.2","2.4","2.6","2.8"]},
+  {name:"Rainbow Stone Bangles Box", price:4499, img:"rainbow-stone-bangles.jpg", sizes:["2.2","2.4","2.6","2.8"]},
+  {name:"18 Dozen Rainbow Stone Box", price:3499, img:"18-dozen-rainbow-box.jpg", sizes:["2.2","2.4","2.6","2.8"]},
   {name:"Watery Bangle Box With Ghungroo Bangles", price:3499, img:"watery-bangle-box.jpg", sizes:["2.4","2.6","2.8"]},
   {name:"Sawan Special", price:399, img:"sawan-special.jpg", sizes:["2.2","2.4","2.6","2.8"]},
   {name:"Kashmiri Ghughru Set", price:299, img:"kashmiri-set.jpg", sizes:["2.2","2.4","2.6","2.8"]},
@@ -82,13 +78,13 @@ const products = [
   {name:"Stone Kada", price:399, img:"stone kada.jpg", sizes:["2.4","2.6","2.8"]},
   {name:"Maggi Zigzag Full Box - 20 Colors", price:2999, img:"maggi-zigzag.jpg", sizes:["2.4","2.6","2.8"]},
   {name:"Maggi Zigzag Bangle - Each Color 299", price:299, img:"maggi.jpg", sizes:["2.4","2.6","2.8"], colors:["01 - Bottle Green","02 - Rose Gold - BEST SELLER","03 - Pista","04 - Yellow","05 - Maroon","06 - Coral","07 - Teal","08 - Golden","09 - Rust Orange","10 - Emerald","11 - Black","12 - Mustard","13 - Light Brown","14 - Dark Grey","15 - Copper","16 - Light Green","17 - Red","18 - Sky Blue","19 - Wine","20 - Mehendi"]},
-  {name:"The Farari Combo - 3 Color Set - Blue + Pink + Magenta", price:499, img:"farari-combo.jpg", sizes:["2.2","2.4","2.6","2.8"]}
+  {name:"The Farari Combo - 3 Color Set - Blue + Pink + Magenta", price:499, img:"farari-combo.jpg", sizes:["2.2","2.4","2.6","2.8"]},
+  {name:"Farari Box - Full Box 4 Rod Combo - 60+ Bangles", price:2999, img:"farari-box-20color.jpg", sizes:["2.2","2.4","2.6","2.8"]},
+  {name:"Farari Bangle - Each Color 299", price:299, img:"farari-box-20color.jpg", sizes:["2.2","2.4","2.6","2.8"], colors:["01 - Rani Pink","02 - Rose Gold","03 - Pista","04 - Maroon","05 - Sea Green","06 - Purple","07 - Red","08 - Green","09 - Light Pink","10 - Multi Red","11 - Firozi Multi","12 - Yellow","13 - Magenta","14 - Mehendi Green","15 - Maroon Multi","16 - Royal Blue","17 - Lemon Yellow","18 - Peacock Blue","19 - Baby Pink","20 - Grey Black"]}
 ];
-
 let cart = JSON.parse(localStorage.getItem("saleem_cart")||"[]");
 let selectedSizes = {};
 let selectedShades = {};
-
 function showProducts() {
   const container = document.getElementById("products");
   container.innerHTML = "";
