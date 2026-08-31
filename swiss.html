@@ -4,14 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Swiss Beauty - Saleem Bangles</title>
-  
 <style>
 body{font-family:Arial;background:#fff0f5;margin:0;padding:20px}
 .header{background:#e91e63;color:white;text-align:center;padding:12px;border-radius:10px;font-weight:bold}
-.box{background:white;border-radius:12px;padding:10px;max-width:350px;margin:15px auto;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,0.1)}
-  .box img{width:100%;height:130px;object-fit:contain;border-radius:10px}
+.box{background:white;border-radius:12px;padding:10px;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,0.1)}
+.box img{width:100%;height:180px;object-fit:contain;border-radius:10px;cursor:pointer}
 select,input{padding:8px;width:80%;margin:5px;border-radius:6px;border:1px solid #ccc}
-  #imgModal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:9999;justify-content:center;align-items:center}
+#imgModal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:9999;justify-content:center;align-items:center}
 #imgModal div{background:white;padding:15px;border-radius:12px;max-width:350px;width:90%;text-align:center;position:relative}
 #imgModal img{width:100%;border-radius:10px}
 </style>
@@ -20,32 +19,35 @@ select,input{padding:8px;width:80%;margin:5px;border-radius:6px;border:1px solid
 <div class="header">SWISS BEAUTY</div>
 <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; max-width:900px; margin:20px auto; padding:10px;">
 <div class="box">
-<img src="swiss.jpg" onclick="openImg(this.src,'Swiss Beauty Compact')" style="cursor:pointer">
+<img src="swiss.jpg">
 <h3>Swiss Beauty Compact</h3>
 <p>₹250</p>
 <select id="shade"><option value="">-- Shade Select --</option><option>01 Pearl Ivory</option><option>02 Light Medium</option><option>03 Natural Nude</option><option>04 Natural Beige</option></select>
-<input type="number" id="qty" value="1" min="1" max="5" onchange="document.getElementById('total').innerText='Total: ₹'+this.value*250"><br>
+<input type="number" id="qty" value="1" min="1" max="5">
 <p id="total"><b>Total: ₹250</b></p>
 <button style="width:90%;padding:10px;background:#e91e63;color:white;border:none;border-radius:6px;font-weight:bold" onclick="addToCart()">Add to Bag 🛒</button>
 </div> 
-
 <div class="box" style="border:2px solid #e91e63;">
-<img src="swiss-combo.jpg" onclick="openImg(this.src,'Swiss Beauty Mega Sale')" style="cursor:pointer">
+<img src="swiss-combo.jpg">
 <h3>Swiss Beauty Mega Sale</h3>
 <p><s>₹1675</s> <b style="color:red">FLAT @ ₹999/-</b></p>
 <input type="number" id="qtyCombo" value="1" min="1" max="5"><br>
 <button style="width:90%;padding:10px;background:#b91c1c;color:white;border:none;border-radius:6px;font-weight:bold;margin-top:8px" onclick="addComboToCart()">Add to Bag 🛒</button>
 </div>
-<div class="box" style="background:#fff; border-radius:15px; padding:15px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
-  <img src="swiss-makup-base.jpg" style="width:100%; height:180px; object-fit:contain;">
-  <h3>Swiss Beauty Makeup Base</h3>
-  <p><span style="color:#888; text-decoration:line-through;">MRP ₹429</span> <b style="color:red; margin-left:8px;">FLAT @ ₹321/-</b></p>
-  <p style="color:green; font-size:13px; margin:0;">You Save ₹108</p>
-  
-  <button onclick="addToCart('Swiss Beauty Makeup Base','321','swiss-makup-base.jpg')" style="width:90%;padding:10px;background:black;color:white;border:none;border-radius:25px;margin-top:10px;font-weight:bold; cursor:pointer;">
-    ADD TO CART
-  </button>
+<div class="box">
+<img src="swiss-makup-base.jpg">
+<h3>Swiss Beauty Makeup Base</h3>
+<p><span style="color:#888; text-decoration:line-through;">MRP ₹429</span> <b style="color:red; margin-left:8px;">FLAT @ ₹321/-</b></p>
+<p style="color:green; font-size:13px;">You Save ₹108</p>
+<button onclick="addToCart('Swiss Beauty Makeup Base','321','swiss-makup-base.jpg')" style="width:90%;padding:10px;background:black;color:white;border:none;border-radius:25px;margin-top:10px;font-weight:bold;">ADD TO CART</button>
 </div>
+<div class="box" style="border:2px solid #e91e63;">
+<img src="swiss-stobe-cream.jpg">
+<h3>Swiss Beauty Glow Up Strobe Cream</h3>
+<p><span style="color:#888; text-decoration:line-through;">MRP ₹329</span> <b style="color:red; margin-left:8px;">FLAT @ ₹249/-</b></p>
+<p style="color:green; font-size:13px;">You Save ₹80/-</p>
+<button onclick="addToCart('Swiss Beauty Strobe Cream','249','swiss-stobe-cream.jpg')" style="width:90%;padding:10px;background:#b91c1c;color:white;border:none;border-radius:6px;font-weight:bold;margin-top:10px;">ADD TO CART</button>
+</div> 
 </div>
 <div style="background:white;border:2px solid #ffb6d9;border-radius:12px;padding:15px;max-width:700px;margin:30px auto;">
 <h3>🛒 Your Cart</h3>
@@ -55,56 +57,35 @@ select,input{padding:8px;width:80%;margin:5px;border-radius:6px;border:1px solid
 <button onclick="payAll()" style="width:100%;padding:10px;background:#ff6a00;color:white;border:none;border-radius:6px;font-weight:bold;margin-top:8px">Proceed to Checkout - Payment 💳</button>
 <button onclick="clearCart()" style="width:100%;padding:6px;background:white;border:1px solid #ddd;border-radius:6px;margin-top:8px">Clear Cart</button>
 </div>
-
-<div style="text-align:center"><a href="cosmetics.html" style="color:#e91e63;font-weight:bold;text-decoration:none">← Back to All Brands</a></div>
-<div style="text-align:center;padding:15px;margin:30px auto;background:#fff0f5;border-radius:12px;max-width:700px">
-<p style="font-weight:bold;margin:0 0 10px 0">Follow Us On Instagram 📸</p>
-<a href="https://instagram.com/saleembanglecosmetics2.0" target="_blank" style="display:inline-block;margin:5px;padding:10px 18px;background:#e91e63;color:white;border-radius:25px;text-decoration:none;font-weight:bold">📸 @saleembanglecosmetics2.0</a>
-<a href="https://instagram.com/salemetics" target="_blank" style="display:inline-block;margin:5px;padding:10px 18px;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:white;border-radius:25px;text-decoration:none;font-weight:bold">💄 @salemetics</a>
-</div>
- <div id="imgModal" onclick="this.style.display='none'" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:9999;justify-content:center;align-items:center">
-<div style="background:white;padding:15px;border-radius:12px;max-width:350px;width:90%;text-align:center;position:relative">
+<div id="imgModal" onclick="this.style.display='none'">
+<div onclick="event.stopPropagation()">
 <span style="position:absolute;top:5px;right:12px;font-size:22px;cursor:pointer" onclick="document.getElementById('imgModal').style.display='none'">&times;</span>
-<img id="modalImg" src="" style="width:100%;border-radius:10px">
+<img id="modalImg" src="">
 <h4 id="modalName"></h4>
 </div>
 </div>
 <script>
-function openImg(src,name){
-document.getElementById('modalImg').src=src;
-document.getElementById('modalName').innerText=name;
-document.getElementById('imgModal').style.display='flex';
-}
-</script> 
-<script>
+document.querySelectorAll('.box img').forEach(img=>{
+  img.addEventListener('click', function(){
+    document.getElementById('imgModal').style.display='flex';
+    document.getElementById('modalImg').src=this.src;
+    document.getElementById('modalName').innerText=this.closest('.box').querySelector('h3').innerText;
+  });
+});
 function addToCart(name, price, img){
   if(name && price){
-    // Ye naya wala Swiss Base ke liye hai
     let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]');
     c.push({name:name, price:parseInt(price), image:img});
-    localStorage.setItem('saleem_cart',JSON.stringify(c)); 
-    renderCart(); 
-    alert(name + " Cart me add ho gaya ✅");
-    return;
+    localStorage.setItem('saleem_cart',JSON.stringify(c)); renderCart(); alert(name + " Cart me add ✅"); return;
   }
-  // Ye purana wala shade ke liye hai
   var s=document.getElementById('shade').value; if(s==""){alert("Shade select karo ben!");return;}
   var q=parseInt(document.getElementById('qty').value)||1;
   let cart=JSON.parse(localStorage.getItem('saleem_cart')||'[]');
   for(let i=0;i<q;i++) cart.push({name:"Swiss Beauty - "+s, price:250});
   localStorage.setItem('saleem_cart',JSON.stringify(cart)); renderCart(); alert("Cart me add ✅");
 }
-function addComboToCart(){
- var q=parseInt(document.getElementById('qtyCombo').value)||1;
- let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]');
- for(let i=0;i<q;i++) c.push({name:"Swiss Beauty Mega Sale", price:999});
- localStorage.setItem('saleem_cart',JSON.stringify(c)); renderCart(); alert("Combo Cart me add ✅");
-}
-function renderCart(){
- let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]'); let h=''; let t=0;
- c.forEach((it,i)=>{t+=it.price; h+=it.name+" - ₹"+it.price+" <span onclick='rem("+i+")' style='background:#ffe0e6;color:#fc2779;padding:4px 8px;border-radius:6px;cursor:pointer;margin-left:8px;border:1px solid #ffb6d9'>🗑️</span><br><br>"});
- document.getElementById('cartItems').innerHTML=h||'Cart Khali hai'; document.getElementById('cartTotal').innerHTML='<b>Total: ₹'+t+'</b>';
-}
+function addComboToCart(){var q=parseInt(document.getElementById('qtyCombo').value)||1; let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]'); for(let i=0;i<q;i++) c.push({name:"Swiss Beauty Mega Sale", price:999}); localStorage.setItem('saleem_cart',JSON.stringify(c)); renderCart(); alert("Combo Cart me add ✅");}
+function renderCart(){let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]'); let h=''; let t=0; c.forEach((it,i)=>{t+=it.price; h+=it.name+" - ₹"+it.price+" <span onclick='rem("+i+")' style='background:#ffe0e6;color:#fc2779;padding:4px 8px;border-radius:6px;cursor:pointer;margin-left:8px'>🗑️</span><br><br>"}); document.getElementById('cartItems').innerHTML=h||'Cart Khali hai'; document.getElementById('cartTotal').innerHTML='<b>Total: ₹'+t+'</b>';}
 function rem(i){let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]'); c.splice(i,1); localStorage.setItem('saleem_cart',JSON.stringify(c)); renderCart();}
 function clearCart(){localStorage.removeItem('saleem_cart'); renderCart();}
 function orderAllWA(){let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]'); if(!c.length){alert('Cart khali');return;} let m='Salam! Swiss Order:%0A'; let t=0; c.forEach(it=>{m+="• "+it.name+"=₹"+it.price+"%0A"; t+=it.price;}); m+="%0ATotal: ₹"+t; window.open('https://wa.me/917703067297?text='+m,'_blank');}
