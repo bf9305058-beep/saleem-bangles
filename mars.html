@@ -1,1 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MARS Foundation - Saleem Bangles</title>
+<style>
+body{font-family:Arial;background:#fff8f0;margin:0;padding:10px}
+.card{max-width:400px;margin:auto;background:white;border-radius:15px;padding:15px;box-shadow:0 4px 10px rgba(0,0,0,0.1);text-align:center}
+img{width:100%;border-radius:10px}
+.price{font-size:18px;margin:10px 0}
+.old{color:gray;text-decoration:line-through}
+.new{color:red;font-size:28px;font-weight:bold}
+.offer{background:green;color:white;padding:5px 10px;border-radius:5px;display:inline-block}
+.shade-box{margin-top:15px;text-align:left;background:#fff0e6;padding:12px;border-radius:10px}
+select{width:100%;padding:12px;font-size:18px;border-radius:8px;border:2px solid #d4a574;margin-top:8px}
+.btn{width:100%;padding:12px;background:#25D366;color:white;border:none;border-radius:8px;font-size:18px;margin-top:15px;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="card">
+  <h2 style="color:#5a2d0c">Saleem Bangles & Cosmetics</h2>
+  <img src="mars-foundation.jpg" alt="MARS Foundation">
+  
+  <h3>MARS High Coverage Foundation SPF 50</h3>
+  <p>⭐ 4.3 | 79.4K+ Ratings</p>
+  
+  <div class="price">
+    <span class="old">MRP ₹379</span><br>
+    <span class="new">Our Price ₹340</span>
+    <span class="offer">5% OFF</span>
+  </div>
 
+  <div class="shade-box">
+    <b>Select Shade Number:</b>
+    <select id="shade" onchange="updateShade()">
+      <option value="">-- Shade No. Chuno --</option>
+      <option value="01">01</option>
+      <option value="02">02</option>
+      <option value="03">03</option>
+      <option value="04">04</option>
+      <option value="05">05</option>
+      <option value="06">06</option>
+    </select>
+    <p id="selected" style="color:#5a2d0c;font-weight:bold;margin-top:8px"></p>
+  </div>
+
+  <button class="btn" onclick="orderNow()">WhatsApp Pe Order Karo</button>
+  <br><br>
+  <a href="index.html">⬅ Back to Home</a>
+</div>
+
+<script>
+function updateShade(){
+  let s = document.getElementById('shade').value;
+  document.getElementById('selected').innerText = s ? "✅ Shade No. " + s + " Selected" : "";
+}
+function orderNow(){
+  let shade = document.getElementById('shade').value;
+  if(!shade){ alert("Pehle Shade Number chuno!"); return; }
+  let msg = `Hello Saleem Bangles, mujhe MARS Foundation Shade No. ${shade} chahiye. Price: Rs 340`;
+  window.open("https://wa.me/917703067297?text="+encodeURIComponent(msg), "_blank");
+}
+</script>
+</body>
+</html>
