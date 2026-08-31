@@ -2,104 +2,96 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MARS Foundation - Saleem Bangles</title>
+<title>MARS Foundation</title>
 <style>
 body{font-family:Arial;background:#fff8f0;margin:0;padding:10px}
-.card{max-width:420px;margin:15px auto;background:white;border-radius:15px;padding:15px;box-shadow:0 4px 12px rgba(0,0,0,0.1);text-align:center;border:1px solid #d4a574}
+.card{max-width:400px;margin:auto;background:white;padding:15px;border-radius:12px;text-align:center;box-shadow:0 2px 10px #ccc}
 img{width:100%;border-radius:10px}
-.price{margin:10px 0}
-.old{color:gray;text-decoration:line-through}
-.new{color:red;font-size:26px;font-weight:bold}
-.offer{background:green;color:white;padding:4px 10px;border-radius:5px;font-size:14px}
-.shade-box{margin:12px 0;text-align:left;background:#fff0e6;padding:12px;border-radius:10px}
-select, input{width:100%;padding:10px;font-size:16px;border-radius:8px;border:2px solid #d4a574;margin-top:8px;box-sizing:border-box}
-.btn-red{width:100%;padding:12px;background:#c0392b;color:white;border:none;border-radius:8px;font-size:16px;margin-top:10px;cursor:pointer;font-weight:bold}
-.cart-box{max-width:420px;margin:15px auto;background:#fff;border-radius:12px;padding:15px;box-shadow:0 2px 8px rgba(0,0,0,0.08);text-align:left;border:1px solid #eee}
-.btn-green{width:100%;padding:12px;background:#25D366;color:white;border:none;border-radius:8px;font-weight:bold;margin-top:8px;cursor:pointer}
-.btn-orange{width:100%;padding:12px;background:#e67e22;color:white;border:none;border-radius:8px;font-weight:bold;margin-top:8px;cursor:pointer}
-.btn-clear{width:100%;padding:8px;background:#f5f5f5;border:1px solid #ddd;border-radius:8px;margin-top:8px;cursor:pointer}
-.back-link{display:block;text-align:center;margin:20px 0;color:#c0392b;text-decoration:none;font-weight:bold}
+.old{text-decoration:line-through;color:grey}
+.new{color:red;font-size:24px;font-weight:bold}
+select,input{width:100%;padding:10px;margin-top:8px;border-radius:8px;border:1px solid #ccc}
+button{width:100%;padding:12px;margin-top:10px;border:none;border-radius:8px;font-weight:bold;cursor:pointer}
+.red{background:#c0392b;color:white}
+.green{background:#25D366;color:white}
+.orange{background:#e67e22;color:white}
+.item{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee;padding:8px 0}
+.del{background:#ffdddd;padding:5px 10px;border-radius:5px;cursor:pointer;border:none}
 </style>
 </head>
 <body>
 
 <div class="card">
-  <h3 style="color:#5a2d0c;margin:5px">Saleem Bangles & Cosmetics</h3>
-  <img src="mars-foundation.jpg">
-  <h3 style="margin:10px 0">MARS High Coverage Foundation SPF 50</h3>
-  <p>⭐ 4.3 | 79.4K+ Ratings</p>
- <div class="price">
-  <span class="old">MRP ₹379</span><br>
-  <span class="new">Our Price ₹340</span>
+<h3>Saleem Bangles & Cosmetics</h3>
+<img src="mars-foundation.jpg">
+<h3>MARS Foundation SPF 50</h3>
+<p><span class="old">MRP ₹379</span><br><span class="new">Our Price ₹340</span></p>
+
+<select id="shade">
+<option value="">Shade Chuno</option>
+<option>01</option><option>02</option><option>03</option>
+<option>04</option><option>05</option><option>06</option>
+</select>
+
+<input type="number" id="qty" value="1" min="1">
+<button class="red" onclick="addToBag()">Add to Bag 🛍️</button>
+
+<h4 style="text-align:left;margin-top:20px">🛒 Your Cart</h4>
+<div id="cart" style="text-align:left">Cart Khali hai</div>
+<h4 id="total">Total: ₹0</h4>
+
+<button class="green" onclick="orderWA()">Order on WhatsApp</button>
+<button class="orange" onclick="window.location.href='checkout.html'">Proceed to Checkout 💳</button>
+<button onclick="clearCart()">Clear Cart</button>
+<a href="brands.html" style="display:block;margin-top:20px;color:#c0392b">← Back to All Brands</a>
 </div>
-
-
-  <div class="shade-box">
-    <b>Select Shade Number:</b>
-    <select id="shade">
-      <option value="">-- Shade No. Chuno --</option>
-      <option value="01">01</option>
-      <option value="02">02</option>
-      <option value="03">03</option>
-      <option value="04">04</option>
-      <option value="05">05</option>
-      <option value="06">06</option>
-    </select>
-    <label style="margin-top:10px;display:block"><b>Quantity:</b></label>
-    <input type="number" id="qty" value="1" min="1">
-  </div>
-
-  <button class="btn-red" onclick="addToBag()">Add to Bag 🛍️</button>
-</div>
-
-<div class="cart-box">
-  <b>🛒 Your Cart</b>
-  <div id="cartItems" style="margin:10px 0;font-size:14px">Cart Khali hai</div>
-  <b id="total">Total: ₹0</b>
-  <button class="btn-green" onclick="orderWA()">Order on WhatsApp</button>
-  <button class="btn-orange" onclick="checkout()">Proceed to Checkout - Payment 💳</button>
-  <button class="btn-clear" onclick="clearCart()">Clear Cart</button>
-</div>
-
-<a href="brands.html" class="back-link">← Back to All Brands</a>
 
 <script>
-let cart = JSON.parse(localStorage.getItem('saleemCart')||'[]');
-showCart();
+let cart=JSON.parse(localStorage.getItem('saleemCart')||'[]');
+show();
 
 function addToBag(){
- let shade = document.getElementById('shade').value;
- let qty = parseInt(document.getElementById('qty').value)||1;
- if(!shade){ alert("Pehle Shade No. chuno!"); return; }
- let item = {name:`MARS Foundation Shade-${shade}`, price:340, qty:qty};
- let found = cart.find(i=>i.name==item.name);
- if(found) found.qty+=qty; else cart.push(item);
- localStorage.setItem('saleemCart', JSON.stringify(cart));
- showCart();
- alert("Added Shade "+shade+" to Bag");
+ let s=document.getElementById('shade').value;
+ let q=parseInt(document.getElementById('qty').value)||1;
+ if(!s){alert('Shade chuno!');return;}
+ let name='MARS Shade-'+s;
+ let f=cart.find(i=>i.name==name);
+ if(f) f.qty+=q; else cart.push({name:name,price:340,qty:q});
+ localStorage.setItem('saleemCart',JSON.stringify(cart));
+ show();
 }
-function showCart(){
- let div = document.getElementById('cartItems');
- let total=0;
- if(cart.length==0){ div.innerHTML="Cart Khali hai"; document.getElementById('total').innerText="Total: ₹0"; return; }
- let html="";
+
+function show(){
+ let div=document.getElementById('cart');
+ let t=0;
+ if(cart.length==0){div.innerHTML='Cart Khali hai';document.getElementById('total').innerText='Total: ₹0';return;}
+ let h='';
  cart.forEach((c,i)=>{
-   total+=c.price*c.qty;
-   html+=`${c.name} x ${c.qty} = ₹${c.price*c.qty}<br>`;
+  t+=c.price*c.qty;
+  h+=`<div class="item"><span>${c.name} x ${c.qty} = ₹${c.price*c.qty}</span><button class="del" onclick="delItem(${i})">🗑️</button></div>`;
  });
- div.innerHTML=html;
- document.getElementById('total').innerText="Total: ₹"+total;
+ div.innerHTML=h;
+ document.getElementById('total').innerText='Total: ₹'+t;
 }
-function clearCart(){ cart=[]; localStorage.removeItem('saleemCart'); showCart(); }
+
+function delItem(i){
+ cart.splice(i,1);
+ localStorage.setItem('saleemCart',JSON.stringify(cart));
+ show();
+}
+
+function clearCart(){
+ cart=[];localStorage.removeItem('saleemCart');show();
+}
+
 function orderWA(){
- if(cart.length==0){ alert("Cart khali hai!"); return; }
- let msg="Hello Saleem Bangles, mujhe order chahiye:%0A";
- cart.forEach(c=>{ msg+=`${c.name} x ${c.qty} = ₹${c.price*c.qty}%0A`; });
- let t=0; cart.forEach(c=>t+=c.price*c.qty);
- msg+=`Total: ₹${t}`;
- window.open("https://wa.me/917703067297?text="+msg,"_blank");
+ if(cart.length==0){alert('Cart khali hai');return;}
+ let msg='Hello Saleem Bangles, order:%0A';
+ let tot=0;
+ cart.forEach(c=>{msg+=c.name+' x '+c.qty+' = ₹'+(c.price*c.qty)+'%0A';tot+=c.price*c.qty;});
+ msg+='Total: ₹'+tot;
+ window.open('https://wa.me/917703067297?text='+msg,'_blank');
 }
-function checkout(){ orderWA(); }
 </script>
+
 </body>
 </html>
