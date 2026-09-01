@@ -1,212 +1,133 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>INSIGHT COLLECTION - SALEEM BANGLES</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INSIGHT COLLECTION - Saleem Bangles</title>
 <style>
-body{font-family:'Segoe UI',Arial; background:#f8f8f8; margin:0; padding:0;}
-.header{background:#fc2779; color:white; padding:15px; text-align:center; position:sticky; top:0; z-index:10;}
-.header h1{margin:0; font-size:22px;}
-.container{max-width:1200px; margin:20px auto; padding:0 15px;}
-.grid{display:flex; flex-direction:column; gap:16px; max-width:500px; margin:0 auto;}
-.card{background:white; border-radius:12px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.08);}
-.card img{width:100%; height:220px; object-fit:contain; background:#fff8f0; padding:10px; box-sizing:border-box; cursor:pointer;}
-.card-body{padding:15px;}
-.card h3{font-size:16px; margin:5px 0; color:#333;}
-.price{font-size:18px; font-weight:bold; color:#000;}
-.old-price{text-decoration:line-through; color:gray; font-size:14px; margin-left:5px;}
-.offer{color:#06a759; font-size:13px; font-weight:bold; margin:5px 0;}
-.btn{background:#fc2779; color:white; padding:10px; border:none; width:100%; border-radius:8px; font-size:15px; font-weight:bold; cursor:pointer; margin-top:8px;}
-.btn:hover{background:#e01e6a;}
-.back-btn{display:block; text-align:center; margin:20px; color:#fc2779; text-decoration:none; font-weight:bold;}
-.shade-select{width:100%; padding:10px; margin:8px 0; border-radius:8px; border:1.5px solid #fc2779; font-size:14px; background:#fff0f5;}
-/* BANGLE BOX Jaisa Popup */
-#boxModal{display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.6); justify-content:center; align-items:center;}
-#boxContent{background:white; padding:15px; border-radius:15px; max-width:380px; width:90%; text-align:center; box-shadow:0 5px 20px rgba(0,0,0,0.3); animation:pop 0.3s;}
-#boxContent img{width:100%; border-radius:10px; max-height:350px; object-fit:contain;}
-@keyframes pop{from{transform:scale(0.7); opacity:0;} to{transform:scale(1); opacity:1;}}
+body{font-family:Arial;background:#eaf2ff;margin:0;padding:0}
+.top-header{background:#e91e63;color:white;text-align:center;padding:12px;font-weight:bold;font-size:18px}
+.grid{display:grid; grid-template-columns:1fr 1fr; gap:12px; padding:12px; max-width:900px; margin:10px auto;}
+.box{background:white;border-radius:18px;padding:12px;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,0.08);border:1px solid #eee;display:flex;flex-direction:column}
+.box img{width:100%;height:190px;object-fit:contain;border-radius:12px;cursor:pointer;background:#fff8f0}
+.box h3{font-size:13px;font-weight:600;margin:10px 0 5px 0;min-height:36px}
+.price{color:#0096ff;font-weight:bold;font-size:16px}
+.mrp{color:#888;text-decoration:line-through;font-size:13px}
+.save{color:#0a9a4a;font-size:11px;font-weight:bold}
+select,input{width:92%;margin:6px auto;padding:7px;border-radius:8px;border:1.5px solid #fc2779;text-align:center;background:#fff0f5;font-size:12px}
+.add-btn{width:100%;padding:10px;background:#fc2779;color:white;border:none;border-radius:12px;font-weight:bold;margin-top:8px;font-size:13px;cursor:pointer}
+.cart-box{background:white;border-radius:18px;padding:15px;max-width:700px;margin:20px auto;box-shadow:0 4px 12px rgba(0,0,0,0.08);border:1px solid #ffc2d9}
+#boxModal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:9999;justify-content:center;align-items:center;padding:15px}
+#boxContent{background:white;border-radius:18px;padding:15px;max-width:340px;width:100%;text-align:center;position:relative}
+#boxContent img{width:100%;max-height:300px;object-fit:contain;border-radius:12px}
+.footer{background:white;margin-top:20px;padding:20px;text-align:center}
+.link-btn{display:inline-block;margin:6px;padding:10px 20px;border-radius:25px;text-decoration:none;font-weight:bold;color:white}
 </style>
 </head>
 <body>
-<div class="header"><h1>INSIGHT COLLECTION</h1></div>
-<div class="container">
+<div class="top-header">💄 INSIGHT COLLECTION</div>
 <div class="grid">
 
-<div class="card">
+<div class="box">
 <img src="insight-kajal.jpg" onclick="openBox(this.src,'Insight Intense Color Kajal','₹130')">
-<div class="card-body">
 <h3>Insight Intense Color Kajal</h3>
-<p class="price">₹130</p>
-<button class="btn" onclick="addToCartAll('Insight Intense Color Kajal',130)" style="margin-bottom:6px;">🛒 Add to Cart</button>
-<button class="btn" onclick="window.location.href='https://wa.me/917703067297?text=Hi, I want Insight Intense Kajal - Rs130'" style="background:white; color:#fc2779; border:1.5px solid #fc2779;">Order on WhatsApp</button>
-</div>
+<p><span class="price">₹130</span></p>
+<button class="add-btn" onclick="addToCartAll('Insight Intense Color Kajal',130)">🛒 Add to Cart</button>
 </div>
 
-<div class="card">
-<img src="insight-lipstick.jpg" onclick="openBox(this.src,'Insight 24 Hrs Non Transfer Matte Lipstick','₹310')" style="background:#ffe4ec;">
-<div class="card-body">
+<div class="box" style="border:2px solid #fc2779;">
+<img src="insight-lipstick.jpg" onclick="openBox(this.src,'Insight Lipstick','₹310')">
 <h3>Insight 24 Hrs Non Transfer Matte Lipstick</h3>
-<p class="price">₹310 <span class="old-price">MRP ₹310</span></p>
-<p class="offer">🔥 BUY 2 GET 1 FREE 🔥 - 24 Shades Available</p>
-<label style="font-weight:bold; font-size:13px;">Apna Shade Select Karo:</label>
-<select id="lipstickShade" class="shade-select">
-<option value="">-- Shade Chuniye --</option>
-<option value="01 - WAKE-UP ME UP">01 - WAKE-UP ME UP</option>
-<option value="02 - BITCH">02 - BITCH</option>
-<option value="03 - OH SHIT">03 - OH SHIT</option>
-<option value="04 - FORGET ME (BEST SELLER)">04 - FORGET ME ⭐ BEST SELLER</option>
-<option value="05 - HOW YOU DOING">05 - HOW YOU DOING</option>
-<option value="06 - SEND NUDES">06 - SEND NUDES</option>
-<option value="07 - STAY BASIC">07 - STAY BASIC</option>
-<option value="08 - STAY BASIC">08 - STAY BASIC</option>
-<option value="09 - BLOOD HOUND">09 - BLOOD HOUND</option>
-<option value="10 - PINKITY POOH">10 - PINKITY POOH</option>
-<option value="11 - RED SEEKER">11 - RED SEEKER</option>
-<option value="12 - STAY TAN">12 - STAY TAN</option>
-<option value="13 - SUMMER PEACH">13 - SUMMER PEACH</option>
-<option value="14 - SPIRALING">14 - SPIRALING</option>
-<option value="15 - BLOOD LUST">15 - BLOOD LUST</option>
-<option value="16 - YES PLEASE!">16 - YES PLEASE!</option>
-<option value="17 - HOTTIE">17 - HOTTIE</option>
-<option value="18 - LOOKING GOOD">18 - LOOKING GOOD</option>
-<option value="19 - HOW ARE YOU">19 - HOW ARE YOU</option>
-<option value="20 - YOU ARE SO SESSY">20 - YOU ARE SO SESSY</option>
-<option value="21 - TOO CHIC!">21 - TOO CHIC!</option>
-<option value="22 - ALWAYS CLASSY">22 - ALWAYS CLASSY</option>
-<option value="23 - DIVA">23 - DIVA</option>
-<option value="24 - INSTAGRAM">24 - INSTAGRAM</option>
-</select> 
-<button class="btn" onclick="addToCartShade('Insight Lipstick',310,'lipstickShade')" style="margin-bottom:6px;">🛒 Add to Cart with Shade</button>
-<button class="btn" onclick="orderWithShade()" style="background:white; color:#fc2779; border:1.5px solid #fc2779;">Order on WhatsApp with Shade</button>
-</div>
+<p><span class="mrp">MRP ₹310</span> <span class="price">₹310</span></p>
+<p class="save">🔥 BUY 2 GET 1 FREE - 24 Shades</p>
+<select id="lipstickShade"><option value="">-- Shade Chuniye --</option><option>01 - WAKE-UP ME UP</option><option>02 - BITCH</option><option>03 - OH SHIT</option><option>04 - FORGET ME ⭐ BEST SELLER</option><option>05 - HOW YOU DOING</option><option>06 - SEND NUDES</option><option>07 - STAY BASIC</option><option>08 - STAY BASIC</option><option>09 - BLOOD HOUND</option><option>10 - PINKITY POOH</option><option>11 - RED SEEKER</option><option>12 - STAY TAN</option><option>13 - SUMMER PEACH</option><option>14 - SPIRALING</option><option>15 - BLOOD LUST</option><option>16 - YES PLEASE!</option><option>17 - HOTTIE</option><option>18 - LOOKING GOOD</option><option>19 - HOW ARE YOU</option><option>20 - YOU ARE SO SESSY</option><option>21 - TOO CHIC!</option><option>22 - ALWAYS CLASSY</option><option>23 - DIVA</option><option>24 - INSTAGRAM</option></select>
+<button class="add-btn" onclick="addToCartShade('Insight Lipstick',310,'lipstickShade')">🛒 Add with Shade</button>
 </div>
 
-<div class="card">
-<img src="insight-highlighter.jpg" onclick="openBox(this.src,'Insight Highlighter','₹135')" style="background:#fff8f0;">
-<div class="card-body">
+<div class="box">
+<img src="insight-highlighter.jpg" onclick="openBox(this.src,'Insight Highlighter','₹135')">
 <h3>Insight Highlighter - Glow That Defines You</h3>
-<p class="price">₹135</p>
-<p class="offer">✨ 5 Shades Available ✨</p>
-<label style="font-weight:bold; font-size:13px;">Apna Shade Select Karo:</label>
-<select id="highlighterShade" class="shade-select">
-<option value="">-- Shade Chuniye --</option>
-<option value="01 - MERMAID SCALE">01 - MERMAID SCALE - Icy champagne</option>
-<option value="03 - ANGELIC BEAUTY">03 - ANGELIC BEAUTY - Warm golden</option>
-<option value="04 - FROSTED HEART">04 - FROSTED HEART - Rose gold ⭐</option>
-<option value="05 - SAVAGE BARBIE">05 - SAVAGE BARBIE - Peachy pink</option>
-<option value="06 - COSMIC POWER">06 - COSMIC POWER - Deep golden</option>
-</select>
-<button class="btn" onclick="addToCartShade('Insight Highlighter',135,'highlighterShade')">Add to Bag with Shade</button>
-</div>
+<p><span class="price">₹135</span></p>
+<p class="save">✨ 5 Shades Available</p>
+<select id="highlighterShade"><option value="">-- Shade Chuniye --</option><option>01 - MERMAID SCALE</option><option>03 - ANGELIC BEAUTY</option><option>04 - FROSTED HEART ⭐</option><option>05 - SAVAGE BARBIE</option><option>06 - COSMIC POWER</option></select>
+<button class="add-btn" onclick="addToCartShade('Insight Highlighter',135,'highlighterShade')">Add with Shade</button>
 </div>
 
-<div class="card">
-<img src="insight-cream-concealer.jpg" onclick="openBox(this.src,'Insight Cream Concealer','₹125-₹135')" style="background:#fff8f0;">
-<div class="card-body">
-<h3>insight Cream Concealer</h3>
-<p class="price">₹125 - ₹135</p>
-<p class="offer">✨ 6 Shades Available ✨</p>
-<label style="font-weight:bold; font-size:13px;">Apna Shade Select Karo:</label>
-<select id="concealerShade" class="shade-select" onchange="updateConcealerPrice()">
-<option value="">-- Shade Chuniye --</option>
-<option value="01 - PORCELAIN">01 - PORCELAIN - ₹135</option>
-<option value="02 - BEIGE">02 - BEIGE - ₹125</option>
-<option value="03 - ROSE IVORY">03 - ROSE IVORY - ₹125</option>
-<option value="04 - WARM YELLOW">04 - WARM YELLOW - ₹125</option>
-<option value="05 - MEDIUM YELLOW">05 - MEDIUM YELLOW - ₹125</option>
-<option value="06 - TANGY ORANGE">06 - TANGY ORANGE - ₹125</option>
-</select>
-<p id="concealerPriceDisplay" style="font-weight:bold; color:#fc2779; margin-top:8px;"></p>
-<button class="btn" onclick="addToCartShade('Insight Cream Concealer', getConcealerPrice(), 'concealerShade')">Add to Bag with Shade</button>
+<div class="box">
+<img src="insight-cream-concealer.jpg" onclick="openBox(this.src,'Insight Cream Concealer','₹125-135')">
+<h3>Insight Cream Concealer</h3>
+<p><span class="price" id="concealerPriceDisplay">₹125 - ₹135</span></p>
+<p class="save">✨ 6 Shades Available</p>
+<select id="concealerShade" onchange="updateConcealerPrice()"><option value="">-- Shade Chuniye --</option><option>01 - PORCELAIN - ₹135</option><option>02 - BEIGE - ₹125</option><option>03 - ROSE IVORY - ₹125</option><option>04 - WARM YELLOW - ₹125</option><option>05 - MEDIUM YELLOW - ₹125</option><option>06 - TANGY ORANGE - ₹125</option></select>
+<button class="add-btn" onclick="addToCartShade('Insight Cream Concealer', getConcealerPrice(), 'concealerShade')">Add with Shade</button>
 </div>
-</div>
-<div class="card" style="border:2px solid #b91c1c;">
-<img src="insight-combo.jpg" onclick="openBox(this.src,'INSIGHT 5-in-1 Glam Kit','₹599')" style="background:#fff0f5;">
-<div class="card-body">
+
+<div class="box" style="border:2px solid #b91c1c;">
+<img src="insight-combo.jpg" onclick="openBox(this.src,'INSIGHT 5-in-1 Glam Kit','₹599')">
 <h3>INSIGHT 5-in-1 Glam Kit 🔥</h3>
-<p class="price"><span style="text-decoration:line-through; color:#888;">MRP: ₹1208</span> <b style="color:#b91c1c; font-size:18px;">₹599 COMBO</b></p>
-<p class="offer">✨ 50% OFF - 5 Products Combo ✨</p>
-<button class="btn" onclick="addToCartAll('Insight 5-in-1 Glam Kit Combo', 599)">Add to Cart - ₹599</button>
+<p><span class="mrp">MRP ₹1208</span> <span class="price">₹599 COMBO</span></p>
+<p class="save">50% OFF - 5 Products Combo</p>
+<button class="add-btn" style="background:#b91c1c;" onclick="addToCartAll('Insight 5-in-1 Glam Kit Combo', 599)">Add to Cart - ₹599</button>
 </div>
-</div>
-  
-<div class="card">
-<img src="insight-blush.jpg" onclick="openBox(this.src,'Insight Blush','₹95-₹105')" style="background:#fff8f0;">
-<div class="card-body">
+
+<div class="box">
+<img src="insight-blush.jpg" onclick="openBox(this.src,'Insight Blush','₹95-105')">
 <h3>Insight Blush</h3>
-<p class="price">₹95 - ₹105</p>
-<p class="offer">✨ 4 Shades Available ✨</p>
-<label style="font-weight:bold; font-size:13px;">Apna Shade Select Karo:</label>
-<select id="blushShade" class="shade-select" onchange="updateBlushPrice()">
-<option value="">-- Shade Chuniye --</option>
-<option value="01">01 - ₹95</option>
-<option value="02">02 - ₹95</option>
-<option value="04">04 - ₹105</option>
-<option value="05">05 - ₹105</option>
-</select>
-<p id="blushPriceDisplay" style="font-weight:bold; color:#fc2779; margin-top:8px;"></p>
-<button class="btn" onclick="addToCartShade('Insight Blush', getBlushPrice(), 'blushShade')">Add to Cart</button>
-</div>
+<p><span class="price" id="blushPriceDisplay">₹95 - ₹105</span></p>
+<p class="save">✨ 4 Shades Available</p>
+<select id="blushShade" onchange="updateBlushPrice()"><option value="">-- Shade --</option><option value="01">01 - ₹95</option><option value="02">02 - ₹95</option><option value="04">04 - ₹105</option><option value="05">05 - ₹105</option></select>
+<button class="add-btn" onclick="addToCartShade('Insight Blush', getBlushPrice(), 'blushShade')">Add to Cart</button>
 </div>
 
-<div class="card">
-<img src="insight-pro-palette.jpg" onclick="openBox(this.src,'Insight Pro Concealer Palette','₹255')" style="background:#fff8f0;">
-<div class="card-body">
-<h3>Insight Pro Concealer Palette - 01 Concealer</h3>
-<p class="price">MRP: ₹255</p>
-<p class="offer">✨ Concealer Palette ✨</p>
-<button class="btn" onclick="addToCartAll('Insight Concealer Palette 01', 255)">Add to Cart</button>
-</div>
+<div class="box">
+<img src="insight-pro-palette.jpg" onclick="openBox(this.src,'Insight Pro Concealer Palette','₹255')">
+<h3>Insight Pro Concealer Palette - 01</h3>
+<p><span class="price">MRP: ₹255</span></p>
+<button class="add-btn" style="background:#111;" onclick="addToCartAll('Insight Concealer Palette 01', 255)">Add to Cart</button>
 </div>
 
-<div class="card">
-<img src="insight-stobe-cream.jpg" onclick="openBox(this.src,'Insight Strobe Cream','₹259')" style="width:100%;height:180px;object-fit:contain">
-<div class="card-body">
+<div class="box">
+<img src="insight-stobe-cream.jpg" onclick="openBox(this.src,'Insight Strobe Cream','₹259')">
 <h3>Insight Strobe Cream</h3>
-<p class="price"><span style="text-decoration:line-through;color:#888">MRP: ₹399</span> ₹259</p>
-<p class="offer">🔥 35% OFF - Strobe Cream 🔥</p>
-<button class="btn" onclick="addToCartAll('Insight Strobe Cream', 259)">Add to Cart</button>
-</div>
-</div>  
-</div>
+<p><span class="mrp">MRP ₹399</span> <span class="price">₹259</span></p>
+<p class="save">You Save ₹140 - 35% OFF</p>
+<button class="add-btn" onclick="addToCartAll('Insight Strobe Cream', 259)">Add to Cart</button>
 </div>
 
-<!-- BANGLES BOX JAISA ZOOM POPUP -->
-<div id="boxModal" onclick="closeBox()">
-<div id="boxContent" onclick="event.stopPropagation()">
-<img id="boxImg" src="">
-<h3 id="boxName" style="margin:12px 0 5px 0;"></h3>
-<p id="boxPrice" style="font-weight:bold; color:#fc2779; font-size:18px;"></p>
-<button class="btn" onclick="closeBox(); addToCartAll(document.getElementById('boxName').innerText, 255)">🛒 Add to Cart</button>
-<button onclick="closeBox()" style="width:100%; margin-top:8px; padding:10px; background:white; border:1px solid #ddd; border-radius:8px; font-weight:bold;">Band Karein</button>
-</div>
 </div>
 
-<div id="cartSection" style="background:white; border:2px solid #ffb6d9; border-radius:12px; padding:15px; max-width:700px; margin:30px auto;">
+<div class="cart-box">
 <h3>🛒 Your Cart</h3>
 <div id="cartItems">Cart Khali hai</div>
 <p id="cartTotal"><b>Total: ₹0</b></p>
-<button onclick="orderAllWA()" style="width:100%;padding:10px;background:#00c851;color:white;border:none;border-radius:6px;font-weight:bold;margin-top:8px;cursor:pointer;">Order on WhatsApp</button>
-<button onclick="payAll()" style="width:100%;padding:10px;background:#ff6a00;color:white;border:none;border-radius:6px;font-weight:bold;margin-top:8px;cursor:pointer;">Proceed to Checkout - Payment 💳</button>
-<button onclick="clearCart()" style="width:100%;padding:6px;background:white;border:1px solid #ddd;border-radius:6px;margin-top:8px;">Clear Cart</button>
+<button onclick="orderAllWA()" style="width:100%;padding:12px;background:#00c851;color:white;border:none;border-radius:12px;font-weight:bold;margin-top:8px">Order on WhatsApp</button>
+<button onclick="payAll()" style="width:100%;padding:12px;background:#ff6a00;color:white;border:none;border-radius:12px;font-weight:bold;margin-top:8px">Proceed to Checkout - Payment 💳</button>
+<button onclick="clearCart()" style="width:100%;padding:8px;background:white;border:1px solid #ddd;border-radius:12px;margin-top:8px">Clear Cart</button>
 </div>
-<a href="cosmetics.html" class="back-btn">← Back to All Brands</a>
+
+<div class="footer">
+<a href="cosmetics.html" class="link-btn" style="background:#111;">← Back to All Brands</a>
+<a href="index.html" class="link-btn" style="background:#e91e63;">← Back to Bangles</a>
+<p style="margin-top:15px;font-size:13px;color:#555;">Saleem Bangle Store - Akbargate Lucknow 226003<br>📞 7703067297</p>
+</div>
+
+<div id="boxModal" onclick="closeBox()"><div id="boxContent" onclick="event.stopPropagation()"><span style="position:absolute;top:8px;right:14px;font-size:22px;cursor:pointer" onclick="closeBox()">&times;</span><img id="boxImg" src=""><h3 id="boxName"></h3><p id="boxPrice" style="color:#fc2779;font-weight:bold"></p><button class="add-btn" onclick="closeBox()">Band Karen</button></div></div>
 
 <script>
 function openBox(src,name,price){ document.getElementById('boxImg').src=src; document.getElementById('boxName').innerText=name; document.getElementById('boxPrice').innerText=price; document.getElementById('boxModal').style.display='flex'; }
 function closeBox(){ document.getElementById('boxModal').style.display='none'; }
-function getConcealerPrice(){ let shade=document.getElementById('concealerShade').value; if(shade.includes('01 - PORCELAIN')) return 135; else return 125; }
-function updateConcealerPrice(){ let shade=document.getElementById('concealerShade').value; let price=getConcealerPrice(); if(shade){ document.getElementById('concealerPriceDisplay').innerText='MRP: ₹'+price+'/-'; } }
-function getBlushPrice(){ let shade=document.getElementById('blushShade').value; if(shade=="01" || shade=="02") return 95; if(shade=="04" || shade=="05") return 105; return 95; }
-function updateBlushPrice(){ let shade=document.getElementById('blushShade').value; let price=getBlushPrice(); if(shade){ document.getElementById('blushPriceDisplay').innerText='MRP: ₹'+price+'/-'; } }
+function getConcealerPrice(){ let v=document.getElementById('concealerShade').value; if(v.includes('PORCELAIN')) return 135; else return 125; }
+function updateConcealerPrice(){ let v=document.getElementById('concealerShade').value; if(v){ document.getElementById('concealerPriceDisplay').innerText='MRP: ₹'+getConcealerPrice()+'/-'; } }
+function getBlushPrice(){ let v=document.getElementById('blushShade').value; if(v=="04"||v=="05") return 105; return 95; }
+function updateBlushPrice(){ let v=document.getElementById('blushShade').value; if(v){ document.getElementById('blushPriceDisplay').innerText='MRP: ₹'+getBlushPrice()+'/-'; } }
 function addToCartAll(name, price){ let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]'); c.push({name:name, price:price}); localStorage.setItem('saleem_cart', JSON.stringify(c)); renderCart(); alert(name+" cart me add ho gaya ✅"); }
 function addToCartShade(name, price, shadeId){ var shade=document.getElementById(shadeId).value; if(shade==""){ alert("Ben pehle shade select karo! 👆"); return; } let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]'); c.push({name:name+" - "+shade, price:price}); localStorage.setItem('saleem_cart', JSON.stringify(c)); renderCart(); alert(name+" "+shade+" cart me add ho gaya ✅"); }
-function orderWithShade(){ var shade=document.getElementById('lipstickShade').value; if(shade==""){ alert("Ben pehle shade select karo! 👆"); return; } window.open('https://wa.me/917703067297?text=Hi, I want Insight Lipstick '+encodeURIComponent(shade)+' - Rs310','_blank'); }
 function renderCart(){ let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]'); let html=''; let total=0; c.forEach((it,i)=>{ total+=it.price; html+=`${it.name} - ₹${it.price} <span onclick="removeItem(${i})" style="background:#ffe0e6;color:#fc2779;padding:4px 8px;border-radius:6px;cursor:pointer;margin-left:8px;border:1px solid #ffb6d9">🗑️</span><br><br>`; }); document.getElementById('cartItems').innerHTML=html||'Cart Khali hai'; document.getElementById('cartTotal').innerHTML='<b>Total: ₹'+total+'</b>'; } 
 function removeItem(i){ let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]'); c.splice(i,1); localStorage.setItem('saleem_cart', JSON.stringify(c)); renderCart(); }
 function clearCart(){ localStorage.removeItem('saleem_cart'); renderCart(); }
 function orderAllWA(){ let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]'); if(!c.length){alert('Cart khali hai');return;} let m='Salam Saleem Bangles!%0AMujhe ye order karna hai:%0A'; let t=0; c.forEach(it=>{ m+= "• "+it.name + " = ₹" + it.price + "%0A"; t+=it.price; }); m+= "%0ATotal: ₹" + t; window.open('https://wa.me/917703067297?text='+m,'_blank'); }
 function payAll(){ if(JSON.parse(localStorage.getItem('saleem_cart')||'[]').length==0){ alert('Cart Khali hai!'); return; } window.location.href='checkout.html'; }
 renderCart();
-</script> 
+</script>
 </body>
 </html>
