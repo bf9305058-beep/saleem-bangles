@@ -47,14 +47,19 @@ select,input{width:90%;margin:6px auto;padding:7px;border-radius:8px;border:1px 
 <h3>Swiss Beauty Makeup Base</h3>
 <p><span class="mrp">MRP ₹429</span> <span class="price">FLAT @ ₹321/-</span></p>
 <p class="save">You Save ₹108</p>
-<button class="add-btn" style="background:#111;" onclick="addToCart('Swiss Beauty Makeup Base','321','swiss-makup-base.jpg')">🛒 Add to Cart</button>
+<select id="makeupBaseShade"><option value="">-- Shade Select --</option><option>01 Natural Tint</option><option>02 Pink Tint</option><option>03 Golden Tint</option></select>
+<input type="number" id="makeupBaseQty" value="1" min="1" max="5">
+<button class="add-btn" style="background:#111;" onclick="addMakeupBaseToCart()">🛒 Add to Cart</button>
 </div>
 <div class="box" style="border:2px solid #ff5a9e;">
 <img src="swiss-stobe-cream.jpg">
 <h3>Swiss Beauty Glow Up Strobe Cream</h3>
 <p><span class="mrp">MRP ₹329</span> <span class="price">FLAT @ ₹249/-</span></p>
 <p class="save">You Save ₹80/-</p>
-<button class="add-btn" onclick="addToCart('Swiss Beauty Strobe Cream','249','swiss-stobe-cream.jpg')">🛒 Add to Cart</button>
+<select id="strobeShade"><option value="">-- Shade Select --</option><option>Pink Twilight</option><option>Moonlit Glow</option></select>
+<input type="number" id="strobeQty" value="1" min="1" max="5">
+<button class="add-btn" onclick="addStrobeToCart()">🛒 Add to Cart</button>
+</div>
 </div> 
 </div>
 <div class="cart-box">
