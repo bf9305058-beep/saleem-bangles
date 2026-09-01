@@ -60,7 +60,6 @@ select,input{width:90%;margin:6px auto;padding:7px;border-radius:8px;border:1px 
 <input type="number" id="strobeQty" value="1" min="1" max="5">
 <button class="add-btn" onclick="addStrobeToCart()">🛒 Add to Cart</button>
 </div>
-</div> 
 </div>
 <div class="cart-box">
 <h3>🛒 Your Cart</h3>
@@ -86,6 +85,8 @@ document.querySelectorAll('.box img').forEach(img=>{
 });
 function addToCart(name, price, img){ if(name && price){let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]');c.push({name:name, price:parseInt(price), image:img});localStorage.setItem('saleem_cart',JSON.stringify(c)); renderCart(); alert(name + " Cart me add ✅"); return;} var s=document.getElementById('shade').value; if(s==""){alert("Shade select karo ben!");return;} var q=parseInt(document.getElementById('qty').value)||1; let cart=JSON.parse(localStorage.getItem('saleem_cart')||'[]'); for(let i=0;i<q;i++) cart.push({name:"Swiss Beauty - "+s, price:250}); localStorage.setItem('saleem_cart',JSON.stringify(cart)); renderCart(); alert("Cart me add ✅");}
 function addComboToCart(){var q=parseInt(document.getElementById('qtyCombo').value)||1; let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]'); for(let i=0;i<q;i++) c.push({name:"Swiss Beauty Mega Sale", price:999}); localStorage.setItem('saleem_cart',JSON.stringify(c)); renderCart(); alert("Combo Cart me add ✅");}
+function addMakeupBaseToCart(){var shade=document.getElementById('makeupBaseShade').value;if(shade==""){alert("Shade select karo ben!");return;}var q=parseInt(document.getElementById('makeupBaseQty').value)||1;let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]');for(let i=0;i<q;i++) c.push({name:"Swiss Beauty Makeup Base - "+shade, price:321});localStorage.setItem('saleem_cart',JSON.stringify(c));renderCart();alert(shade+" Cart me add ✅");}
+function addStrobeToCart(){var shade=document.getElementById('strobeShade').value;if(shade==""){alert("Strobe Shade select karo ben!");return;}var q=parseInt(document.getElementById('strobeQty').value)||1;let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]');for(let i=0;i<q;i++) c.push({name:"Swiss Strobe Cream - "+shade, price:249});localStorage.setItem('saleem_cart',JSON.stringify(c));renderCart();alert(shade+" Cart me add ✅");}
 function renderCart(){let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]'); let h=''; let t=0; c.forEach((it,i)=>{t+=it.price; h+=it.name+" - ₹"+it.price+" <span onclick='rem("+i+")' style='background:#ffe0e6;color:#ff5a9e;padding:3px 8px;border-radius:6px;cursor:pointer;margin-left:6px'>🗑️</span><br><br>"}); document.getElementById('cartItems').innerHTML=h||'Cart Khali hai'; document.getElementById('cartTotal').innerHTML='<b>Total: ₹'+t+'</b>';}
 function rem(i){let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]'); c.splice(i,1); localStorage.setItem('saleem_cart',JSON.stringify(c)); renderCart();}
 function clearCart(){localStorage.removeItem('saleem_cart'); renderCart();}
