@@ -60,9 +60,9 @@ select,input{width:90%;margin:6px auto;padding:7px;border-radius:8px;border:1px 
 <input type="number" id="strobeQty" value="1" min="1" max="5">
 <button class="add-btn" onclick="addStrobeToCart()">🛒 Add to Cart</button>
 </div>
-  <div class="box" style="border:2px solid #111;">
+<div class="box" style="border:2px solid #111;">
 <img src="swiss-grip-primer.jpg">
-<h3>Swiss Beauty Real Make Up Base Primer</h3>
+<h3>Swiss Grip Primer</h3>
 <p><span class="mrp">MRP ₹449</span> <span class="price">FLAT @ ₹314/-</span></p>
 <p class="save">You Save ₹135/-</p>
 <input type="number" id="primerQty" value="1" min="1" max="5">
@@ -95,6 +95,7 @@ function addToCart(name, price, img){ if(name && price){let c=JSON.parse(localSt
 function addComboToCart(){var q=parseInt(document.getElementById('qtyCombo').value)||1; let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]'); for(let i=0;i<q;i++) c.push({name:"Swiss Beauty Mega Sale", price:999}); localStorage.setItem('saleem_cart',JSON.stringify(c)); renderCart(); alert("Combo Cart me add ✅");}
 function addMakeupBaseToCart(){var shade=document.getElementById('makeupBaseShade').value;if(shade==""){alert("Shade select karo ben!");return;}var q=parseInt(document.getElementById('makeupBaseQty').value)||1;let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]');for(let i=0;i<q;i++) c.push({name:"Swiss Beauty Makeup Base - "+shade, price:321});localStorage.setItem('saleem_cart',JSON.stringify(c));renderCart();alert(shade+" Cart me add ✅");}
 function addStrobeToCart(){var shade=document.getElementById('strobeShade').value;if(shade==""){alert("Strobe Shade select karo ben!");return;}var q=parseInt(document.getElementById('strobeQty').value)||1;let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]');for(let i=0;i<q;i++) c.push({name:"Swiss Strobe Cream - "+shade, price:249});localStorage.setItem('saleem_cart',JSON.stringify(c));renderCart();alert(shade+" Cart me add ✅");}
+function addPrimerToCart(){var q=parseInt(document.getElementById('primerQty').value)||1;let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]');for(let i=0;i<q;i++) c.push({name:"Swiss Grip Primer", price:314});localStorage.setItem('saleem_cart',JSON.stringify(c));renderCart();alert("Grip Primer Cart me add ✅");}
 function renderCart(){let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]'); let h=''; let t=0; c.forEach((it,i)=>{t+=it.price; h+=it.name+" - ₹"+it.price+" <span onclick='rem("+i+")' style='background:#ffe0e6;color:#ff5a9e;padding:3px 8px;border-radius:6px;cursor:pointer;margin-left:6px'>🗑️</span><br><br>"}); document.getElementById('cartItems').innerHTML=h||'Cart Khali hai'; document.getElementById('cartTotal').innerHTML='<b>Total: ₹'+t+'</b>';}
 function rem(i){let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]'); c.splice(i,1); localStorage.setItem('saleem_cart',JSON.stringify(c)); renderCart();}
 function clearCart(){localStorage.removeItem('saleem_cart'); renderCart();}
