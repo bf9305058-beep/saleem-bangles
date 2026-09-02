@@ -94,6 +94,25 @@ select,input{width:92%;margin:6px auto;padding:7px;border-radius:8px;border:1.5p
 <button class="add-btn" onclick="addToCartAll('Insight Strobe Cream', 259)">Add to Cart</button>
 </div>
 
+<!-- NEW 1 - PRIMER (NO SHADE BOX) -->
+<div class="box" style="border:2px solid #0d8a4a;">
+<img src="insight-primer.jpg" onclick="openBox(this.src,'Insight Primer 3 in 1','MRP 349 → ₹262')">
+<h3>Insight Primer 3 in 1 - 30ml</h3>
+<p><span class="mrp">MRP ₹349</span> <span class="price">₹262</span></p>
+<p class="save">25% OFF - Long Lasting • Oil Free</p>
+<button class="add-btn" style="background:#0d8a4a;" onclick="addToCartAll('Insight Primer 3 in 1 - 30ml', 262)">Add to Cart - ₹262</button>
+</div>
+
+<!-- NEW 2 - FOUNDATION (WITH SHADE BOX) -->
+<div class="box" style="border:2px solid #ff6a00;">
+<img src="insight-foundation.jpg" onclick="openBox(this.src,'Insight Foundation','MRP 449 → ₹339')">
+<h3>Insight Blend Perfection Foundation</h3>
+<p><span class="mrp">MRP ₹449</span> <span class="price">₹339</span></p>
+<p class="save">24% OFF - Your Perfect Match</p>
+<select id="foundationShade"><option value="">-- Shade Chuniye --</option><option>01 - Peachy Amber</option><option>02 - Silk Sand</option><option>03 - Natural Buff</option><option>04 - Beach Beige</option></select>
+<button class="add-btn" style="background:#ff6a00;" onclick="addToCartShade('Insight Foundation', 339, 'foundationShade')">Add with Shade - ₹339</button>
+</div>
+
 </div>
 
 <div class="cart-box">
