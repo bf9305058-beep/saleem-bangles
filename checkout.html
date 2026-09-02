@@ -11,7 +11,7 @@ h2{text-align:center; color:#111; font-weight:700; letter-spacing:0.5px}
 h3{font-size:15px; color:#333; margin-top:20px; margin-bottom:5px}
 input, textarea{width:100%; padding:13px; margin:8px 0; border:1px solid #ddd; border-radius:10px; box-sizing:border-box; font-size:14px}
 input:focus, textarea:focus{border-color:#111; outline:none}
-.order-summary{background:#f8f9fa; padding:15px; border-radius:10px; font-size:13px; line-height:1.6; border:1px solid #eee}
+.order-summary{background:#fff5f7; padding:15px; border-radius:10px; font-size:13px; line-height:1.6; border:1px solid #ffe0e8}
 .pay-box{background:#fafafa; border:1.5px solid #111; padding:20px; border-radius:14px; text-align:center; margin:20px 0}
 .btn{width:100%; padding:14px; border:none; border-radius:10px; font-size:15px; font-weight:600; cursor:pointer; margin-top:12px; transition:0.2s}
 .btn-pay{background:#111; color:white}
@@ -33,7 +33,7 @@ input:focus, textarea:focus{border-color:#111; outline:none}
 <div class="pay-box">
 <div class="label">UPI Payment</div>
 <div style="margin:8px 0; font-size:14px">UPI ID: <b>gpay-12205946398@okbizaxis</b><br>Account Name: <b>Mohd Saeed</b></div>
-<img id="qrImg" src="" style="width:200px; border-radius:12px; margin:10px 0;">
+<img id="qrImg" src="" style="width:200px; border-radius:12px; margin:10px 0; border:1px solid #ddd; padding:5px; background:white;">
 <div style="font-size:16px; font-weight:700" id="payAmount">₹0</div>
 <div style="font-size:12px; color:#666; margin-top:4px">Scan with Google Pay, PhonePe, Paytm</div>
 <a id="upiLink" href=""><button class="btn btn-pay">Pay via UPI App</button></a>
@@ -44,27 +44,40 @@ input:focus, textarea:focus{border-color:#111; outline:none}
 
 <button class="btn btn-whatsapp" onclick="sendOrder()">Confirm Payment & Place Order via WhatsApp</button>
 <p style="font-size:11px; color:#999; text-align:center; margin-top:10px">After payment, please attach screenshot in WhatsApp chat</p>
+
+<a href="cosmetics.html" style="display:block; text-align:center; margin-top:20px; color:#e91e63; text-decoration:none; font-weight:600;">← Back to Shopping</a>
 </div>
 
 <script>
 let cart = JSON.parse(localStorage.getItem("saleem_cart")||"[]");
-let total = cart.reduce((s,i)=>s+i.price,0);
-let shipping =80;
+// dusri key bhi check karo
+if(cart.length==0){
+  let other = JSON.parse(localStorage.getItem("cart")||"[]");
+  if(other.length>0) cart = other;
+}
+
+let total = cart.reduce((s,i)=>s+ (parseInt(i.price)||0),0);
+let shipping = 80;
 let finalTotal = total + shipping;
 
-document.getElementById("order-summary").innerHTML = cart.map(i=>`${i.name} - ₹${i.price}`).join("<br>") + `<br><br><b>Subtotal: ₹${total}</b><br>Shipping (All India): ₹${shipping}<br><b style="color:#b91c1c;">Total: ₹${finalTotal}</b>`;
-
-document.getElementById("payAmount").innerText = "Amount Payable: ₹" + finalTotal;
-let upiID = "gpay-12205946398@okbizaxis";
-let upiLink = `upi://pay?pa=${upiID}&pn=Mohd%20Saeed&am=${finalTotal}&cu=INR`;
-document.getElementById("upiLink").href = upiLink;
-document.getElementById("qrImg").src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(upiLink)}`;
+if(cart.length==0){
+  document.getElementById("order-summary").innerHTML = "<p style='color:red; text-align:center;'><b>Cart Khali Hai 🛒</b><br><br><a href='cosmetics.html' style='color:#e91e63;'>← Peeche jaake Add to Cart karo</a></p>";
+  document.getElementById("payAmount").innerText = "Cart Empty";
+} else {
+  document.getElementById("order-summary").innerHTML = cart.map(i=>`• ${i.name} ${i.size ? 'Size '+i.size : ''} - ₹${i.price}`).join("<br>") + `<br><br><b>Subtotal: ₹${total}</b><br>Shipping (All India): ₹${shipping}<br><b style="color:#b91c1c; font-size:15px;">Total: ₹${finalTotal}</b>`;
+  document.getElementById("payAmount").innerText = "Amount Payable: ₹" + finalTotal;
+  let upiID = "gpay-12205946398@okbizaxis";
+  let upiLink = `upi://pay?pa=${upiID}&pn=Mohd%20Saeed&am=${finalTotal}&cu=INR`;
+  document.getElementById("upiLink").href = upiLink;
+  document.getElementById("qrImg").src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(upiLink)}`;
+}
 
 function sendOrder(){
-  let name = document.getElementById("c_name").value;
-  let mobile = document.getElementById("c_mobile").value;
-  let address = document.getElementById("c_address").value;
-  if(!name || !mobile || !address){ alert("Please fill all customer details"); return; }
+  if(cart.length==0){ alert("Cart khali hai ben"); return; }
+  let name = document.getElementById("c_name").value.trim();
+  let mobile = document.getElementById("c_mobile").value.trim();
+  let address = document.getElementById("c_address").value.trim();
+  if(!name || !mobile || !address){ alert("Ben Full Name / Mobile / Address bhar do please"); return; }
   let msg = `*NEW ORDER - SALEEM BANGLES*%0AName: ${name}%0AMobile: ${mobile}%0AAddress: ${address}%0A%0A*Order Details:*%0A`;
   cart.forEach(i=>{ msg += `• ${i.name} ${i.size ? 'Size '+i.size : ''} - ₹${i.price}%0A`; });
   msg += `%0A*Total Amount Paid: ₹${finalTotal}* (Shipping ₹${shipping})%0A%0APayment Screenshot will be attached`;
