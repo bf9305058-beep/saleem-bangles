@@ -6,68 +6,104 @@
 <title>Angel Rose 28 Colors - Saleem Bangles</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
-body{font-family:'Poppins',Arial; background:#fff5f7; margin:0; padding:12px}
-.box{background:white; padding:18px; border-radius:16px; max-width:480px; margin:auto; box-shadow:0 4px 20px rgba(0,0,0,0.08)}
-.product-img{width:100%; border-radius:12px; cursor:zoom-in; border:1px solid #eee}
-.price{text-align:center; color:green; font-weight:bold; font-size:22px}
-.btn{width:100%; padding:14px; border:none; border-radius:10px; font-size:15px; font-weight:700; cursor:pointer; margin-top:10px}
-.btn-cart{background:black; color:white} .btn-pay{background:#111; color:white} .btn-wa{background:#25D366; color:white}
-.cart-item{display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid #eee; font-size:13px}
-.delete{color:red; cursor:pointer}
-input,textarea{width:100%; padding:12px; margin:6px 0; border:1px solid #ddd; border-radius:10px; box-sizing:border-box}
-.pay-box{border:1.5px solid #111; padding:15px; border-radius:12px; text-align:center; margin:15px 0; background:#fafafa}
+body{font-family:'Poppins',Arial; background:#fff5f7; margin:0; padding:10px}
+.header{text-align:center; padding:10px}
+.box{max-width:1000px; margin:auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:15px}
+.card{background:white; border-radius:16px; padding:12px; text-align:center; box-shadow:0 4px 15px rgba(0,0,0,0.08); border:1px solid #eee}
+.card img{width:100%; height:220px; object-fit:cover; border-radius:12px; cursor:zoom-in}
+.price{color:#0d8a4a; font-weight:800; font-size:18px}
+.mrp{color:gray; font-size:13px}
+.btn{width:100%; padding:12px; border:none; border-radius:10px; font-weight:700; cursor:pointer; margin-top:8px}
+.btn-black{background:black; color:white}
+.btn-pink{background:#e91e63; color:white}
+.cart-box{background:white; max-width:500px; margin:20px auto; padding:15px; border-radius:14px; box-shadow:0 4px 15px rgba(0,0,0,0.08)}
+.btn-wa{background:#25D366; color:white}
+.btn-pay{background:#ff6f00; color:white}
+.btn-clear{background:white; border:1px solid #ddd; color:#555}
+.backs{display:flex; gap:10px; justify-content:center; margin:20px 0; flex-wrap:wrap}
+.backs a{padding:10px 18px; border-radius:20px; text-decoration:none; color:white; font-weight:600; font-size:13px}
+.black{background:black} .pink{background:#e91e63}
 #imgModal{display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; justify-content:center; align-items:center}
-#imgModal img{max-width:95%; max-height:90%}
+#imgModal img{max-width:95%; max-height:90%; border-radius:10px}
+.footer{text-align:center; font-size:12px; color:#666; margin-top:10px}
+.pay-box{border:1.5px solid #111; padding:12px; border-radius:12px; text-align:center; margin:15px 0; background:#fafafa}
 </style>
 </head>
 <body>
+
 <div class="box">
-<img src="angle-rose-eyeshadow.jpg" class="product-img" onclick="openPop(this.src)">
-<h2 style="text-align:center;">Angel Rose 28 Colors Eyeshadow</h2>
-<p style="text-align:center; color:gray; margin:0;">MRP <s>Rs. 699</s></p>
+<div class="card">
+<img src="angle-rose-eyeshadow.jpg" onclick="openPop(this.src)">
+<h4>Angel Rose 28 Colors Eyeshadow</h4>
+<p class="mrp">MRP <s>Rs. 699</s></p>
 <p class="price">Rs. 349 Only 🔥</p>
-<button class="btn btn-cart" onclick="addToCart()"><i class="fa fa-cart-plus"></i> Add to Cart</button>
-<div id="cartBox" style="display:none; margin-top:12px; background:#f8f9fa; padding:10px; border-radius:10px;">
-<b>🛒 Your Cart:</b><div id="cartItems"></div><div id="totalText" style="margin-top:8px; font-weight:bold;"></div>
+<p style="font-size:11px; color:#e91e63;">You Save Rs. 350 - 50% OFF</p>
+<button class="btn btn-black" onclick="addToCart()">Add to Cart</button>
 </div>
-<hr>
-<input id="c_name" placeholder="Full Name *"><input id="c_mobile" placeholder="Mobile Number *"><textarea id="c_address" placeholder="Full Address *"></textarea>
+</div>
+
+<!-- YOUR CART - SAME AS COSMETICS -->
+<div class="cart-box">
+<h3><i class="fa fa-shopping-cart"></i> Your Cart</h3>
+<div id="cartItems">Cart Khali hai</div>
+<div id="totalText" style="font-weight:bold; margin-top:8px;">Total: ₹0</div>
+
+<div id="payArea" style="display:none;">
 <div class="pay-box">
 <div style="font-size:11px; color:#888;">UPI PAYMENT</div>
-<div style="font-size:13px;">UPI: <b>gpay-12205946398@okbizaxis</b><br>Account: <b>Mohd Saeed</b></div>
-<img id="qrImg" src="" style="width:190px; margin:8px 0; border-radius:10px;">
-<div id="payAmount" style="font-weight:800; font-size:16px;">₹0</div>
-<a id="upiLink" href=""><button class="btn btn-pay">Pay via UPI App</button></a>
+<div style="font-size:12px;">UPI: <b>gpay-12205946398@okbizaxis</b><br>Acc: <b>Mohd Saeed</b></div>
+<img id="qrImg" src="" style="width:170px; margin:8px 0; border-radius:8px;">
+<div id="payAmount" style="font-weight:800;"></div>
+<a id="upiLink" href=""><button class="btn btn-black" style="padding:8px; font-size:12px; margin-top:6px;">Pay via UPI App</button></a>
 </div>
-<button class="btn btn-wa" onclick="sendOrder()"><i class="fa-brands fa-whatsapp"></i> Confirm & Order on WhatsApp</button>
 </div>
+
+<button class="btn btn-wa" onclick="sendWA()"><i class="fa-brands fa-whatsapp"></i> Order on WhatsApp</button>
+<button class="btn btn-pay" onclick="goCheckout()">Proceed to Checkout - Payment 💳</button>
+<button class="btn btn-clear" onclick="clearCart()">Clear Cart</button>
+</div>
+
+<div class="backs">
+<a href="cosmetics.html" class="black">← Back to All Brands</a>
+<a href="index.html" class="pink">← Back to Bangles</a>
+</div>
+
+<div class="footer">
+Saleem Bangle Store - Akbargada Lucknow 226003<br>
+📞 7703067297
+</div>
+
 <div id="imgModal" onclick="closePop()"><img id="modalImg" src=""></div>
+
 <script>
 let cart=JSON.parse(localStorage.getItem("saleem_cart")||"[]");
 function openPop(s){document.getElementById("modalImg").src=s;document.getElementById("imgModal").style.display="flex";}
 function closePop(){document.getElementById("imgModal").style.display="none";}
-function addToCart(){cart.push({name:'Angel Rose 28 Colors',price:349});saveCart();}
-function saveCart(){localStorage.setItem("saleem_cart",JSON.stringify(cart));localStorage.setItem("cart",JSON.stringify(cart));renderCart();}
-function removeItem(i){cart.splice(i,1);saveCart();}
-function renderCart(){
-  let box=document.getElementById("cartBox"); let div=document.getElementById("cartItems");
-  if(cart.length==0){box.style.display="none";return;} box.style.display="block";
-  div.innerHTML=cart.map((it,idx)=>`<div class="cart-item"><span>${it.name} - ₹${it.price}</span><i class="fa fa-trash delete" onclick="removeItem(${idx})"></i></div>`).join('');
-  let total=cart.reduce((s,i)=>s+i.price,0); let shipping=80; let finalTotal=total+shipping;
-  document.getElementById("totalText").innerHTML=`Subtotal ₹${total} + Ship ₹${shipping} = <span style="color:#b91c1c;">₹${finalTotal}</span>`;
+function addToCart(){cart.push({name:'Angel Rose 28 Colors',price:349}); save();}
+function save(){localStorage.setItem("saleem_cart",JSON.stringify(cart)); localStorage.setItem("cart",JSON.stringify(cart)); render();}
+function clearCart(){cart=[]; save();}
+function render(){
+  let div=document.getElementById("cartItems");
+  let totalEl=document.getElementById("totalText");
+  let payArea=document.getElementById("payArea");
+  if(cart.length==0){div.innerHTML="Cart Khali hai"; totalEl.innerText="Total: ₹0"; payArea.style.display="none"; return;}
+  div.innerHTML=cart.map((it,i)=>`<div style="display:flex; justify-content:space-between; border-bottom:1px solid #eee; padding:5px 0; font-size:13px;"><span>${it.name} - ₹${it.price}</span><i class="fa fa-trash" style="color:red; cursor:pointer;" onclick="removeItem(${i})"></i></div>`).join('');
+  let total=cart.reduce((s,i)=>s+i.price,0); let ship=80; let finalTotal=total+ship;
+  totalEl.innerHTML=`Subtotal ₹${total} + Ship ₹${ship} = <span style="color:#b91c1c;">₹${finalTotal}</span>`;
   document.getElementById("payAmount").innerText="Payable: ₹"+finalTotal;
   let upiID="gpay-12205946398@okbizaxis"; let upiLink=`upi://pay?pa=${upiID}&pn=Mohd%20Saeed&am=${finalTotal}&cu=INR`;
   document.getElementById("upiLink").href=upiLink;
   document.getElementById("qrImg").src=`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiLink)}`;
-  window.finalTotal=finalTotal; window.shipping=shipping;
+  payArea.style.display="block"; window.finalTotal=finalTotal;
 }
-renderCart();
-function sendOrder(){
-  let n=document.getElementById("c_name").value.trim(); let m=document.getElementById("c_mobile").value.trim(); let a=document.getElementById("c_address").value.trim();
-  if(cart.length==0){alert("Pehle Add to Cart karo");return;} if(!n||!m||!a){alert("Details bharo");return;}
-  let msg=`*NEW ORDER - ANGEL ROSE*%0AName: ${n}%0AMobile: ${m}%0AAddress: ${a}%0A%0A*Order:*%0A`; cart.forEach(i=>{msg+=`• ${i.name} - ₹${i.price}%0A`;});
-  msg+=`%0A*Total: ₹${window.finalTotal}*`; window.open(`https://wa.me/917703067297?text=${msg}`,'_blank');
+function removeItem(i){cart.splice(i,1); save();}
+render();
+function sendWA(){
+  if(cart.length==0){alert("Cart khali hai ben"); return;}
+  let msg=`*NEW ORDER - Angel Rose*%0A%0A`; cart.forEach(i=>{msg+=`• ${i.name} - ₹${i.price}%0A`;});
+  msg+=`%0ATotal: ₹${window.finalTotal}%0A`; window.open(`https://wa.me/917703067297?text=${msg}`,'_blank');
 }
+function goCheckout(){ document.getElementById("payArea").scrollIntoView({behavior:'smooth'}); if(cart.length>0) render(); }
 </script>
 </body>
 </html>
