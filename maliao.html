@@ -1,83 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maliao Collection - Saleem Bangles</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maliao - Saleem Bangles</title>
 <style>
 *{box-sizing:border-box} body{font-family:Arial;background:#f5f5f5;margin:0;padding:10px}
 .header{background:#000;color:#ffd700;text-align:center;padding:14px;border-radius:10px;font-weight:bold}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:15px;max-width:1100px;margin:auto}
 .card{background:white;border:1px solid #ddd;border-radius:12px;padding:12px;text-align:center}
-.card img{width:100%;height:140px;object-fit:contain;background:white;border-radius:8px}
-.card h3{font-size:13px;margin:8px 0;min-height:32px}
-.mrp{font-size:12px;color:#888;text-decoration:line-through}
-.price{font-size:15px;color:#2196F3;font-weight:bold}
-.off{font-size:11px;color:#2e7d32}
+.card img{width:100%;height:150px;object-fit:contain;background:#fff}
+.card h3{font-size:13px;margin:8px 0}
+.mrp{font-size:11px;color:#888;text-decoration:line-through} .price{color:#e91e63;font-weight:bold}
 .btn{width:100%;padding:10px;border-radius:20px;border:none;font-weight:bold;margin-top:6px;cursor:pointer}
-.btn-green{background:#111;color:#ffd700}
-.btn-orange{background:#ff6f00;color:white}
-.shade{width:100%;padding:8px;border-radius:8px;border:1px solid #ccc;background:#fff3f3;margin:5px 0}
-#cartBox{max-width:500px;margin:20px auto;background:white;padding:15px;border-radius:12px}
+.btn-green{background:#111;color:#ffd700} .btn-orange{background:#ff6f00;color:#fff}
+.shade{width:100%;padding:7px;border-radius:8px;border:1px solid #ccc;margin:5px 0;background:#fff5f7}
+#cartBox{max-width:500px;margin:20px auto;background:#fff;padding:15px;border-radius:12px}
 </style>
 </head>
 <body>
-<a href="cosmetics.html" style="background:black;color:white;padding:8px 14px;border-radius:20px;text-decoration:none;display:inline-block;margin-bottom:10px">⬅ Back to All Brands</a>
-<div class="header">💄 MALIAO COLLECTION - 19 ITEMS</div>
+<a href="cosmetics.html" style="background:black;color:#fff;padding:8px 14px;border-radius:20px;text-decoration:none">⬅ Back</a>
+<div class="header">💄 MALIAO COLLECTION - 15 ITEMS</div>
 <div class="grid" id="grid"></div>
-
 <div id="cartBox">
 <h3>🛒 Your Cart</h3>
 <div id="citems">Cart Khali hai</div>
 <h3>Total: ₹<span id="total">0</span></h3>
-<button onclick="goWhatsApp()" style="width:100%;background:#25D366;color:white;padding:12px;border-radius:8px;border:none;font-weight:bold;margin-top:8px">Order on WhatsApp</button>
-<button onclick="goCheckout()" style="width:100%;background:#ff6f00;color:white;padding:12px;border-radius:8px;border:none;font-weight:bold;margin-top:8px">Proceed to Checkout - Payment</button>
-<button onclick="clearCart()" style="width:100%;background:#f5f5f5;padding:8px;border-radius:8px;border:1px solid #ddd;margin-top:8px">Clear Cart</button>
+<button onclick="goCheckout()" style="width:100%;background:#ff6f00;color:#fff;padding:12px;border-radius:10px;border:none;font-weight:bold">Proceed to Checkout</button>
+<button onclick="clearCart()" style="width:100%;background:#eee;padding:8px;border-radius:8px;border:1px solid #ddd;margin-top:8px">Clear Cart</button>
 </div>
-
-<div style="text-align:center;margin:30px 0;color:#666;font-size:12px">Saleem Bangle Store - Akbargate Lucknow<br>📞 7703067297</div>
-
 <script>
+// FINAL UNIQUE LIST - Koi double nahi
 const products=[
-{name:"Maliao Jed Black Kajal",mrp:199,rate:149,fd:false,img:"maliao-jed-black.jpg"},
-{name:"Maliao Black Kajal",mrp:199,rate:159,fd:false,img:"maliao-jet-black-kajal.jpg"},
 {name:"Maliao White Kajal",mrp:190,rate:179,fd:false,img:"maliao-white-kajal.jpg"},
 {name:"Maliao 7 in 1 Cream",mrp:650,rate:500,fd:false,img:"maliao-high-coverj-foundation.jpg"},
 {name:"Maliao Black Fixer",mrp:349,rate:279,fd:false,img:"maliao-shimer-fixer.jpg"},
 {name:"Maliao Shimer Fixer",mrp:499,rate:349,fd:false,img:"maliao-shimer-fixer.jpg"},
-{name:"Maliao Pearl",mrp:299,rate:199,fd:false,img:"maliao-hd-glass-faoundation.jpg"},
+{name:"Maliao Pearl Foundation",mrp:299,rate:199,fd:false,img:"maliao-hd-glass-faoundation.jpg"},
 {name:"Green Toner",mrp:349,rate:219,fd:false,img:"maliao-green-toner.jpg"},
 {name:"Rose Toner",mrp:349,rate:219,fd:false,img:"maliao-rose-toner.jpg"},
 {name:"V-C Serum",mrp:449,rate:359,fd:false,img:"maliao-v+c-sirum.jpg"},
-{name:"High Cover Maliao",mrp:399,rate:290,fd:true,img:"maliao-high-coverj-foundation.jpg"},
-{name:"Color Changing",mrp:499,rate:379,fd:true,img:"maliao-hd-glass-faoundation.jpg"},
-{name:"BB Cream Foundation",mrp:299,rate:199,fd:true,img:"maliao-hd-tube.jpg"},
-{name:"Maliao HD Tube",mrp:299,rate:219,fd:true,img:"maliao-hd-tube.jpg"},
+{name:"High Cover Foundation",mrp:399,rate:290,fd:true,img:"maliao-high-coverj-foundation.jpg"},
+{name:"Color Changing Foundation",mrp:499,rate:379,fd:true,img:"maliao-hd-glass-faoundation.jpg"},
+{name:"Maliao HD Foundation",mrp:299,rate:219,fd:true,img:"maliao-hd-tube.jpg"},
 {name:"Maliao Golden Tube",mrp:299,rate:230,fd:true,img:"maliao-golden-tube.jpg"},
-{name:"Maliao Green Tea Aloe",mrp:299,rate:220,fd:true,img:"maliao-hd-glass-faoundation.jpg"},
 {name:"Liner Mascara Combo",mrp:299,rate:200,fd:false,img:"maliao-liner-mascara-combo.jpg"},
-{name:"Maliao Mascara",mrp:199,rate:200,fd:false,img:"maliao-liner-mascara-combo.jpg"},
+{name:"Maliao Mascara",mrp:199,rate:200,fd:false,img:"maliao-jet-black-kajal.jpg"},
 {name:"Maliao HD Glass",mrp:399,rate:299,fd:true,img:"maliao-hd-glass-faoundation.jpg"},
 ];
-
 let cart=JSON.parse(localStorage.getItem('sb_cart')||'[]');
 let grid=document.getElementById('grid');
+grid.innerHTML=""; // FIX - Pehle ka double hatane ke liye
 products.forEach((p,i)=>{
 let off=Math.round((p.mrp-p.rate)/p.mrp*100);
-let shade = p.fd? `<select id="s${i}" class="shade"><option value="">-- Shade Chuniye --</option><option>Shade 01</option><option>Shade 02</option><option>Shade 03</option><option>Shade 04</option></select><button class="btn btn-orange" onclick="add(${i})">Add with Shade - ₹${p.rate}</button>` : `<button class="btn btn-green" onclick="add(${i})">Add to Cart - ₹${p.rate}</button>`;
-grid.innerHTML+=`<div class="card"><img src="${p.img}"><h3>${p.name}</h3><div class="mrp">MRP: ₹${p.mrp} <span class="price">₹${p.rate}</span></div><div class="off">${off}% OFF</div>${shade}</div>`;
+let shade=p.fd?`<select id="s${i}" class="shade"><option value="">-- Shade Chuniye --</option><option>Shade 01</option><option>Shade 02</option><option>Shade 03</option><option>Shade 04</option></select><button class="btn btn-orange" onclick="add(${i})">Add with Shade ₹${p.rate}</button>`:`<button class="btn btn-green" onclick="add(${i})">Add to Cart ₹${p.rate}</button>`;
+grid.innerHTML+=`<div class="card"><img src="${p.img}"><h3>${p.name}</h3><div class="mrp">MRP ₹${p.mrp} <span class="price">₹${p.rate}</span></div><div style="font-size:11px;color:green">${off}% OFF</div>${shade}</div>`;
 });
-function add(i){
-let sel=""; if(products[i].fd){sel=document.getElementById('s'+i).value; if(!sel){alert('Shade Chuniye');return}}
-cart.push({...products[i],shade:sel}); localStorage.setItem('sb_cart',JSON.stringify(cart)); update();
-}
-function update(){
-let h="",t=0; cart.forEach((c,idx)=>{t+=c.rate; let sh=c.shade?` (${c.shade})`:""; h+=`<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed #ddd"><span>${c.name}${sh}</span><span>₹${c.rate} <b onclick="cart.splice(${idx},1);localStorage.setItem('sb_cart',JSON.stringify(cart));update()" style="color:red;cursor:pointer">x</b></span></div>`});
-document.getElementById('citems').innerHTML=h||"Cart Khali hai"; document.getElementById('total').innerText=t;
-}
+function add(i){let s=""; if(products[i].fd){s=document.getElementById('s'+i).value; if(!s){alert('Shade Chuniye');return}} cart.push({...products[i],shade:s}); localStorage.setItem('sb_cart',JSON.stringify(cart)); update();}
+function update(){let h="",t=0; cart.forEach((c,idx)=>{t+=c.rate; let sh=c.shade?` (${c.shade})`:""; h+=`<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed #ddd"><span>${c.name}${sh}</span><span>₹${c.rate} <b onclick="cart.splice(${idx},1);localStorage.setItem('sb_cart',JSON.stringify(cart));update()" style="color:red">x</b></span></div>`}); document.getElementById('citems').innerHTML=h||"Cart Khali hai"; document.getElementById('total').innerText=t;}
 function clearCart(){cart=[];localStorage.setItem('sb_cart',JSON.stringify(cart));update()}
-function goCheckout(){if(cart.length==0){alert('Cart Khali hai');return} localStorage.setItem('sb_cart',JSON.stringify(cart)); location.href='checkout.html';}
-function goWhatsApp(){if(cart.length==0){alert('Cart Khali hai');return} let msg="Order - MALIAO:\n"; cart.forEach(c=>{msg+=`- ${c.name} ${c.shade||''} - Rs${c.rate}\n`}); msg+=`Total: Rs${document.getElementById('total').innerText}`; window.open(`https://wa.me/917703067297?text=${encodeURIComponent(msg)}`)}
+function goCheckout(){if(cart.length==0){alert('Cart Khali');return} localStorage.setItem('sb_cart',JSON.stringify(cart)); location.href='checkout.html';}
 update();
 </script>
 </body>
