@@ -1,1 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maliao Collection - Saleem Bangles</title>
+<style>
+body{font-family:Arial;background:#ffeef7;margin:0;padding:10px}
+.header{background:#9b16b3;color:white;text-align:center;padding:15px;border-radius:10px;font-size:20px;font-weight:bold}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:15px}
+@media(min-width:700px){.grid{grid-template-columns:repeat(3,1fr)}}
+.card{background:white;border-radius:12px;padding:10px;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.1);border:1px solid #ffd1e8;position:relative}
+.card img{width:100%;height:90px;object-fit:contain;background:#fff9f0;border-radius:8px;padding:5px}
+.card h3{font-size:12px;margin:6px 0;height:30px;line-height:13px}
+.mrp{font-size:10px;color:#999;text-decoration:line-through}
+.rate{font-size:15px;color:#e91e63;font-weight:bold;margin:2px 0}
+.off{background:#25D366;color:white;font-size:9px;padding:2px 6px;border-radius:10px;position:absolute;top:6px;right:6px}
+.shadeBox{margin:6px 0;background:#fff3e0;border:1px solid #ffcc80;border-radius:6px;padding:4px}
+.shadeBox label{font-size:10px;font-weight:bold;display:block;color:#b76e00}
+.shadeBox select{width:100%;padding:4px;border-radius:4px;border:1px solid #ffb74d;font-size:11px;margin-top:2px}
+.btn{background:#111;color:#ffd700;border:none;padding:7px;border-radius:20px;width:100%;font-size:12px;font-weight:bold;margin-top:5px;cursor:pointer}
+#cart{position:fixed;right:-100%;top:0;width:92%;max-width:360px;height:100%;background:#fff;z-index:99;padding:12px;transition:.3s;overflow-y:auto}
+#cart.open{right:0}
+.item{display:flex;justify-content:space-between;font-size:12px;padding:6px 0;border-bottom:1px dashed #ddd}
+</style>
+</head>
+<body>
+<a href="cosmetics.html" style="background:black;color:white;padding:8px 15px;border-radius:20px;text-decoration:none;display:inline-block;margin-bottom:10px">⬅ Back to Cosmetics</a>
+<div class="header">💄 MALIAO COLLECTION - 19 ITEMS 💄</div>
 
+<div class="grid" id="grid"></div>
+
+<div id="cart">
+<h3>Your Cart <span style="float:right;cursor:pointer" onclick="document.getElementById('cart').classList.remove('open')">X</span></h3>
+<div id="citems">Empty</div>
+<h3 style="margin-top:10px">Total: ₹<span id="total">0</span></h3>
+<div style="background:#fff7e6;border:1px solid gold;border-radius:10px;padding:10px;text-align:center;margin-top:10px">
+<p style="font-size:12px">UPI ID: <b>7703067297@upi</b></p>
+<img id="qr" src="" style="width:150px;margin:8px">
+<a id="upiLink" href="#" style="display:block;background:#673ab7;color:white;padding:10px;border-radius:8px;text-decoration:none;font-weight:bold">Pay with UPI</a>
+<a href="https://wa.me/917703067297" style="display:block;background:#25D366;color:white;padding:10px;border-radius:8px;text-decoration:none;margin-top:8px;font-weight:bold">WhatsApp Pe Order Bhejo</a>
+</div>
+</div>
+
+<script>
+const products=[
+{name:"Maliao Jed Black Kajal", cost:90, mrp:199, rate:149, fd:false},
+{name:"Maliao Black Kajal", cost:80, mrp:199, rate:159, fd:false},
+{name:"Maliao White Kajal", cost:90, mrp:190, rate:179, fd:false},
+{name:"Maliao 7 in 1 Cream", cost:340, mrp:650, rate:500, fd:false},
+{name:"Maliao Black Fixer", cost:155, mrp:349, rate:279, fd:false},
+{name:"Maliao Shimer Fixer", cost:210, mrp:499, rate:349, fd:false},
+{name:"Maliao Pearl", cost:120, mrp:299, rate:199, fd:false},
+{name:"Green Toner", cost:150, mrp:349, rate:219, fd:false},
+{name:"Rose Toner", cost:150, mrp:349, rate:219, fd:false},
+{name:"V-C Serum", cost:185, mrp:449, rate:359, fd:false},
+{name:"High Cover Maliao", cost:170, mrp:399, rate:290, fd:true},
+{name:"Color Changing", cost:205, mrp:499, rate:379, fd:true},
+{name:"BB Cream Foundation", cost:120, mrp:299, rate:199, fd:true},
+{name:"Maliao HD Tube", cost:120, mrp:299, rate:219, fd:true},
+{name:"Maliao Golden Tube", cost:120, mrp:299, rate:230, fd:true},
+{name:"Maliao Green Tea Aloe", cost:120, mrp:299, rate:220, fd:true},
+{name:"Liner - Mascara Combo", cost:200, mrp:299, rate:200, fd:false},
+{name:"Maliao Mascara", cost:100, mrp:199, rate:200, fd:false},
+{name:"Maliao HD-Glass", cost:180, mrp:399, rate:299, fd:true},
+];
+
+let cart=[];
+let grid=document.getElementById('grid');
+products.forEach((p,i)=>{
+  let off = Math.round((p.mrp - p.rate)/p.mrp*100);
+  let shadeHtml = p.fd ? `<div class="shadeBox"><label>Shade Number Chuno:</label><select id="shade${i}"><option value="01">Shade 01</option><option value="02">Shade 02</option><option value="03">Shade 03</option><option value="04">Shade 04</option></select></div>` : `<div style="height:34px"></div>`;
+  grid.innerHTML+=`
+  <div class="card">
+    <div class="off">${off}% OFF</div>
+    <img src="https://via.placeholder.com/150/fff5f9/e91e63?text=${encodeURIComponent(p.name)}" alt="${p.name}">
+    <h3>${p.name}</h3>
+    <div class="mrp">MRP ₹${p.mrp}</div>
+    <div class="rate">₹${p.rate}</div>
+    ${shadeHtml}
+    <button class="btn" onclick="addCart(${i})">Add to Cart</button>
+  </div>`;
+});
+
+function addCart(i){
+  let shadeVal="";
+  if(products[i].fd){
+    shadeVal=document.getElementById('shade'+i).value;
+  }
+  cart.push({...products[i], shade:shadeVal});
+  updateCart();
+  document.getElementById('cart').classList.add('open');
+}
+function updateCart(){
+  let html="", total=0;
+  cart.forEach((c,idx)=>{
+    total+=c.rate;
+    let sh = c.shade ? `(Shade ${c.shade})` : "";
+    html+=`<div class="item"><span>${c.name} ${sh}</span><span>₹${c.rate} <b style="color:red;cursor:pointer" onclick="remove(${idx})"> x</b></span></div>`;
+  });
+  document.getElementById('citems').innerHTML=html||"Empty";
+  document.getElementById('total').innerText=total;
+  let upi="7703067297@upi";
+  document.getElementById('qr').src=`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=${upi}&pn=SaleemBangles&am=${total}&cu=INR`;
+  document.getElementById('upiLink').href=`upi://pay?pa=${upi}&pn=SaleemBangles&am=${total}&cu=INR`;
+}
+function remove(i){cart.splice(i,1);updateCart()}
+</script>
+</body>
+</html>
