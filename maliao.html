@@ -8,115 +8,77 @@
 *{box-sizing:border-box} body{font-family:Arial;background:#f5f5f5;margin:0;padding:10px}
 .header{background:#000;color:#ffd700;text-align:center;padding:14px;border-radius:10px;font-weight:bold}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:15px;max-width:1100px;margin:auto}
-@media(max-width:600px){.grid{grid-template-columns:1fr}}
-.card{background:white;border:1px solid #ddd;border-radius:12px;padding:12px;text-align:center;box-shadow:0 2px 5px rgba(0,0,0,.06)}
-.card img{width:100%;height:130px;object-fit:contain;background:#fff8f0;border-radius:8px}
+.card{background:white;border:1px solid #ddd;border-radius:12px;padding:12px;text-align:center}
+.card img{width:100%;height:140px;object-fit:contain;background:white;border-radius:8px}
 .card h3{font-size:13px;margin:8px 0;min-height:32px}
 .mrp{font-size:12px;color:#888;text-decoration:line-through}
-.price{font-size:15px;color:#2196F3;font-weight:bold;margin:3px 0}
+.price{font-size:15px;color:#2196F3;font-weight:bold}
 .off{font-size:11px;color:#2e7d32}
 .btn{width:100%;padding:10px;border-radius:20px;border:none;font-weight:bold;margin-top:6px;cursor:pointer}
 .btn-green{background:#111;color:#ffd700}
 .btn-orange{background:#ff6f00;color:white}
 .shade{width:100%;padding:8px;border-radius:8px;border:1px solid #ccc;background:#fff3f3;margin:5px 0}
-#cartBox{max-width:500px;margin:20px auto;background:white;padding:15px;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,.1)}
+#cartBox{max-width:500px;margin:20px auto;background:white;padding:15px;border-radius:12px}
 </style>
 </head>
 <body>
 <a href="cosmetics.html" style="background:black;color:white;padding:8px 14px;border-radius:20px;text-decoration:none;display:inline-block;margin-bottom:10px">⬅ Back to All Brands</a>
 <div class="header">💄 MALIAO COLLECTION - 19 ITEMS</div>
-
 <div class="grid" id="grid"></div>
 
 <div id="cartBox">
 <h3>🛒 Your Cart</h3>
-<div id="citems" style="font-size:13px">Cart Khali hai</div>
+<div id="citems">Cart Khali hai</div>
 <h3>Total: ₹<span id="total">0</span></h3>
 <button onclick="goWhatsApp()" style="width:100%;background:#25D366;color:white;padding:12px;border-radius:8px;border:none;font-weight:bold;margin-top:8px">Order on WhatsApp</button>
 <button onclick="goCheckout()" style="width:100%;background:#ff6f00;color:white;padding:12px;border-radius:8px;border:none;font-weight:bold;margin-top:8px">Proceed to Checkout - Payment</button>
 <button onclick="clearCart()" style="width:100%;background:#f5f5f5;padding:8px;border-radius:8px;border:1px solid #ddd;margin-top:8px">Clear Cart</button>
 </div>
 
-<div id="checkout" style="display:none;max-width:500px;margin:20px auto;background:white;padding:15px;border-radius:12px">
-<h3>Customer Details</h3>
-<input id="name" placeholder="Full Name *" style="width:100%;padding:10px;margin:5px 0;border:1px solid #ccc;border-radius:6px">
-<input id="mobile" placeholder="Mobile Number *" style="width:100%;padding:10px;margin:5px 0;border:1px solid #ccc;border-radius:6px">
-<textarea id="address" placeholder="Full Shipping Address *" style="width:100%;padding:10px;margin:5px 0;border:1px solid #ccc;border-radius:6px"></textarea>
-
-<div style="border:1px solid #333;border-radius:12px;padding:15px;text-align:center;margin-top:15px">
-<p style="font-size:11px;letter-spacing:1px">UPI PAYMENT</p>
-<p style="font-size:13px;font-weight:bold">UPI ID: gpay-12205946398@okbizaxis<br>Account Name: Mohd Saeed</p>
-<img id="qr" src="" style="width:220px;margin:10px auto;display:block">
-<p><b>Amount Payable: ₹<span id="payAmt">0</span></b><br><span style="font-size:11px;color:#666">Scan with Google Pay, PhonePe, Paytm</span></p>
-<a id="upiLink" href="#" style="display:block;background:#111;color:white;padding:12px;border-radius:8px;text-decoration:none;font-weight:bold">Pay via UPI App</a>
-</div>
-
-<h4 style="margin-top:15px">Payment Proof</h4>
-<input type="file" id="proof" style="margin:5px 0">
-<button onclick="confirmOrder()" style="width:100%;background:#25D366;color:white;padding:12px;border-radius:8px;border:none;font-weight:bold;margin-top:10px">Confirm Payment & Place Order via WhatsApp</button>
-<p style="text-align:center;font-size:11px;color:#888;margin-top:5px">After payment, please attach screenshot in WhatsApp chat</p>
-<a href="#" onclick="document.getElementById('checkout').style.display='none';return false" style="display:block;text-align:center;color:#e91e63;text-decoration:none;margin-top:10px">← Back to Shopping</a>
-</div>
-
-<div style="text-align:center;margin:30px 0;color:#666;font-size:12px">Saleem Bangle Store - Akbargate Lucknow 226003<br>📞 7703067297</div>
+<div style="text-align:center;margin:30px 0;color:#666;font-size:12px">Saleem Bangle Store - Akbargate Lucknow<br>📞 7703067297</div>
 
 <script>
 const products=[
-{name:"Maliao Jed Black Kajal",mrp:199,rate:149,fd:false,desc:"Jet Black - Long Lasting"},
-{name:"Maliao Black Kajal",mrp:199,rate:159,fd:false,desc:"Deep Black"},
-{name:"Maliao White Kajal",mrp:190,rate:179,fd:false,desc:"White Kajal"},
-{name:"Maliao 7 in 1 Cream",mrp:650,rate:500,fd:false,desc:"7 in One Cream"},
-{name:"Maliao Black Fixer",mrp:349,rate:279,fd:false,desc:"Makeup Fixer"},
-{name:"Maliao Shimer Fixer",mrp:499,rate:349,fd:false,desc:"Shimmer Fixer"},
-{name:"Maliao Pearl",mrp:299,rate:199,fd:false,desc:"Pearl Beauty"},
-{name:"Green Toner",mrp:349,rate:219,fd:false,desc:"Refreshing Toner"},
-{name:"Rose Toner",mrp:349,rate:219,fd:false,desc:"Rose Toner"},
-{name:"V-C Serum",mrp:449,rate:359,fd:false,desc:"Vitamin C Serum"},
-{name:"High Cover Maliao",mrp:399,rate:290,fd:true,desc:"Foundation"},
-{name:"Color Changing",mrp:499,rate:379,fd:true,desc:"Color Changing Foundation"},
-{name:"BB Cream Foundation",mrp:299,rate:199,fd:true,desc:"BB Cream"},
-{name:"Maliao HD Tube",mrp:299,rate:219,fd:true,desc:"HD Foundation Tube"},
-{name:"Maliao Golden Tube",mrp:299,rate:230,fd:true,desc:"Golden Tube"},
-{name:"Maliao Green Tea Aloe",mrp:299,rate:220,fd:true,desc:"Aloe Foundation"},
-{name:"Liner Mascara Combo",mrp:299,rate:200,fd:false,desc:"Combo Offer"},
-{name:"Maliao Mascara",mrp:199,rate:200,fd:false,desc:"Volume Mascara"},
-{name:"Maliao HD Glass",mrp:399,rate:299,fd:true,desc:"HD Glass Foundation"},
+{name:"Maliao Jed Black Kajal",mrp:199,rate:149,fd:false,img:"maliao-jed-black.jpg"},
+{name:"Maliao Black Kajal",mrp:199,rate:159,fd:false,img:"maliao-jet-black-kajal.jpg"},
+{name:"Maliao White Kajal",mrp:190,rate:179,fd:false,img:"maliao-white-kajal.jpg"},
+{name:"Maliao 7 in 1 Cream",mrp:650,rate:500,fd:false,img:"maliao-high-coverj-foundation.jpg"},
+{name:"Maliao Black Fixer",mrp:349,rate:279,fd:false,img:"maliao-shimer-fixer.jpg"},
+{name:"Maliao Shimer Fixer",mrp:499,rate:349,fd:false,img:"maliao-shimer-fixer.jpg"},
+{name:"Maliao Pearl",mrp:299,rate:199,fd:false,img:"maliao-hd-glass-faoundation.jpg"},
+{name:"Green Toner",mrp:349,rate:219,fd:false,img:"maliao-green-toner.jpg"},
+{name:"Rose Toner",mrp:349,rate:219,fd:false,img:"maliao-rose-toner.jpg"},
+{name:"V-C Serum",mrp:449,rate:359,fd:false,img:"maliao-v+c-sirum.jpg"},
+{name:"High Cover Maliao",mrp:399,rate:290,fd:true,img:"maliao-high-coverj-foundation.jpg"},
+{name:"Color Changing",mrp:499,rate:379,fd:true,img:"maliao-hd-glass-faoundation.jpg"},
+{name:"BB Cream Foundation",mrp:299,rate:199,fd:true,img:"maliao-hd-tube.jpg"},
+{name:"Maliao HD Tube",mrp:299,rate:219,fd:true,img:"maliao-hd-tube.jpg"},
+{name:"Maliao Golden Tube",mrp:299,rate:230,fd:true,img:"maliao-golden-tube.jpg"},
+{name:"Maliao Green Tea Aloe",mrp:299,rate:220,fd:true,img:"maliao-hd-glass-faoundation.jpg"},
+{name:"Liner Mascara Combo",mrp:299,rate:200,fd:false,img:"maliao-liner-mascara-combo.jpg"},
+{name:"Maliao Mascara",mrp:199,rate:200,fd:false,img:"maliao-liner-mascara-combo.jpg"},
+{name:"Maliao HD Glass",mrp:399,rate:299,fd:true,img:"maliao-hd-glass-faoundation.jpg"},
 ];
-let cart=[];
+
+let cart=JSON.parse(localStorage.getItem('sb_cart')||'[]');
 let grid=document.getElementById('grid');
 products.forEach((p,i)=>{
 let off=Math.round((p.mrp-p.rate)/p.mrp*100);
 let shade = p.fd? `<select id="s${i}" class="shade"><option value="">-- Shade Chuniye --</option><option>Shade 01</option><option>Shade 02</option><option>Shade 03</option><option>Shade 04</option></select><button class="btn btn-orange" onclick="add(${i})">Add with Shade - ₹${p.rate}</button>` : `<button class="btn btn-green" onclick="add(${i})">Add to Cart - ₹${p.rate}</button>`;
-grid.innerHTML+=`<div class="card">
-<img src="https://dummyimage.com/300x300/fff5f0/b76e00&text=${encodeURIComponent(p.name)}">
-<h3>${p.name}</h3>
-<div class="mrp">MRP: ₹${p.mrp} <span class="price">₹${p.rate}</span></div>
-<div class="off">${off}% OFF - ${p.desc}</div>
-${shade}
-</div>`;
+grid.innerHTML+=`<div class="card"><img src="${p.img}"><h3>${p.name}</h3><div class="mrp">MRP: ₹${p.mrp} <span class="price">₹${p.rate}</span></div><div class="off">${off}% OFF</div>${shade}</div>`;
 });
 function add(i){
-let sel=""; if(products[i].fd){sel=document.getElementById('s'+i).value; if(!sel){alert('Shade Chuniye - 01 02 03 04 me se');return} }
-cart.push({...products[i],shade:sel}); update();
+let sel=""; if(products[i].fd){sel=document.getElementById('s'+i).value; if(!sel){alert('Shade Chuniye');return}}
+cart.push({...products[i],shade:sel}); localStorage.setItem('sb_cart',JSON.stringify(cart)); update();
 }
 function update(){
-let h="",t=0; cart.forEach((c,idx)=>{t+=c.rate; let sh=c.shade?` (${c.shade})`:""; h+=`<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed #ddd"><span>${c.name}${sh}</span><span>₹${c.rate} <b onclick="cart.splice(${idx},1);update()" style="color:red;cursor:pointer">x</b></span></div>`});
-document.getElementById('citems').innerHTML=h||"Cart Khali hai";
-document.getElementById('total').innerText=t;
-document.getElementById('payAmt').innerText=t;
-let upi="gpay-12205946398@okbizaxis";
-document.getElementById('qr').src=`https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=upi://pay?pa=${upi}&pn=Mohd%20Saeed&am=${t}&cu=INR`;
-document.getElementById('upiLink').href=`upi://pay?pa=${upi}&pn=Mohd%20Saeed&am=${t}&cu=INR`;
+let h="",t=0; cart.forEach((c,idx)=>{t+=c.rate; let sh=c.shade?` (${c.shade})`:""; h+=`<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed #ddd"><span>${c.name}${sh}</span><span>₹${c.rate} <b onclick="cart.splice(${idx},1);localStorage.setItem('sb_cart',JSON.stringify(cart));update()" style="color:red;cursor:pointer">x</b></span></div>`});
+document.getElementById('citems').innerHTML=h||"Cart Khali hai"; document.getElementById('total').innerText=t;
 }
-function clearCart(){cart=[];update()}
-function goCheckout(){if(cart.length==0){alert('Cart Khali hai');return} document.getElementById('checkout').style.display='block'; window.scrollTo(0,document.getElementById('checkout').offsetTop)}
+function clearCart(){cart=[];localStorage.setItem('sb_cart',JSON.stringify(cart));update()}
+function goCheckout(){if(cart.length==0){alert('Cart Khali hai');return} localStorage.setItem('sb_cart',JSON.stringify(cart)); location.href='checkout.html';}
 function goWhatsApp(){if(cart.length==0){alert('Cart Khali hai');return} let msg="Order - MALIAO:\n"; cart.forEach(c=>{msg+=`- ${c.name} ${c.shade||''} - Rs${c.rate}\n`}); msg+=`Total: Rs${document.getElementById('total').innerText}`; window.open(`https://wa.me/917703067297?text=${encodeURIComponent(msg)}`)}
-function confirmOrder(){
-let n=document.getElementById('name').value,m=document.getElementById('mobile').value,a=document.getElementById('address').value;
-if(!n||!m||!a){alert('Naam, Mobile, Address bharo');return}
-let msg=`*NEW ORDER - MALIAO*\nName: ${n}\nMobile: ${m}\nAddress: ${a}\n\n`; cart.forEach(c=>{msg+=`- ${c.name} ${c.shade||''} - Rs${c.rate}\n`}); msg+=`Total Paid: Rs${document.getElementById('total').innerText}\nUPI: gpay-12205946398@okbizaxis\nPayment Proof Attached`;
-window.open(`https://wa.me/917703067297?text=${encodeURIComponent(msg)}`);
-}
+update();
 </script>
 </body>
 </html>
