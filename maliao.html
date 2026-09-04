@@ -1,38 +1,56 @@
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Maliao</title>
-<style>body{font-family:Arial;background:#f5f5f5;margin:0;padding:10px}.header{background:#000;color:#ffd700;text-align:center;padding:14px;border-radius:10px;font-weight:bold}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:15px auto;max-width:1100px}.card{background:#fff;border:1px solid #ddd;border-radius:12px;padding:12px;text-align:center}.card img{width:100%;height:150px;object-fit:contain}.btn{width:100%;padding:10px;border-radius:20px;border:none;font-weight:bold;margin-top:6px}.btn-green{background:#111;color:#ffd700}.btn-orange{background:#ff6f00;color:#fff}.shade{width:100%;padding:7px;border-radius:8px;margin:5px 0}#cartBox{max-width:500px;margin:20px auto;background:#fff;padding:15px;border-radius:12px}</style>
-</head><body>
-<a href="cosmetics.html" style="background:black;color:#fff;padding:8px 14px;border-radius:20px;text-decoration:none">⬅ Back</a>
-<div class="header">💄 MALIAO - 15 UNIQUE ITEMS</div>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Maliao - Saleem Bangles</title>
+<style>
+*{box-sizing:border-box} body{font-family:Arial;background:#f5f5f5;margin:0;padding:10px}
+.header{background:#000;color:#ffd700;text-align:center;padding:14px;border-radius:10px;font-weight:bold}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:15px auto;max-width:1100px}
+.card{background:#fff;border:1px solid #ddd;border-radius:12px;padding:12px;text-align:center}
+.card img{width:100%;height:150px;object-fit:contain;background:#fff}
+.card h3{font-size:13px;margin:8px 0;min-height:32px}
+.mrp{font-size:11px;color:#888;text-decoration:line-through} .price{color:#e91e63;font-weight:bold}
+.btn{width:100%;padding:10px;border-radius:20px;border:none;font-weight:bold;margin-top:6px;cursor:pointer}
+.btn-green{background:#111;color:#ffd700} .btn-orange{background:#ff6f00;color:#fff}
+.shade{width:100%;padding:7px;border-radius:8px;border:1px solid #ccc;margin:5px 0;background:#fff5f7;font-size:12px}
+#cartBox{max-width:500px;margin:20px auto;background:#fff;padding:15px;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,.1)}
+</style></head><body>
+<a href="cosmetics.html" style="background:black;color:#fff;padding:8px 14px;border-radius:20px;text-decoration:none;display:inline-block">⬅ Back</a>
+<div class="header">💄 MALIAO COLLECTION - 19 ITEMS</div>
 <div class="grid" id="grid"></div>
-<div id="cartBox"><h3>🛒 Cart</h3><div id="citems">Cart Khali hai</div><h3>Total: ₹<span id="total">0</span></h3><button onclick="location.href='checkout.html'" style="width:100%;background:#ff6f00;color:#fff;padding:12px;border-radius:10px;border:none;font-weight:bold">Proceed to Checkout</button></div>
+<div id="cartBox"><h3>🛒 Your Cart</h3><div id="citems">Cart Khali hai</div><h3>Total: ₹<span id="total">0</span></h3><button onclick="goCheckout()" style="width:100%;background:#ff6f00;color:#fff;padding:12px;border-radius:10px;border:none;font-weight:bold;margin-top:8px">Proceed to Checkout - Payment</button><button onclick="clearCart()" style="width:100%;background:#f5f5f5;padding:8px;border-radius:8px;border:1px solid #ddd;margin-top:8px">Clear Cart</button></div>
 <script>
+// Aapke bahi-khate se 19 products - Cost MRP Discount
 const products=[
-{n:"Maliao White Kajal",m:190,r:179,f:0,i:"maliao-white-kajal.jpg"},
-{n:"Maliao 7 in 1 Cream",m:650,r:500,f:0,i:"maliao-high-coverj-foundation.jpg"},
-{n:"Maliao Black Fixer",m:349,r:279,f:0,i:"maliao-shimer-fixer.jpg"},
-{n:"Maliao Shimer Fixer",m:499,r:349,f:0,i:"maliao-shimer-fixer.jpg"},
-{n:"Maliao Pearl",m:299,r:199,f:0,i:"maliao-hd-glass-faoundation.jpg"},
-{n:"Green Toner",m:349,r:219,f:0,i:"maliao-green-toner.jpg"},
-{n:"Rose Toner",m:349,r:219,f:0,i:"maliao-rose-toner.jpg"},
-{n:"V-C Serum",m:449,r:359,f:0,i:"maliao-v+c-sirum.jpg"},
-{n:"High Cover",m:399,r:290,f:1,i:"maliao-high-coverj-foundation.jpg"},
-{n:"Color Changing",m:499,r:379,f:1,i:"maliao-hd-glass-faoundation.jpg"},
-{n:"Maliao HD Tube",m:299,r:219,f:1,i:"maliao-hd-tube.jpg"},
-{n:"Maliao Golden Tube",m:299,r:230,f:1,i:"maliao-golden-tube.jpg"},
-{n:"Liner Mascara Combo",m:299,r:200,f:0,i:"maliao-liner-mascara-combo.jpg"},
-{n:"Maliao Mascara",m:199,r:200,f:0,i:"maliao-liner-mascara-combo.jpg"},
-{n:"Maliao HD Glass",m:399,r:299,f:1,i:"maliao-hd-glass-faoundation.jpg"},
+{name:"Maliao Jed Black Kajal", cost:90, mrp:199, rate:149, fd:false, img:"maliao-jed-black.jpg"},
+{name:"Maliao Black Kajal", cost:80, mrp:199, rate:159, fd:false, img:"maliao-jet-black-kajal.jpg"},
+{name:"Maliao White Kajal", cost:90, mrp:190, rate:179, fd:false, img:"maliao-white-kajal.jpg"},
+{name:"Maliao 7 in 1 Cream", cost:340, mrp:650, rate:500, fd:false, img:"maliao-high-coverj-foundation.jpg"},
+{name:"Maliao Black Fixer", cost:155, mrp:349, rate:279, fd:false, img:"maliao-shimer-fixer.jpg"},
+{name:"Maliao Shimer Fixer", cost:210, mrp:499, rate:349, fd:false, img:"maliao-shimer-fixer.jpg"},
+{name:"Maliao Pearl", cost:120, mrp:299, rate:199, fd:false, img:"maliao-hd-glass-faoundation.jpg"},
+{name:"Green Toner", cost:150, mrp:349, rate:219, fd:false, img:"maliao-green-toner.jpg"},
+{name:"Rose Toner", cost:150, mrp:349, rate:219, fd:false, img:"maliao-rose-toner.jpg"},
+{name:"V-C Serum", cost:185, mrp:449, rate:359, fd:false, img:"maliao-v+c-sirum.jpg"},
+{name:"High Cover Maliao", cost:170, mrp:399, rate:290, fd:true, img:"maliao-high-coverj-foundation.jpg"},
+{name:"Color Changing", cost:205, mrp:499, rate:379, fd:true, img:"maliao-hd-glass-faoundation.jpg"},
+{name:"BB Cream Foundation", cost:120, mrp:299, rate:199, fd:true, img:"maliao-hd-tube.jpg"},
+{name:"Maliao HD Tube", cost:120, mrp:299, rate:219, fd:true, img:"maliao-hd-tube.jpg"},
+{name:"Maliao Golden Tube", cost:120, mrp:299, rate:230, fd:true, img:"maliao-golden-tube.jpg"},
+{name:"Maliao Green Tea Aloe", cost:120, mrp:299, rate:220, fd:true, img:"maliao-hd-glass-faoundation.jpg"},
+{name:"Liner - Mascara Combo", cost:100, mrp:199, rate:200, fd:false, img:"maliao-liner-mascara-combo.jpg"},
+{name:"Maliao Mascara", cost:100, mrp:199, rate:200, fd:false, img:"maliao-liner-mascara-combo.jpg"},
+{name:"Maliao HD Glass", cost:180, mrp:399, rate:299, fd:true, img:"maliao-hd-glass-faoundation.jpg"},
 ];
 let cart=JSON.parse(localStorage.getItem('sb_cart')||'[]');
 let grid=document.getElementById('grid');
-grid.innerHTML=""; // IMPORTANT - Double hatane ke liye
-products.forEach((p,idx)=>{
-let off=Math.round((p.m-p.r)/p.m*100);
-let shade=p.f?`<select id="s${idx}" class="shade"><option value="">-- Shade Chuniye --</option><option>Shade 01</option><option>Shade 02</option></select><button class="btn btn-orange" onclick="add(${idx})">Add with Shade ₹${p.r}</button>`:`<button class="btn btn-green" onclick="add(${idx})">Add to Cart ₹${p.r}</button>`;
-grid.innerHTML+=`<div class="card"><img src="${p.i}"><h3>${p.n}</h3><div style="font-size:11px;color:#888;text-decoration:line-through">MRP ₹${p.m}</div><div style="color:#e91e63;font-weight:bold">₹${p.r} - ${off}% OFF</div>${shade}</div>`;
+grid.innerHTML=""; // Double hatane ke liye FIX
+products.forEach((p,i)=>{
+let off=Math.round((p.mrp-p.rate)/p.mrp*100);
+let shade=p.fd?`<select id="s${i}" class="shade"><option value="">-- Shade Chuniye --</option><option>Shade 01</option><option>Shade 02</option><option>Shade 03</option><option>Shade 04</option></select><button class="btn btn-orange" onclick="add(${i})">Add with Shade - ₹${p.rate}</button>`:`<button class="btn btn-green" onclick="add(${i})">Add to Cart - ₹${p.rate}</button>`;
+grid.innerHTML+=`<div class="card"><img src="${p.img}" onerror="this.style.background='#fff5f7'"><h3>${p.name}</h3><div class="mrp">MRP ₹${p.mrp} <span class="price">₹${p.rate}</span></div><div style="font-size:11px;color:#2e7d32">${off}% OFF</div>${shade}</div>`;
 });
-function add(i){let s="";if(products[i].f){s=document.getElementById('s'+i).value;if(!s){alert('Shade Chuniye');return}}cart.push({...products[i],shade:s,rate:products[i].r,name:products[i].n});localStorage.setItem('sb_cart',JSON.stringify(cart));update()}
-function update(){let h="",t=0;cart.forEach((c,i)=>{t+=c.rate;let sh=c.shade?` (${c.shade})`:"";h+=`<div style="display:flex;justify-content:space-between;padding:4px 0"><span>${c.name}${sh}</span><span>₹${c.rate} <b onclick="cart.splice(${i},1);localStorage.setItem('sb_cart',JSON.stringify(cart));update()" style="color:red">x</b></span></div>`});document.getElementById('citems').innerHTML=h||"Cart Khali hai";document.getElementById('total').innerText=t;localStorage.setItem('sb_total',t)}
+function add(i){let s="";if(products[i].fd){s=document.getElementById('s'+i).value;if(!s){alert('Shade Chuniye');return}}cart.push({...products[i],shade:s});localStorage.setItem('sb_cart',JSON.stringify(cart));update()}
+function update(){let h="",t=0;cart.forEach((c,idx)=>{t+=c.rate;let sh=c.shade?` (${c.shade})`:"";h+=`<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed #ddd"><span>${c.name}${sh}</span><span>₹${c.rate} <b onclick="cart.splice(${idx},1);localStorage.setItem('sb_cart',JSON.stringify(cart));update()" style="color:red;cursor:pointer"> x</b></span></div>`});document.getElementById('citems').innerHTML=h||"Cart Khali hai";document.getElementById('total').innerText=t}
+function clearCart(){cart=[];localStorage.setItem('sb_cart',JSON.stringify(cart));update()}
+function goCheckout(){if(cart.length==0){alert('Cart Khali hai');return}localStorage.setItem('sb_cart',JSON.stringify(cart));location.href='checkout.html';}
 update();
 </script></body></html>
