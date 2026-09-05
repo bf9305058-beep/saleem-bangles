@@ -1,48 +1,37 @@
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Maliao 18 Items</title>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Maliao 18</title>
 <style>
 body{font-family:Arial;background:#f5f5f5;margin:0;padding:10px}
 .header{background:#000;color:#ffd700;text-align:center;padding:15px;border-radius:10px;font-weight:bold}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:15px auto;max-width:1100px}
-.card{background:#fff;border:1px solid #ddd;border-radius:12px;padding:10px;text-align:center;cursor:pointer}
-.card img{width:100%;height:165px;object-fit:contain;background:#fff;border-radius:8px}
+.card{background:#fff;border:1px solid #ddd;border-radius:12px;padding:10px;text-align:center;min-height:280px}
+.card img{width:100%;height:165px;object-fit:contain;background:#fff;border-radius:8px;display:block}
 .card h3{font-size:12px;margin:8px 0;min-height:30px}
-.mrp{font-size:11px;color:#888;text-decoration:line-through;margin-top:4px}
-.price{color:#e91e63;font-weight:bold;font-size:14px;margin:2px 0}
+.mrp{font-size:11px;color:#888;text-decoration:line-through}
+.price{color:#e91e63;font-weight:bold;font-size:14px}
 .off{font-size:11px;color:green}
 .btn{width:100%;padding:10px;border-radius:20px;border:none;font-weight:bold;margin-top:6px;cursor:pointer}
 .btn-green{background:#111;color:#ffd700}
 .btn-orange{background:#ff6f00;color:#fff}
 .shade{width:100%;padding:7px;border-radius:8px;border:1px solid #ccc;margin:5px 0;background:#fff5f7;font-size:11px}
 #cartBox{max-width:500px;margin:20px auto;background:#fff;padding:15px;border-radius:12px}
-/* POPUP CSS - Aapki photo jaisa */
 #popup{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:9999;justify-content:center;align-items:center}
 #popupBox{background:#fff;width:90%;max-width:380px;border-radius:18px;padding:15px;text-align:center;position:relative}
 #popupBox img{width:100%;max-height:400px;object-fit:contain;border-radius:12px}
 #popupClose{position:absolute;top:8px;right:12px;font-size:20px;cursor:pointer;font-weight:bold}
-#bandBtn{background:#ff3b7f;color:#fff;width:100%;padding:12px;border:none;border-radius:12px;font-weight:bold;margin-top:12px;cursor:pointer}
+#bandBtn{background:#ff3b7f;color:#fff;width:100%;padding:12px;border:none;border-radius:12px;font-weight:bold;margin-top:12px}
 </style></head><body>
 <a href="cosmetics.html" style="background:black;color:#fff;padding:8px 14px;border-radius:20px;text-decoration:none">⬅ Back</a>
 <div class="header">💄 MALIAO - 18 PRODUCTS</div>
 <div class="grid" id="grid"></div>
 <div id="cartBox"><h3>🛒 Cart</h3><div id="citems">Cart Khali hai</div><h3>Total: ₹<span id="total">0</span></h3><button onclick="goCheckout()" style="width:100%;background:#ff6f00;color:#fff;padding:12px;border-radius:10px;border:none;font-weight:bold">Proceed to Checkout</button></div>
 
-<!-- PHOTO POPUP - Bilkul Insight Lipstick jaisa -->
-<div id="popup" onclick="closePop()">
-<div id="popupBox" onclick="event.stopPropagation()">
-<span id="popupClose" onclick="closePop()">X</span>
-<img id="popImg" src="">
-<h3 id="popName" style="margin:12px 0 4px 0"></h3>
-<div id="popMrp" style="font-size:12px;color:#888;text-decoration:line-through"></div>
-<div id="popRate" style="color:#e91e63;font-weight:bold;font-size:16px;margin:4px 0"></div>
-<button id="bandBtn" onclick="closePop()">Band Karen</button>
-</div>
-</div>
+<div id="popup" onclick="closePop()"><div id="popupBox" onclick="event.stopPropagation()"><span id="popupClose" onclick="closePop()">X</span><img id="popImg" src=""><h3 id="popName"></h3><div id="popMrp" style="font-size:12px;color:#888;text-decoration:line-through"></div><div id="popRate" style="color:#e91e63;font-weight:bold;font-size:16px"></div><button id="bandBtn" onclick="closePop()">Band Karen</button></div></div>
 
 <script>
 const products=[
 {name:"Maliao Jed Black Kajal", mrp:199, rate:149, fd:false, img:"maliao-jed-black.jpg"},
-{name:"Maliao Black Kajal", mrp:199, rate:159, fd:false, img:"maliao-jet-black.jpg"},
+{name:"Maliao Black Kajal", mrp:199, rate:159, fd:false, img:"maliao-jet-black-kajal.jpg"},
 {name:"Maliao White Kajal", mrp:190, rate:179, fd:false, img:"maliao-white-kajal.jpg"},
 {name:"Maliao 7 in 1 Cream", mrp:650, rate:500, fd:false, img:"maliao-7in-one.jpg"},
 {name:"Maliao Black Fixer", mrp:349, rate:279, fd:false, img:"maliao-black-fixer.jpg"},
@@ -64,16 +53,10 @@ let cart=JSON.parse(localStorage.getItem('sb_cart')||'[]');
 let grid=document.getElementById('grid'); grid.innerHTML="";
 products.forEach((p,i)=>{
 let off=Math.round((p.mrp-p.rate)/p.mrp*100);
-let shade=p.fd?`<select id="s${i}" class="shade" onclick="event.stopPropagation()"><option value="">-- Shade Chuniye --</option><option>Shade 01</option><option>Shade 02</option><option>Shade 03</option><option>Shade 04</option></select><button class="btn btn-orange" onclick="event.stopPropagation();add(${i})">Add with Shade</button>`:`<button class="btn btn-green" onclick="event.stopPropagation();add(${i})">Add to Cart</button>`;
-grid.innerHTML+=`<div class="card" onclick="openPop('${p.img}','${p.name}',${p.mrp},${p.rate})"><img src="${p.img}" onerror="this.src='maliao-hd-glass.jpg'"><h3>${p.name}</h3><div class="mrp">MRP ₹${p.mrp}</div><div class="price">₹${p.rate}</div><div class="off">${off}% OFF</div>${shade}</div>`;
+let shade=p.fd?`<select id="s${i}" class="shade" onclick="event.stopPropagation()"><option value="">-- Shade Chuniye --</option><option>Shade 01</option><option>Shade 02</option><option>Shade 03</option></select><button class="btn btn-orange" onclick="event.stopPropagation();add(${i})">Add with Shade</button>`:`<button class="btn btn-green" onclick="event.stopPropagation();add(${i})">Add to Cart</button>`;
+grid.innerHTML+=`<div class="card" onclick="openPop('${p.img}','${p.name}',${p.mrp},${p.rate})"><img src="${p.img}" loading="lazy" onerror="this.onerror=null;this.src='https://via.placeholder.com/200x200?text=${encodeURIComponent(p.name)}'"><h3>${p.name}</h3><div class="mrp">MRP ₹${p.mrp}</div><div class="price">₹${p.rate}</div><div class="off">${off}% OFF</div>${shade}</div>`;
 });
-function openPop(img,name,mrp,rate){
-document.getElementById('popImg').src=img;
-document.getElementById('popName').innerText=name;
-document.getElementById('popMrp').innerText='MRP ₹'+mrp;
-document.getElementById('popRate').innerText='₹'+rate;
-document.getElementById('popup').style.display='flex';
-}
+function openPop(img,name,mrp,rate){document.getElementById('popImg').src=img;document.getElementById('popName').innerText=name;document.getElementById('popMrp').innerText='MRP ₹'+mrp;document.getElementById('popRate').innerText='₹'+rate;document.getElementById('popup').style.display='flex';}
 function closePop(){document.getElementById('popup').style.display='none';}
 function add(i){let s="";if(products[i].fd){s=document.getElementById('s'+i).value;if(!s){alert('Shade Chuniye');return}}cart.push({...products[i],shade:s});localStorage.setItem('sb_cart',JSON.stringify(cart));update()}
 function update(){let h="",t=0;cart.forEach((c,idx)=>{t+=c.rate;let sh=c.shade?` (${c.shade})`:"";h+=`<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px dashed #ddd"><span>${c.name}${sh}</span><span>₹${c.rate} <b onclick="cart.splice(${idx},1);localStorage.setItem('sb_cart',JSON.stringify(cart));update()" style="color:red"> x</b></span></div>`});document.getElementById('citems').innerHTML=h||"Cart Khali hai";document.getElementById('total').innerText=t}
