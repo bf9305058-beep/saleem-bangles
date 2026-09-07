@@ -3,67 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Saleem Bangles - 15 Min Fast Delivery All Over Lucknow - A Complete Bangle Hub</title>
+<title>Saleem Bangles - 15 Min Fast Delivery All Over Lucknow</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap');
 body{font-family:'Poppins',sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 50%,#f093fb 100%);margin:0;padding:0;display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:100vh;text-align:center;}
-.logo{font-size:42px;font-weight:700;color:white;text-shadow:0 4px 15px rgba(0,0,0,0.3);margin-bottom:10px;letter-spacing:2px;}
+.logo{font-size:42px;font-weight:700;color:white;text-shadow:0 4px 15px rgba(0,0,0,0.3);margin-bottom:10px;}
 .logo span{color:#ffd700;}
-.welcome-box{background:rgba(255,255,255,0.95);padding:30px 40px 50px 40px;border-radius:25px;box-shadow:0 15px 40px rgba(0,0,0,0.3);max-width:550px;width:90%;backdrop-filter:blur(10px);}
-.welcome-box h2{color:#d63384;font-size:24px;margin-bottom:8px;}
-.welcome-box p{color:#666;font-size:15px;margin-bottom:35px;}
-.btn-container{display:flex;flex-direction:column;gap:22px;}
-.btn{padding:20px 30px;font-size:22px;font-weight:700;border:none;border-radius:15px;cursor:pointer;transition:all 0.3s ease;box-shadow:0 6px 18px rgba(0,0,0,0.25);letter-spacing:1px;}
-.btn:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 10px 25px rgba(0,0,0,0.35);}
+.welcome-box{background:rgba(255,255,255,0.95);padding:25px 25px 35px 25px;border-radius:25px;box-shadow:0 15px 40px rgba(0,0,0,0.3);max-width:550px;width:90%;}
+.btn{padding:18px 25px;font-size:20px;font-weight:700;border:none;border-radius:15px;cursor:pointer;width:100%;margin-top:12px;box-shadow:0 6px 18px rgba(0,0,0,0.25);}
 .btn-bangles{background:linear-gradient(90deg,#0099ff,#00d4ff);color:white;}
 .btn-cosmetics{background:linear-gradient(90deg,#ff69b4,#ff1493);color:white;}
-.footer{text-align:center;margin-top:20px;padding:20px;font-size:14px;color:white;text-shadow:0 2px 5px rgba(0,0,0,0.3);}
-.logo .and{font-size:28px;color:#ffd700;}
 </style>
 </head>
 <body>
-<div class="logo">💎 SALEEM BANGLES <span class="and">&</span> COSMETICS 💄</div>
+<div class="logo">💎 SALEEM BANGLES <span>&</span> COSMETICS 💄</div>
 
 <div class="welcome-box">
-  <!-- GREEN HIGHLIGHT BANNER - STYLISH -->
-  <div style="background: linear-gradient(90deg, #00b050, #00e676, #16a34a); color:white; padding:12px 16px; border-radius:30px; text-align:center; font-weight:800; font-size:15px; margin-bottom:16px; box-shadow:0 5px 15px rgba(0, 176, 80, 0.5); border:2px solid #bbf7d0; letter-spacing:0.5px;">
-    🛵⚡ 15 Min Fast Delivery All Over Lucknow ✅
-  </div>
-<div style="width:100%;margin:10px 0;overflow:hidden;border-radius:14px">
-<img id="adSlide" src="Banner1.jpg" style="width:100%;border-radius:14px;display:block">
+<div style="background:linear-gradient(90deg,#00b050,#00e676);color:white;padding:12px;border-radius:30px;font-weight:800;margin-bottom:12px;">🛵⚡ 15 Min Fast Delivery All Over Lucknow ✅</div>
+
+<!-- 3 ADS - NO CUT - FULL SHOW -->
+<div style="width:100%;border-radius:15px;overflow:hidden;margin-bottom:18px;">
+<img id="adSlide" src="Banner1.jpg" style="width:100%;display:block;border-radius:15px;">
 </div>
+
+<h2 style="color:#d63384;">✨ A Complete Bangle Hub ✨</h2>
+<p>Traditional & Modern Bangles + Cosmetics</p>
+
+<button class="btn btn-bangles" onclick="location.href='bangles.html'">💎 BANGLES COLLECTION<br><small>Click Here 👇</small></button>
+<button class="btn btn-cosmetics" onclick="location.href='cosmetics.html'">💄 COSMETICS COLLECTION<br><small>Click Here 👇</small></button>
+
+<div style="border:1px solid #ddd;border-radius:12px;padding:12px;margin-top:20px;background:white;text-align:left;font-size:13px;">
+📍 <b>Akbarigate Lucknow, 226003</b><br>
+🚚 Delivery by <span id="d"></span><br>
+<div style="background:#fff3cd;padding:8px;border-radius:8px;margin-top:8px;text-align:center;">✅ All India Delivery<br>🌐 International Delivery<br>💳 UPI: gpay-12205946398@okbizaxis</div>
+</div>
+</div>
+
 <script>
+document.getElementById('d').innerText=new Date(Date.now()+7*86400000).toLocaleDateString('en-IN',{day:'numeric',month:'short'});
 let ads=["Banner1.jpg","Banner2.jpg","Banner3.jpg"];
 let a=0;
-setInterval(()=>{
-a=(a+1)%3;
-document.getElementById('adSlide').src=ads[a];
-},3000);
+setInterval(()=>{a=(a+1)%3;document.getElementById('adSlide').src=ads[a];},3000);
 </script>
-</div>
-<script>let a=0;setInterval(()=>{a=(a+1)%3;document.getElementById('adBox').style.transform=`translateX(-${a*33.33}%)`;},3000);</script>
-  <h2>✨ A Complete Bangle Hub ✨</h2>
-  <p>Traditional & Modern Bangles + Cosmetics</p>
-
-  <div class="btn-container">
-    <button class="btn btn-bangles" onclick="window.location.href='bangles.html'">💎 BANGLES COLLECTION<br><small>Click Here 👇</small></button>
-    <button class="btn btn-cosmetics" onclick="window.location.href='cosmetics.html'">💄 COSMETICS COLLECTION<br><small>Click Here 👇</small></button>
-  </div>
-
-  <div style="border:1px solid #e0e0e0; border-radius:12px; padding:16px; margin-top:30px; background:white; text-align:left;">
-    <h3 style="margin:0 0 12px 0; font-size:17px; color:#333; text-align:center;">📦 Delivery details</h3>
-    <div style="display:flex; align-items:center; margin-bottom:10px; font-size:14px;"><span style="margin-right:8px;">📍</span><span><b>Akbarigate Lucknow, 226003</b></span></div>
-    <div style="display:flex; align-items:center; margin-bottom:14px; font-size:14px;"><span style="margin-right:8px;">🚚</span><div><b>Delivery by <span id="delivery-date"></span></b></div></div>
-    <div style="background:#fff3cd; border:1px solid #ffc107; padding:10px; border-radius:10px; margin-top:10px; text-align:center; font-size:14px;">✅ <b>All India Delivery Available</b><br>🌐 <b>International Delivery Available</b><br><span style="font-size:12px; color:#666;">💳 Prepaid Orders Only - UPI: gpay-12205946398@okbizaxis</span></div>
-  </div>
-</div>
- 
-<div class="footer"><b>📍 Amin Complex Shop No. 8 & 48, Basement, Akbari Gate, Nakhas, Lucknow</b><br>📞 7703067297 | Prop: Mohd Saeed</div>
-
-<script>
-function getDeliveryDate(days){let date=new Date();date.setDate(date.getDate()+days);let options={day:'numeric',month:'short',weekday:'short'};return date.toLocaleDateString('en-IN',options);}
-document.getElementById('delivery-date').innerText=getDeliveryDate(7);
-</script>
-<script src="cart-common.js"></script>
 </body>
 </html>
