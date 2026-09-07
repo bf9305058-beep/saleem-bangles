@@ -1,49 +1,64 @@
 <!DOCTYPE html>
-<html lang="hi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Saleem Bangles - 15 Min Fast Delivery All Over Lucknow</title>
+<html lang="hi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Saleem Bangles - Lucknow's Best</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap');
-body{font-family:'Poppins',sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 50%,#f093fb 100%);margin:0;padding:0;display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:100vh;text-align:center;}
-.logo{font-size:42px;font-weight:700;color:white;text-shadow:0 4px 15px rgba(0,0,0,0.3);margin-bottom:10px;}
-.logo span{color:#ffd700;}
-.welcome-box{background:rgba(255,255,255,0.95);padding:25px 25px 35px 25px;border-radius:25px;box-shadow:0 15px 40px rgba(0,0,0,0.3);max-width:550px;width:90%;}
-.btn{padding:18px 25px;font-size:20px;font-weight:700;border:none;border-radius:15px;cursor:pointer;width:100%;margin-top:12px;box-shadow:0 6px 18px rgba(0,0,0,0.25);}
-.btn-bangles{background:linear-gradient(90deg,#0099ff,#00d4ff);color:white;}
-.btn-cosmetics{background:linear-gradient(90deg,#ff69b4,#ff1493);color:white;}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap');
+body{font-family:'Poppins',sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 50%,#f093fb 100%);margin:0;padding:0;display:flex;flex-direction:column;align-items:center;min-height:100vh;text-align:center;padding-bottom:80px}
+.logo{font-size:24px;font-weight:800;color:white;margin:15px 0;text-shadow:0 2px 5px black}
+.welcome-box{background:rgba(255,255,255,0.96);padding:18px;border-radius:20px;width:92%;max-width:500px;box-shadow:0 8px 25px rgba(0,0,0,0.2)}
+.btn{padding:15px;width:100%;font-size:17px;font-weight:700;border:none;border-radius:12px;margin-top:10px;cursor:pointer}
+.btn-bangles{background:linear-gradient(90deg,#0099ff,#00d4ff);color:white}
+.btn-cosmetics{background:linear-gradient(90deg,#ff69b4,#ff1493);color:white}
+/* CHAMAK */
+.banner-box{position:relative;width:100%;border-radius:15px;overflow:hidden;margin-bottom:12px;border:2px solid gold;cursor:pointer;box-shadow:0 4px 15px rgba(255,215,0,0.4)}
+.banner-box::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.7),transparent);animation:shine 2.5s infinite}
+@keyframes shine{0%{left:-100%}100%{left:150%}}
+.whatsapp-float{position:fixed;bottom:20px;right:20px;background:#25D366;color:white;width:62px;height:62px;border-radius:50%;display:flex;justify-content:center;align-items:center;font-size:32px;box-shadow:0 4px 15px rgba(0,0,0,0.4);z-index:999;text-decoration:none}
+.insta-btn{border:none;padding:11px;width:100%;border-radius:10px;margin-top:8px;font-weight:700;color:white;cursor:pointer}
 </style>
-</head>
-<body>
-<div class="logo">💎 SALEEM BANGLES <span>&</span> COSMETICS 💄</div>
-
+</head><body>
+<div class="logo">💎 SALEEM BANGLES & COSMETICS 💄</div>
 <div class="welcome-box">
-<div style="background:linear-gradient(90deg,#00b050,#00e676);color:white;padding:12px;border-radius:30px;font-weight:800;margin-bottom:12px;">🛵⚡ 15 Min Fast Delivery All Over Lucknow ✅</div>
+<div style="background:linear-gradient(90deg,#00b050,#00e676);color:white;padding:10px;border-radius:30px;font-weight:800;margin-bottom:12px;font-size:13px">🛵⚡ 15 Min Fast Delivery All Over Lucknow ✅</div>
 
-<!-- 3 ADS - NO CUT - FULL SHOW -->
-<div style="width:100%;border-radius:15px;overflow:hidden;margin-bottom:18px;">
-<img id="adSlide" src="Banner1.jpg" style="width:100%;display:block;border-radius:15px;">
+<!-- 4 BANNER + CLICKABLE + CHAMAK -->
+<div class="banner-box" onclick="location.href='cosmetics.html'">
+<img id="adSlide" src="Banner1.jpg" style="width:100%;display:block">
 </div>
 
-<h2 style="color:#d63384;">✨ A Complete Bangle Hub ✨</h2>
-<p>Traditional & Modern Bangles + Cosmetics</p>
+<!-- TIMER -->
+<div style="background:#ff4757;color:white;padding:10px;border-radius:10px;font-weight:800;margin-bottom:12px;animation:blink 1s infinite">⏰ OFFER ENDS IN: <span id="timer">02:00:00</span> ⏰<br><small style="font-size:12px">1208 → 599 Only! Jaldi Karo!</small></div>
+<style>@keyframes blink{0%,100%{opacity:1}50%{opacity:0.8}}</style>
 
-<button class="btn btn-bangles" onclick="location.href='bangles.html'">💎 BANGLES COLLECTION<br><small>Click Here 👇</small></button>
-<button class="btn btn-cosmetics" onclick="location.href='cosmetics.html'">💄 COSMETICS COLLECTION<br><small>Click Here 👇</small></button>
+<h2 style="color:#d63384;margin:8px 0;font-size:20px">✨ A Complete Bangle Hub ✨</h2>
+<p style="margin:5px 0 10px 0;font-size:14px;color:#555">Traditional & Modern Bangles + Cosmetics</p>
+<button class="btn btn-bangles" onclick="location.href='bangles.html'">💎 BANGLES COLLECTION</button>
+<button class="btn btn-cosmetics" onclick="location.href='cosmetics.html'">💄 COSMETICS COLLECTION</button>
 
-<div style="border:1px solid #ddd;border-radius:12px;padding:12px;margin-top:20px;background:white;text-align:left;font-size:13px;">
-📍 <b>Akbarigate Lucknow, 226003</b><br>
-🚚 Delivery by <span id="d"></span><br>
-<div style="background:#fff3cd;padding:8px;border-radius:8px;margin-top:8px;text-align:center;">✅ All India Delivery<br>🌐 International Delivery<br>💳 UPI: gpay-12205946398@okbizaxis</div>
+<!-- INSTA BOTH -->
+<button class="insta-btn" style="background:linear-gradient(90deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);margin-top:12px" onclick="window.open('https://instagram.com/saleembanglecosmetics2.0','_blank')">📸 Follow @saleembanglecosmetics2.0</button>
+<button class="insta-btn" style="background:linear-gradient(90deg,#833ab4,#fd1d1d,#fcb045)" onclick="window.open('https://instagram.com/salemetics','_blank')">💄 Follow @salemetics</button>
+
+<div style="border:1px solid #eee;border-radius:10px;padding:10px;margin-top:12px;text-align:left;font-size:12px;background:white">📍 Akbarigate Lucknow<br>🚚 Delivery by <span id="d"></span><br><div style="background:#fff3cd;padding:6px;border-radius:6px;text-align:center;margin-top:6px">✅ All India | 🌐 International<br>💳 UPI: gpay-12205946398@okbizaxis</div></div>
+
+<!-- BY SAEEDROYALSIDDIQUI -->
+<div style="margin-top:15px;padding:10px;background:black;color:gold;border-radius:10px;font-weight:800;letter-spacing:1px;font-size:13px;text-align:center">
+  👑 Developed By <span style="color:white">Saeedroyalsiddiqui</span> 👑
 </div>
 </div>
+
+<!-- WHATSAPP -->
+<a class="whatsapp-float" href="https://wa.me/919999999999?text=Assalamualaikum%20Saleem%20Bhai,%20mujhe%20order%20karna%20hai" target="_blank">💬</a>
 
 <script>
 document.getElementById('d').innerText=new Date(Date.now()+7*86400000).toLocaleDateString('en-IN',{day:'numeric',month:'short'});
 let ads=["Banner1.jpg","Banner2.jpg","Banner3.jpg","Banner4.jpg"];
 let a=0;
 setInterval(()=>{a=(a+1)%4;document.getElementById('adSlide').src=ads[a];},3000);
+let time=2*60*60;
+setInterval(()=>{
+let h=Math.floor(time/3600),m=Math.floor((time%3600)/60),s=time%60;
+document.getElementById('timer').innerText=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+if(time>0)time--;else time=2*60*60;
+},1000);
 </script>
-</body>
-</html>
+</body></html>
