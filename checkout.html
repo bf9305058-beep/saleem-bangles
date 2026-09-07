@@ -26,29 +26,44 @@ input, textarea{width:100%; padding:13px; margin:8px 0; border:1px solid #ddd; b
 <textarea id="c_address" placeholder="Full Shipping Address *"></textarea>
 <div class="pay-box">
 <div>UPI ID: <b>gpay-12205946398@okbizaxis</b><br>Account: <b>Mohd Saeed</b></div>
-<img id="qrImg" src="" style="width:200px; border-radius:12px; margin:10px 0; border:1px solid #ddd; padding:5px; background:white;">
+<img id="qrImg" src="" style="width:220px; border-radius:12px; margin:10px 0; border:1px solid #ddd; padding:5px; background:white;">
 <div style="font-size:16px; font-weight:700" id="payAmount">₹0</div>
 <a id="upiLink" href=""><button class="btn btn-pay">Pay via UPI App</button></a>
 </div>
 <button class="btn btn-whatsapp" onclick="sendOrder()">Confirm Payment & Place Order via WhatsApp</button>
 <a href="cosmetics.html" style="display:block; text-align:center; margin-top:20px; color:#e91e63; text-decoration:none; font-weight:600;">← Back to Shopping</a>
+<div style="display:flex; gap:10px; justify-content:center; margin-top:10px">
+<a href="brands.html" style="color:#333; text-decoration:none; font-weight:600;">← All Brands</a>
+<a href="bangles.html" style="color:#333; text-decoration:none; font-weight:600;">← Bangles</a>
+</div>
 </div>
 <script>
-// YAHAN THEEK KIYA - sb_cart pehle check karega
+// YAHAN FIX KIYA - MARS ka saleemCart bhi add kiya
 let cart = JSON.parse(localStorage.getItem("sb_cart")||"[]");
+if(cart.length==0){ cart = JSON.parse(localStorage.getItem("saleemCart")||"[]"); } // MARS WALA
 if(cart.length==0){ cart = JSON.parse(localStorage.getItem("saleem_cart")||"[]"); }
 if(cart.length==0){ cart = JSON.parse(localStorage.getItem("cart")||"[]"); }
 
-// YAHAN THEEK KIYA - rate || price
-let total = cart.reduce((s,i)=>s+ (parseInt(i.rate || i.price)||0),0);
+// YAHAN FIX KIYA - qty * rate
+let total = 0;
+cart.forEach(i=>{
+  let price = parseInt(i.rate || i.price || 0);
+  let qty = parseInt(i.qty || 1);
+  total += price * qty;
+});
+
 let shipping = 80;
 let finalTotal = total + shipping;
 
 if(cart.length==0){
-  document.getElementById("order-summary").innerHTML = "<p style='color:red; text-align:center;'><b>Cart Khali Hai 🛒</b><br><a href='maliao.html'>← Add to Cart karo</a></p>";
+  document.getElementById("order-summary").innerHTML = "<p style='color:red; text-align:center;'><b>Cart Khali Hai 🛒</b><br><a href='mars.html'>MARS me Add to Cart karo</a></p>";
   document.getElementById("payAmount").innerText = "Cart Empty";
 } else {
-  document.getElementById("order-summary").innerHTML = cart.map(i=>`• ${i.name} ${i.shade ? '('+i.shade+')' : ''} - ₹${i.rate || i.price}`).join("<br>") + `<br><br><b>Subtotal: ₹${total}</b><br>Shipping: ₹${shipping}<br><b>Total: ₹${finalTotal}</b>`;
+  document.getElementById("order-summary").innerHTML = cart.map(i=>{
+    let p = i.rate || i.price;
+    let q = i.qty || 1;
+    return `• ${i.name} ${i.shade ? '('+i.shade+')' : ''} x ${q} = ₹${p*q}`;
+  }).join("<br>") + `<br><br><b>Subtotal: ₹${total}</b><br>Shipping: ₹${shipping}<br><b>Total: ₹${finalTotal}</b>`;
   document.getElementById("payAmount").innerText = "Pay: ₹" + finalTotal;
   let upiID = "gpay-12205946398@okbizaxis";
   let upiLink = `upi://pay?pa=${upiID}&pn=Mohd%20Saeed&am=${finalTotal}&cu=INR`;
@@ -62,8 +77,12 @@ function sendOrder(){
   let address = document.getElementById("c_address").value.trim();
   if(!name || !mobile || !address){ alert("Name / Mobile / Address bharo"); return; }
   let msg = `*NEW ORDER*%0AName: ${name}%0AMobile: ${mobile}%0AAddress: ${address}%0A%0A`;
-  cart.forEach(i=>{ msg += `• ${i.name} ${i.shade||''} - ₹${i.rate || i.price}%0A`; });
-  msg += `%0ATotal: ₹${finalTotal}%0A`;
+  cart.forEach(i=>{ 
+    let p = i.rate || i.price;
+    let q = i.qty || 1;
+    msg += `• ${i.name} ${i.shade||''} x ${q} = ₹${p*q}%0A`; 
+  });
+  msg += `%0ASubtotal: ₹${total}%0AShipping: ₹${shipping}%0ATotal: ₹${finalTotal}%0A`;
   window.open(`https://wa.me/917703067297?text=${msg}`, '_blank');
 }
 </script>
