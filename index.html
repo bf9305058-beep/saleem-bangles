@@ -30,11 +30,16 @@ body{font-family:'Poppins',sans-serif;background:linear-gradient(135deg,#667eea 
     🛵⚡ 15 Min Fast Delivery All Over Lucknow ✅
   </div>
 <div style="width:100%;margin:10px 0;overflow:hidden;border-radius:14px">
-<div id="adBox" style="display:flex;width:300%;transition:0.6s">
-<img src="ad1.jpg" style="width:100%">
-<img src="ad2.jpg" style="width:100%">
-<img src="ad3.jpg" style="width:100%">
+<img id="adSlide" src="Banner1.jpg" style="width:100%;border-radius:14px;display:block">
 </div>
+<script>
+let ads=["Banner1.jpg","Banner2.jpg","Banner3.jpg"];
+let a=0;
+setInterval(()=>{
+a=(a+1)%3;
+document.getElementById('adSlide').src=ads[a];
+},3000);
+</script>
 </div>
 <script>let a=0;setInterval(()=>{a=(a+1)%3;document.getElementById('adBox').style.transform=`translateX(-${a*33.33}%)`;},3000);</script>
   <h2>✨ A Complete Bangle Hub ✨</h2>
