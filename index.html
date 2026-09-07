@@ -41,9 +41,9 @@ body{font-family:'Poppins',sans-serif;background:linear-gradient(135deg,#667eea 
 
 <script>
 document.getElementById('d').innerText=new Date(Date.now()+7*86400000).toLocaleDateString('en-IN',{day:'numeric',month:'short'});
-let ads=["Banner1.jpg","Banner2.jpg","Banner3.jpg"];
+let ads=["Banner1.jpg","Banner2.jpg","Banner3.jpg","Banner4.jpg"];
 let a=0;
-setInterval(()=>{a=(a+1)%3;document.getElementById('adSlide').src=ads[a];},3000);
+setInterval(()=>{a=(a+1)%4;document.getElementById('adSlide').src=ads[a];},3000);
 </script>
 </body>
 </html>
