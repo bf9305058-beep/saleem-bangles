@@ -11,7 +11,6 @@ h1{text-align:center;color:#111}
 .box img{width:100%;height:230px;object-fit:contain;cursor:pointer;background:white;border-radius:8px}
 .mrp{text-decoration:line-through;color:grey;font-size:13px}
 .price{color:#e91e63;font-weight:bold;font-size:16px}
-.save{color:green;font-size:12px}
 select,input{width:100%;padding:8px;margin-top:6px;border-radius:8px;border:1px solid #ccc;box-sizing:border-box}
 button{width:100%;padding:10px;margin-top:6px;border:none;border-radius:8px;font-weight:bold;cursor:pointer;background:#111;color:white}
 .cart-box{max-width:500px;margin:20px auto;background:white;padding:15px;border-radius:12px;box-shadow:0 2px 10px #ccc;text-align:center}
@@ -22,65 +21,48 @@ button{width:100%;padding:10px;margin-top:6px;border:none;border-radius:8px;font
 </head>
 <body>
 <h1>SWISS BEAUTY - SALEEM BANGLES</h1>
-  <div style="display:flex;gap:10px;justify-content:center;padding:10px;max-width:500px;margin:auto">
+<div style="display:flex;gap:10px;justify-content:center;padding:10px;max-width:500px;margin:auto">
 <a href="cosmetics.html" style="flex:1;background:black;color:white;padding:12px;text-align:center;border-radius:25px;text-decoration:none;font-weight:bold">← All Brands</a>
 <a href="index.html" style="flex:1;background:#e91e63;color:white;padding:12px;text-align:center;border-radius:25px;text-decoration:none;font-weight:bold">← Back to Bangles</a>
 </div>
 <div class="grid">
-
 <div class="box"><img src="swiss.jpg" onclick="openImg(this.src)"><h3>Swiss Beauty Compact Powder</h3><p><span class="mrp">MRP ₹349</span> <span class="price">FLAT @ ₹250</span></p><select id="compactShade"><option value="">Shade Chuno</option><option>01 Pearl Ivory</option><option>02 Light Medium</option><option>03 Natural Nude</option></select><input type="number" id="compactQty" value="1" min="1"><button onclick="addCompactToCart()">Add to Cart</button></div>
-
 <div class="box"><img src="swiss-combo.jpg" onclick="openImg(this.src)"><h3>Swiss Beauty Mega Sale</h3><p><span class="mrp">₹1675</span> <span class="price">FLAT @ ₹999</span></p><input type="number" id="qtyCombo" value="1" min="1"><button onclick="addComboToCart()">Add to Cart</button></div>
-
 <div class="box"><img src="swiss-makup-base.jpg" onclick="openImg(this.src)"><h3>Swiss Beauty Makeup Base</h3><p><span class="mrp">MRP ₹429</span> <span class="price">FLAT @ ₹321</span></p><select id="makeupBaseShade"><option value="">Shade Chuno</option><option>01 Natural Tint</option><option>02 Pink Tint</option></select><input type="number" id="makeupBaseQty" value="1" min="1"><button onclick="addMakeupBaseToCart()">Add to Cart</button></div>
-
 <div class="box"><img src="swiss-stobe-cream.jpg" onclick="openImg(this.src)"><h3>Swiss Beauty Strobe Cream</h3><p><span class="mrp">MRP ₹329</span> <span class="price">FLAT @ ₹249</span></p><select id="strobeShade"><option value="">Shade Chuno</option><option>Pink Twilight</option><option>Moonlit Glow</option></select><input type="number" id="strobeQty" value="1" min="1"><button onclick="addStrobeToCart()">Add to Cart</button></div>
-
 <div class="box"><img src="swiss-grip-primer.jpg" onclick="openImg(this.src)"><h3>Swiss Grip Primer</h3><p><span class="mrp">MRP ₹449</span> <span class="price">FLAT @ ₹314</span></p><input type="number" id="primerQty" value="1" min="1"><button onclick="addPrimerToCart()">Add to Cart</button></div>
-
 <div class="box"><img src="swiss-liner-maskara.jpg" onclick="openImg(this.src)"><h3>Swiss Liner + Mascara Combo</h3><p><span class="mrp">MRP ₹528</span> <span class="price">FLAT @ ₹369</span></p><input type="number" id="linerMascaraQty" value="1" min="1"><button onclick="addLinerMascaraToCart()">Add to Cart</button></div>
-
 <div class="box"><img src="swiss-foundation.jpg" onclick="openImg(this.src)"><h3>Swiss Foundation</h3><p><span class="mrp">MRP ₹429</span> <span class="price">FLAT @ ₹299</span></p><select id="foundationShade"><option value="">Shade Chuno</option><option>01 White Ivory</option><option>02 Rose Blush</option><option>03 Natural Beige</option></select><input type="number" id="foundationQty" value="1" min="1"><button onclick="addFoundationToCart()">Add to Cart</button></div>
-
 <div class="box"><img src="swiss-black-primer.jpg" onclick="openImg(this.src)"><h3>Swiss Black Primer</h3><p><span class="mrp">MRP ₹399</span> <span class="price">FLAT @ ₹279</span></p><input type="number" id="blackPrimerQty" value="1" min="1"><button onclick="addBlackPrimerToCart()">Add to Cart</button></div>
-
 <div class="box"><img src="swiss-cheek-tint.jpg" onclick="openImg(this.src)"><h3>Swiss Cream n Tint</h3><p><span class="mrp">MRP ₹219</span> <span class="price">FLAT @ ₹129</span></p><input type="number" id="cheekTintQty" value="1" min="1"><button onclick="addCheekTintToCart()">Add to Cart</button></div>
-
 <div class="box"><img src="swiss-cream-blush.jpg" onclick="openImg(this.src)"><h3>Swiss Cream Blush</h3><p><span class="mrp">MRP ₹299</span> <span class="price">FLAT @ ₹229</span></p><input type="number" id="creamBlushQty" value="1" min="1"><button onclick="addCreamBlushToCart()">Add to Cart</button></div>
-
 <div class="box" style="border-color:#c9a86a"><img src="swiss-pearl.jpg" onclick="openImg(this.src)"><h3>Swiss Beauty Pearl Base</h3><p><span class="mrp">MRP ₹329</span> <span class="price">FLAT @ ₹229</span></p><select id="pearlShade"><option value="">Shade Chuno</option><option>01 Gold Pink</option><option>02 Silver Pink</option></select><input type="number" id="pearlQty" value="1" min="1"><button style="background:#c9a86a" onclick="addPearlToCart()">Add to Cart</button></div>
-
 <div class="box"><img src="swiss-waterdrop.jpg" onclick="openImg(this.src)"><h3>Swiss Waterdrop Primer</h3><p><span class="mrp">MRP ₹229</span> <span class="price">FLAT @ ₹179</span></p><input type="number" id="waterdropQty" value="1" min="1"><button onclick="addWaterdropToCart()">Add to Cart</button></div>
-
 <div class="box"><img src="swiss-gold-sirum.jpg" onclick="openImg(this.src)"><h3>Swiss Gold Sirum</h3><p><span class="mrp">MRP ₹299</span> <span class="price">FLAT @ ₹225</span></p><input type="number" id="sirumQty" value="1" min="1"><button onclick="addSirumToCart()">Add to Cart</button></div>
-
 <div class="box"><img src="swiss-natrual-fixer.jpg" onclick="openImg(this.src)"><h3>Swiss Natural Fixer</h3><p><span class="mrp">MRP ₹289</span> <span class="price">FLAT @ ₹219</span></p><input type="number" id="natrualFixerQty" value="1" min="1"><button onclick="addNatrualFixerToCart()">Add to Cart</button></div>
-
 <div class="box"><img src="swiss-shimer-fixer.jpg" onclick="openImg(this.src)"><h3>Swiss Shimer Fixer</h3><p><span class="mrp">MRP ₹369</span> <span class="price">FLAT @ ₹249</span></p><input type="number" id="shimerFixerQty" value="1" min="1"><button onclick="addShimerFixerToCart()">Add to Cart</button></div>
-
 <div class="box"><img src="swiss-setting-spray.jpg" onclick="openImg(this.src)"><h3>Swiss Setting Spray</h3><p><span class="mrp">MRP ₹329</span> <span class="price">FLAT @ ₹249</span></p><input type="number" id="settingQty" value="1" min="1"><button onclick="addSettingToCart()">Add to Cart</button></div>
-
 <div class="box"><img src="swiss-concilor.jpg" onclick="openImg(this.src)"><h3>Swiss Liquid Concealer</h3><p><span class="mrp">MRP ₹249</span> <span class="price">FLAT @ ₹199</span></p><select id="concealerShade"><option value="">Shade Chuno</option><option>01 WARM-SAND</option><option>02 SAND-SABLE</option><option>03 LIGHT-MOYEN</option></select><input type="number" id="concealerQty" value="1" min="1"><button onclick="addConcealerToCart()">Add to Cart</button></div>
-
 <div class="box" style="border-color:#b45309;background:#fff8f0"><img src="swiss-losepowder.jpeg" onclick="openImg(this.src)"><h3>Swiss Loose Powder</h3><p><span class="mrp">MRP ₹499</span> <span class="price">FLAT @ ₹374</span></p><select id="losePowderShade"><option value="">Shade Chuno</option><option>01 - Natural</option><option>02 - Banana Powder</option><option>03 - Medium / Moyen</option><option>04 - Medium Deep / Mayon Fance</option></select><input type="number" id="losePowderQty" value="1" min="1"><button style="background:#b45309" onclick="addLosePowderToCart()">Add to Cart</button></div>
-
 <div class="box" style="border-color:#222"><img src="swiss-jel-kajal.jpeg" onclick="openImg(this.src)"><h3>Swiss Jel Kajal</h3><p><span class="mrp">MRP ₹429</span> <span class="price">FLAT @ ₹320</span></p><input type="number" id="jelKajalQty" value="1" min="1"><button onclick="addJelKajalToCart()">Add to Cart</button></div>
-
 <div class="box" style="border-color:#e91e63;background:#fff0f5"><img src="swiss-beauty-lipliner.jpg" onclick="openImg(this.src)"><h3>Swiss Beauty Lipliner</h3><p><span class="price" style="color:#111;font-size:18px">MRP ₹70</span></p><select id="liplinerShade"><option value="">Shade Chuno</option><option>01 Brown</option><option>02 Red</option><option>03 Pink</option><option>04 Nude</option><option>05 Maroon</option><option>06 Plum</option></select><input type="number" id="liplinerQty" value="1" min="1"><button style="background:#e91e63" onclick="addSwissLiplinerToCart()">Add - ₹70</button></div>
-
 </div>
-
-<div class="cart-box"><h3>🛒 Your Cart</h3><div id="cartItems">Cart Khali hai</div><p id="cartTotal"><b>Total: ₹0</b></p><button onclick="orderAllWA()" style="background:#25D366">Order on WhatsApp</button><button onclick="payAll()" style="background:#ff6a00">Proceed to Checkout 💳</button><button onclick="clearCart()" style="background:white;color:#333;border:1px solid #ccc">Clear Cart</button></div>
+<div class="cart-box"><h3>🛒 Your Cart</h3><div id="cartItems">Cart Khali hai</div><p id="cartTotal"><b>Total: ₹0</b></p><button onclick="orderAllWA()" style="background:#25D366">Order on WhatsApp</button><button onclick="payAll()" style="background:#ff6a00">Proceed to Checkout 💳</button><button onclick="clearCart()" style="background:white;color:#333;border:1px solid #ccc">Clear Cart</button>
+<div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;justify-content:center">
+<a href="cosmetics.html" style="flex:1;background:black;color:white;padding:10px;text-align:center;border-radius:20px;text-decoration:none;font-weight:bold;font-size:12px">← Back to All Brands</a>
+<a href="index.html" style="flex:1;background:#e91e63;color:white;padding:10px;text-align:center;border-radius:20px;text-decoration:none;font-weight:bold;font-size:12px">← Back to Bangles</a>
+<a href="kiss-beauty.html" style="flex:1;background:#8a5a1d;color:white;padding:10px;text-align:center;border-radius:20px;text-decoration:none;font-weight:bold;font-size:12px">← Kiss Beauty</a>
+<a href="mars.html" style="flex:1;background:#c0392b;color:white;padding:10px;text-align:center;border-radius:20px;text-decoration:none;font-weight:bold;font-size:12px">← MARS</a>
+</div>
+</div>
 <div id="imgPopup" onclick="this.style.display='none'"><img id="popupImg" src=""></div>
-
 <script>
 function openImg(src){document.getElementById('popupImg').src=src;document.getElementById('imgPopup').style.display='flex';}
-function renderCart(){let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]');let h='';let t=0;c.forEach((it,i)=>{t+=it.price;h+=it.name+" - ₹"+it.price+" <span onclick='rem("+i+")' style='background:#ffe0e6;color:#ff5a9e;padding:3px 8px;border-radius:6px;cursor:pointer;margin-left:6px'>🗑️</span><br><br>"});document.getElementById('cartItems').innerHTML=h||'Cart Khali hai';document.getElementById('cartTotal').innerHTML='<b>Total: ₹'+t+'</b>';localStorage.setItem('saleemCart',JSON.stringify(c.map(x=>({name:x.name,price:x.price,qty:1}))));localStorage.setItem('sb_cart',JSON.stringify(c));}
+function renderCart(){let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]');let h='';let t=0;c.forEach((it,i)=>{t+=it.price;h+=it.name+" - ₹"+it.price+" <span onclick='rem("+i+")' style='background:#ffe0e6;color:#ff5a9e;padding:3px 8px;border-radius:6px;cursor:pointer;margin-left:6px'>🗑️</span><br><br>"});document.getElementById('cartItems').innerHTML=h||'Cart Khali hai';document.getElementById('cartTotal').innerHTML='<b>Total: ₹'+t+'</b>';}
 function rem(i){let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]');c.splice(i,1);localStorage.setItem('saleem_cart',JSON.stringify(c));renderCart();}
-function clearCart(){localStorage.removeItem('saleem_cart');localStorage.removeItem('saleemCart');localStorage.removeItem('sb_cart');renderCart();}
+function clearCart(){localStorage.removeItem('saleem_cart');renderCart();}
 function addWithShade(name,price,shadeId,qtyId){var s=document.getElementById(shadeId).value;if(!s){alert("Shade select karo ben!");return;}var q=parseInt(document.getElementById(qtyId).value)||1;let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]');for(let i=0;i<q;i++)c.push({name:name+" - "+s,price:price});localStorage.setItem('saleem_cart',JSON.stringify(c));renderCart();alert(s+" Cart me add ✅");}
 function addSimple(name,price,qtyId){var q=parseInt(document.getElementById(qtyId).value)||1;let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]');for(let i=0;i<q;i++)c.push({name:name,price:price});localStorage.setItem('saleem_cart',JSON.stringify(c));renderCart();alert(name+" Cart me add ✅");}
-
 function addCompactToCart(){addWithShade("Swiss Compact",250,'compactShade','compactQty')}
 function addComboToCart(){addSimple("Swiss Mega Sale",999,'qtyCombo')}
 function addMakeupBaseToCart(){addWithShade("Swiss Makeup Base",321,'makeupBaseShade','makeupBaseQty')}
@@ -101,7 +83,6 @@ function addConcealerToCart(){addWithShade("Swiss Concealer",199,'concealerShade
 function addLosePowderToCart(){addWithShade("Swiss Loose Powder",374,'losePowderShade','losePowderQty')}
 function addJelKajalToCart(){addSimple("Swiss Jel Kajal",320,'jelKajalQty')}
 function addSwissLiplinerToCart(){addWithShade("Swiss Beauty Lipliner",70,'liplinerShade','liplinerQty')}
-
 function orderAllWA(){let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]');if(!c.length){alert('Cart khali');return;}let m='Salam! Swiss Order:%0A';let t=0;c.forEach(it=>{m+="• "+it.name+"=₹"+it.price+"%0A";t+=it.price;});m+="%0ATotal: ₹"+t;window.open('https://wa.me/917703067297?text='+m,'_blank');}
 function payAll(){if(JSON.parse(localStorage.getItem('saleem_cart')||'[]').length==0){alert('Cart Khali hai!');return;}window.location.href='checkout.html';}
 renderCart();
