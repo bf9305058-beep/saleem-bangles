@@ -1,1 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saleem Bangle Cosmetics - Premium Collection</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  body{margin:0; background:#fdf2e9; font-family:'Poppins', sans-serif;}
+  .header{text-align:center; padding:30px 20px; background: linear-gradient(135deg, #f9e8d9 0%, #f5d5b8 100%); border-bottom:2px solid #d4a76a; position:sticky; top:0; z-index:100;}
+  .header h1{font-family:'Playfair Display', serif; font-size:36px; color:#8a5a1d; margin:0;}
+  .header p{color:#a67c52; margin:5px 0 15px;}
+  .cart-btn{background:#8a5a1d; color:white; padding:10px 25px; border:none; border-radius:25px; font-size:16px; cursor:pointer;}
+  .container{display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:25px; padding:30px; max-width:1200px; margin:auto;}
+  .card{background:white; border-radius:20px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.08); border:1px solid #f0d5b5; transition:0.3s; position:relative;}
+  .card:hover{transform:translateY(-5px);}
+  .card img{width:100%; height:320px; object-fit:contain; background:#fffaf5; cursor:zoom-in; padding:10px;}
+  .card-body{padding:16px;}
+  .card-body h3{margin:0 0 5px; font-size:17px; color:#333;}
+  .desc{font-size:12px; color:#888; margin:0 0 8px; line-height:1.4;}
+  .shade-box{margin:10px 0; display:flex; gap:6px; flex-wrap:wrap;}
+  .shade{padding:5px 10px; border:1px solid #d4a76a; border-radius:20px; font-size:12px; cursor:pointer; background:white;}
+  .shade.active{background:#d4a76a; color:white; border-color:#8a5a1d;}
+  .price{display:flex; justify-content:space-between; align-items:center; margin-top:10px;}
+  .mrp{text-decoration:line-through; color:#999; font-size:13px;}
+  .our-rate{font-size:19px; font-weight:700; color:#b7792d;}
+  .btn{display:block; width:100%; text-align:center; margin-top:12px; background:linear-gradient(90deg, #d4a76a, #b7792d); color:white; padding:11px; border-radius:10px; text-decoration:none; font-weight:500; border:none; cursor:pointer;}
+  
+  /* Zoom Pop Modal */
+  #imgModal{display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.85); justify-content:center; align-items:center;}
+  #imgModal img{max-width:90%; max-height:90%; border-radius:15px; background:white; padding:10px;}
+  #imgModal span{position:absolute; top:20px; right:30px; color:white; font-size:35px; cursor:pointer;}
 
+  /* Cart Drawer */
+  #cartDrawer{display:none; position:fixed; top:0; right:0; width:350px; max-width:90%; height:100%; background:white; z-index:1000; box-shadow:-5px 0 30px rgba(0,0,0,0.2); padding:20px; overflow-y:auto;}
+  .cart-item{display:flex; justify-content:space-between; margin:12px 0; border-bottom:1px dashed #eee; padding-bottom:8px; font-size:14px;}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Saleem Bangle Cosmetics</h1>
+  <p>Luxury Cosmetics • Lucknow • Best Rates</p>
+  <button class="cart-btn" onclick="openCart()">🛒 Cart (<span id="cartCount">0</span>)</button>
+</div>
+
+<div class="container">
+
+  <!-- 1. Liquid Blush -->
+  <div class="card">
+    <img src="kiss-beauty-liquid-blush.jpg" onclick="zoomImg(this.src)" alt="Liquid Blush">
+    <div class="card-body">
+      <h3>Kiss Beauty Liquid Blush</h3>
+      <p class="desc">Highly pigmented, soft matte finish. Long lasting, waterproof. Perfect for daily & party look.</p>
+      <div class="shade-box">
+        <div class="shade active" onclick="selectShade(this)">Shade 01 - Peach</div>
+        <div class="shade" onclick="selectShade(this)">Shade 02 - Pink</div>
+        <div class="shade" onclick="selectShade(this)">Shade 03 - Rose</div>
+        <div class="shade" onclick="selectShade(this)">Shade 04 - Coral</div>
+      </div>
+      <div class="price"><span class="mrp">MRP 199</span><span class="our-rate">Our Rate 150</span></div>
+      <button class="btn" onclick="addToCart('Liquid Blush',150)">Add to Cart</button>
+    </div>
+  </div>
+
+  <!-- 2. Highlighter -->
+  <div class="card">
+    <img src="kiss-beauty-highliter.jpg" onclick="zoomImg(this.src)" alt="Highlighter">
+    <div class="card-body">
+      <h3>Kiss Beauty Highlighter</h3>
+      <p class="desc">Golden glow highlighter, shimmer bright look. Eye + face ke liye best.</p>
+      <div class="shade-box">
+        <div class="shade active" onclick="selectShade(this)">Shade 01 - Gold</div>
+        <div class="shade" onclick="selectShade(this)">Shade 02 - Rose Gold</div>
+        <div class="shade" onclick="selectShade(this)">Shade 03 - Champagne</div>
+        <div class="shade" onclick="selectShade(this)">Shade 04 - Bronze</div>
+      </div>
+      <div class="price"><span class="mrp">MRP 199</span><span class="our-rate">₹149</span></div>
+      <button class="btn" onclick="addToCart('Highlighter',149)">Add to Cart</button>
+    </div>
+  </div>
+
+  <!-- 3. Teddy Tint -->
+  <div class="card">
+    <img src="kiss-beauty-teddy-tint.jpg" onclick="zoomImg(this.src)" alt="Teddy Tint">
+    <div class="card-body">
+      <h3>Teddy Tint - Lip & Cheek</h3>
+      <p class="desc">2-in-1 cute teddy pack. Soft velvet, kiss-proof & light weight.</p>
+      <div class="shade-box">
+        <div class="shade active" onclick="selectShade(this)">Shade 01</div>
+        <div class="shade" onclick="selectShade(this)">Shade 02</div>
+        <div class="shade" onclick="selectShade(this)">Shade 03</div>
+        <div class="shade" onclick="selectShade(this)">Shade 04</div>
+      </div>
+      <div class="price"><span class="mrp">MRP 149</span><span class="our-rate">Our Rate 130</span></div>
+      <button class="btn" onclick="addToCart('Teddy Tint',130)">Add to Cart</button>
+    </div>
+  </div>
+
+  <!-- 4. Strawberry Gloss -->
+  <div class="card">
+    <img src="kiss-beauty-stroberry-gloss.jpg" onclick="zoomImg(this.src)" alt="Strawberry Gloss">
+    <div class="card-body">
+      <h3>Strawberry Gloss</h3>
+      <p class="desc">Juicy strawberry shine, non-sticky, hydrating lip gloss with sweet fragrance.</p>
+      <div class="shade-box">
+        <div class="shade active" onclick="selectShade(this)">Shade 01</div>
+        <div class="shade" onclick="selectShade(this)">Shade 02</div>
+        <div class="shade" onclick="selectShade(this)">Shade 03</div>
+        <div class="shade" onclick="selectShade(this)">Shade 04</div>
+      </div>
+      <div class="price"><span class="mrp">MRP 149</span><span class="our-rate">Our Rate 120</span></div>
+      <button class="btn" onclick="addToCart('Strawberry Gloss',120)">Add to Cart</button>
+    </div>
+  </div>
+
+  <!-- 5. Plum Glossy -->
+  <div class="card">
+    <img src="kiss-beauty-plum-glossy.jpg" onclick="zoomImg(this.src)" alt="Plum Glossy">
+    <div class="card-body">
+      <h3>Plum Glossy</h3>
+      <p class="desc">Rich plum color, glossy finish, long stay. Party wear favorite.</p>
+      <div class="shade-box">
+        <div class="shade active" onclick="selectShade(this)">Shade 01</div>
+        <div class="shade" onclick="selectShade(this)">Shade 02</div>
+        <div class="shade" onclick="selectShade(this)">Shade 03</div>
+        <div class="shade" onclick="selectShade(this)">Shade 04</div>
+      </div>
+      <div class="price"><span class="mrp">MRP 149</span><span class="our-rate">Our Rate 120</span></div>
+      <button class="btn" onclick="addToCart('Plum Glossy',120)">Add to Cart</button>
+    </div>
+  </div>
+
+  <!-- 6. Mascara -->
+  <div class="card">
+    <img src="kiss-beauty-mascara.jpg" onclick="zoomImg(this.src)" alt="Mascara">
+    <div class="card-body">
+      <h3>Kiss Beauty Sky High Mascara</h3>
+      <p class="desc">Limitless length, full volume, lash impact. Waterproof, smudge proof.</p>
+      <div class="price"><span class="mrp"></span><span class="our-rate">₹149</span></div>
+      <button class="btn" onclick="addToCart('Mascara',149)">Add to Cart</button>
+    </div>
+  </div>
+
+  <!-- 7. Liner -->
+  <div class="card">
+    <img src="kiss-beauty-liner.jpg" onclick="zoomImg(this.src)" alt="Liner">
+    <div class="card-body">
+      <h3>Kiss Beauty Super Black Liner</h3>
+      <p class="desc">Super black, limitless length, one stroke application. Professional look.</p>
+      <div class="price"><span class="mrp"></span><span class="our-rate">₹140</span></div>
+      <button class="btn" onclick="addToCart('Liner',140)">Add to Cart</button>
+    </div>
+  </div>
+
+  <!-- 8. Combo -->
+  <div class="card" style="border:2px solid #b7792d;">
+    <img src="kiss-beauty-combo.jpg" onclick="zoomImg(this.src)" alt="Combo">
+    <div class="card-body">
+      <h3>Kiss Beauty Combo (Mascara+Liner)</h3>
+      <p class="desc">Best combo offer! Full eye makeup in one pack. Save ₹100.</p>
+      <div class="price"><span class="mrp">MRP 300</span><span class="our-rate">Our Rate 199</span></div>
+      <button class="btn" style="background:#8a5a1d;" onclick="addToCart('Combo Pack',199)">Add Combo to Cart</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- Zoom Modal -->
+<div id="imgModal" onclick="this.style.display='none'">
+  <span>&times;</span>
+  <img id="modalImg">
+</div>
+
+<!-- Cart Drawer -->
+<div id="cartDrawer">
+  <h3>Your Cart 🛒 <span style="float:right; cursor:pointer;" onclick="closeCart()">✕</span></h3>
+  <div id="cartItems"></div>
+  <h3>Total: ₹<span id="cartTotal">0</span></h3>
+  <a id="waOrder" href="#" class="btn">Order on WhatsApp</a>
+  <button class="btn" style="background:#999; margin-top:8px;" onclick="clearCart()">Clear Cart</button>
+</div>
+
+<script>
+let cart = [];
+function selectShade(el){
+  let parent = el.parentElement;
+  parent.querySelectorAll('.shade').forEach(s=>s.classList.remove('active'));
+  el.classList.add('active');
+}
+function zoomImg(src){
+  document.getElementById('modalImg').src = src;
+  document.getElementById('imgModal').style.display='flex';
+}
+function addToCart(name, price){
+  let parent = event.target.closest('.card-body');
+  let shadeEl = parent.querySelector('.shade.active');
+  let shade = shadeEl ? shadeEl.innerText : 'Default';
+  cart.push({name:name+' ('+shade+')', price:price});
+  updateCart();
+  openCart();
+}
+function updateCart(){
+  document.getElementById('cartCount').innerText = cart.length;
+  let itemsDiv = document.getElementById('cartItems');
+  let total = 0;
+  itemsDiv.innerHTML='';
+  cart.forEach((item,i)=>{
+    total+=item.price;
+    itemsDiv.innerHTML+= `<div class="cart-item"><span>${item.name}</span><span>₹${item.price}</span></div>`;
+  });
+  document.getElementById('cartTotal').innerText = total;
+  let msg = "Hi Saleem Bangle Cosmetics, I want:%0A";
+  cart.forEach(it=>{ msg+=`- ${it.name} - Rs ${it.price}%0A`; });
+  msg+=`Total: Rs ${total}`;
+  document.getElementById('waOrder').href = `https://wa.me/917703067297?text=${msg}`;
+}
+function openCart(){ document.getElementById('cartDrawer').style.display='block'; }
+function closeCart(){ document.getElementById('cartDrawer').style.display='none'; }
+function clearCart(){ cart=[]; updateCart(); }
+</script>
+
+</body>
+</html>
