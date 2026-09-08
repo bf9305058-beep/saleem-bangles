@@ -4,43 +4,44 @@
 <title>LAKME COLLECTION - SALEEM BANGLES</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-body{font-family:'Segoe UI',Arial;background:#f8f8f8;margin:0}
-.header{background:#fc2779;color:#fff;padding:15px;text-align:center;position:sticky;top:0}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;padding:15px;max-width:1200px;margin:auto}
+body{font-family:'Segoe UI',Arial;background:#f8f8f8;margin:0;padding:0}
+.header{background:#fc2779;color:#fff;padding:15px;text-align:center;position:sticky;top:0;z-index:10}
+.header h1{margin:0;font-size:20px}
+.container{max-width:1200px;margin:20px auto;padding:0 15px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
 .card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.08);position:relative}
 .card img{width:100%;height:300px;object-fit:contain;background:#fff0f5}
-.card-body{padding:15px}.price{font-weight:bold;font-size:18px}.mrp{color:#888;text-decoration:line-through;font-size:13px;margin-left:5px}
-.badge{position:absolute;top:10px;left:10px;background:#D4AF37;padding:5px 10px;border-radius:20px;font-size:11px;font-weight:bold}
+.card-body{padding:15px}.price{font-size:18px;font-weight:bold}.mrp{font-size:13px;color:#888;text-decoration:line-through;margin-left:5px}
+.badge{position:absolute;top:10px;left:10px;background:#D4AF37;color:#000;padding:5px 10px;border-radius:20px;font-size:11px;font-weight:bold}
 .btn{background:#fc2779;color:#fff;padding:11px;border:none;width:100%;border-radius:8px;font-weight:bold;cursor:pointer;margin-top:8px}
 .sel{width:100%;padding:10px;margin:8px 0;border-radius:8px;border:1.5px solid #fc2779;background:#fff0f5}
 </style>
 </head>
 <body>
 <div class="header"><h1>LAKME COLLECTION - SALEEM BANGLES</h1></div>
-<div class="grid">
+<div class="container"><div class="grid">
 
-<!-- 1. LAKME MARBLE - 250 -->
-<div class="card"><div class="badge">BEST SELLER</div><img src="lakme-foundation.jpg" onerror="this.src='lakme-powder.jpg'"><div class="card-body"><h3>Lakme Marble</h3><p class="price">₹250 <span class="mrp">MRP ₹250</span></p><select id="shade1" class="sel"><option value="">-- Shade --</option><option value="Marble">Marble</option></select><select id="qty1" class="sel"><option value="1">1 Pc - ₹250</option><option value="2">2 Pc - ₹500</option></select><button class="btn" onclick="add(1,'Lakme Marble',250)">🛒 Add ₹250</button></div></div>
+<div class="card"><div class="badge">BEST SELLER</div><img src="lakme-marble.jpg"><div class="card-body"><h3>Lakme Marble Foundation</h3><p class="price">₹250 <span class="mrp">MRP ₹250</span></p><select id="shade1" class="sel"><option value="">-- Shade --</option><option value="Marble">Marble</option></select><select id="qty1" class="sel"><option value="1">1 Pc - ₹250</option><option value="2">2 Pc - ₹500</option></select><button class="btn" onclick="add(1,'Lakme Marble',250)">🛒 Add ₹250</button></div></div>
 
-<!-- 2. LAKME FOUNDATION - 299 MRP 270 OFF -->
-<div class="card"><div class="badge">₹29 OFF</div><img src="lakme-foundation.jpg" onerror="this.src='lakme-powder.jpg'"><div class="card-body"><h3>Lakme Foundation</h3><p class="price">₹270 <span class="mrp">₹299</span></p><select id="shade2" class="sel"><option value="">-- Shade --</option><option value="Natural">Natural</option><option value="Beige">Beige</option></select><select id="qty2" class="sel"><option value="1">1 Pc - ₹270</option><option value="2">2 Pc - ₹540</option></select><button class="btn" onclick="add(2,'Lakme Foundation',270)">🛒 Add ₹270</button></div></div>
+<div class="card"><div class="badge">₹29 OFF</div><img src="lakme-foundation.jpg"><div class="card-body"><h3>Lakme Forever Matte Foundation</h3><p class="price">₹270 <span class="mrp">₹299</span></p><select id="shade2" class="sel"><option value="">-- Shade --</option><option value="Soft Pink">01 Soft Pink</option><option value="Warm Pink">02 Warm Pink</option><option value="Marble">Marble</option></select><select id="qty2" class="sel"><option value="1">1 Pc - ₹270</option><option value="2">2 Pc - ₹540</option></select><button class="btn" onclick="add(2,'Lakme Foundation',270)">🛒 Add ₹270</button></div></div>
 
-<!-- 3. LAKME KAJAL - 225 MRP 199 OFF -->
-<div class="card"><div class="badge">₹26 OFF</div><img src="lakme-kajal.jpg" onerror="this.src='lakme-powder.jpg'"><div class="card-body"><h3>Lakme Kajal</h3><p class="price">₹199 <span class="mrp">₹225</span></p><select id="shade3" class="sel"><option value="">-- Shade --</option><option value="Deep Black">Deep Black</option></select><select id="qty3" class="sel"><option value="1">1 Pc - ₹199</option><option value="2">2 Pc - ₹398</option></select><button class="btn" onclick="add(3,'Lakme Kajal',199)">🛒 Add ₹199</button></div></div>
+<div class="card"><div class="badge">₹26 OFF</div><img src="lakme-kajal.jpg"><div class="card-body"><h3>Lakme Eyeconic Kajal</h3><p class="price">₹199 <span class="mrp">₹225</span></p><select id="shade3" class="sel"><option value="">-- Shade --</option><option value="Deep Black">Deep Black</option><option value="Brown">Brown</option></select><select id="qty3" class="sel"><option value="1">1 Pc - ₹199</option><option value="2">2 Pc - ₹398</option></select><button class="btn" onclick="add(3,'Lakme Kajal',199)">🛒 Add ₹199</button></div></div>
 
-<!-- 4. LAKME LUMI - 379 MRP 340 OFF -->
-<div class="card"><div class="badge">₹39 OFF</div><img src="lakme-lumi.jpg" onerror="this.src='lakme-powder.jpg'"><div class="card-body"><h3>Lakme Lumi</h3><p class="price">₹340 <span class="mrp">₹379</span></p><select id="shade4" class="sel"><option value="">-- Shade --</option><option value="Rose Gold">Rose Gold</option></select><select id="qty4" class="sel"><option value="1">1 Pc - ₹340</option><option value="2">2 Pc - ₹680</option></select><button class="btn" onclick="add(4,'Lakme Lumi',340)">🛒 Add ₹340</button></div></div>
+<div class="card"><div class="badge">₹39 OFF</div><img src="lakme-lumi.jpg"><div class="card-body"><h3>Lakme Lumi Lit Cream</h3><p class="price">₹340 <span class="mrp">₹379</span></p><select id="shade4" class="sel"><option value="">-- Shade --</option><option value="Rose Gold">Rose Gold</option><option value="Golden Glow">Golden Glow</option></select><select id="qty4" class="sel"><option value="1">1 Pc - ₹340</option><option value="2">2 Pc - ₹680</option></select><button class="btn" onclick="add(4,'Lakme Lumi',340)">🛒 Add ₹340</button></div></div>
 
-</div>
+<div class="card"><div class="badge" style="background:#fc2779;color:#fff">₹50 OFF</div><img src="lakme-powder.jpg"><div class="card-body"><h3>Lakme Face Powder</h3><p class="price">₹200 <span class="mrp">₹250</span></p><select id="shade5" class="sel"><option value="">-- Shade --</option><option value="01 Soft Pink">01 Soft Pink</option><option value="02 Warm Pink">02 Warm Pink</option><option value="Natural Beige">Natural Beige</option></select><select id="qty5" class="sel"><option value="1">1 Pc - ₹200</option><option value="2">2 Pc - ₹400</option><option value="3">3 Pc - ₹600</option></select><button class="btn" onclick="add(5,'Lakme Powder',200)">🛒 Add ₹200</button></div></div>
 
-<div style="background:#fff;border:2px solid #ffb6d9;border-radius:12px;padding:15px;max-width:700px;margin:20px auto"><h3>🛒 Your Cart</h3><div id="cartItems">Cart Khali hai</div><p id="cartTotal"><b>Total: ₹0</b></p><button onclick="orderWA()" style="width:100%;padding:11px;background:#00c851;color:#fff;border:none;border-radius:8px;font-weight:bold;margin-top:8px">WhatsApp Order</button><button onclick="clearC()" style="width:100%;padding:7px;background:#fff;border:1px solid #ddd;border-radius:8px;margin-top:8px">Clear</button></div>
+</div></div>
+
+<div style="background:#fff;border:2px solid #ffb6d9;border-radius:12px;padding:15px;max-width:700px;margin:30px auto"><h3>🛒 Your Cart</h3><div id="cartItems">Cart Khali hai</div><p id="cartTotal"><b>Total: ₹0</b></p><button onclick="orderWA()" style="width:100%;padding:11px;background:#00c851;color:#fff;border:none;border-radius:8px;font-weight:bold;margin-top:8px">Order on WhatsApp</button><button onclick="pay()" style="width:100%;padding:11px;background:#ff6a00;color:#fff;border:none;border-radius:8px;font-weight:bold;margin-top:8px">Checkout 💳</button><button onclick="clearC()" style="width:100%;padding:7px;background:#fff;border:1px solid #ddd;border-radius:8px;margin-top:8px">Clear Cart</button></div>
 
 <script>
-function add(id,name,price){var s=document.getElementById('shade'+id).value;var q=parseInt(document.getElementById('qty'+id).value);if(s==""){alert("Shade select karo");return;}let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]');c.push({name:name+" - "+s+" (x"+q+")",price:price*q});localStorage.setItem('saleem_cart',JSON.stringify(c));render();alert(name+" add ✅")}
-function render(){let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]');let h='';let t=0;c.forEach((it,i)=>{t+=it.price;h+=it.name+" - ₹"+it.price+" <span onclick='rem("+i+")' style='color:#fc2779;cursor:pointer'>🗑️</span><br><br>"});document.getElementById('cartItems').innerHTML=h||'Cart Khali hai';document.getElementById('cartTotal').innerHTML='<b>Total: ₹'+t+'</b>'}
+function add(id,name,price){var s=document.getElementById('shade'+id).value;var q=parseInt(document.getElementById('qty'+id).value);if(s==""){alert("Shade select karo 👆");return;}let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]');c.push({name:name+" - "+s+" (x"+q+")",price:price*q});localStorage.setItem('saleem_cart',JSON.stringify(c));render();alert(name+" add ✅")}
+function render(){let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]');let h='';let t=0;c.forEach((it,i)=>{t+=it.price;h+=it.name+" - ₹"+it.price+" <span onclick='rem("+i+")' style='color:#fc2779;cursor:pointer'> 🗑️</span><br><br>"});document.getElementById('cartItems').innerHTML=h||'Cart Khali hai';document.getElementById('cartTotal').innerHTML='<b>Total: ₹'+t+'</b>'}
 function rem(i){let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]');c.splice(i,1);localStorage.setItem('saleem_cart',JSON.stringify(c));render()}
 function clearC(){localStorage.removeItem('saleem_cart');render()}
-function orderWA(){let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]');if(!c.length){alert('Cart khali');return;}let m='Salam Saleem Bangles! LAKME Order:%0A';let t=0;c.forEach(it=>{m+="• "+it.name+" = ₹"+it.price+"%0A";t+=it.price});m+="%0ATotal: ₹"+t;window.open('https://wa.me/917703067297?text='+m,'_blank')}render();
+function orderWA(){let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]');if(!c.length){alert('Cart khali');return;}let m='Salam Saleem Bangles! LAKME Order:%0A';let t=0;c.forEach(it=>{m+="• "+it.name+" = ₹"+it.price+"%0A";t+=it.price});m+="%0ATotal: ₹"+t;window.open('https://wa.me/917703067297?text='+m,'_blank')}
+function pay(){if(JSON.parse(localStorage.getItem('saleem_cart')||'[]').length==0){alert('Cart khali');return;}window.location.href='checkout.html'}render();
 </script>
 </body>
 </html>
