@@ -66,6 +66,8 @@ button{width:100%;padding:10px;margin-top:6px;border:none;border-radius:8px;font
 
 <div class="box" style="border-color:#222"><img src="swiss-jel-kajal.jpeg" onclick="openImg(this.src)"><h3>Swiss Jel Kajal</h3><p><span class="mrp">MRP ₹429</span> <span class="price">FLAT @ ₹320</span></p><input type="number" id="jelKajalQty" value="1" min="1"><button onclick="addJelKajalToCart()">Add to Cart</button></div>
 
+<div class="box" style="border-color:#e91e63;background:#fff0f5"><img src="swiss-beauty-lipliner.jpg" onclick="openImg(this.src)"><h3>Swiss Beauty Lipliner</h3><p><span class="price" style="color:#111;font-size:18px">MRP ₹70</span></p><select id="liplinerShade"><option value="">Shade Chuno</option><option>01 Brown</option><option>02 Red</option><option>03 Pink</option><option>04 Nude</option><option>05 Maroon</option><option>06 Plum</option></select><input type="number" id="liplinerQty" value="1" min="1"><button style="background:#e91e63" onclick="addSwissLiplinerToCart()">Add - ₹70</button></div>
+
 </div>
 
 <div class="cart-box"><h3>🛒 Your Cart</h3><div id="cartItems">Cart Khali hai</div><p id="cartTotal"><b>Total: ₹0</b></p><button onclick="orderAllWA()" style="background:#25D366">Order on WhatsApp</button><button onclick="payAll()" style="background:#ff6a00">Proceed to Checkout 💳</button><button onclick="clearCart()" style="background:white;color:#333;border:1px solid #ccc">Clear Cart</button></div>
@@ -98,6 +100,7 @@ function addSettingToCart(){addSimple("Swiss Setting Spray",249,'settingQty')}
 function addConcealerToCart(){addWithShade("Swiss Concealer",199,'concealerShade','concealerQty')}
 function addLosePowderToCart(){addWithShade("Swiss Loose Powder",374,'losePowderShade','losePowderQty')}
 function addJelKajalToCart(){addSimple("Swiss Jel Kajal",320,'jelKajalQty')}
+function addSwissLiplinerToCart(){addWithShade("Swiss Beauty Lipliner",70,'liplinerShade','liplinerQty')}
 
 function orderAllWA(){let c=JSON.parse(localStorage.getItem('saleem_cart')||'[]');if(!c.length){alert('Cart khali');return;}let m='Salam! Swiss Order:%0A';let t=0;c.forEach(it=>{m+="• "+it.name+"=₹"+it.price+"%0A";t+=it.price;});m+="%0ATotal: ₹"+t;window.open('https://wa.me/917703067297?text='+m,'_blank');}
 function payAll(){if(JSON.parse(localStorage.getItem('saleem_cart')||'[]').length==0){alert('Cart Khali hai!');return;}window.location.href='checkout.html';}
