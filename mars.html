@@ -2,73 +2,82 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Saleem Bangles - MARS All 10 Products</title>
+<title>Saleem Bangles - MARS All 13 Products</title>
 <style>
 body{font-family:Arial;background:#fff8f0;margin:0;padding:10px}
-.card{max-width:500px;margin:20px auto;background:white;padding:15px;border-radius:12px;box-shadow:0 2px 10px #ccc}
-img{width:100%;border-radius:10px;cursor:pointer}
-h1{text-align:center}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:900px;margin:auto}
-.pcard{background:white;padding:10px;border-radius:12px;text-align:center;box-shadow:0 2px 8px #ccc}
-.pcard img{height:220px;object-fit:contain;background:#fff;cursor:pointer}
-.old{text-decoration:line-through;color:grey;font-size:13px}
-.new{color:red;font-size:18px;font-weight:bold}
-select,input{width:100%;padding:8px;margin-top:6px;border-radius:8px;border:1px solid #ccc}
-button{width:100%;padding:10px;margin-top:8px;border:none;border-radius:8px;font-weight:bold;cursor:pointer}
+h1{text-align:center;color:#c0392b;font-size:20px;margin:10px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;max-width:1000px;margin:auto}
+.pcard{background:white;padding:8px;border-radius:10px;text-align:center;box-shadow:0 1px 5px #ddd;border:1px solid #ffc1d6}
+.pcard img{height:160px;object-fit:contain;background:#fff;width:100%;border-radius:8px;cursor:pointer}
+.pcard h4{font-size:12px;margin:5px 0 2px}
+.old{text-decoration:line-through;color:grey;font-size:11px}
+.new{color:#c0392b;font-size:14px;font-weight:bold}
+select,input{width:100%;padding:6px;margin-top:4px;border-radius:6px;border:1px solid #ccc;font-size:12px}
+button{width:100%;padding:8px;margin-top:6px;border:none;border-radius:6px;font-weight:bold;cursor:pointer;font-size:12px}
 .red{background:#c0392b;color:white}
 .green{background:#25D366;color:white}
 .orange{background:#e67e22;color:white}
-.item{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee;padding:8px 0}
-.del{background:#ffdddd;padding:5px 10px;border-radius:5px;cursor:pointer;border:none}
-.back-links{display:flex;justify-content:center;gap:15px;margin-top:20px;flex-wrap:wrap}
-.back-links a{padding:10px 20px;background:#333;color:white;text-decoration:none;border-radius:8px;font-weight:bold}
-@media(max-width:600px){.grid{grid-template-columns:1fr} .pcard img{height:280px}}
-/* POPUP CHOTA KIYA */
+.black{background:#222;color:white}
+.blue{background:#3f51b5;color:white}
+.card{max-width:520px;margin:15px auto;background:white;padding:12px;border-radius:12px;box-shadow:0 2px 10px #ccc}
+.item{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee;padding:6px 0;font-size:13px}
+.del{background:#ffdddd;padding:4px 8px;border-radius:4px;cursor:pointer;border:none}
+.back-links{display:flex;justify-content:center;gap:8px;margin-top:12px;flex-wrap:wrap}
+.back-links a{padding:8px 14px;color:white;text-decoration:none;border-radius:20px;font-weight:bold;font-size:12px}
+.upi-box{border:1px dashed #333;border-radius:10px;padding:10px;text-align:center;margin-top:10px}
+.qr{width:180px;height:180px;display:block;margin:8px auto}
 #imgModal{display:none;position:fixed;z-index:9999;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.85);justify-content:center;align-items:center}
 #imgModal img{max-width:60%;max-height:60%;object-fit:contain;background:white;padding:8px;border-radius:10px}
-#closeModal{position:absolute;top:10px;right:20px;color:white;font-size:35px;font-weight:bold;cursor:pointer}
+#closeModal{position:absolute;top:10px;right:20px;color:white;font-size:30px;font-weight:bold;cursor:pointer}
 </style>
 </head>
 <body>
 
-<h1>SALEEM BANGLES - MARS COLLECTION</h1>
+<h1>MARS - 13 PRODUCTS</h1>
 
 <div class="grid">
-
-<div class="pcard"><img src="mars-mouse.jpg" onclick="openImg(this.src)"><h4>MARS Mousse</h4><p><span class="old">MRP ₹449</span><br><span class="new">Our ₹336</span></p><select id="shade-mouse"><option value="">Shade Chuno</option><option>01</option><option>02</option><option>03</option><option>04</option></select><input type="number" id="qty-mouse" value="1" min="1"><button class="red" onclick="addToBag('MARS Mousse',336,'shade-mouse','qty-mouse')">Add to Bag 🛍️</button></div>
-
-<div class="pcard"><img src="mars-foundation.jpg" onclick="openImg(this.src)"><h4>MARS Foundation</h4><p><span class="old">MRP ₹449</span><br><span class="new">Our ₹336</span></p><select id="shade-foundation"><option value="">Shade Chuno</option><option>01</option><option>02</option><option>03</option><option>04</option></select><input type="number" id="qty-foundation" value="1" min="1"><button class="red" onclick="addToBag('MARS Foundation',336,'shade-foundation','qty-foundation')">Add to Bag 🛍️</button></div>
-
-<div class="pcard"><img src="mars-high-covrej.jpg" onclick="openImg(this.src)"><h4>MARS High Coverage</h4><p><span class="old">MRP ₹379</span><br><span class="new">Our ₹340</span></p><select id="shade-high"><option value="">Shade Chuno</option><option>01</option><option>02</option><option>03</option><option>04</option></select><input type="number" id="qty-high" value="1" min="1"><button class="red" onclick="addToBag('MARS High Coverage',340,'shade-high','qty-high')">Add to Bag 🛍️</button></div>
-
-<div class="pcard"><img src="mars-hd-foundation.jpg" onclick="openImg(this.src)"><h4>MARS HD Foundation</h4><p><span class="old">MRP ₹449</span><br><span class="new">Our ₹336</span></p><select id="shade-hd"><option value="">Shade Chuno</option><option>01</option><option>02</option><option>03</option><option>04</option></select><input type="number" id="qty-hd" value="1" min="1"><button class="red" onclick="addToBag('MARS HD Foundation',336,'shade-hd','qty-hd')">Add to Bag 🛍️</button></div>
-
-<div class="pcard"><img src="mars-bb-cream.jpg" onclick="openImg(this.src)"><h4>MARS BB Cream</h4><p><span class="old">MRP ₹449</span><br><span class="new">Our ₹336</span></p><select id="shade-bbcream"><option value="">Shade Chuno</option><option>01</option><option>02</option><option>03</option><option>04</option></select><input type="number" id="qty-bbcream" value="1" min="1"><button class="red" onclick="addToBag('MARS BB Cream',336,'shade-bbcream','qty-bbcream')">Add to Bag 🛍️</button></div>
-
-<div class="pcard"><img src="mars-bb-powder.jpg" onclick="openImg(this.src)"><h4>MARS BB Powder</h4><p><span class="old">MRP ₹449</span><br><span class="new">Our ₹336</span></p><select id="shade-bbpowder"><option value="">Shade Chuno</option><option>01</option><option>02</option><option>03</option><option>04</option></select><input type="number" id="qty-bbpowder" value="1" min="1"><button class="red" onclick="addToBag('MARS BB Powder',336,'shade-bbpowder','qty-bbpowder')">Add to Bag 🛍️</button></div>
-
-<div class="pcard"><img src="mars-melody.jpg" onclick="openImg(this.src)"><h4>MARS Melody</h4><p><span class="old">MRP ₹449</span><br><span class="new">Our ₹336</span></p><select id="shade-melody"><option value="">Shade Chuno</option><option>01</option><option>02</option><option>03</option><option>04</option></select><input type="number" id="qty-melody" value="1" min="1"><button class="red" onclick="addToBag('MARS Melody',336,'shade-melody','qty-melody')">Add to Bag 🛍️</button></div>
-
-<div class="pcard"><img src="mars-kajal.jpg" onclick="openImg(this.src)"><h4>MARS Kajal</h4><p><span class="old">MRP ₹179</span><br><span class="new">Our ₹150</span></p><input type="number" id="qty-kajal" value="1" min="1"><button class="red" onclick="addToBagNoShade('MARS Kajal',150,'qty-kajal')">Add to Bag 🛍️</button></div>
-
-<div class="pcard"><img src="mars-colorchenging.jpg" onclick="openImg(this.src)"><h4>MARS Color Changing</h4><p><span class="old">MRP ₹499</span><br><span class="new">Our ₹374</span></p><input type="number" id="qty-color" value="1" min="1"><button class="red" onclick="addToBagNoShade('MARS Color Changing',374,'qty-color')">Add to Bag 🛍️</button></div>
-
-<div class="pcard"><img src="mars-concilor.jpg" onclick="openImg(this.src)"><h4>MARS Concealer</h4><p><span class="old">MRP ₹249</span><br><span class="new">Our ₹199</span></p><select id="shade-concilor"><option value="">Shade Chuno</option><option>01</option><option>02</option><option>03</option><option>04</option><option>05</option><option>06</option></select><input type="number" id="qty-concilor" value="1" min="1"><button class="red" onclick="addToBag('MARS Concealer',199,'shade-concilor','qty-concilor')">Add to Bag 🛍️</button></div>
-
+<div class="pcard"><img src="mars-mouse.jpg" onclick="openImg(this.src)"><h4>MARS Mousse</h4><p><span class="old">MRP ₹449</span><br><span class="new">Our ₹336</span></p><select id="shade-mouse"><option value="">Shade Chuno</option><option>01</option><option>02</option><option>03</option><option>04</option></select><input type="number" id="qty-mouse" value="1" min="1"><button class="red" onclick="addToBag('MARS Mousse',336,'shade-mouse','qty-mouse')">Add 🛍️</button></div>
+<div class="pcard"><img src="mars-foundation.jpg" onclick="openImg(this.src)"><h4>MARS Foundation</h4><p><span class="old">MRP ₹449</span><br><span class="new">Our ₹336</span></p><select id="shade-foundation"><option value="">Shade</option><option>01</option><option>02</option><option>03</option><option>04</option></select><input type="number" id="qty-foundation" value="1" min="1"><button class="red" onclick="addToBag('MARS Foundation',336,'shade-foundation','qty-foundation')">Add 🛍️</button></div>
+<div class="pcard"><img src="mars-high-covrej.jpg" onclick="openImg(this.src)"><h4>MARS High Coverage</h4><p><span class="old">MRP ₹379</span><br><span class="new">Our ₹340</span></p><select id="shade-high"><option value="">Shade</option><option>01</option><option>02</option><option>03</option><option>04</option></select><input type="number" id="qty-high" value="1" min="1"><button class="red" onclick="addToBag('MARS High Coverage',340,'shade-high','qty-high')">Add 🛍️</button></div>
+<div class="pcard"><img src="mars-hd-foundation.jpg" onclick="openImg(this.src)"><h4>MARS HD Foundation</h4><p><span class="old">MRP ₹449</span><br><span class="new">Our ₹336</span></p><select id="shade-hd"><option value="">Shade</option><option>01</option><option>02</option><option>03</option><option>04</option></select><input type="number" id="qty-hd" value="1" min="1"><button class="red" onclick="addToBag('MARS HD Foundation',336,'shade-hd','qty-hd')">Add 🛍️</button></div>
+<div class="pcard"><img src="mars-bb-cream.jpg" onclick="openImg(this.src)"><h4>MARS BB Cream</h4><p><span class="old">MRP ₹449</span><br><span class="new">Our ₹336</span></p><select id="shade-bbcream"><option value="">Shade</option><option>01</option><option>02</option><option>03</option><option>04</option></select><input type="number" id="qty-bbcream" value="1" min="1"><button class="red" onclick="addToBag('MARS BB Cream',336,'shade-bbcream','qty-bbcream')">Add 🛍️</button></div>
+<div class="pcard"><img src="mars-bb-powder.jpg" onclick="openImg(this.src)"><h4>MARS BB Powder</h4><p><span class="old">MRP ₹449</span><br><span class="new">Our ₹336</span></p><select id="shade-bbpowder"><option value="">Shade</option><option>01</option><option>02</option><option>03</option><option>04</option></select><input type="number" id="qty-bbpowder" value="1" min="1"><button class="red" onclick="addToBag('MARS BB Powder',336,'shade-bbpowder','qty-bbpowder')">Add 🛍️</button></div>
+<div class="pcard"><img src="mars-melody.jpg" onclick="openImg(this.src)"><h4>MARS Melody</h4><p><span class="old">MRP ₹449</span><br><span class="new">Our ₹336</span></p><select id="shade-melody"><option value="">Shade</option><option>01</option><option>02</option><option>03</option><option>04</option></select><input type="number" id="qty-melody" value="1" min="1"><button class="red" onclick="addToBag('MARS Melody',336,'shade-melody','qty-melody')">Add 🛍️</button></div>
+<div class="pcard"><img src="mars-concilor.jpg" onclick="openImg(this.src)"><h4>MARS Concealer</h4><p><span class="old">MRP ₹249</span><br><span class="new">Our ₹199</span></p><select id="shade-concilor"><option value="">Shade 01-06</option><option>01</option><option>02</option><option>03</option><option>04</option><option>05</option><option>06</option></select><input type="number" id="qty-concilor" value="1" min="1"><button class="red" onclick="addToBag('MARS Concealer',199,'shade-concilor','qty-concilor')">Add 🛍️</button></div>
+<div class="pcard"><img src="mars-kajal.jpg" onclick="openImg(this.src)"><h4>MARS Kajal</h4><p><span class="old">MRP ₹179</span><br><span class="new">Our ₹150</span></p><input type="number" id="qty-kajal" value="1" min="1"><button class="red" onclick="addToBagNoShade('MARS Kajal',150,'qty-kajal')">Add 🛍️</button></div>
+<div class="pcard"><img src="mars-colorchenging.jpg" onclick="openImg(this.src)"><h4>MARS Color Changing</h4><p><span class="old">MRP ₹499</span><br><span class="new">Our ₹374</span></p><input type="number" id="qty-color" value="1" min="1"><button class="red" onclick="addToBagNoShade('MARS Color Changing',374,'qty-color')">Add 🛍️</button></div>
+<div class="pcard"><img src="mars-lip-tint.jpg" onclick="openImg(this.src)"><h4>MARS Lip Tint</h4><p><span class="old">MRP ₹199</span><br><span class="new">Our ₹149</span></p><select id="shade-liptint"><option value="">Shade</option><option>01</option><option>02</option><option>03</option><option>04</option></select><input type="number" id="qty-liptint" value="1" min="1"><button class="red" onclick="addToBag('MARS Lip Tint',149,'shade-liptint','qty-liptint')">Add 🛍️</button></div>
+<div class="pcard"><img src="mars-lipliner.jpg" onclick="openImg(this.src)"><h4>MARS Lipliner</h4><p><span class="old">MRP ₹149</span><br><span class="new">Our ₹99</span></p><select id="shade-lipliner"><option value="">Shade</option><option>01 Brown</option><option>02 Red</option><option>03 Nude</option><option>04 Pink</option></select><input type="number" id="qty-lipliner" value="1" min="1"><button class="red" onclick="addToBag('MARS Lipliner',99,'shade-lipliner','qty-lipliner')">Add 🛍️</button></div>
+<div class="pcard"><img src="mars-liner.jpg" onclick="openImg(this.src)"><h4>MARS Liner</h4><p><span class="old">MRP ₹179</span><br><span class="new">Our ₹129</span></p><input type="number" id="qty-liner" value="1" min="1"><button class="red" onclick="addToBagNoShade('MARS Liner',129,'qty-liner')">Add 🛍️</button></div>
 </div>
 
 <div class="card">
-<h4>🛒 Your Cart</h4>
+<h4 style="margin:5px 0">🛒 Your Cart</h4>
 <div id="cart">Cart Khali hai</div>
 <h4 id="total">Total: ₹0</h4>
 <button class="green" onclick="orderWA()">Order on WhatsApp</button>
-<button class="orange" onclick="window.location.href='checkout.html'">Proceed to Checkout 💳</button>
-<button onclick="clearCart()">Clear Cart</button>
+<button class="orange" onclick="showCheckout()">Proceed to Checkout - Payment 💳</button>
+<button onclick="clearCart()" style="background:#eee">Clear Cart</button>
 
-<!-- BACK BUTTONS -->
+<div id="checkoutBox" style="display:none;margin-top:15px;border-top:2px solid #eee;padding-top:10px">
+  <h4>Customer Details</h4>
+  <input id="cname" placeholder="Full Name *">
+  <input id="cmobile" placeholder="Mobile Number *">
+  <input id="caddr" placeholder="Full Address *" style="width:100%;padding:8px;margin-top:6px;border-radius:8px;border:1px solid #ccc">
+  <div class="upi-box">
+    <b style="font-size:13px">UPI ID: gpay-12205946398@okbizaxis<br>Account: Mohd Saeed</b>
+    <img class="qr" id="qrImg" src="">
+    <p><b>Pay: ₹<span id="payAmt">0</span></b></p>
+    <button class="black" onclick="payUPI()">Pay via UPI App</button>
+  </div>
+  <button class="green" style="margin-top:10px" onclick="confirmOrder()">Confirm Payment & Place Order via WhatsApp</button>
+  <div class="back-links"><a href="index.html" class="blue">← Back to Shopping - All Brands</a></div>
+</div>
+
 <div class="back-links">
-<a href="brands.html">← Back to All Brands</a>
-<a href="bangles.html">← Back to Bangles</a>
+<a href="index.html" style="background:#222">← Back to All Brands</a>
+<a href="bangles.html" style="background:#d81b60">← Back to Bangles</a>
+<a href="kiss-beauty.html" style="background:#8a5a1d">← Kiss Beauty</a>
 </div>
 </div>
 
@@ -77,34 +86,31 @@ button{width:100%;padding:10px;margin-top:8px;border:none;border-radius:8px;font
 <script>
 let cart=JSON.parse(localStorage.getItem('saleemCart')||'[]');show();
 function addToBag(pname,price,shadeId,qtyId){
- let s=document.getElementById(shadeId).value;
- let q=parseInt(document.getElementById(qtyId).value)||1;
- if(!s){alert('Pehle Shade Chuno 01-04');return;}
- let name=pname+' Shade-'+s;
- let f=cart.find(i=>i.name==name);
+ let s=document.getElementById(shadeId).value; let q=parseInt(document.getElementById(qtyId).value)||1;
+ if(!s){alert('Pehle Shade Chuno');return;}
+ let name=pname+' Shade-'+s; let f=cart.find(i=>i.name==name);
  if(f) f.qty+=q; else cart.push({name:name,price:price,qty:q});
- localStorage.setItem('saleemCart',JSON.stringify(cart));show();alert(name+' Add ho gaya ✅');
+ localStorage.setItem('saleemCart',JSON.stringify(cart));show();
 }
 function addToBagNoShade(pname,price,qtyId){
- let q=parseInt(document.getElementById(qtyId).value)||1;
- let f=cart.find(i=>i.name==pname);
+ let q=parseInt(document.getElementById(qtyId).value)||1; let f=cart.find(i=>i.name==pname);
  if(f) f.qty+=q; else cart.push({name:pname,price:price,qty:q});
- localStorage.setItem('saleemCart',JSON.stringify(cart));show();alert(pname+' Add ho gaya ✅');
+ localStorage.setItem('saleemCart',JSON.stringify(cart));show();
 }
 function show(){
  let div=document.getElementById('cart');let t=0;
  if(cart.length==0){div.innerHTML='Cart Khali hai';document.getElementById('total').innerText='Total: ₹0';return;}
  let h='';cart.forEach((c,i)=>{t+=c.price*c.qty;h+=`<div class="item"><span>${c.name} x ${c.qty} = ₹${c.price*c.qty}</span><button class="del" onclick="delItem(${i})">🗑️</button></div>`;});
  div.innerHTML=h;document.getElementById('total').innerText='Total: ₹'+t;
+ let f=t+80; document.getElementById('payAmt').innerText=f;
+ document.getElementById('qrImg').src=`https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi://pay?pa=gpay-12205946398@okbizaxis%26pn=Mohd%20Saeed%26am=${f}%26cu=INR`;
 }
 function delItem(i){cart.splice(i,1);localStorage.setItem('saleemCart',JSON.stringify(cart));show();}
 function clearCart(){cart=[];localStorage.removeItem('saleemCart');show();}
-function orderWA(){
- if(cart.length==0){alert('Cart khali hai - pehle Shade chun ke Add to Bag karo');return;}
- let msg='Hello Saleem Bangles, order:%0A';let tot=0;
- cart.forEach(c=>{msg+=c.name+' x '+c.qty+' = ₹'+(c.price*c.qty)+'%0A';tot+=c.price*c.qty;});
- msg+='Total: ₹'+tot;window.open('https://wa.me/917703067297?text='+msg,'_blank');
-}
+function orderWA(){ if(cart.length==0){alert('Cart khali');return;} let msg='Hello Saleem Bangles, MARS order:%0A';let tot=0; cart.forEach(c=>{msg+=c.name+' x '+c.qty+' = ₹'+(c.price*c.qty)+'%0A';tot+=c.price*c.qty;}); msg+='Total: ₹'+tot;window.open('https://wa.me/917703067297?text='+msg,'_blank');}
+function showCheckout(){ if(cart.length==0){alert('Cart khali');return;} document.getElementById('checkoutBox').style.display='block'; window.scrollTo(0,document.body.scrollHeight); }
+function payUPI(){ let t=0; cart.forEach(c=>t+=c.price*c.qty); let f=t+80; window.location.href=`upi://pay?pa=gpay-12205946398@okbizaxis&pn=Mohd Saeed&am=${f}&cu=INR`; }
+function confirmOrder(){ let n=document.getElementById('cname').value,m=document.getElementById('cmobile').value,a=document.getElementById('caddr').value; if(!n||!m||!a){alert('Details bharo');return;} let tot=0, items=''; cart.forEach(c=>{tot+=c.price*c.qty; items+=c.name+' x'+c.qty+' Rs'+(c.price*c.qty)+'%0A';}); let f=tot+80; let msg=`New MARS Order%0AName:${n}%0AMobile:${m}%0AAddress:${a}%0A${items}Total: Rs ${f}%0AUPI Paid: gpay-12205946398@okbizaxis`; window.open('https://wa.me/917703067297?text='+msg,'_blank'); }
 function openImg(src){document.getElementById('imgModal').style.display='flex';document.getElementById('modalImg').src=src;}
 function closeImg(){document.getElementById('imgModal').style.display='none';}
 </script>
