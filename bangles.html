@@ -14,13 +14,12 @@ h1{text-align:center; color:#0066cc; font-size:24px; margin:20px 0}
 .card h3{margin:10px 0; color:#333; font-size:16px}
 .card p{font-size:18px; color:#0099ff; font-weight:bold; margin:5px 0}
 .btn-add{margin-top:8px; cursor:pointer; width:100%; padding:10px; background:#ff69b4; color:white; border:none; border-radius:8px; font-weight:bold;}
-.btn-share{margin-top:6px; cursor:pointer; width:100%; padding:8px; background:#25D366; color:white; border:none; border-radius:8px; font-weight:bold; font-size:14px;}
 .shade-select{width:100%; padding:8px; margin:8px 0; border:2px solid #e91e63; border-radius:8px; font-weight:bold; background:#fff0f6;}
 #cart{margin:20px; padding:20px; border:2px solid #ff69b4; border-radius:10px; background:white;}
 #cart ul{list-style:none; padding:0;}
 .footer{text-align:center; margin-top:20px; padding:20px; background:#ccefff; font-size:14px; line-height:1.6}
 #productPopup{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:9999;justify-content:center;align-items:center;}
-#productPopup.popup-box{background:white;padding:20px;border-radius:10px;max-width:400px;text-align:center;}
+#productPopup .popup-box{background:white;padding:20px;border-radius:10px;max-width:400px;text-align:center;}
 #productPopup img{width:100%;border-radius:8px;}
 </style>
 </head>
@@ -103,7 +102,7 @@ function showProducts() {
       p.colors.forEach(c => { shadeBox += `<option value="${c}">${c}</option>`; });
       shadeBox += `</select>`;
     }
-    container.innerHTML += `<div class="card"><img src="${p.img}" onclick="openPopup(${i})"><h3>${p.name}</h3><p>₹${p.price}</p>${sizeBtns}${shadeBox}<button class="btn-add" onclick="addToCart(${i})">🛒 Add to Cart</button><button class="btn-share" onclick="shareSingleProduct(${i})">📲 WhatsApp Share</button></div>`;
+    container.innerHTML += `<div class="card"><img src="${p.img}" onclick="openPopup(${i})"><h3>${p.name}</h3><p>₹${p.price}</p>${sizeBtns}${shadeBox}<button class="btn-add" onclick="addToCart(${i})">🛒 Add to Cart</button></div>`;
   });
 }
 function selectSize(i, size, el){
@@ -123,14 +122,6 @@ function addToCart(i) {
   localStorage.setItem("saleem_cart", JSON.stringify(cart));
   alert(finalName + " Size " + size + " cart me add ho gaya ✅");
   showCart();
-}
-function shareSingleProduct(i){
-  let p = products[i];
-  let shade = selectedShades[i]? " - " + selectedShades[i] : "";
-  let size = selectedSizes[i]? " Size: " + selectedSizes[i] : "";
-  let website = "https://saleem-bangles-lbxo.vercel.app";
-  let msg = `*${p.name}${shade}*%0A💰 Price: ₹${p.price}${size}%0A%0A👑 Saleem Bangles - Since 1997%0A📍 Akbari Gate, Lucknow%0A%0A🛒 Order karne ke liye yahan click karo:%0A${website}%0A%0A📞 7703067297`;
-  window.open(`https://wa.me/?text=${msg}`, '_blank');
 }
 function showCart() {
   let cartList = document.getElementById("cart-items");
