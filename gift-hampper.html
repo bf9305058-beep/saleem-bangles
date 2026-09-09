@@ -7,18 +7,14 @@
 body{font-family:Poppins,sans-serif;background:#f5f7ff;margin:0;padding:15px;}
 .card{max-width:420px;margin:auto;background:white;border-radius:15px;padding:12px;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,0.1);border:1.5px solid #8B0046;}
 .card img{width:100%;height:380px;object-fit:contain;border-radius:10px;background:#fff8f0;cursor:zoom-in;}
-.mrp{color:gray;text-decoration:line-through;font-size:12px;}
-.price{color:#007bff;font-weight:800;font-size:16px;}
-.off{color:#00a651;font-size:11px;font-weight:700;margin:5px 0;}
 .btn{width:100%;padding:13px;border:none;border-radius:10px;font-weight:800;cursor:pointer;margin-top:10px;font-size:14px;}
 .btn-wa{background:#e91e63;color:white;}
 .btn-pay{background:#ff6d00;color:white;}
+.btn-back{background:black;color:white;}
 .custom-box{background:#FFF0F5;border:2px dashed #8B0046;border-radius:12px;padding:12px;margin-top:12px;text-align:left;}
-.custom-box input{width:100%;padding:11px;margin-top:8px;border:2px solid #8B0046;border-radius:8px;font-size:13px;box-sizing:border-box;}
-/* PHOTO POP-UP */
+.custom-box input{width:100%;padding:11px;margin-top:8px;border:2px solid #8B0046;border-radius:8px;box-sizing:border-box;}
 #popup{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:9999;justify-content:center;align-items:center;}
 #popup img{max-width:90%;max-height:90%;border-radius:12px;border:3px solid white;}
-#popup span{position:absolute;top:20px;right:30px;color:white;font-size:40px;cursor:pointer;}
 </style>
 </head>
 <body>
@@ -27,28 +23,24 @@ body{font-family:Poppins,sans-serif;background:#f5f7ff;margin:0;padding:15px;}
 
 <div class="card">
 <img src="nikah-nama-file.jpg" onclick="zoom(this.src)">
-<p style="font-size:13px;font-weight:600;">Nikah Nama File - Qubool Hai Hamper</p>
-<p><span class="mrp">MRP-₹999</span> <span class="price">Today @ ₹599</span></p>
-<p class="off">40% OFF - Velvet Box + Pen Combo</p>
+<p><b>Nikah Nama File - Qubool Hai Hamper</b></p>
+<p>MRP 999 <b style="color:#007bff;">Today @ ₹599</b></p>
 
 <div class="custom-box">
-<label style="font-weight:800;color:#8B0046;font-size:13px;">✏️ Customization Details:</label>
-<input type="text" id="customName" placeholder="Name likhiye Ex- Arman & Sana">
+<label style="font-weight:800;color:#8B0046;">✏️ Customization:</label>
+<input type="text" id="customName" placeholder="Name: Ex- Arman & Sana">
 <input type="date" id="customDate">
-<p style="font-size:10px;color:green;margin:6px 0 0 0;">✅ Jo naam & date likhoge wahi hamper par lagega</p>
 </div>
 
 <button class="btn btn-wa" onclick="orderWA()">Order on WhatsApp - ₹599</button>
 <button class="btn btn-pay" onclick="payOnline()">💳 Website Se Payment - ₹599</button>
 
-<p style="font-size:11px;margin-top:10px;">📍 Saleem Bangles, Akbari Gate, Lucknow<br>📞 7703067297</p>
+<!-- BACK BUTTON FIX - 404 khatam -->
+<button class="btn btn-back" onclick="location.href='index.html'">← Back to All Brands</button>
+<button class="btn" style="background:#8B0046;color:white;" onclick="location.href='bangles.html'">← Back to Bangles</button>
 </div>
 
-<!-- ZOOM POPUP - PHOTO BADI HOGI -->
-<div id="popup" onclick="this.style.display='none'">
-<span>&times;</span>
-<img id="popImg" src="">
-</div>
+<div id="popup" onclick="this.style.display='none'"><img id="popImg" src=""></div>
 
 <script>
 function zoom(src){document.getElementById('popImg').src=src;document.getElementById('popup').style.display='flex';}
@@ -56,21 +48,24 @@ function zoom(src){document.getElementById('popImg').src=src;document.getElement
 function getData(){
  let n=document.getElementById('customName').value.trim();
  let d=document.getElementById('customDate').value;
- if(n==""){alert("Please naam likhiye");return null;}
- if(d==""){alert("Please date select kijiye");return null;}
+ if(!n){alert("Naam likhiye");return null;}
+ if(!d){alert("Date select kijiye");return null;}
  return {n,d};
 }
 
 function orderWA(){
  let data=getData(); if(!data) return;
- let msg=`*GIFT HAMPER ORDER* 🎁\n\n*Product:* Nikah Nama Hamper @599\n*Custom Name:* ${data.n}\n*Custom Date:* ${data.d}`;
- window.open("https://wa.me/917703067297?text="+encodeURIComponent(msg), '_blank');
+ let msg=`GIFT HAMPER ORDER 🎁\nProduct: Nikah Hamper @599\nName: ${data.n}\nDate: ${data.d}`;
+ window.open("https://wa.me/917703067297?text="+encodeURIComponent(msg),'_blank');
 }
 
 function payOnline(){
  let data=getData(); if(!data) return;
- // checkout page par naam aur date ke saath bhej rahe hain
- window.location.href=`checkout.html?product=Nikah-Hamper&name=${encodeURIComponent(data.n)}&date=${encodeURIComponent(data.d)}&price=599`;
+ // FIX 1: Cart me add karo warna Checkout Khali bolega
+ let cartItem = {name:`Nikah Hamper - ${data.n} - Date: ${data.d}`, price:599};
+ localStorage.setItem('saleem_cart', JSON.stringify([cartItem]));
+ // FIX 2: Checkout par naam-date URL se bhi bhejo
+ location.href=`checkout.html?name=${encodeURIComponent(data.n)}&date=${encodeURIComponent(data.d)}`;
 }
 </script>
 </body>
