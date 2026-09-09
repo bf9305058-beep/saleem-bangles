@@ -1,78 +1,45 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html>
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gift Hamper - Saleem Bangles</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gift Hamper @599 - Saleem Bangles</title>
 <style>
-body{font-family:Poppins,sans-serif;background:#f5f7ff;margin:0;padding:15px;}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:900px;margin:auto;}
-.card{background:white;border-radius:15px;padding:12px;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,0.08);border:1px solid #ff99cc;}
-.card img{width:100%;height:170px;object-fit:contain;border-radius:10px;cursor:zoom-in;background:#fff8f0;}
-.mrp{color:gray;text-decoration:line-through;font-size:12px;}
-.price{color:#007bff;font-weight:800;font-size:15px;}
-.off{color:#00a651;font-size:11px;font-weight:700;margin:5px 0;}
-.btn{width:100%;padding:10px;border:none;border-radius:8px;font-weight:700;cursor:pointer;margin-top:5px;}
-.btn-cart{background:orange;color:white;}
-.btn-pink{background:#e91e63;color:white;}
-.cart-box{background:white;border-radius:12px;padding:15px;max-width:900px;margin:20px auto;box-shadow:0 2px 10px rgba(0,0,0,0.1);}
-.green{background:#00c853;color:white;}
-.orange{background:#ff6d00;color:white;}
-/* POPUP ZOOM */
-#popup{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:9999;justify-content:center;align-items:center;}
-#popup img{max-width:90%;max-height:90%;border-radius:12px;border:3px solid white;}
-#popup span{position:absolute;top:20px;right:30px;color:white;font-size:40px;cursor:pointer;}
+body{font-family:Arial;margin:0;background:#fff;padding:15px}
+.card{border:2px solid #8B0046;border-radius:15px;padding:15px;max-width:400px;margin:auto}
+.btn{width:100%;padding:14px;background:linear-gradient(90deg,#8B0046,#FF0066);color:#fff;border:none;border-radius:10px;font-weight:800;font-size:16px;margin-top:15px}
+input{width:100%;box-sizing:border-box}
 </style>
 </head>
 <body>
-
-<h2 style="text-align:center;color:#d81b60;">🎁 Gift Hamper Collection</h2>
-
-<div class="grid">
-
-<!-- PRODUCT 1 -->
 <div class="card">
-<img src="nikah-nama-file.jpg" onclick="zoom(this.src)">
-<p style="font-size:13px;font-weight:600;">Nikah Nama File - Qubool Hai Hamper</p>
-<p><span class="mrp">MRP-₹999</span> <span class="price">₹599</span></p>
-<p class="off">40% OFF - Velvet Box + Pen Combo</p>
-<button class="btn btn-cart" onclick="addCart('Nikah Nama Hamper',599)">Add to Cart - ₹599</button>
+<h2 style="color:#8B0046;text-align:center">🎁 Nikah Gift Hamper</h2>
+<img src="https://via.placeholder.com/350x350?text=Hamper+Image" style="width:100%;border-radius:10px">
+
+<h3 style="text-align:center">MRP 999 - Today @ Just ₹599</h3>
+
+<!-- CUSTOMIZATION BOX START -->
+<div style="background:#FFF0F5;border:2px dashed #8B0046;border-radius:12px;padding:14px;margin:15px 0;">
+  <label style="font-weight:800;color:#8B0046;font-size:14px;">✏️ Customization Details:</label>
+  <input type="text" id="customNameInput" placeholder="Name likhiye: Ex- Arman & Sana" style="padding:12px;margin-top:10px;border:2px solid #8B0046;border-radius:8px;font-size:14px;">
+  <input type="date" id="customDateInput" style="padding:12px;margin-top:10px;border:2px solid #8B0046;border-radius:8px;font-size:14px;">
+  <p style="font-size:11px;color:#666;margin:8px 0 0 0;">✅ Jo naam & date likhoge wahi hamper par lagega</p>
 </div>
+<!-- CUSTOMIZATION BOX END -->
 
-
-
-</div>
-
-<!-- CART SAME AS YOUR PHOTO -->
-<div class="cart-box">
-<h3>🛒 Your Cart</h3>
-<div id="cItems">Cart Khali hai</div>
-<p id="cTotal"><b>Total: ₹0</b></p>
-<button class="btn green" onclick="orderWA()">Order on WhatsApp</button>
-<button class="btn orange" onclick="location.href='checkout.html'">Proceed to Checkout - Payment 💳</button>
-<button class="btn" style="background:white;border:1px solid #ddd;" onclick="clearCart()">Clear Cart</button>
-</div>
-
-<div style="text-align:center;margin-top:20px;">
-<button onclick="location.href='index.html'" style="background:black;color:white;padding:10px 20px;border-radius:20px;border:none;">← Back to All Brands</button>
-<button onclick="location.href='bangles.html'" style="background:#e91e63;color:white;padding:10px 20px;border-radius:20px;border:none;">← Back to Bangles</button>
-<p style="font-size:12px;margin-top:10px;">Saleem Bangle Store - Akbargate Lucknow 226003<br>📞 7703067297 | UPI: gpay-12205946398@okbizaxis</p>
-</div>
-
-<!-- ZOOM POPUP -->
-<div id="popup" onclick="this.style.display='none'">
-<span>&times;</span>
-<img id="popImg" src="">
+<button class="btn" onclick="orderNow()">Order on WhatsApp - ₹599</button>
+<p style="text-align:center;font-size:12px;margin-top:10px">📍 Saleem Bangles, Akbari Gate, Lucknow<br>📞 7703067297</p>
 </div>
 
 <script>
-let cart=JSON.parse(localStorage.getItem('saleem_cart'))||[];
-function addCart(n,p){cart.push({name:n,price:p});localStorage.setItem('saleem_cart',JSON.stringify(cart));render();}
-function render(){let h='';let t=0;cart.forEach((it,i)=>{t+=it.price;h+=`${it.name} - ₹${it.price} <span onclick="del(${i})" style="color:red;cursor:pointer;">[x]</span><br>`;});if(cart.length==0)h='Cart Khali hai';document.getElementById('cItems').innerHTML=h;document.getElementById('cTotal').innerHTML='<b>Total: ₹'+t+'</b>';}
-function del(i){cart.splice(i,1);localStorage.setItem('saleem_cart',JSON.stringify(cart));render();}
-function clearCart(){localStorage.removeItem('saleem_cart');cart=[];render();}
-function zoom(src){document.getElementById('popImg').src=src;document.getElementById('popup').style.display='flex';}
-function orderWA(){let t=cart.reduce((a,b)=>a+b.price,0);if(t==0){alert('Cart khali hai');return;}let items=cart.map(i=>i.name).join(', ');let msg=`Order: ${items} Total ₹${t}`;window.open(`https://wa.me/917703067297?text=${encodeURIComponent(msg)}`,'_blank');}
-render();
+function orderNow(){
+  let name = document.getElementById('customNameInput').value;
+  let date = document.getElementById('customDateInput').value;
+  if(name == ""){ alert("Please apna naam likhiye"); return; }
+  if(date == ""){ alert("Please date select kijiye"); return; }
+  
+  let msg = `*GIFT HAMPER ORDER* 🎁%0A%0A*Product:* Nikah Gift Hamper @599%0A*Custom Name:* ${name}%0A*Custom Date:* ${date}%0A%0APlease isko ready kar dijiye`;
+  window.open(`https://wa.me/917703067297?text=${msg}`, '_blank');
+}
 </script>
 </body>
 </html>
