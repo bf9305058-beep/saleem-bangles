@@ -1,104 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gift Hamper ₹599 - Saleem Bangles Lucknow</title>
+<title>Gift Hamper @599 - Saleem Bangles</title>
 <style>
-body{font-family:Poppins,sans-serif;background:#fff5f8;margin:0;padding:0;}
+body{font-family:'Poppins',sans-serif;background:#fff5f8;margin:0;padding:0;}
 .header{background:linear-gradient(90deg,#8B0046,#FF4D8D);color:white;padding:15px;text-align:center;position:sticky;top:0;z-index:10;}
 .container{max-width:900px;margin:auto;padding:15px;}
-.card{background:white;border-radius:15px;box-shadow:0 4px 15px rgba(0,0,0,0.1);padding:20px;margin-bottom:20px;text-align:center;}
+.card{background:white;border-radius:15px;box-shadow:0 4px 15px rgba(0,0,0,0.1);padding:15px;margin-bottom:20px;text-align:center;}
+.card img{width:100%;max-width:400px;border-radius:15px;border:2px solid #8B0046;}
 .mrp{color:gray;text-decoration:line-through;font-size:18px;}
 .offer{color:#8B0046;font-size:28px;font-weight:bold;}
-.btn{border:none;cursor:pointer;padding:12px 25px;border-radius:25px;font-weight:bold;margin:5px;}
+.btn{border:none;cursor:pointer;padding:12px 25px;border-radius:25px;font-weight:bold;margin:5px;width:90%;}
 .btn-cart{background:white;color:#8B0046;border:2px solid #8B0046;}
-.btn-buy{background:#8B0046;color:white;width:90%;}
-#checkout-box{background:white;border-radius:15px;padding:20px;margin-top:20px;box-shadow:0 4px 15px rgba(0,0,0,0.1);}
-.input{width:90%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:10px;}
-.qr-box{border:2px dashed #8B0046;border-radius:15px;padding:15px;text-align:center;margin-top:15px;}
+.btn-buy{background:#8B0046;color:white;}
+#checkout{background:white;border-radius:15px;padding:15px;margin-top:20px;box-shadow:0 4px 15px rgba(0,0,0,0.1);}
+.input{width:92%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:10px;}
 </style>
 </head>
 <body>
 
 <div class="header">
-<h2>🎁 Saleem Bangles - Akbari Gate Lucknow</h2>
-<p>Cart: <span id="cart-count">0</span> | 7703867297</p>
+<h2>🎁 GIFT HAMPER @599 - Saleem Bangles</h2>
+<p>Akbari Gate Lucknow | Cart: <span id="cCount">0</span></p>
 </div>
 
 <div class="container">
 
 <div class="card">
-<img src="https://via.placeholder.com/350x350/FFB6C1/8B0046?text=Nikah+Nama+Hamper" style="width:100%;max-width:300px;border-radius:12px;">
-<h2>Nikah Special Hamper</h2>
-<p>Velvet Nikah Nama + Qubool Hai Pen + Gift Box</p>
-<p><span class="mrp">MRP ₹999</span> <span class="offer">₹599 Only</span></p>
-<p style="color:green;font-weight:bold;">You Save ₹400</p>
-<button class="btn btn-cart" onclick="addToCart('Nikah Hamper',599)">Add to Cart - ₹599</button>
+<img src="nikah-nama-file.jpg" alt="Nikah Nama Hamper">
+<h2>Nikah Special Hamper - Qubool Hai</h2>
+<p>Premium Nikah Nama File + Pen Combo</p>
+<p><span class="mrp">MRP ₹999</span> <br> <span class="offer">₹599 Only</span></p>
+<p style="color:green;font-weight:bold;background:#e6ffe6;padding:5px;border-radius:20px;display:inline-block;">You Save ₹400 - 40% OFF</p>
+<br><br>
+<button class="btn btn-cart" onclick="addCart('Nikah Hamper - Qubool Hai',599)">Add to Cart - ₹599</button>
+<button class="btn btn-buy" onclick="buyNow('Nikah Hamper - Qubool Hai',599)">Buy Now</button>
 </div>
 
-<div id="checkout-box">
+<div id="checkout">
 <h3>🛒 Your Cart</h3>
-<div id="cartItems">Cart Khali hai</div>
-<p id="cartTotal"><b>Total: ₹0</b></p>
+<div id="cItems">Cart Khali hai</div>
+<p id="cTotal"><b>Total: ₹0</b></p>
 
-<h3 style="margin-top:20px;">Customer Details</h3>
-<input id="custName" class="input" placeholder="Full Name *">
-<input id="custMobile" class="input" placeholder="Mobile Number *">
-<input id="custAddr" class="input" placeholder="Full Shipping Address *">
+<h3>Customer Details</h3>
+<input id="name" class="input" placeholder="Full Name *">
+<input id="mobile" class="input" placeholder="Mobile Number *">
+<input id="addr" class="input" placeholder="Full Address *">
 
-<div class="qr-box">
-<p><b>UPI ID:</b> gpay-12205946398@okbizaxis<br>Account: Mohd Saeed<br>UPI Number: 7703067297</p>
-<div id="qrAmount">Pay: ₹0</div>
-<button onclick="payViaUPI()" style="width:100%;padding:12px;background:black;color:white;border:none;border-radius:12px;font-weight:bold;margin-top:10px;">Pay via UPI App</button>
-<p style="font-size:12px;color:gray;margin-top:8px;">GPay / PhonePe / Paytm se pay karein</p>
+<div style="border:2px dashed #8B0046;border-radius:15px;padding:15px;text-align:center;margin-top:15px;">
+<p><b>UPI ID:</b> gpay-12205946398@okbizaxis<br><b>Mohd Saeed</b><br>Number: 7703067297</p>
+<div id="payAmt" style="font-weight:bold;font-size:20px;">Pay: ₹0</div>
+<button onclick="payUPI()" style="width:100%;padding:12px;background:black;color:white;border:none;border-radius:12px;font-weight:bold;margin-top:10px;">Pay via UPI App - GPay/PhonePe</button>
 </div>
 
-<button onclick="orderOnWhatsApp()" style="width:100%;padding:12px;background:#25D366;color:white;border:none;border-radius:12px;font-weight:bold;margin-top:12px;">Order on WhatsApp</button>
-<button onclick="clearCart()" style="width:100%;padding:8px;background:white;border:1px solid #ddd;border-radius:12px;margin-top:8px;">Clear Cart</button>
-
+<button onclick="orderWA()" style="width:100%;padding:12px;background:#25D366;color:white;border:none;border-radius:12px;font-weight:bold;margin-top:12px;">Order on WhatsApp - COD Available</button>
+<button onclick="clearC()" style="width:100%;padding:8px;background:white;border:1px solid #ddd;border-radius:12px;margin-top:8px;">Clear Cart</button>
 </div>
 
-<a href="index.html" style="display:block;text-align:center;margin:20px;color:#8B0046;">← Back to Bangles</a>
-<p style="text-align:center;color:gray;font-size:13px;">Saleem Bangle Store - Akbargate Lucknow 226003 - 7703867297</p>
-
+<a href="index.html" style="display:block;text-align:center;margin:20px;color:#8B0046;font-weight:bold;text-decoration:none;">← Back to Home</a>
 </div>
 
 <script>
 let cart=JSON.parse(localStorage.getItem('saleem_cart'))||[];
-function addToCart(name,price){cart.push({name,price}); localStorage.setItem('saleem_cart',JSON.stringify(cart)); renderCart();}
-function renderCart(){
- let html=''; let total=0;
- cart.forEach((it,i)=>{total+=it.price; html+=`${it.name} - ₹${it.price} <span onclick="removeItem(${i})" style="color:red;cursor:pointer;">x</span><br>`;});
- if(cart.length==0) html='Cart Khali hai';
- document.getElementById('cartItems').innerHTML=html;
- document.getElementById('cartTotal').innerHTML='<b>Total: ₹'+total+'</b>';
- document.getElementById('qrAmount').innerHTML='Pay: ₹'+total;
- document.getElementById('cart-count').innerText=cart.length;
-}
-function removeItem(i){cart.splice(i,1); localStorage.setItem('saleem_cart',JSON.stringify(cart)); renderCart();}
-function clearCart(){localStorage.removeItem('saleem_cart'); cart=[]; renderCart();}
-function payViaUPI(){
- let total=cart.reduce((a,b)=>a+b.price,0);
- if(total==0){alert('Cart Khali hai!'); return;}
- let name=document.getElementById('custName').value;
- if(name==''){alert('Pehle Full Name bharo!'); return;}
- // UPI Payment Link
- let upiId='gpay-12205946398@okbizaxis';
- let link=`upi://pay?pa=${upiId}&pn=Mohd%20Saeed&am=${total}&cu=INR&tn=Order%20${name}`;
- window.location.href=link;
-}
-function orderOnWhatsApp(){
- let total=cart.reduce((a,b)=>a+b.price,0);
- if(total==0){alert('Cart Khali hai!'); return;}
- let name=document.getElementById('custName').value;
- let mobile=document.getElementById('custMobile').value;
- let addr=document.getElementById('custAddr').value;
- let items=cart.map(i=>i.name).join(', ');
- let msg=`Salam Saleem Bangles!%0AMujhe ye order karna hai:%0A%0AItems: ${items}%0ATotal: ₹${total}%0A%0AName: ${name}%0AMobile: ${mobile}%0AAddress: ${addr}%0APayment: UPI - gpay-12205946398@okbizaxis`;
- window.open(`https://wa.me/917703867297?text=${msg}`, '_blank');
-}
-renderCart();
+function addCart(n,p){cart.push({name:n,price:p});localStorage.setItem('saleem_cart',JSON.stringify(cart));render();alert(n+' Cart me add ho gaya!');}
+function buyNow(n,p){cart=[{name:n,price:p}];localStorage.setItem('saleem_cart',JSON.stringify(cart));render();window.scrollTo(0,1000);}
+function render(){let h='';let t=0;cart.forEach((it,i)=>{t+=it.price;h+=`${it.name} - ₹${it.price} <span onclick="del(${i})" style="color:red;cursor:pointer;">[x]</span><br>`;});if(cart.length==0)h='Cart Khali hai';document.getElementById('cItems').innerHTML=h;document.getElementById('cTotal').innerHTML='<b>Total: ₹'+t+'</b>';document.getElementById('payAmt').innerHTML='Pay: ₹'+t;document.getElementById('cCount').innerText=cart.length;}
+function del(i){cart.splice(i,1);localStorage.setItem('saleem_cart',JSON.stringify(cart));render();}
+function clearC(){localStorage.removeItem('saleem_cart');cart=[];render();}
+function payUPI(){let t=cart.reduce((a,b)=>a+b.price,0);if(t==0){alert('Cart Khali hai!');return;}let n=document.getElementById('name').value;if(n==''){alert('Naam bharo!');return;}let upi='gpay-12205946398@okbizaxis';window.location.href=`upi://pay?pa=${upi}&pn=Mohd%20Saeed&am=${t}&cu=INR&tn=Order ${n}`;}
+function orderWA(){let t=cart.reduce((a,b)=>a+b.price,0);if(t==0){alert('Cart Khali hai!');return;}let n=document.getElementById('name').value;let m=document.getElementById('mobile').value;let ad=document.getElementById('addr').value;let items=cart.map(i=>i.name).join(', ');let msg=`Salam Saleem Bhai! Order: ${items} Total ₹${t} Name:${n} Mobile:${m} Addr:${ad} UPI: gpay-12205946398@okbizaxis`;window.open(`https://wa.me/917703067297?text=${encodeURIComponent(msg)}`,'_blank');}
+render();
 </script>
 </body>
 </html>
