@@ -14,10 +14,12 @@ h1{text-align:center;color:#e91e63}
 .btn{width:100%;padding:8px;border:none;border-radius:8px;font-weight:600;cursor:pointer;margin-top:4px}
 .btn-orange{background:#ff6a00;color:white}
 .btn-green{background:#111;color:white}
-#cartBox{background:white;padding:15px;border-radius:12px;margin-top:20px;box-shadow:0 2px 10px rgba(0,0,0,0.1)}
+#cartBox{background:white;padding:15px;border-radius:12px;margin-top:20px;box-shadow:0 2px 10px rgba(0,0,0,0.1);position:sticky;bottom:10px}
 #popup{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);display:none;justify-content:center;align-items:center;z-index:999}
 #popupBox{background:white;padding:20px;border-radius:16px;max-width:320px;text-align:center;position:relative}
 #popupClose{position:absolute;top:10px;right:15px;font-size:20px;cursor:pointer}
+.cart-item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px dashed #ddd;font-size:13px}
+.del-btn{background:#ff3b3b;color:white;border:none;border-radius:50%;width:26px;height:26px;cursor:pointer;font-weight:800;display:flex;justify-content:center;align-items:center}
 </style></head><body>
 <h1>MALIAO PRODUCTS</h1>
 <div id="grid"></div>
@@ -62,9 +64,8 @@ grid.innerHTML+=`<div class="card" onclick="openPop('${p.img}','${p.name}',${p.m
 function openPop(img,name,mrp,rate){document.getElementById('popImg').src=img;document.getElementById('popName').innerText=name;document.getElementById('popMrp').innerText="MRP ₹"+mrp;document.getElementById('popRate').innerText="₹"+rate;document.getElementById('popup').style.display='flex';}
 function closePop(){document.getElementById('popup').style.display='none';}
 function add(i){let s="";if(products[i].shades || products[i].fd){s=document.getElementById('s'+i).value;if(!s){alert('Shade Chuniye');return}}cart.push({...products[i],shade:s});localStorage.setItem('sb_cart',JSON.stringify(cart));update()}
-function update(){let h="",t=0;cart.forEach((c,idx)=>{t+=c.rate;let sh=c.shade?` (${c.shade})`:"";h+=`<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px dashed #ddd"><span>${c.name}${sh} - ₹${c.rate}</span><span style="color:red;cursor:pointer" onclick="cart.splice(${idx},1);localStorage.setItem('sb_cart',JSON.stringify(cart));update()">X</span></div>`;});document.getElementById('cartList').innerHTML=h||"Cart Khali Hai";document.getElementById('total').innerText="₹"+t;}
+function update(){let h="",t=0;cart.forEach((c,idx)=>{t+=c.rate;let sh=c.shade?` (${c.shade})`:"";h+=`<div class="cart-item"><span>${c.name}${sh} - ₹${c.rate}</span><button class="del-btn" onclick="cart.splice(${idx},1);localStorage.setItem('sb_cart',JSON.stringify(cart));update()">X</button></div>`;});document.getElementById('cartList').innerHTML=h||"Cart Khali Hai";document.getElementById('total').innerText="₹"+t;}
 function clearCart(){cart=[];localStorage.setItem('sb_cart',JSON.stringify(cart));update()}
-function orderWA(){if(cart.length==0){alert('Cart Khali hai');return}let msg="Order - Maliao:%0A";cart.forEach(c=>{msg+=`- ${c.name} ${c.shade||''} - ₹${c.rate}%0A`;});msg+=`Total: ₹${document.getElementById('total').innerText}`;window.open(`https://wa.me/917703067297?text=${msg}`,'_blank')}
 function goCheckout(){if(cart.length==0){alert('Cart Khali hai');return}localStorage.setItem('sb_cart',JSON.stringify(cart));location.href='checkout.html'}
 update();
 </script></body></html>
