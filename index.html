@@ -8,6 +8,7 @@ body{font-family:'Poppins',sans-serif;background:linear-gradient(135deg,#667eea 
 .btn{padding:15px;width:100%;font-size:17px;font-weight:700;border:none;border-radius:12px;margin-top:10px;cursor:pointer}
 .btn-bangles{background:linear-gradient(90deg,#0099ff,#00d4ff);color:white}
 .btn-cosmetics{background:linear-gradient(90deg,#ff69b4,#ff1493);color:white}
+.btn-gift{background:linear-gradient(90deg,#8B0046,#ff1493);color:white}
 /* CHAMAK */
 .banner-box{position:relative;width:100%;border-radius:15px;overflow:hidden;margin-bottom:12px;border:2px solid gold;cursor:pointer;box-shadow:0 4px 15px rgba(255,215,0,0.4)}
 .banner-box::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.7),transparent);animation:shine 2.5s infinite}
@@ -18,20 +19,17 @@ body{font-family:'Poppins',sans-serif;background:linear-gradient(135deg,#667eea 
 <meta property="og:image" content="https://saleem-bangles-lbxo.vercel.app/Banner5.jpg" />
 <meta property="og:title" content="80% OFF - Dulhan Bridal Chooda Royal Collection" />
 <meta property="og:description" content="SALEEM BANGLES Since 1997 Akbari Gate Lucknow" />
-<meta property="og:type" content="website" />  
+<meta property="og:type" content="website" />
 </head><body>
 <div class="logo">💎 SALEEM BANGLES & COSMETICS 💄</div>
 <div class="welcome-box">
-<div style="background:linear-gradient(90deg,#00b050,#00e676);color:white;padding:10px;border-radius:30px;font-weight:800;margin-bottom:12px;font-size:13px">🛵⚡ 15 Min Fast Delivery All Over Lucknow ✅</div>
+
+<div style="background:#f3f0ff;color:#333;padding:11px;border-radius:30px;font-weight:800;margin-bottom:12px;font-size:13px;border:1px solid #e0d7ff">🚚 Same Day Delivery in Lucknow | 💎 Since 1997</div>
 
 <!-- 4 BANNER + CLICKABLE + CHAMAK -->
 <div class="banner-box" onclick="location.href='cosmetics.html'">
 <img id="adSlide" src="Banner1.jpg" style="width:100%;display:block">
 </div>
-
-<!-- TIMER -->
-<div style="background:#ff4757;color:white;padding:10px;border-radius:10px;font-weight:800;margin-bottom:12px;animation:blink 1s infinite">⏰ OFFER ENDS IN: <span id="timer">02:00:00</span> ⏰<br><small style="font-size:12px">1208 → 599 Only! Jaldi Karo!</small></div>
-<style>@keyframes blink{0%,100%{opacity:1}50%{opacity:0.8}}</style>
 
 <h2 style="color:#d63384;margin:8px 0;font-size:20px">✨ A Complete Bangle Hub ✨</h2>
 <p style="margin:5px 0 10px 0;font-size:14px;color:#555">Traditional & Modern Bangles + Cosmetics</p>
@@ -62,11 +60,5 @@ document.getElementById('d').innerText=new Date(Date.now()+7*86400000).toLocaleD
 let ads=["Banner1.jpg","Banner2.jpg","Banner3.jpg","Banner4.jpg"];
 let a=0;
 setInterval(()=>{a=(a+1)%4;document.getElementById('adSlide').src=ads[a];},3000);
-let time=2*60*60;
-setInterval(()=>{
-let h=Math.floor(time/3600),m=Math.floor((time%3600)/60),s=time%60;
-document.getElementById('timer').innerText=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-if(time>0)time--;else time=2*60*60;
-},1000);
 </script>
 </body></html>
