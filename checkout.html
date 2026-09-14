@@ -28,11 +28,9 @@ input, textarea{width:100%; padding:13px; margin:8px 0; border:1px solid #ddd; b
 <textarea id="c_address" placeholder="Full Shipping Address *"></textarea>
 
 <div class="pay-box">
-<div style="font-size:13px;">UPI ID: <b>gpay-12205946398@okbizaxis</b></div>
-<img id="qrImg" src="" style="width:200px; border-radius:12px; margin:10px 0; border:1px solid #ddd; padding:5px; background:white;">
-<div style="font-size:16px; font-weight:700" id="payAmount">₹0</div>
-<a id="upiLink" href=""><button class="btn btn-pay">Pay via UPI App</button></a>
-<div style="font-size:11px; color:#666; margin-top:8px;">Pay karke neeche wala button dabao</div>
+<div style="font-size:14px; margin-bottom:10px;">Total Payable: <b id="payAmount">₹0</b></div>
+<a id="upiLink" href=""><button class="btn btn-pay">Pay ₹<span id="payAmount2">0</span> via UPI App</button></a>
+<div style="font-size:11px; color:#666; margin-top:8px;">GPay / PhonePe / Paytm khulega</div>
 </div>
 
 <button class="btn btn-whatsapp" onclick="sendOrder()">I Have Paid - Place Order on WhatsApp</button>
@@ -50,31 +48,27 @@ cart.forEach(i=>{
   let qty = parseInt(i.qty || 1);
   total += price * qty;
 });
-
-let shipping = 80; // FIX 80, NO FREE
+let shipping = 80;
 let finalTotal = total + shipping;
 
 if(cart.length==0){
-  document.getElementById("order-summary").innerHTML = "<p style='color:red; text-align:center;'><b>Cart Khali Hai 🛒</b></p>";
-  document.getElementById("payAmount").innerText = "Cart Empty";
+  document.getElementById("order-summary").innerHTML = "<p style='color:red; text-align:center;'><b>Cart Khali Hai</b></p>";
 } else {
   document.getElementById("order-summary").innerHTML = cart.map(i=>{
     let p = i.rate || i.price;
     let q = i.qty || 1;
-    return `<div class="total-line"><span>${i.name} ${i.shade ? '('+i.shade+')' : ''} x ${q}</span><span>₹${p*q}</span></div>`;
+    return `<div class="total-line"><span>${i.name} x ${q}</span><span>₹${p*q}</span></div>`;
   }).join("") + `
   <div class="total-line"><span>Subtotal</span><span>₹${total}</span></div>
   <div class="total-line"><span>Delivery (Lucknow)</span><span>₹${shipping}</span></div>
   <div class="total-line total-final"><span>Total to Pay</span><span>₹${finalTotal}</span></div>`;
-  
-  document.getElementById("payAmount").innerText = "Pay: ₹" + finalTotal;
+  document.getElementById("payAmount").innerText = "₹" + finalTotal;
+  document.getElementById("payAmount2").innerText = finalTotal;
   let upiID = "gpay-12205946398@okbizaxis";
   let upiLink = `upi://pay?pa=${upiID}&pn=Mohd%20Saeed&am=${finalTotal}&cu=INR&tn=SaleemBanglesOrder`;
   document.getElementById("upiLink").href = upiLink;
-  document.getElementById("qrImg").src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(upiLink)}`;
 }
 function sendOrder(){
-  if(cart.length==0){ alert("Cart khali hai"); return; }
   let name = document.getElementById("c_name").value.trim();
   let mobile = document.getElementById("c_mobile").value.trim();
   let address = document.getElementById("c_address").value.trim();
@@ -83,9 +77,9 @@ function sendOrder(){
   cart.forEach(i=>{ 
     let p = i.rate || i.price;
     let q = i.qty || 1;
-    msg += `• ${i.name} ${i.shade||''} x ${q} = ₹${p*q}%0A`; 
+    msg += `• ${i.name} x ${q} = ₹${p*q}%0A`; 
   });
-  msg += `%0ASubtotal: ₹${total}%0ADelivery: ₹${shipping}%0A*Total Paid: ₹${finalTotal}*%0APlease check UPI - gpay-12205946398@okbizaxis`;
+  msg += `%0ASubtotal: ₹${total}%0ADelivery: ₹${shipping}%0A*Total Paid: ₹${finalTotal}*`;
   window.open(`https://wa.me/917703067297?text=${msg}`, '_blank');
 }
 </script>
