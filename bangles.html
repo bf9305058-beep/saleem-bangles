@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Saleem Bangles</title>
+<title>Saleem Bangles - Bridal Collection</title>
 <style>
 body{font-family:Arial; background:#e6f7ff; margin:0; padding:0}
 .header{background:#0099ff; color:white; text-align:center; padding:15px; font-size:22px; font-weight:bold}
@@ -41,8 +41,8 @@ h1{text-align:center; color:#0066cc; font-size:24px; margin:20px 0}
     <h3 id="popupName"></h3>
     <p id="popupPrice"></p>
     <p id="popupSizes"></p>
-    <button id="popupWhatsapp" style="background:#25D366;color:white;padding:10px 20px;border:none;border-radius:5px;cursor:pointer;">WhatsApp pe Order Karein</button>
-    <button onclick="closePopup()" style="margin-left:10px;padding:10px 20px;border:none;border-radius:5px;cursor:pointer;">Band Karein</button>
+    <button id="popupWhatsapp" style="background:#25D366;color:white;padding:10px 20px;border:none;border-radius:5px;cursor:pointer;font-weight:bold;">Order on WhatsApp</button>
+    <button onclick="closePopup()" style="margin-left:10px;padding:10px 20px;border:none;border-radius:5px;cursor:pointer;background:#eee;font-weight:bold;">Close</button>
   </div>
 </div>
 <div class="footer">
@@ -98,7 +98,7 @@ function showProducts() {
     sizeBtns += `</div>`;
     let shadeBox = "";
     if(p.colors){
-      shadeBox = `<select onchange="selectShade(${i},this.value)" class="shade-select"><option value="">-- Shade Chuniye --</option>`;
+      shadeBox = `<select onchange="selectShade(${i},this.value)" class="shade-select"><option value="">-- Select Shade --</option>`;
       p.colors.forEach(c => { shadeBox += `<option value="${c}">${c}</option>`; });
       shadeBox += `</select>`;
     }
@@ -113,58 +113,18 @@ function selectSize(i, size, el){
 function selectShade(i, shade){ selectedShades[i] = shade; }
 function addToCart(i) {
   let p = products[i];
-  if(p.sizes &&!selectedSizes[i]){ alert("Pehle Size select karo! 👉 "+p.name); return; }
-  if(p.colors &&!selectedShades[i]){ alert("Please -- Shade Chuniye -- select karo!"); return; }
+  if(p.sizes &&!selectedSizes[i]){ alert("Please select size first! 👉 "+p.name); return; }
+  if(p.colors &&!selectedShades[i]){ alert("Please select shade!"); return; }
   let size = selectedSizes[i] || "";
   let shade = selectedShades[i] || "";
   let finalName = p.name + (shade? " - " + shade : "");
   cart.push({name:finalName, price:p.price, size:size});
   localStorage.setItem("saleem_cart", JSON.stringify(cart));
-  alert(finalName + " Size " + size + " cart me add ho gaya ✅");
+  alert(finalName + " Size " + size + " added to cart ✅");
   showCart();
 }
 function showCart() {
   let cartList = document.getElementById("cart-items");
   let total = 0;
   cartList.innerHTML = "";
-  if(cart.length==0){ cartList.innerHTML = "Cart khali hai"; document.getElementById("total").innerText = ""; return; }
-  cart.forEach((item, idx) => {
-    cartList.innerHTML += `<li>${item.name} Size ${item.size} - ₹${item.price} <button onclick="removeItem(${idx})" style="background:red;color:white;border:none;padding:3px 8px;border-radius:4px;margin-left:10px;">🗑️</button></li>`;
-    total += item.price;
-  });
-  document.getElementById("total").innerText = "Total: ₹" + total;
-}
-function removeItem(i){ cart.splice(i,1); localStorage.setItem("saleem_cart", JSON.stringify(cart)); showCart(); }
-function clearCart(){ cart = []; localStorage.removeItem("saleem_cart"); showCart(); }
-function orderOnWhatsApp() {
-  if(cart.length == 0){ alert("Pehle cart me product add karo!"); return; }
-  let number = "917703067297";
-  let message = "Salam Saleem Bangles! Mujhe ye order karna hai:%0A%0A";
-  cart.forEach(item => { message += `• ${item.name} Size ${item.size} - ₹${item.price}%0A`; });
-  let total = cart.reduce((sum, item) => sum + item.price, 0);
-  message += `%0ATotal: ₹${total}`;
-  window.open(`https://wa.me/${number}?text=${message}`, '_blank');
-}
-function openPopup(index){
-  let p = products[index];
-  document.getElementById("popupImg").src = p.img;
-  document.getElementById("popupName").innerText = p.name;
-  document.getElementById("popupPrice").innerText = "₹" + p.price;
-  document.getElementById("popupSizes").innerText = p.sizes? "Size: " + p.sizes.join(", ") : "";
-  document.getElementById("popupWhatsapp").onclick = () => {
-    let selSize = selectedSizes[index] || (p.sizes? p.sizes[0] : "");
-    let selShade = selectedShades[index] || "";
-    let msg = `Hello! Mujhe ${p.name} ${selShade} order karna hai. Price: ₹${p.price} Size: ${selSize}`;
-    window.open(`https://wa.me/917703067297?text=${encodeURIComponent(msg)}`, '_blank');
-  }
-  document.getElementById("productPopup").style.display = "flex";
-}
-function closePopup(){ document.getElementById("productPopup").style.display = "none"; }
-showProducts();
-showCart();
-</script>
-<div style="text-align:center; margin:25px 0;">
-<a href="cosmetics.html" style="background:#222; color:white; padding:10px 20px; border-radius:25px; text-decoration:none; display:inline-block;">← Back to Cosmetics</a>
-</div>
-</body>
-</html>
+  if(cart.length==0){ cartList.innerHTML = "Your cart is empty"; document.getElementById("total").innerText =
