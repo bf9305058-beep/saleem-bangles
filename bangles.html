@@ -73,20 +73,21 @@ const products = [
   {name:"Multi Moti 2", price:299, img:"multi-moti2.jpg", sizes:["2.2","2.4","2.6","2.8"]},
   {name:"Wine with Irani Kada", price:299, img:"wine-irani-kada.jpg", sizes:["2.2","2.4","2.6","2.8"]},
   {name:"Rangila Set", price:349, img:"rangila-bangle.jpg", sizes:["2.2","2.4","2.6","2.8"]},
-  {name:"Bridal Pearl Kaleera", price:3999, img:"bridal kalira kada.jpg", sizes:["2.4","2.6","2.8"]},
-  {name:"Mirror Stone Kada", price:399, img:"mirror stone kada.jpg", sizes:["2.4","2.6","2.8"]},
-  {name:"Stone Kada", price:399, img:"stone kada.jpg", sizes:["2.4","2.6","2.8"]},
+  {name:"Bridal Pearl Kaleera", price:3999, img:"bridal%20kalira%20kada.jpg", sizes:["2.4","2.6","2.8"]},
+  {name:"Mirror Stone Kada", price:399, img:"mirror%20stone%20kada.jpg", sizes:["2.4","2.6","2.8"]},
+  {name:"Stone Kada", price:399, img:"stone%20kada.jpg", sizes:["2.4","2.6","2.8"]},
   {name:"Maggi Zigzag Full Box - 20 Colors", price:2999, img:"maggi-zigzag.jpg", sizes:["2.4","2.6","2.8"]},
-  {name:"Maggi Zigzag Bangle - Each Color 299", price:299, img:"maggi.jpg", sizes:["2.4","2.6","2.8"], colors:["01 - Bottle Green","02 - Rose Gold - BEST SELLER","03 - Pista","04 - Yellow","05 - Maroon","06 - Coral","07 - Teal","08 - Golden","09 - Rust Orange","10 - Emerald","11 - Black","12 - Mustard","13 - Light Brown","14 - Dark Grey","15 - Copper","16 - Light Green","17 - Red","18 - Sky Blue","19 - Wine","20 - Mehendi"]},
+  {name:"Maggi Zigzag Bangle - Each Color 299", price:299, img:"maggi.jpg", sizes:["2.4","2.6","2.8"], colors:["01 - Bottle Green","02 - Rose Gold - BEST SELLER","03 - Pista","04 - Yellow","05 - Maroon","06 - Coral","07 - Teal","08 - Golden","09 - Rust Orange","10 - Emerald","11 - Black","12 - MustMustard","13 - Light Brown","14 - Dark Grey","15 - Copper","16 - Light Green","17 - Red","18 - Sky Blue","19 - Wine","20 - Mehendi"]},
   {name:"The Farari Combo - 3 Color Set - Blue + Pink + Magenta", price:499, img:"farari-combo.jpg", sizes:["2.2","2.4","2.6","2.8"]},
   {name:"Farari Box - Full Box 4 Rod Combo - 60+ Bangles", price:2999, img:"farari-box-20color.jpg", sizes:["2.2","2.4","2.6","2.8"]},
-  {name:"Farari Bangle - Each Color 299", price:299, img:"farari-hand-model.jpg", sizes:["2.2","2.4","2.6","2.8"], colors:["Mehndi","Golden","Picock","Redum","Black","Yellow","Surf","Pink","Multi Pich","Eed L Multi","Majanta","Mhndi","Stoberry","Sky Blue","Puperl","Yellow", "Pyazi"]}
+  {name:"Farari Bangle - Each Color 299", price:299, img:"farari-hand-model.jpg", sizes:["2.2","2.4","2.6","2.8"], colors:["Mehndi","Golden","Picock","Redum","Black","Yellow","Surf","Pink","Multi Pich","Eed L Multi","Majanta","Mhndi","Stoberry","Sky Blue","Puperl","Yellow","Pyazi"]}
 ];
 let cart = JSON.parse(localStorage.getItem("saleem_cart")||"[]");
 let selectedSizes = {};
 let selectedShades = {};
 function showProducts() {
   const container = document.getElementById("products");
+  if(!container) return;
   container.innerHTML = "";
   products.forEach((p,i) => {
     let sizeBtns = `<div style="margin:5px 0;">`;
@@ -102,29 +103,4 @@ function showProducts() {
       p.colors.forEach(c => { shadeBox += `<option value="${c}">${c}</option>`; });
       shadeBox += `</select>`;
     }
-    container.innerHTML += `<div class="card"><img src="${p.img}" onclick="openPopup(${i})"><h3>${p.name}</h3><p>₹${p.price}</p>${sizeBtns}${shadeBox}<button class="btn-add" onclick="addToCart(${i})">🛒 Add to Cart</button></div>`;
-  });
-}
-function selectSize(i, size, el){
-  selectedSizes[i] = size;
-  el.parentElement.querySelectorAll("button").forEach(b=>{b.style.background="#fff"; b.style.color="#000"});
-  el.style.background="#ff69b4"; el.style.color="white";
-}
-function selectShade(i, shade){ selectedShades[i] = shade; }
-function addToCart(i) {
-  let p = products[i];
-  if(p.sizes &&!selectedSizes[i]){ alert("Please select size first! 👉 "+p.name); return; }
-  if(p.colors &&!selectedShades[i]){ alert("Please select shade!"); return; }
-  let size = selectedSizes[i] || "";
-  let shade = selectedShades[i] || "";
-  let finalName = p.name + (shade? " - " + shade : "");
-  cart.push({name:finalName, price:p.price, size:size});
-  localStorage.setItem("saleem_cart", JSON.stringify(cart));
-  alert(finalName + " Size " + size + " added to cart ✅");
-  showCart();
-}
-function showCart() {
-  let cartList = document.getElementById("cart-items");
-  let total = 0;
-  cartList.innerHTML = "";
-  if(cart.length==0){ cartList.innerHTML = "Your cart is empty"; document.getElementById("total").innerText =
+    container.innerHTML += `<div class="card"><img src="${p.img}" onerror="this.src='https://via.placeholder.com/250?text=Bangle'" onclick="openPopup(${i})"><h3>${p.name}</h3><p>₹${p
